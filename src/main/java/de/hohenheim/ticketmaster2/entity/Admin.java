@@ -9,7 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class User {
+public class Admin {
     @Id
     @GeneratedValue
     private Integer userId;
@@ -24,10 +24,25 @@ public class User {
 
     private String writingPermission;
 
+    private String readingPermission;
+
     private String configurations;
 
-    @OneToMany(mappedBy = "user")
+    private String specialization;
+
+    @OneToMany(mappedBy = "admin")
     private List<Ticket> tickets = new ArrayList<>();
+
+    public Admin() {
+    }
+
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
+    }
 
     public String getConfigurations() {
         return configurations;
@@ -37,12 +52,20 @@ public class User {
         this.configurations = configurations;
     }
 
+    public String getReadingPermission() {
+        return readingPermission;
+    }
+
+    public void setReadingPermission(String readingPermission) {
+        this.readingPermission = readingPermission;
+    }
+
     public String getWritingPermission() {
         return writingPermission;
     }
 
-    public void setWritingPermission(String permission) {
-        this.writingPermission = permission;
+    public void setWritingPermission(String writingPermission) {
+        this.writingPermission = writingPermission;
     }
 
     public Date getLastLogin() {
@@ -61,16 +84,12 @@ public class User {
         this.mail = mail;
     }
 
-    public User() {
-        // empty constructor for Hibernate
+    public String getPassword() {
+        return password;
     }
 
-    public Integer getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getUsername() {
@@ -81,11 +100,13 @@ public class User {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getUserId() {
+        return userId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserId(Integer userId) {
+        this.userId = userId;
     }
+
+
 }
