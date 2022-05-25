@@ -1,9 +1,6 @@
 package de.hohenheim.ticketmaster2.entity;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -15,14 +12,6 @@ public class User {
     private String username;
 
     private String password;
-
-    private String mail;
-
-    private Date lastLogin;
-
-    private String writingPermission;
-
-    private String configurations;
 
     private boolean enabled = true;
 
@@ -45,37 +34,6 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public String getConfigurations() {
-        return configurations;
-    }
-
-    public void setConfigurations(String configurations) {
-        this.configurations = configurations;
-    }
-
-    public String getWritingPermission() {
-        return writingPermission;
-    }
-
-    public void setWritingPermission(String permission) {
-        this.writingPermission = permission;
-    }
-
-    public Date getLastLogin() {
-        return lastLogin;
-    }
-
-    public void setLastLogin(Date lastLogin) {
-        this.lastLogin = lastLogin;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
 
     public User() {
         // empty constructor for Hibernate
