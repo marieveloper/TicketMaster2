@@ -14,7 +14,7 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "adminId")
-    private Admin admin;
+    private Role role;
 
     @ManyToOne
     @JoinColumn(name = "userId")

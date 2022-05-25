@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous"/>
+  <title>Sopra 2022 TicketMaster</title>
+</head>
+<body>
+<div class="container">
+  <form th:action="@{/login}" method="POST" class="form-horizontal">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title" th:text="'Sopra 2020 Demo Login'"></h4>
+        <div th:if="${param.error}" class="alert alert-danger">
+          <span th:text="'Login fehlgeschlagen.'"></span>
+        </div>
+        <div th:if="${param.logout}" class="alert alert-success">
+          <span th:text="'Logout erfolgreich.'"></span>
+        </div>
+        <div class="row form-group">
+          <div class="col-12 col-md-6">
+            <label>Username</label>
+            <input type="text" id="username" name="username"  th:placeholder="'Username'" class="form-control"/><br/>
+          </div>
+        </div>
+        <div class="row form-group">
+          <div class="col-12 col-md-6">
+            <label>Password</label>
+            <input type="password"  th:placeholder="'Password'" id="password" name="password" class="form-control"/><br/>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <button name="Submit" value="Login" type="Submit" th:text="'Login'" class="btn btn-primary"></button>
+      </div>
+    </div>
+  </form>
+</div>
+</body>
+</html>
