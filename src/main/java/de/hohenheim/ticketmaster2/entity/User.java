@@ -1,12 +1,7 @@
 package de.hohenheim.ticketmaster2.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 public class User {
@@ -18,48 +13,27 @@ public class User {
 
     private String password;
 
-    private String mail;
+    private boolean enabled = true;
 
-    private Date lastLogin;
-
-    private String writingPermission;
-
-    private String configurations;
-
-    @OneToMany(mappedBy = "user")
-    private List<Ticket> tickets = new ArrayList<>();
-
-    public String getConfigurations() {
-        return configurations;
+    public Set<Role> getRoles() {
+        return roles;
     }
 
-    public void setConfigurations(String configurations) {
-        this.configurations = configurations;
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
-    public String getWritingPermission() {
-        return writingPermission;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setWritingPermission(String permission) {
-        this.writingPermission = permission;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
-    public Date getLastLogin() {
-        return lastLogin;
-    }
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Role> roles;
 
-    public void setLastLogin(Date lastLogin) {
-        this.lastLogin = lastLogin;
-    }
-
-    public String getMail() {
-        return mail;
-    }
-
-    public void setMail(String mail) {
-        this.mail = mail;
-    }
 
     public User() {
         // empty constructor for Hibernate
