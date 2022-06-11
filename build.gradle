@@ -6,7 +6,7 @@ plugins {
 
 group = 'de.hohenheim'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '17'
+sourceCompatibility = "16"
 
 repositories {
     mavenCentral()
@@ -31,3 +31,4 @@ tasks.named('test') {
 bootRun {
     sourceResources(sourceSets.main)
 }
+targetCompatibility = JavaVersion.VERSION_16
