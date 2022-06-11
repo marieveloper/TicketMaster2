@@ -1,0 +1,70 @@
+body, html{
+    height: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.bg{
+    background-color: #D9D9D9;
+    opacity: 0.2;
+    border-right: 80%;
+    border-left: 80%;
+}
+.backgroundImage{
+    background:url("some file");
+    height: 100%;
+    background-position:  cover;
+    background-repeat:  no-repeat;
+    background-size:  cover;
+    position:  relative;
+}
+.container {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+    padding: 16px;
+    /*background-color: rgba(197, 28, 28, 0.164);*/
+}
+.containerBg {
+    position: relative;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+    padding: 16px;
+    background-color: rgba(139, 132, 132, 0.712);
+}
+/* Full-width input fields */
+input[type=text]{
+    width: 100%;
+    right: 80%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    border: auto;
+    background: #f1f1f1;
+}
+input[type=text]:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+/* Set a style for the submit button */
+.button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.9;
+}
+h1 {
+    text-align: center;
+}
+p {
+    text-align: center;
+    text-indent: 30px;
+    text-size-adjust: 20px;
+    font-size:large;
+}
+h2 {
+    text-align: center;
+}
