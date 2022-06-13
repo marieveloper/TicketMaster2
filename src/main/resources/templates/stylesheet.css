@@ -56,6 +56,13 @@ input[type=text]:focus {
     width: 20%;
     opacity: 0.9;
 }
+.centeredContainer {
+      position: relative;
+      margin-right: auto;
+      margin-left: auto;
+      max-width: 800px;
+      padding: 16px;
+}
 h1 {
     text-align: center;
 }
