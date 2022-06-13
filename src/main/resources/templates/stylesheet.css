@@ -58,6 +58,7 @@ input[type=text]:focus {
 }
 .centeredContainer {
       position: relative;
+      margin-top: auto;
       margin-right: auto;
       margin-left: auto;
       max-width: 800px;
