@@ -3,6 +3,8 @@ package de.hohenheim.ticketmaster2.entity;
 import javax.persistence.*;
 import de.hohenheim.ticketmaster2.enums.*;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -12,13 +14,25 @@ public class Ticket {
     private Integer ticketId;
 
     private IncidentCategorization categorization;
-    private Priorisation prio;
+    private Prioritization prio;
+
+    private LocalDate date;
+    private Status status;
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate() {
+        this.date = date.now();
+    }
+
     @OneToMany(mappedBy = "ticket")
     private Set<Message> messages;
 
-    @ManyToOne
+    @ManyToMany
     @JoinColumn(name = "adminId")
-    private Role role;
+    private Set<Role> roles;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -36,17 +50,13 @@ public class Ticket {
         return categorization;
     }
 
-    public Priorisation getPrio() {
-        return prio;
-    }
+    public Prioritization getPrio() {return prio; }
 
     public Set<Message> getMessages() {
         return messages;
     }
 
-    public Role getRole() {
-        return role;
-    }
+
 
     public User getUser() {
         return user;
@@ -60,7 +70,7 @@ public class Ticket {
         switch(categorization){
             case INACTIVITY: System.out.println("user is inactive");
             break;
-            case TECHNICALPROBLEMS: System.out.println("software/ hardware problems");
+            case TECHNICAL_PROBLEMS: System.out.println("software/ hardware problems");
             break;
             case OTHER: System.out.println("other");
             break;
@@ -68,7 +78,11 @@ public class Ticket {
         this.categorization=categorization;
     }
 
-    public void setPrio(Priorisation prio) {
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setPrio(Prioritization prio) {
         switch(prio){
             case LOW: System.out.println("less important");
                 break;
@@ -79,15 +93,32 @@ public class Ticket {
         this.prio = prio;
     }
 
+    public void setStatus(Status status) {
+        switch(status){
+            case IN_PROCESS: System.out.println("in process");
+                break;
+            case OPEN: System.out.println("open");
+                break;
+            case CLOSED: System.out.println("closed");
+        }
+        this.status = status;
+    }
     public void setMessages(Set<Message> messages) {
         this.messages = messages;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
-    }
+
+
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }
