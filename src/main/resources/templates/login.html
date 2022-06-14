@@ -6,17 +6,19 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
         crossorigin="anonymous"/>
 
-  <title>Sopra 2022 TicketMaster</title>
+  <title>TicketMaster</title>
 </head>
 <body>
 <br><br>
 
 <div class="container">
-  <img src="../static/images/Logo.png" width="500" height="600" align="top" alt="Company Logo"/>
+  <center>
+  <img src="images/Logo.png" width="500" height="600" align="middle" alt="Company Logo"/>
+  </center>
   <form th:action="@{/login}" method="POST" class="form-horizontal">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title" th:text="'Sopra 2020 Demo Login'"></h4>
+        <h4 class="card-title" th:text="'Ticket Master Login'"></h4>
         <div th:if="${param.error}" class="alert alert-danger">
           <span th:text="'Login fehlgeschlagen.'"></span>
         </div>

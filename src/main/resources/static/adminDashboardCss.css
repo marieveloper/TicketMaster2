@@ -69,7 +69,7 @@ img{
 .personButton {
   width: 57px;
   height: 57px;
-  background: url("images/v21_2947.png");
+  background: url("images/userButton.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -86,7 +86,7 @@ img{
 .bellButton {
   width: 57px;
   height: 57px;
-  background: url("images/v21_2948.png");
+  background: url("images/notification.png");
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
