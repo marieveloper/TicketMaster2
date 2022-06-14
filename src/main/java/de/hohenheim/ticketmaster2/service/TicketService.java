@@ -19,4 +19,5 @@ public class TicketService {
     public List<Ticket> findAllTickets() {
         return ticketRepository.findAll();
     }
+
 }
