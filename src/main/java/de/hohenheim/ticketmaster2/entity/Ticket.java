@@ -12,7 +12,7 @@ public class Ticket {
     private Integer ticketId;
 
     private IncidentCategorization categorization;
-    private Priorization prio;
+    private Priorisation prio;
     @OneToMany(mappedBy = "ticket")
     private Set<Message> messages;
 
@@ -36,7 +36,7 @@ public class Ticket {
         return categorization;
     }
 
-    public Priorization getPrio() {
+    public Priorisation getPrio() {
         return prio;
     }
 
@@ -68,7 +68,7 @@ public class Ticket {
         this.categorization=categorization;
     }
 
-    public void setPrio(Priorization prio) {
+    public void setPrio(Priorisation prio) {
         switch(prio){
             case LOW: System.out.println("less important");
                 break;
