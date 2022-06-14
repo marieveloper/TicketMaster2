@@ -12,6 +12,7 @@ public class Ticket {
     private Integer ticketId;
 
     private IncidentCategorization categorization;
+    private Priorization prio;
     @OneToMany(mappedBy = "ticket")
     private Set<Message> messages;
 
