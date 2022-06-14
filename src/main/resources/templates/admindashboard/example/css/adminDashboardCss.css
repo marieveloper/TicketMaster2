@@ -4,7 +4,7 @@
 body {
   font-size: 14px;
 }
-.v7_21 {
+.desktop {
   width: 100%;
   height: 1024px;
   background: rgba(255,255,255,1);
@@ -50,10 +50,12 @@ body {
   left: 0px;
   overflow: hidden;
 }
-.v89_397 {
-  width: 59px;
-  height: 59px;
-  background: url("../images/v89_397.png");
+
+img{
+  height: 57px;
+  width: 57px;
+}
+.filter{
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
@@ -63,7 +65,8 @@ body {
   left: 381px;
   overflow: hidden;
 }
-.v21_2947 {
+
+.personButton {
   width: 57px;
   height: 57px;
   background: url("../images/v21_2947.png");
@@ -80,7 +83,7 @@ body {
   border-bottom-right-radius: 7px;
   overflow: hidden;
 }
-.v21_2948 {
+.bellButton {
   width: 57px;
   height: 57px;
   background: url("../images/v21_2948.png");
@@ -93,7 +96,7 @@ body {
   left: 1322px;
   overflow: hidden;
 }
-.v7_45 {
+.myTicketsButton {
   width: 241px;
   height: 55px;
   background: rgba(217,217,217,1);
@@ -108,14 +111,14 @@ body {
   border-bottom-right-radius: 15px;
   overflow: hidden;
 }
-.v7_46 {
-  width: 124px;
+.myTickets {
+  width: 172px;
   color: rgba(0,0,0,1);
   position: absolute;
-  top: 56px;
-  left: 138px;
+  top: 88px;
+  left: 135px;
   font-family: Inter;
-  font-weight: Regular;
+  font-weight: 400;
   font-size: 24px;
   opacity: 1;
   text-align: left;
