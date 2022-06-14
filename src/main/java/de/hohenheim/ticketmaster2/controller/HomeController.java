@@ -1,6 +1,8 @@
 package de.hohenheim.ticketmaster2.controller;
 
+import de.hohenheim.ticketmaster2.entity.User;
 import de.hohenheim.ticketmaster2.service.TicketService;
+import de.hohenheim.ticketmaster2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class HomeController {
     @Autowired
     private TicketService ticketService;
+    @Autowired
+    private UserService userService;
     /**
      * Zeigt die Startseite Ihrer Anwendung.
      * @param model enthält alle ModelAttribute.
@@ -18,20 +22,22 @@ public class HomeController {
      */
     @GetMapping("/home")
     public String showHome(Model model) {
-        model.addAttribute("tickets", ticketService.findAllTickets());
-        return "home";
+        if (userService.getCurrentUser().getRoles().equals("ROLE_ADMIN")) {
+            return "admindashboard";
+        }
+        return "userdashboard";
     }
 
     @GetMapping("/admindashboard")
     public String showAdminDashboard(Model model) {
-        model.addAttribute("message", "Und hier sehen Sie ein ModelAttribut");
-        return "login";
+        model.addAttribute("tickets", ticketService.findAllTickets());
+        return "admindashboard";
     }
 
-    @PostMapping("/createticket")
+    @GetMapping("/createTicket")
     public String createTicket(Model model){
         model.addAttribute("message", "Und hier sehen Sie ein ModelAttribut");
-        return "";
+        return "createTicket";
     }
 
 }

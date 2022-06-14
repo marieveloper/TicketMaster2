@@ -12,7 +12,7 @@ public class Ticket {
     private Integer ticketId;
 
     private IncidentCategorization categorization;
-    private Priorization prio;
+    private Priorisation prio;
     @OneToMany(mappedBy = "ticket")
     private Set<Message> messages;
 
@@ -36,7 +36,7 @@ public class Ticket {
         return categorization;
     }
 
-    public Priorization getPrio() {
+    public Priorisation getPrio() {
         return prio;
     }
 
@@ -58,23 +58,23 @@ public class Ticket {
 
     public void setCategorization(IncidentCategorization categorization) {
         switch(categorization){
-            case INACTIVITY: System.out.println("User ist inaktiv");
+            case INACTIVITY: System.out.println("user is inactive");
             break;
-            case TECHNICALPROBLEMS: System.out.println("Hardware/ Software Probleme");
+            case TECHNICALPROBLEMS: System.out.println("software/ hardware problems");
             break;
-            case OTHER: System.out.println("Sonstige");
+            case OTHER: System.out.println("other");
             break;
         }
         this.categorization=categorization;
     }
 
-    public void setPrio(Priorization prio) {
+    public void setPrio(Priorisation prio) {
         switch(prio){
-            case LOW: System.out.println("weniger wichtig");
+            case LOW: System.out.println("less important");
                 break;
-            case MEDIUM: System.out.println("wichtig");
+            case MEDIUM: System.out.println("important");
                 break;
-            case HIGH: System.out.println("sehr wichtig");
+            case HIGH: System.out.println("urgent");
         }
         this.prio = prio;
     }
