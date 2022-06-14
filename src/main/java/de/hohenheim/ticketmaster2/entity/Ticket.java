@@ -62,6 +62,7 @@ public class Ticket {
             case OTHER: System.out.println("Sonstige");
             break;
         }
+        this.categorization=categorization;
     }
 
     public void setMessages(Set<Message> messages) {
