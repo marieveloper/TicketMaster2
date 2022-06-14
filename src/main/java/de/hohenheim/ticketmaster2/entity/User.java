@@ -34,6 +34,11 @@ public class User {
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
+    @OneToMany(mappedBy = "receiver")
+    private Set<Message> receivedMessages;
+
+    @OneToMany(mappedBy = "author")
+    private Set<Message> sentMessages;
 
     public User() {
         // empty constructor for Hibernate

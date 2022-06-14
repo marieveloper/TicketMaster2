@@ -1,16 +1,22 @@
 package de.hohenheim.ticketmaster2.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
+@Entity
 public class Message {
     @Id
     @GeneratedValue
     private Integer id;
 
     private String text;
+    @ManyToOne
+    @JoinColumn(name = "authorId")
     private User author;
+    @ManyToOne
+    @JoinColumn(name = "receiverId")
     private User receiver;
+    @ManyToOne
+    @JoinColumn(name = "ticketId")
     private Ticket ticket;
 
     public Message() {

@@ -2,19 +2,17 @@ package de.hohenheim.ticketmaster2.entity;
 
 import javax.persistence.*;
 import de.hohenheim.ticketmaster2.enums.*;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.LinkedList;
+
 import java.util.Set;
 
 @Entity
 public class Ticket {
     @Id
     @GeneratedValue
-    private Integer number;
+    private Integer ticketId;
 
     private IncidentCategorization categorization;
-    @Transient //TODO Error?
+    @OneToMany(mappedBy = "ticket")
     private Set<Message> messages;
 
     @ManyToOne
@@ -29,8 +27,8 @@ public class Ticket {
         // empty constructor for Hibernate
     }
 
-    public Integer getNumber() {
-        return number;
+    public Integer getTicketId() {
+        return ticketId;
     }
 
     public IncidentCategorization getCategorization() {
@@ -49,8 +47,8 @@ public class Ticket {
         return user;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setTicketId(Integer number) {
+        this.ticketId = number;
     }
 
     public void setCategorization(IncidentCategorization categorization) {
