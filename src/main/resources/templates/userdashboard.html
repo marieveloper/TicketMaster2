@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<h1>Userdashboard</h1>
+<section>
+    <section>
+    <div class="createTicketButton"></div>
+    <div class="text-Ticket">Create Ticket</div>
+    </section>
+    <div class="notification"></div>
+    <div class="filterButton">
+        <div class="dropdown">
+            <button class="filterButton" type="button" id="dropdown" data-bs-toggle="dropdown"
+                    aria-expanded="false">
+                Dropdown
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdown">
+                <li><a class="dropdown-item" href="#">Priorisation</a></li>
+                <li><a class="dropdown-item" href="#">Incident</a></li>
+                <li><a class="dropdown-item" href="#">Status</a></li>
+                <li><a class="dropdown-item" href="#">Admin</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="plus"></div>
+    <div class="userButton"></div>
+</section>
+
+
+</body>
+</html> <br/><br/>
+<style>* {
+    box-sizing: border-box;
+}
+
+div {
+
+}
+
+.dropdown{
+    visibility: hidden;
+}
+
+
+body {
+    font-size: 14px;
+}
+
+.createTicketButton {
+    width: 250px;
+    height: 60px;
+    background: rgba(217, 217, 217, 1);
+    position: absolute;
+    top: 69px;
+    left: 53px;
+    border: 1px solid rgba(0, 0, 0, 1);
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.text-Ticket {
+    width: 153px;
+    color: rgba(0, 0, 0, 1);
+    position: relative;
+    top: 78px;
+    left: 67px;
+    font-family: Inter;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: left;
+}
+
+.notification {
+    width: 57px;
+    height: 57px;
+    background: url("images/notification.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 75px;
+    left: 1129px;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    overflow: hidden;
+}
+
+.filterButton {
+    width: 59px;
+    height: 59px;
+    background: url("images/filterButton.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 65px;
+    left: 353px;
+    overflow: hidden;
+}
+
+.plus {
+    width: 44px;
+    height: 44px;
+    background: url("images/plus.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 77px;
+    left: 244px;
+    overflow: hidden;
+}
+
+.userButton {
+    width: 57px;
+    height: 57px;
+    background: url("images/userButton.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 75px;
+    left: 1275px;
+    overflow: hidden;
+}
+</style>
