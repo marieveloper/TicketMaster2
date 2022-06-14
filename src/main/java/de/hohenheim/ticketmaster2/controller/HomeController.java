@@ -32,6 +32,11 @@ public class HomeController {
         return "admindashboard";
     }
 
+    @GetMapping("/userdashboard")
+    public String showUserDashboard(Model model) {
+        model.addAttribute("tickets", ticketService.findAllTickets());
+        return "userdashboard";
+    }
     @GetMapping("/createTicket")
     public String createTicket(Model model){
         model.addAttribute("message", "Und hier sehen Sie ein ModelAttribut");
