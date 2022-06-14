@@ -1,6 +1,7 @@
 package de.hohenheim.ticketmaster2.entity;
 
 import javax.persistence.*;
+import de.hohenheim.ticketmaster2.enums.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -12,7 +13,7 @@ public class Ticket {
     @GeneratedValue
     private Integer number;
 
-    private String categorization;
+    private IncidentCategorization categorization;
     @Transient //TODO Error?
     private Set<Message> messages;
 
@@ -32,7 +33,7 @@ public class Ticket {
         return number;
     }
 
-    public String getCategorization() {
+    public IncidentCategorization getCategorization() {
         return categorization;
     }
 
@@ -52,8 +53,15 @@ public class Ticket {
         this.number = number;
     }
 
-    public void setCategorization(String categorization) {
-        this.categorization = categorization;
+    public void setCategorization(IncidentCategorization categorization) {
+        switch(categorization){
+            case INACTIVITY: System.out.println("User ist inaktiv");
+            break;
+            case TECHNICALPROBLEMS: System.out.println("Hardware/ Software Probleme");
+            break;
+            case OTHER: System.out.println("Sonstige");
+            break;
+        }
     }
 
     public void setMessages(Set<Message> messages) {
