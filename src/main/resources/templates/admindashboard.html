@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <link href="../static/adminDashboardCss.css" rel="stylesheet" />
     <title>Document</title>
 </head>
@@ -16,17 +17,17 @@
 </div>
     <div class="v46_1329">
         <div class="filter">
-            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <img src = "../static/images/filterButton.png">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="filter-dropdown" data-toggle="dropdown">
+                <img src = "../static/images/filterButton.png" alt="filter">
             </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="">Test</a>
-                <a class="dropdown-item" href="">Incident</a>
-                <a class="dropdown-item" href="">Status</a>
-                <a class="dropdown-item" href="">User</a>
-                <a class="dropdown-item" href="">Admin</a>
-                <a class="dropdown-item" href="">Clear all</a>
-            </div>
+            <ul class="dropdown-menu" aria-labelledby="filter-dropdown">
+                <li><a class="dropdown-item" href="#">Prioritization</a></li>
+                <li><a class="dropdown-item" href="#">Incident</a></li>
+                <li><a class="dropdown-item" href="#">Status</a></li>
+                <li><a class="dropdown-item" href="#">User</a></li>
+                <li><a class="dropdown-item" href="#">Admin</a></li>
+                <li><a class="dropdown-item" href="#">Clear all</a></li>
+            </ul>
         </div>
         <div class="personButton"></div>
         <div class="bellButton"></div>
