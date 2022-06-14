@@ -14,6 +14,8 @@ public class Ticket {
     private Integer number;
 
     private IncidentCategorization categorization;
+    private Priorization prio;
+
     @Transient //TODO Error?
     private Set<Message> messages;
 
@@ -35,6 +37,10 @@ public class Ticket {
 
     public IncidentCategorization getCategorization() {
         return categorization;
+    }
+
+    public Priorization getPrio() {
+        return prio;
     }
 
     public Set<Message> getMessages() {
@@ -63,6 +69,17 @@ public class Ticket {
             break;
         }
         this.categorization=categorization;
+    }
+
+    public void setPrio(Priorization prio) {
+        switch(prio){
+            case LOW: System.out.println("weniger wichtig");
+                break;
+            case MEDIUM: System.out.println("wichtig");
+                break;
+            case HIGH: System.out.println("sehr wichtig");
+        }
+        this.prio = prio;
     }
 
     public void setMessages(Set<Message> messages) {
