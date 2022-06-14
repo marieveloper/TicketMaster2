@@ -1,23 +1,37 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
     <link href="css/adminDashboardCss.css" rel="stylesheet" />
     <title>Document</title>
 </head>
 <body>
-<div class="v7_21">
+<div class="desktop">
     <div class="v23_5686">
     <div class="name"></div>
     <div class="name"></div>
     <div class="name"></div>
 </div>
     <div class="v46_1329">
-        <div class="v89_397"></div>
-        <div class="v21_2947"></div>
-        <div class="v21_2948"></div>
-        <div class="v7_45"></div>
-        <span class="v7_46">My Tickets</span>
+        <div class="filter">
+            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src = "images/v89_397.png">
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="">Test</a>
+                <a class="dropdown-item" href="">Incident</a>
+                <a class="dropdown-item" href="">Status</a>
+                <a class="dropdown-item" href="">User</a>
+                <a class="dropdown-item" href="">Admin</a>
+                <a class="dropdown-item" href="">Clear all</a>
+            </div>
+        </div>
+        <div class="personButton"></div>
+        <div class="bellButton"></div>
+        <div class="myTicketsButton"></div>
+        <span class="myTickets">My Tickets</span>
     </div>
 </div>
 </body>
