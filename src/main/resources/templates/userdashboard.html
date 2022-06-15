@@ -6,42 +6,26 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
 
+
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
 
-<div id="frame">
-    <div class="createTicketButton">
-    </div>
-    <div class="notification"></div>
-
-
-
-<div class="plus"></div>
-<div class="userButton"></div>
-
-
 
 <hr/>
-
-
 <div class="container">
     <br/><br/>
-
-
-    <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket</a>
+    <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕ <p class="plus"></p></a>
     <br/><br/>
     <table class="table table-bordered table-striped" id="ticketTable">
-
         <thead>
         <tr>
-            <th>Incident</th>
-            <th>Date</th>
-            <th>Prioritization</th>
-            <th>Admin</th>
-            <th>Status</th>
+            <th datatype="string" id="1">Incident</th>
+            <th datatype="date" id="2">Date</th>
+            <th datatype="string" id="3">Prioritization</th>
+            <th datatype="string" id="4">Admin </th>
+            <th datatype="string" id="5">Status</th>
         </tr>
-
         <tbody>
         <tr th:each="ticket: ${tickets}">
             <td th:text="${ticket.getCategorization()}"/>
@@ -53,38 +37,101 @@
         </tbody>
     </table>
 </div>
-
-</div>
 </body>
+
+<script>
+    // HTML-Tabelle sortieren
+
+    const table = document.getElementById("foobar-table");
+    const headers = table.querySelectorAll("th");
+    const tableBody = table.querySelector("tbody");
+    const rows = tableBody.querySelectorAll("tr");
+    const directions = Array.from(headers).map(function(header) {
+        return "";
+    });
+
+    const transform = function(index, content) {
+        const type = headers[index].getAttribute("data-type");
+        switch (type) {
+            case "number":
+                return parseFloat(content);
+            case "string":
+            default:
+                return content;
+        }
+    };
+
+    const sortColumn = function(index, headers) {
+
+        const cls = ["upArrow", "dnArrow"];
+        headers.forEach((header) => {
+            document.getElementById(header.id).classList.remove(...cls);
+        });
+
+        const direction = directions[index] || "asc";
+        const multiplier = (direction === "asc") ? 1 : -1;
+        const newRows = Array.from(rows);
+
+        if (direction === "asc") {
+            document.getElementById(index).classList.add("upArrow");
+        }
+        else {
+            document.getElementById(index).classList.add("dnArrow");
+        }
+
+        newRows.sort((rowA, rowB) => {
+            const cellA = rowA.querySelectorAll("td")[index].textContent.toLowerCase();
+            const cellB = rowB.querySelectorAll("td")[index].textContent.toLowerCase();
+
+            const a = transform(index, cellA);
+            const b = transform(index, cellB);
+
+            switch (true) {
+                case a > b: return 1 * multiplier;
+                case a < b: return -1 * multiplier;
+                case a === b: return 0;
+            }
+        });
+
+        [].forEach.call(rows, function(row) {
+            tableBody.removeChild(row);
+        });
+
+        directions[index] = direction === "asc" ? "desc" : "asc";
+        newRows.forEach(function(newRow) {
+            tableBody.appendChild(newRow);
+        });
+    };
+
+    [].forEach.call(headers, function(header, index) {
+        header.setAttribute("id", index);
+        header.addEventListener("click", () => {
+            sortColumn(index, headers);
+        });
+    });
+</script>
 </html>
 
 <style>* {
     box-sizing: border-box;
 }
 
-#frame{
-
-
-
+#headline{
+    max-width: 1000px;
+    max-height: 750px;
+    text-align: right;
 }
 
 
 body {
-    font-size: 14px;
+    position: center;
+    margin: 0 auto;
+    background-color: white;
+    text-align: left;
 }
 
-.createTicketButton {
-    width: 250px;
-    height: 60px;
-    background: rgba(217, 217, 217, 1);
-    position: absolute;
-    top: 69px;
-    left: 53px;
-    border: 1px solid rgba(0, 0, 0, 1);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+.btn-primary{
+    background: white;
 }
 
 
@@ -95,15 +142,7 @@ body {
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 75px;
-    left: 1129px;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    overflow: hidden;
+    float: right;
 }
 
 .filterButton {
@@ -120,31 +159,25 @@ body {
     overflow: hidden;
 }
 
-.plus {
-    width: 44px;
-    height: 44px;
-    background: url("../static/images/plus.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 77px;
-    left: 244px;
-    overflow: hidden;
-}
 
 .userButton {
     width: 57px;
     height: 57px;
     background: url("../static/images/userButton.png");
-    background-repeat: no-repeat;
-    background-position: center center;
     background-size: cover;
-    opacity: 1;
+
+
+}
+
+.upArrow::after {
+    content: "\2191";
+    color: #FFFFFF;
     position: absolute;
-    top: 75px;
-    left: 1275px;
-    overflow: hidden;
+}
+
+.dnArrow::after {
+    content: "\2193";
+    color: #FFFFFF;
+    position: absolute;
 }
 </style>
