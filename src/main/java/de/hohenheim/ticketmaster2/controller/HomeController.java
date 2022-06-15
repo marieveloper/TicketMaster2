@@ -18,24 +18,27 @@ public class HomeController {
      * @param model enthält alle ModelAttribute.
      * @return home-Seite.
      */
-    @GetMapping("/home")
+    @GetMapping( "/")
     public String showHome(Model model) {
-        if (userService.getCurrentUser().getRoles().equals("ROLE_ADMIN")) {
-            return "admindashboard";
+        System.out.print(userService.getCurrentUser().getUsername());
+        if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+            System.out.print("Hallo");
+            return "admin";
         }
-        return "userdashboard";
+        return "user";
     }
 
-    @GetMapping("/admindashboard")
+
+    @GetMapping("/admin")
     public String showAdminDashboard(Model model) {
         model.addAttribute("tickets", ticketService.findAllTickets());
-        return "admindashboard";
+        return "admin";
     }
 
-    @GetMapping("/userdashboard")
+    @GetMapping("/user")
     public String showUserDashboard(Model model) {
         model.addAttribute("tickets", ticketService.findAllTickets());
-        return "userdashboard";
+        return "user";
     }
     @GetMapping("/createTicket")
     public String createTicket(Model model){
