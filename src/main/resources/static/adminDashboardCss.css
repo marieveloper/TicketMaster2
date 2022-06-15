@@ -123,3 +123,13 @@ img{
   opacity: 1;
   text-align: left;
 }
+.button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    opacity: 0.9;
+    }
+
