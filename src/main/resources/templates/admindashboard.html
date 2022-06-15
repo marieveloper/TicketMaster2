@@ -1,41 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
+    <style>
+     .button {
+        background-color: #04AA6D;
+        color: white;
+        padding: 16px 20px;
+        border: none;
+        cursor: pointer;
+        width: 20%;
+        opacity: 0.9;
+    }
+    </style>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
+
 
     <title>Home</title>
 </head>
 <body>
 <div class="container">
     <br/><br/>
-    <h3>Tickets</h3>
+
 
     <hr/>
-    <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket</a>
+    <button type="button" class="button" th:href="@{/createTicket}" >My Tickets</button>
     <br/><br/>
     <table class="table table-bordered table-striped" id="ticketTable">
-
         <thead>
         <tr>
+            <th>Priorisation</th>
             <th>Incident</th>
             <th>Date</th>
-            <th>Prioritization</th>
             <th>User</th>
+            <th>Admin</th>
             <th>Status</th>
         </tr>
 
         <tbody>
+    <!--TODO get the correct method declarations-->
         <tr th:each="ticket: ${tickets}">
-            <td th:text="${ticket.getCategorization()}" />
-            <td th:text="${ticket.getDate()}" />
             <td th:text="${ticket.getPrio()}" />
+            <td th:text="${ticket.getIncident()}" />
+            <td th:text="${ticket.getDate()}" />
             <td th:text="${ticket.getUser().getUsername()}" />
+            <td th:text="${ticket.getAdmin().getAdminname()}" />
             <td th:text="${ticket.getStatus()}" />
-
-
         </tr>
         </tbody>
     </table>
