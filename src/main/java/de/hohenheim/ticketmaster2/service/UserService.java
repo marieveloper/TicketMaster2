@@ -100,11 +100,10 @@ public class UserService implements UserDetailsService {
     public User createUser(String name,String password, Role role){
         User user= new User();
         Set<Role> userRoles = new HashSet<>();
-        //userRoles.add(RoleService.);
-
+        userRoles.add(role);
         user.setUsername(name);
         user.setPassword(password);
         user.setRoles(userRoles);
-        return null;
+        return user;
     }
 }
