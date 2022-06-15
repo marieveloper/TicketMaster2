@@ -90,4 +90,13 @@ public class UserService implements UserDetailsService {
         }
         return grantedAuthorities;
     }
+
+    public boolean hasRole(String roleName, User user){
+        for(Role role: user.getRoles()){
+            if(role.getRoleName().equals(roleName)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

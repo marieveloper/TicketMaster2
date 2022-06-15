@@ -2,40 +2,75 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/adminDashboardCss.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Home</title>
 </head>
 <body>
 <div class="container">
     <br/><br/>
-    <h3>Tickets</h3>
-
     <hr/>
-    <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket</a>
+    <button type="button" class="button" th:href="@{/getMyTickets}">My Tickets</button>
+    <div class="dropdown">
+        <button class="dropbtn"><img src="/static/images/filterButton.png"></button>
+        <div class="dropdown-content">
+            <li class="dropdown-submenu">
+                <a class="test" tabindex="-1" >Status<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a tabindex="-1" onclick="getStatusOpen()">Open</a></li>
+                    <li><a tabindex="-1" onclick="getStatusClosed()">Closed</a></li>
+                    <li><a tabindex="-1" onclick="getStatusInProgress()">In progress</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a class="test" tabindex="-1" >Priorization<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a tabindex="-1" onclick="getPrioHigh()">High</a></li>
+                    <li><a tabindex="-1" onclick="getPrioMedium()">Medium</a></li>
+                    <li><a tabindex="-1" onclick="getPrioLow()">Low</a></li>
+                </ul>
+            </li>
+            <li class="dropdown-submenu">
+                <a class="test" tabindex="-1" >Incident<span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a tabindex="-1" onclick="getIncidentInactivity()">Inactivity</a></li>
+                    <li><a tabindex="-1" onclick="getIncidentTechnicalProblems()">Technical problems</a></li>
+                    <li><a tabindex="-1" onclick="getIncidentOther()">Other</a></li>
+                </ul>
+            </li>
+        </div>
+    </div>
+
+
+
+    <div type="button" class="userbutton" ><img src="/static/images/userbutton.png"></div>
+    <div type="button" class="notification" ><img src="/static/images/notification.png"></div>
     <br/><br/>
     <table class="table table-bordered table-striped" id="ticketTable">
-
         <thead>
         <tr>
+            <th>Priorization</th>
             <th>Incident</th>
             <th>Date</th>
-            <th>Prioritization</th>
             <th>User</th>
+            <th>Admin</th>
             <th>Status</th>
         </tr>
 
         <tbody>
+    <!--TODO get the correct method declarations-->
         <tr th:each="ticket: ${tickets}">
-            <td th:text="${ticket.getCategorization()}" />
-            <td th:text="${ticket.getDate()}" />
-            <td th:text="${ticket.getPrio()}" />
-            <td th:text="${ticket.getUser().getUsername()}" />
-            <td th:text="${ticket.getStatus()}" />
-
-
+            <td th:text="${ticket.getPrio()}"/>
+            <td th:text="${ticket.getIncident()}"/>
+            <td th:text="${ticket.getDate()}"/>
+            <td th:text="${ticket.getUser().getUsername()}"/>
+            <td th:text="${ticket.getAdmin().getAdminname()}"/>
+            <td th:text="${ticket.getStatus()}"/>
         </tr>
         </tbody>
     </table>

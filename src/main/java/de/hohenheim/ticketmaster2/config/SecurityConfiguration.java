@@ -45,7 +45,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 // Achtung: Spring Security fügt automatisch das Prefix "ROLE_" für die Überprüfung ein. Daher verwenden wir
                 // hier nicht "ROLE_ADMIN", wie bspw. im TestDataLoader angegeben.
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/user/**").hasRole("USER")
                 // alle weiteren Requests erfordern Authentifizierung
                 .anyRequest().authenticated()
                 // füge CSRF token ein, welches evtl. für AJAX-requests benötigt wird
