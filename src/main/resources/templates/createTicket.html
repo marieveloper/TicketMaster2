@@ -1,189 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/createTicket.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <title> create Ticket </title>
 </head>
 <body>
-<h1>createTicket</h1>
-<section>
-    <section>
-        <div class="createTicketButton"></div>
-        <div class="text-Ticket">Create Ticket</div>
-    </section>
-    <div class="notification"></div>
-    <div class="filterButton">
-        <div class="dropdown">
-            <button class="filterButton" type="button" id="dropdown" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                Dropdown
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdown">
-                <li><a class="dropdown-item" href="#">Priorisation</a></li>
-                <li><a class="dropdown-item" href="#">Incident</a></li>
-                <li><a class="dropdown-item" href="#">Status</a></li>
-                <li><a class="dropdown-item" href="#">Admin</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="plus"></div>
-    <div class="userButton"></div>
-</section>
-<div class="create-ticket-user-screen">
-    <div class="frame-4">
-        <img class="home-2" src="home-2.png" /><img class="rectangle-7.png" /img>
-        class="rectangle-10"
-        src=rectangle-10.png"
-        />
-</div>
-<div class="frame-1">
-    <div class="overlap-group3">
-        <div class="problem-specification">Problem specification:</div>
-        <div class="input-fields">
-            <div class="overlap-group1">
-                <div class="error-message">Name</div>
-                <div class="box border-1px-black"></div>
-                <div class="key-field">Text</div>
-                <div class="overlap-group">
-                    <img class="start-cursor” src="start-cursor.png" />
-                <div class="value-masked">
-                    <img class="mask-layer” src="mask-layer.png" />
-                </div>
-                <img class="start-cursor” src="start-cursor.png" />
+<div class="container">
+    <br/><br/>
+    <h1>Create a Ticket</h1>
+    <hr/>
+    <div class="fieldContainer">
+        <br/><br/>
+        <form th:action="@{/saveTicket}" th:object="${ticket}" method="POST">
+            <br/>
+            <div class="selection"> Select incident:
+                <select th:field="*{categorization}">
+                    <option th:value="'technical problem'" th:text="technical problem"> technical problem</option>
+                    <option th:value="'inactivity'" th:text="inactivity"> inactivity</option>
+                    <option th:value="'other'" th:text="other"> other</option>
+                </select>
             </div>
-        </div>
+            </br> </br>
+            <input type="date" th:field="*{date}" class="form-control col-4 mb-4">
+            <textarea name="problemspecification" rows="10" cols="80" style="margin-top: 10px"
+                      th:field="*{problemspecification}"
+                      placeholder="Describe your problem" class="form-control col-4 mb-4"></textarea>
+            <button class="btn btn-primary" type="submit">submit</button>
+        </form>
     </div>
-    <div class="listcomponent">
-        <div class="list-box-title">
-            <div class="incidents">Incidents</div>
-        </div>
-        <div class="list-container">
-            <div class="1ist-box-main">
-                <div class="placeholder-text">
-                    <div class="select-a-categorie">Select a categorie</div>
-            </div>
-        <img class="chevron" src="chevron.svg" />
-    </div>
-        <div class="clip-list">
-            <div class="dropdown-list">
-                <div class="item-1">
-                    <div class="x1 montserrat-normal-mine-shaft-16px">inactivity</div>
-                </div>
-                <div class= "item">
-                    <div class= "x3 montserrat-normal-mine-shaft-16px" >other</div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-        <img class="polygon-2" sre="polygon-2.svg" />
-            rectangle-17 border-1px-black" ></div>
-        <h1 class="title">Submit Ticket</h1>
-</div>
-</div>
 </div>
 
 </body>
-</html> <br/><br/>
-<style>* {
-    box-sizing: border-box;
-}
-
-div {
-
-}
-
-.dropdown{
-    visibility: hidden;
-}
-
-
-body {
-    font-size: 14px;
-}
-
-.createTicketButton {
-    width: 250px;
-    height: 60px;
-    background: rgba(217, 217, 217, 1);
-    position: absolute;
-    top: 69px;
-    left: 53px;
-    border: 1px solid rgba(0, 0, 0, 1);
-    border-top-left-radius: 15px;
-    border-top-right-radius: 15px;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
-}
-
-.text-Ticket {
-    width: 153px;
-    color: rgba(0, 0, 0, 1);
-    position: relative;
-    top: 78px;
-    left: 67px;
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 24px;
-    text-align: left;
-}
-
-.notification {
-    width: 57px;
-    height: 57px;
-    background: url("../static/images/notification.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 75px;
-    left: 1129px;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    overflow: hidden;
-}
-
-.filterButton {
-    width: 59px;
-    height: 59px;
-    background: url("images/filterButton.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 65px;
-    left: 353px;
-    overflow: hidden;
-}
-
-.plus {
-    width: 44px;
-    height: 44px;
-    background: url("images/plus.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 77px;
-    left: 244px;
-    overflow: hidden;
-}
-
-.userButton {
-    width: 57px;
-    height: 57px;
-    background: url("images/userButton.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 75px;
-    left: 1275px;
-    overflow: hidden;
-}
-</style>
+</html>

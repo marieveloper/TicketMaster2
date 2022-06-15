@@ -1,0 +1,22 @@
+* {
+    box-sizing: border-box;
+}
+
+.container{
+
+}
+
+form{
+    background: darkgray;
+    margin: 0 auto;
+}
+
+
+
+.fields{
+    text-align: center;
+}
+
+.nameField{
+
+}
