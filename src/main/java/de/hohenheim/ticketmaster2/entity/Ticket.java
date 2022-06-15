@@ -30,10 +30,6 @@ public class Ticket {
     @OneToMany(mappedBy = "ticket")
     private Set<Message> messages;
 
-    @ManyToMany
-    @JoinColumn(name = "adminId")
-    private Set<Role> roles;
-
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
@@ -108,17 +104,21 @@ public class Ticket {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketId=" + ticketId +
+                ", categorization=" + categorization +
+                ", prio=" + prio +
+                ", date=" + date +
+                ", status=" + status +
+                ", messages=" + messages +
+                ", user=" + user +
+                '}';
+    }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }

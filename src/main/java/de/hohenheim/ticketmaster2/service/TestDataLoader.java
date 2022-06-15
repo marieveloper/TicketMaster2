@@ -71,7 +71,6 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         ticket.setDate();
         ticket.setStatus(Status.IN_PROCESS);
         ticket.setUser(normalUser);
-        ticket.setRoles(admin.getRoles());
         ticket.setPrio(Prioritization.HIGH);
         ticketService.saveTicket(ticket);
 
