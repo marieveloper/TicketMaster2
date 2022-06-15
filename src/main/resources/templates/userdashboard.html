@@ -10,29 +10,25 @@
 </head>
 <body>
 
-<div class="createTicketButton"></div>
-<div class="text-Ticket">Create Ticket</div>
-<div class="notification"></div>
-
-<div class="filterButton">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown"
-            aria-expanded="false"> Button
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdown">
-        <a class="dropdown-item" href="">Dropdown item</a>
-        <a class="dropdown-item" href="">Dropdown item</a>
-        <a class="dropdown-item" href="">Dropdown item</a>
+<div id="frame">
+    <div class="createTicketButton">
     </div>
-</div>
+    <div class="notification"></div>
+
 
 
 <div class="plus"></div>
 <div class="userButton"></div>
+
+
+
+<hr/>
+
+
 <div class="container">
     <br/><br/>
-    <h3>Tickets</h3>
 
-    <hr/>
+
     <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket</a>
     <br/><br/>
     <table class="table table-bordered table-striped" id="ticketTable">
@@ -48,17 +44,17 @@
 
         <tbody>
         <tr th:each="ticket: ${tickets}">
-            <td th:text="${ticket.getCategorization()}" />
-            <td th:text="${ticket.getDate()}" />
-            <td th:text="${ticket.getPrio()}" />
-            <td th:text="${ticket.getUser().getUsername()}" />
-            <td th:text="${ticket.getStatus()}" />
+            <td th:text="${ticket.getCategorization()}"/>
+            <td th:text="${ticket.getDate()}"/>
+            <td th:text="${ticket.getPrio()}"/>
+            <td th:text="${ticket.getUser().getUsername()}"/>
+            <td th:text="${ticket.getStatus()}"/>
         </tr>
         </tbody>
     </table>
 </div>
 
-
+</div>
 </body>
 </html>
 
@@ -66,9 +62,12 @@
     box-sizing: border-box;
 }
 
-div {
+#frame{
+
+
 
 }
+
 
 body {
     font-size: 14px;
@@ -88,17 +87,6 @@ body {
     border-bottom-right-radius: 15px;
 }
 
-.text-Ticket {
-    width: 153px;
-    color: rgba(0, 0, 0, 1);
-    position: relative;
-    top: 78px;
-    left: 67px;
-    font-family: Inter;
-    font-weight: 400;
-    font-size: 24px;
-    text-align: left;
-}
 
 .notification {
     width: 57px;
