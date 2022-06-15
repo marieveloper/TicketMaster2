@@ -9,6 +9,8 @@
 </head>
 <body>
 <div class="container">
+    <form  th:action="@{/createTicket}"  method= "POST" class="form-horizontal">
+    </form>
     <br/><br/>
     <h1>Create a Ticket</h1>
     <hr/>
@@ -18,7 +20,7 @@
             <br/>
             <div class="selection"> Select incident:
                 <select th:field="*{categorization}">
-                    <option th:value="'technical problem'" th:text="technical problem"> technical problem</option>
+                    <option th:value="'technical problem'" th:text="technicalProblem"> technical problem</option>
                     <option th:value="'inactivity'" th:text="inactivity"> inactivity</option>
                     <option th:value="'other'" th:text="other"> other</option>
                 </select>
