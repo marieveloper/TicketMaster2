@@ -25,7 +25,7 @@
             <a href="#">Status</a>
             <a href="#">Admin</a>
             <a href="#">User</a>
-            <a href="#">Priorization</a>
+            <a href="#">Prioritization</a>
             <a href="#">Incident</a>
         </div>
     </div>
@@ -48,8 +48,7 @@
             <td class="col-md-1" th:text="${ticket.getPrio()}" />
             <td class="col-md-2" th:text="${ticket.getIncident()}" />
             <td class="col-md-3" th:text="${ticket.getDate()}" />
-            <!--admin-Name?-->
-            <td class="col-md-4" th:text="${ticket.getUser().getUsername()}" />
+            <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>;
             <td class="col-md-5" th:text="${ticket.getStatus()}" />
         </tr>
         </tbody>
@@ -135,11 +134,6 @@ table#foobar-table th[data-type="string"]:hover {
     cursor: Pointer;
 }
 
-.upArrow::after {
-    content: "\2191";
-    color: #FFFFFF;
-    position: absolute;
-}
 
 .dnArrow::after {
     content: "\2193";
