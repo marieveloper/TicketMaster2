@@ -54,6 +54,8 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(adminRole);
 
+
+
         User normalUser = new User();
         normalUser.setUsername("user");
         normalUser.setPassword(passwordEncoder.encode("1234"));

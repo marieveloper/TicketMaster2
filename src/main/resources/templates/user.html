@@ -13,14 +13,12 @@
 
 <div class = "container">
     <form th:action="@{/user}" method="POST" class="form-horizontal">
-        <p th:text="'Dies ist Ihre initiale User Startseite'"></p>
-        <p th:text="${message}"></p>
     </form>
 
     <br/><br/>
 
     <hr/>
-    <button type="button" class="button" th:href="@{/createTicket}" >Create Ticket ➕</button>
+    <a th:href="@{/createTicket}" class ="btn btn-primary" >Create Ticket ➕</a>
     <div class="dropdown">
         <button class="dropbtn"><img src="/static/images/filterButton.png"></button>
         <div class="dropdown-content">
