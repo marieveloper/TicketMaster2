@@ -1,37 +1,67 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link href="https://fonts.googleapis.com/css?family=Inter&display=swap" rel="stylesheet"/>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
-<h1>Userdashboard</h1>
-<section>
-    <section>
-    <div class="createTicketButton"></div>
-    <div class="text-Ticket">Create Ticket</div>
-    </section>
-    <div class="notification"></div>
-    <div class="filterButton">
-        <div class="dropdown">
-            <button class="filterButton" type="button" id="dropdown" data-bs-toggle="dropdown"
-                    aria-expanded="false">
-                Dropdown
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdown">
-                <li><a class="dropdown-item" href="#">Priorisation</a></li>
-                <li><a class="dropdown-item" href="#">Incident</a></li>
-                <li><a class="dropdown-item" href="#">Status</a></li>
-                <li><a class="dropdown-item" href="#">Admin</a></li>
-            </ul>
-        </div>
+
+<div class="createTicketButton"></div>
+<div class="text-Ticket">Create Ticket</div>
+<div class="notification"></div>
+
+<div class="filterButton">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdown" data-bs-toggle="dropdown"
+            aria-expanded="false"> Button
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdown">
+        <a class="dropdown-item" href="">Dropdown item</a>
+        <a class="dropdown-item" href="">Dropdown item</a>
+        <a class="dropdown-item" href="">Dropdown item</a>
     </div>
-    <div class="plus"></div>
-    <div class="userButton"></div>
-</section>
+</div>
+
+
+<div class="plus"></div>
+<div class="userButton"></div>
+<div class="container">
+    <br/><br/>
+    <h3>Tickets</h3>
+
+    <hr/>
+    <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket</a>
+    <br/><br/>
+    <table class="table table-bordered table-striped" id="ticketTable">
+
+        <thead>
+        <tr>
+            <th>Incident</th>
+            <th>Date</th>
+            <th>Prioritization</th>
+            <th>Admin</th>
+            <th>Status</th>
+        </tr>
+
+        <tbody>
+        <tr th:each="ticket: ${tickets}">
+            <td th:text="${ticket.getCategorization()}" />
+            <td th:text="${ticket.getDate()}" />
+            <td th:text="${ticket.getPrio()}" />
+            <td th:text="${ticket.getUser().getUsername()}" />
+            <td th:text="${ticket.getStatus()}" />
+        </tr>
+        </tbody>
+    </table>
+</div>
 
 
 </body>
-</html> <br/><br/>
+</html>
+
 <style>* {
     box-sizing: border-box;
 }
@@ -39,11 +69,6 @@
 div {
 
 }
-
-.dropdown{
-    visibility: hidden;
-}
-
 
 body {
     font-size: 14px;
@@ -96,7 +121,7 @@ body {
 .filterButton {
     width: 59px;
     height: 59px;
-    background: url("images/filterButton.png");
+    background: url("../static/images/filterButton.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -110,7 +135,7 @@ body {
 .plus {
     width: 44px;
     height: 44px;
-    background: url("images/plus.png");
+    background: url("../static/images/plus.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -124,7 +149,7 @@ body {
 .userButton {
     width: 57px;
     height: 57px;
-    background: url("images/userButton.png");
+    background: url("../static/images/userButton.png");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;

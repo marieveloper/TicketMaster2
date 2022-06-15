@@ -1,7 +1,11 @@
 package de.hohenheim.ticketmaster2.service;
 
 import de.hohenheim.ticketmaster2.entity.Role;
+import de.hohenheim.ticketmaster2.entity.Ticket;
 import de.hohenheim.ticketmaster2.entity.User;
+import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
+import de.hohenheim.ticketmaster2.enums.Prioritization;
+import de.hohenheim.ticketmaster2.enums.Status;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
@@ -26,6 +30,9 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private TicketService ticketService;
 
     /**
      * Diese Methode wird zum Aufsetzen von Testdaten für die Datenbank verwendet werden. Die Methode wird immer dann
@@ -58,5 +65,15 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRoles(adminRoles);
         userService.saveUser(admin);
+
+        Ticket ticket = new Ticket();
+        ticket.setCategorization(IncidentCategorization.INACTIVITY);
+        ticket.setDate();
+        ticket.setStatus(Status.IN_PROCESS);
+        ticket.setUser(normalUser);
+        ticket.setRoles(admin.getRoles());
+        ticket.setPrio(Prioritization.HIGH);
+        ticketService.saveTicket(ticket);
+
     }
 }
