@@ -28,28 +28,40 @@
 
 <div class="plus"></div>
 <div class="userButton"></div>
-
-<br>
-<br>
-<br>
-<br>
-<br>
 <div class="container">
+    <br/><br/>
+    <h3>Tickets</h3>
+
     <hr/>
-    <table class="table table-bordered table-stripded" id="ticketList">
+    <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket</a>
+    <br/><br/>
+    <table class="table table-bordered table-striped" id="ticketTable">
+
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Datum</th>
-            <th>Meldung</th>
+            <th>Incident</th>
+            <th>Date</th>
+            <th>Prioritization</th>
+            <th>Admin</th>
+            <th>Status</th>
         </tr>
-        </thead>
+
+        <tbody>
+        <tr th:each="ticket: ${tickets}">
+            <td th:text="${ticket.getCategorization()}" />
+            <td th:text="${ticket.getDate()}" />
+            <td th:text="${ticket.getPrio()}" />
+            <td th:text="${ticket.getUser().getUsername()}" />
+            <td th:text="${ticket.getStatus()}" />
+        </tr>
+        </tbody>
     </table>
 </div>
 
 
 </body>
-</html> <br/><br/>
+</html>
+
 <style>* {
     box-sizing: border-box;
 }
