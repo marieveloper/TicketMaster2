@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/static/adminDashboardCss.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -15,16 +16,32 @@
 <hr/>
 <div class="container">
     <br/><br/>
+    <hr/>
     <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕ <p class="plus"></p></a>
-    <br/><br/>
+
+    <div class="dropdown">
+        <button class="dropbtn"><img src="/static/images/filterButton.png"></button>
+        <div class="dropdown-content">
+            <a href="#">Status :after</a>
+            <a href="#">Admin</a>
+            <a href="#">User</a>
+            <a href="#">Priorization</a>
+            <a href="#">Incident</a>
+        </div>
+    </div>
+
+    <div type="button" class="userbutton"><img src="/static/images/userButton.png"></div>
+    <div type="button" class="notification"><img src="/static/images/notification.png"></div>
+
+    <br><br>
     <table class="table table-bordered table-striped" id="ticketTable">
         <thead>
         <tr>
-            <th datatype="string" id="1">Incident</th>
-            <th datatype="date" id="2">Date</th>
-            <th datatype="string" id="3">Prioritization</th>
-            <th datatype="string" id="4">Admin </th>
-            <th datatype="string" id="5">Status</th>
+            <th datatype="string" id="1" class="dnArrow">Incident</th>
+            <th datatype="date" id="2" class="dnArrow">Date</th>
+            <th datatype="string" id="3" class="dnArrow">Prioritization</th>
+            <th datatype="string" id="4" class="dnArrow">Admin</th>
+            <th datatype="string" id="5" class="dnArrow">Status</th>
         </tr>
         <tbody>
         <tr th:each="ticket: ${tickets}">
@@ -46,11 +63,11 @@
     const headers = table.querySelectorAll("th");
     const tableBody = table.querySelector("tbody");
     const rows = tableBody.querySelectorAll("tr");
-    const directions = Array.from(headers).map(function(header) {
+    const directions = Array.from(headers).map(function (header) {
         return "";
     });
 
-    const transform = function(index, content) {
+    const transform = function (index, content) {
         const type = headers[index].getAttribute("data-type");
         switch (type) {
             case "number":
@@ -61,7 +78,7 @@
         }
     };
 
-    const sortColumn = function(index, headers) {
+    const sortColumn = function (index, headers) {
 
         const cls = ["upArrow", "dnArrow"];
         headers.forEach((header) => {
@@ -74,8 +91,7 @@
 
         if (direction === "asc") {
             document.getElementById(index).classList.add("upArrow");
-        }
-        else {
+        } else {
             document.getElementById(index).classList.add("dnArrow");
         }
 
@@ -87,23 +103,26 @@
             const b = transform(index, cellB);
 
             switch (true) {
-                case a > b: return 1 * multiplier;
-                case a < b: return -1 * multiplier;
-                case a === b: return 0;
+                case a > b:
+                    return 1 * multiplier;
+                case a < b:
+                    return -1 * multiplier;
+                case a === b:
+                    return 0;
             }
         });
 
-        [].forEach.call(rows, function(row) {
+        [].forEach.call(rows, function (row) {
             tableBody.removeChild(row);
         });
 
         directions[index] = direction === "asc" ? "desc" : "asc";
-        newRows.forEach(function(newRow) {
+        newRows.forEach(function (newRow) {
             tableBody.appendChild(newRow);
         });
     };
 
-    [].forEach.call(headers, function(header, index) {
+    [].forEach.call(headers, function (header, index) {
         header.setAttribute("id", index);
         header.addEventListener("click", () => {
             sortColumn(index, headers);
@@ -116,12 +135,6 @@
     box-sizing: border-box;
 }
 
-#headline{
-    max-width: 1000px;
-    max-height: 750px;
-    text-align: right;
-}
-
 
 body {
     position: center;
@@ -130,43 +143,9 @@ body {
     text-align: left;
 }
 
-.btn-primary{
+
+.btn-primary {
     background: white;
-}
-
-
-.notification {
-    width: 57px;
-    height: 57px;
-    background: url("../static/images/notification.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    float: right;
-}
-
-.filterButton {
-    width: 59px;
-    height: 59px;
-    background: url("../static/images/filterButton.png");
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 65px;
-    left: 353px;
-    overflow: hidden;
-}
-
-
-.userButton {
-    width: 57px;
-    height: 57px;
-    background: url("../static/images/userButton.png");
-    background-size: cover;
-
-
 }
 
 .upArrow::after {
@@ -180,4 +159,29 @@ body {
     color: #FFFFFF;
     position: absolute;
 }
+
+
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: white;
+}
+
+button{
+
+}
+
 </style>
