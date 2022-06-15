@@ -68,6 +68,12 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         admin.setRoles(adminRoles);
         userService.saveUser(admin);
 
-        
+        Ticket ticket = new Ticket();
+        ticket.setCategorization(IncidentCategorization.INACTIVITY);
+        ticket.setDate();
+        ticket.setStatus(Status.IN_PROCESS);
+        ticket.setUser(normalUser);
+        ticket.setPrio(Prioritization.HIGH);
+        ticketService.saveTicket(ticket);
     }
 }
