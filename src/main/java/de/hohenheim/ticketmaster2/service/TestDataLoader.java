@@ -73,6 +73,5 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         ticket.setUser(normalUser);
         ticket.setPrio(Prioritization.HIGH);
         ticketService.saveTicket(ticket);
-
     }
 }

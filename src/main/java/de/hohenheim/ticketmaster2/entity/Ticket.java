@@ -1,10 +1,11 @@
 package de.hohenheim.ticketmaster2.entity;
 
-import javax.persistence.*;
-import de.hohenheim.ticketmaster2.enums.*;
+import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
+import de.hohenheim.ticketmaster2.enums.Prioritization;
+import de.hohenheim.ticketmaster2.enums.Status;
 
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
