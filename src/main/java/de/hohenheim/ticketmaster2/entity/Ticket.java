@@ -19,6 +19,16 @@ public class Ticket {
     private LocalDate date;
     private Status status;
 
+    public String getProblemspecification() {
+        return problemspecification;
+    }
+
+    public void setProblemspecification(String problemspecification) {
+        this.problemspecification = problemspecification;
+    }
+
+    private String problemspecification;
+
     public LocalDate getDate() {
         return date;
     }
