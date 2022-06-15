@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/adminDashboardCss.css">
+    <link rel="stylesheet" href="/adminDashboardCss.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -13,16 +13,14 @@
 
 <div class = "container">
     <form th:action="@{/user}" method="POST" class="form-horizontal">
-        <p th:text="'Dies ist Ihre initiale User Startseite'"></p>
-        <p th:text="${message}"></p>
     </form>
 
     <br/><br/>
 
     <hr/>
-    <button type="button" class="button" th:href="@{/createTicket}" >Create Ticket ➕</button>
+    <a th:href="@{/createTicket}" class="btn btn-primary"> Create Ticket ➕</a>
     <div class="dropdown">
-        <button class="dropbtn"><img src="/static/images/filterButton.png"></button>
+        <button class="dropbtn"><img src="/images/filterButton.png"></button>
         <div class="dropdown-content">
             <a href="#">Status</a>
             <a href="#">Admin</a>
@@ -31,8 +29,8 @@
             <a href="#">Incident</a>
         </div>
     </div>
-    <div type="button" class="userbutton" ><img src="/static/images/userbutton.png"></div>
-    <div type="button" class="notification" ><img src="/static/images/notification.png"></div>
+    <div type="button" class="userbutton" ><img src="/images/userButton.png"></div>
+    <div type="button" class="notification" ><img src="/images/notification.png"></div>
     <br/><br/>
 
     <table class="table table-bordered table-striped" id="ticketTable">
@@ -47,11 +45,12 @@
 
         <tbody>
         <tr th:each="ticket: ${tickets}">
-            <td th:text="${ticket.getPrio()}" />
-            <td th:text="${ticket.getIncident()}" />
-            <td th:text="${ticket.getDate()}" />
-            <td th:text="${ticket.getAdmin().getAdminname()}" />
-            <td th:text="${ticket.getStatus()}" />
+            <td class="col-md-1" th:text="${ticket.getPrio()}" />
+            <td class="col-md-2" th:text="${ticket.getIncident()}" />
+            <td class="col-md-3" th:text="${ticket.getDate()}" />
+            <!--admin-Name?-->
+            <td class="col-md-4" th:text="${ticket.getUser().getUsername()}" />
+            <td class="col-md-5" th:text="${ticket.getStatus()}" />
         </tr>
         </tbody>
     </table>
