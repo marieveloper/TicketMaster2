@@ -108,7 +108,19 @@ public class Ticket {
     }
 
 
-
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "ticketId=" + ticketId +
+                ", categorization=" + categorization +
+                ", prio=" + prio +
+                ", date=" + date +
+                ", status=" + status +
+                ", messages=" + messages +
+                ", roles=" + roles +
+                ", user=" + user +
+                '}';
+    }
 
     public void setUser(User user) {
         this.user = user;
