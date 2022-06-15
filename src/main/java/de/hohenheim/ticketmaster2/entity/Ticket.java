@@ -3,7 +3,10 @@ package de.hohenheim.ticketmaster2.entity;
 import javax.persistence.*;
 import de.hohenheim.ticketmaster2.enums.*;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Set;
 
@@ -16,26 +19,12 @@ public class Ticket {
     private IncidentCategorization categorization;
     private Prioritization prio;
 
-    private LocalDate date;
+    private Timestamp creationTime;
     private Status status;
 
-    public String getProblemspecification() {
-        return problemspecification;
-    }
+    private String content;
 
-    public void setProblemspecification(String problemspecification) {
-        this.problemspecification = problemspecification;
-    }
-
-    private String problemspecification;
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate() {
-        this.date = date.now();
-    }
+    private String title;
 
     @OneToMany(mappedBy = "ticket")
     private Set<Message> messages;
@@ -43,6 +32,9 @@ public class Ticket {
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
+
+    @ManyToOne
+    private User responsibleAdmin;
 
     public Ticket() {
         // empty constructor for Hibernate
@@ -75,11 +67,11 @@ public class Ticket {
     public void setCategorization(IncidentCategorization categorization) {
         switch(categorization){
             case INACTIVITY: System.out.println("user is inactive");
-            break;
+                break;
             case TECHNICAL_PROBLEMS: System.out.println("software/ hardware problems");
-            break;
+                break;
             case OTHER: System.out.println("other");
-            break;
+                break;
         }
         this.categorization=categorization;
     }
@@ -120,7 +112,7 @@ public class Ticket {
                 "ticketId=" + ticketId +
                 ", categorization=" + categorization +
                 ", prio=" + prio +
-                ", date=" + date +
+                ", timestamp=" + creationTime +
                 ", status=" + status +
                 ", messages=" + messages +
                 ", user=" + user +
@@ -131,4 +123,45 @@ public class Ticket {
         this.user = user;
     }
 
+    public String getCreationTime(String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return formatter.format(creationTime.toLocalDateTime());
+    }
+
+    /**
+     *
+     * @return a Timestamp of the creation time. You should probably not use this, use the one that returns a String
+     */
+    public Timestamp getCreationTime(){
+        return this.creationTime;
+    }
+
+
+    public void setCreationTime(Timestamp timestamp) {
+        this.creationTime = timestamp;
+    }
+
+    public User getResponsibleAdmin() {
+        return responsibleAdmin;
+    }
+
+    public void setResponsibleAdmin(User responsibleAdmin) {
+        this.responsibleAdmin = responsibleAdmin;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
 }

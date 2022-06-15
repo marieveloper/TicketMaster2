@@ -12,10 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -98,5 +95,16 @@ public class UserService implements UserDetailsService {
             }
         }
         return false;
+    }
+
+    public User createUser(String name,String password, Role role){
+        User user= new User();
+        Set<Role> userRoles = new HashSet<>();
+        //userRoles.add(RoleService.);
+
+        user.setUsername(name);
+        user.setPassword(password);
+        user.setRoles(userRoles);
+        return null;
     }
 }
