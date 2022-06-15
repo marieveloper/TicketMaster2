@@ -20,8 +20,10 @@ public class HomeController {
      */
     @GetMapping( "/")
     public String showHome(Model model) {
+        System.out.print(userService.getCurrentUser().getUsername());
         if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
-            return "admindashboard";
+            System.out.print("Hallo");
+            return "admin";
         }
         return "user";
     }

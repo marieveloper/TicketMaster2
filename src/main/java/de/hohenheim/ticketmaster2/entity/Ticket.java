@@ -30,10 +30,6 @@ public class Ticket {
     @OneToMany(mappedBy = "ticket")
     private Set<Message> messages;
 
-    @ManyToMany
-    @JoinColumn(name = "adminId")
-    private Set<Role> roles;
-
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
@@ -117,7 +113,6 @@ public class Ticket {
                 ", date=" + date +
                 ", status=" + status +
                 ", messages=" + messages +
-                ", roles=" + roles +
                 ", user=" + user +
                 '}';
     }
@@ -126,11 +121,4 @@ public class Ticket {
         this.user = user;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
 }
