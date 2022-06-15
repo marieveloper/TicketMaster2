@@ -45,7 +45,7 @@ public class HomeController {
     }
     @GetMapping("/createTicket")
     public String createTicket(Model model){
-        model.addAttribute("message", "Und hier sehen Sie ein ModelAttribut");
+        model.addAttribute("ticket", new Ticket());
         return "createTicket";
     }
 
