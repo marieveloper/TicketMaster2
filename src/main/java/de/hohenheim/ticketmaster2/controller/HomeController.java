@@ -20,7 +20,7 @@ public class HomeController {
      */
     @GetMapping("/home")
     public String showHome(Model model) {
-        if (userService.getCurrentUser().getRoles().equals("ROLE_ADMIN")) {
+        if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             return "admindashboard";
         }
         return "userdashboard";
