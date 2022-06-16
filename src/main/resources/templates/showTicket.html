@@ -59,9 +59,7 @@
         </div>
     </div>
         <br>
-    <a class="btn btn-info"
-       th:onclick="'window.location.href=\'/user?ticketId=' + ${ticket.getTicketId()} + '\''">Withdraw
-        Ticket</a>
+        <a th:href="@{/withdrawTicket(ticketId=${ticket.getTicketId()})}" class="btn btn-danger">Withdraw Ticket</a>
     <a class="btn btn-info" th:href="@{/requestStatus(ticketId=${ticket.getTicketId()})}">Request Status</a>
     </form>
 </div>
