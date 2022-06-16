@@ -49,7 +49,9 @@
     </div>
     <div type="button" class="btn" ><img src="/images/userbutton.png" ></div>
     <div type="button" class="btn" ><img src="/images/notification.png" ></div>
-    <div type="button" class="btn" th:href="@{/logout}"><img src="/images/exit.png" ></div>
+    <div>
+            <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png" ></a>
+    </div>
     <br/><br/>
     <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
     <table class="table table-bordered table-striped" id="ticketTable">
