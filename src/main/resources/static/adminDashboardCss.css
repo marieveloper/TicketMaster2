@@ -177,12 +177,13 @@ img{
     opacity: 1;
     position: absolute;
     top: 100px;
-    left: 1329px;
+    left: 66%;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     overflow: hidden;
+    margin: 2px 2px 2px 2px;
 }
 .userbutton {
     width: 57px;
@@ -193,10 +194,28 @@ img{
     opacity: 1;
     position: absolute;
     top: 100px;
-    left: 1129px;
+    left: 72%;
     border-top-left-radius: 7px;
     border-top-right-radius: 7px;
     border-bottom-left-radius: 7px;
     border-bottom-right-radius: 7px;
     overflow: hidden;
+    margin: 2px 2px 2px 2px;
+}
+.exitButton {
+    width: 57px;
+    height: 57px;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    opacity: 1;
+    position: absolute;
+    top: 100px;
+    left: 78%;
+    border-top-left-radius: 7px;
+    border-top-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-bottom-right-radius: 7px;
+    overflow: hidden;
+    margin: 2px 2px 2px 2px;
 }
