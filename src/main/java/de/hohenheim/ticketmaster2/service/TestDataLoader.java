@@ -61,7 +61,6 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         for(int i =0; i<3; i++){
             userService.createUser(names.get(i),passwordEncoder.encode( i+"1000"), adminRole);
-            users.add(userService.getUserByUsername(names.get(i)));
 
         }
         for(int i =3; i<6; i++){
@@ -80,7 +79,6 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRoles(adminRoles);
         userService.saveUser(admin);
-        users.add(admin);
         users.add(normalUser);
 
         //userService.createUser("a",passwordEncoder.encode("a"),adminRole);

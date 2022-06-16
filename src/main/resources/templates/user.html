@@ -47,7 +47,7 @@
             <th data-type="string">Status</th>
         </tr>
         <tbody>
-        <tr th:each="ticket: ${tickets}">
+        <tr th:each="ticket: ${userTickets}">
             <td class="col-md-1" th:text="${ticket.getPrio()}" />
             <td class="col-md-2" th:text="${ticket.getCategorization()}" />
             <td class="col-md-3" th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}" />
