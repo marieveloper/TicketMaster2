@@ -55,5 +55,11 @@ public class HomeController {
         return "redirect:/userdashboard";
     }
 
+    @GetMapping("/back")
+    public String backToUserDashboard(Model model){
+        model.addAttribute("tickets", ticketService.findAllTickets());
+        return "user";
+    }
+
 
 }
