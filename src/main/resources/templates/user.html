@@ -29,11 +29,14 @@
                 <a href="#">Incident</a>
             </div>
         </div>
-        <div href="" type="button" class="btn-link"><img src="/images/userButton.png" class="img-responsive">
-        </div>
-        <div href="" type="button" class="btn-info"><img src="/images/notification.png" class="img-responsive"></div>
+        <a href="" type="button" class="btn" style="left:66%"><img src="/images/userButton.png" class="img-responsive">
+        </a>
+        <a href="" type="button" class="btn" style="left:72%"><img src="/images/notification.png" class="img-responsive"></a>
+        <a href="" type="button" class="btn" style="left:78%"><img src="/images/exit.png" class="img-responsive"></a>
     </div>
     <br/><br/>
+    <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
+    <div class="">
     <table class="table table-bordered table-striped" id="ticketTable">
         <thead>
         <tr>
@@ -53,6 +56,8 @@
         </tr>
         </tbody>
     </table>
+    </div>
+    </form>
     </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
