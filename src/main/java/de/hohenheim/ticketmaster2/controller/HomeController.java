@@ -69,9 +69,9 @@ public class HomeController {
         return "redirect:/user";
     }
 
-    @GetMapping("/showTicket/{ticketID}")
-    public String gotoTicket(@RequestParam int ticketID, Model model){
-        Ticket ticket = ticketService.getByTicketId(ticketID);
+    @GetMapping("/showTicket{ticketId}")
+    public String gotoTicket(@RequestParam Integer ticketId, Model model){
+        Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket",ticket);
         return "showTicket";
         }

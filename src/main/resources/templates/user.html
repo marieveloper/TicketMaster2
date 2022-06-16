@@ -13,14 +13,14 @@
 </head>
 <body>
 <div class="container">
-    <hr/>
+    <hr>
     <h3>Userdashboard</h3>
     <form th:action="@{/user}" method="POST" class="form-horizontal">
-    <hr/>
+    <hr>
     <div>
         <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕</a>
         <div class="dropdown">
-            <button class="dropbtn"><img src="/images/filterButton.png"></button>
+            <img src="/images/filterButton.png" class="img-responsive">
             <div class="dropdown-content">
                 <a href="#">Status</a>
                 <a href="#">Admin</a>
@@ -29,10 +29,12 @@
                 <a href="#">Incident</a>
             </div>
         </div>
+        <div style="float:right">
         <a href="" type="button" class="btn" style="left:66%"><img src="/images/userButton.png" class="img-responsive">
         </a>
         <a href="" type="button" class="btn" style="left:72%"><img src="/images/notification.png" class="img-responsive"></a>
         <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png" ></a>
+        </div>
     </div>
     <br/><br/>
     <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
@@ -55,7 +57,7 @@
             <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>;
             <td class="col-md-5" th:text="${ticket.getStatus()}" />
             <td>
-                <a class="btn btn-info" th:onclick="'window.location.href=\'/showTicket/' + ${ticket.getTicketId()} + '\''">Show Ticket</a>
+                <a class="btn btn-info" th:onclick="'window.location.href=\'/showTicket?ticketId=' + ${ticket.getTicketId()} + '\''">Show Ticket</a>
             </td>
         </tr>
         </tbody>
