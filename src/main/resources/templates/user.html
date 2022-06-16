@@ -46,8 +46,8 @@
         <tbody>
         <tr th:each="ticket: ${tickets}">
             <td class="col-md-1" th:text="${ticket.getPrio()}" />
-            <td class="col-md-2" th:text="${ticket.getIncident()}" />
-            <td class="col-md-3" th:text="${ticket.getDate()}" />
+            <td class="col-md-2" th:text="${ticket.getCategorization()}" />
+            <td class="col-md-3" th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}" />
             <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>;
             <td class="col-md-5" th:text="${ticket.getStatus()}" />
         </tr>

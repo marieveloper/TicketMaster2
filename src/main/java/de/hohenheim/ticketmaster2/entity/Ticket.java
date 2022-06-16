@@ -6,6 +6,7 @@ import de.hohenheim.ticketmaster2.enums.Status;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
@@ -137,6 +138,10 @@ public class Ticket {
      */
     public Timestamp getCreationTime(){
         return this.creationTime;
+    }
+    public String getCreationTimeString(Timestamp timestamp){
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd, HH:mm:ss").format(timestamp);
+        return timeStamp;
     }
 
 

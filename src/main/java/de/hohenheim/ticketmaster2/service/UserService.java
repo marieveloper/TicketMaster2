@@ -116,7 +116,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User getByuserId(int id){
+    public User getUserById(int id){
         return userRepository.getById(id);
     }
 }
