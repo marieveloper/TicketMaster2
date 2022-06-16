@@ -16,7 +16,6 @@
     <hr/>
     <h3>Userdashboard</h3>
     <form th:action="@{/user}" method="POST" class="form-horizontal">
-    </form>
     <hr/>
     <div>
         <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕</a>
@@ -46,15 +45,15 @@
         </tr>
         <tbody>
         <tr th:each="ticket: ${tickets}">
-            <td class="col-md-1" th:text="${ticket.getPrio()}"/>
-            <td class="col-md-2" th:text="${ticket.getIncident()}"/>
-            <td class="col-md-3" th:text="${ticket.getDate()}"/>
-            <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
-            ;
-            <td class="col-md-5" th:text="${ticket.getStatus()}"/>
+            <td class="col-md-1" th:text="${ticket.getPrio()}" />
+            <td class="col-md-2" th:text="${ticket.getCategorization()}" />
+            <td class="col-md-3" th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}" />
+            <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>;
+            <td class="col-md-5" th:text="${ticket.getStatus()}" />
         </tr>
         </tbody>
     </table>
+    </form>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
@@ -67,4 +66,5 @@
         integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
         crossorigin="anonymous"></script>
 </body>
+
 </html>

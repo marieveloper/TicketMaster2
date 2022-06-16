@@ -30,12 +30,16 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public Ticket getByticketId(int id){
+    public Ticket getByTicketId(int id){
         return ticketRepository.getById(id);
     }
 
     public List<Ticket> getAllTicketsByAuthor(String username){
         return findAllTickets().stream().filter(t -> t.getUser().getUsername().equals(username)).toList();
+    }
+
+    public List<Ticket> getAllTicketsByUserId(int id){
+        return findAllTickets().stream().filter(t -> t.getUser().getUserId()==id).toList();
     }
 
     public List<Ticket> getAllTicketsWithStatus(Status status){
@@ -72,11 +76,11 @@ public class TicketService {
     }
 
     public void deleteTicket(int ticketId){
-        ticketRepository.delete(getByticketId(ticketId)); //TODO: FK-Beziehungen mit @OnDelete versehen
+        ticketRepository.delete(getByTicketId(ticketId)); //TODO: FK-Beziehungen mit @OnDelete versehen
     }
 
     public boolean canRequestStatus(int ticketId){
-        Timestamp timestamp = getByticketId(ticketId).getCreationTime();
+        Timestamp timestamp = getByTicketId(ticketId).getCreationTime();
         long deltaTime = System.currentTimeMillis() - timestamp.getTime();
         if(deltaTime / 3600000 >= 12){
             return true;
@@ -89,7 +93,7 @@ public class TicketService {
     }
 
     public void changeTicketPriority(int ticketId, Prioritization prio){
-        Ticket ticket = getByticketId(ticketId);
+        Ticket ticket = getByTicketId(ticketId);
         ticket.setPrio(prio);
         ticketRepository.save(ticket);
     }

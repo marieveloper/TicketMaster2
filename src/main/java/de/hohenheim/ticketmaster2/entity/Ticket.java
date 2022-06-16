@@ -3,9 +3,10 @@ package de.hohenheim.ticketmaster2.entity;
 import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
@@ -41,6 +42,7 @@ public class Ticket {
     public Ticket() {
         // empty constructor for Hibernate
     }
+
 
     public Integer getTicketId() {
         return ticketId;
@@ -136,6 +138,10 @@ public class Ticket {
      */
     public Timestamp getCreationTime(){
         return this.creationTime;
+    }
+    public String getCreationTimeString(Timestamp timestamp){
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd, HH:mm:ss").format(timestamp);
+        return timeStamp;
     }
 
 
