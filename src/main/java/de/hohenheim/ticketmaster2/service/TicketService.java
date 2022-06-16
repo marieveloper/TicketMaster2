@@ -30,7 +30,7 @@ public class TicketService {
         return ticketRepository.findAll();
     }
 
-    public Ticket getByTicketId(int id){
+    public Ticket getByTicketId(Integer id){
         return ticketRepository.getById(id);
     }
 
@@ -38,7 +38,7 @@ public class TicketService {
         return findAllTickets().stream().filter(t -> t.getUser().getUsername().equals(username)).toList();
     }
 
-    public List<Ticket> getAllTicketsByUserId(int id){
+    public List<Ticket> getAllTicketsByUserId(Integer id){
         return findAllTickets().stream().filter(t -> t.getUser().getUserId()==id).toList();
     }
 
