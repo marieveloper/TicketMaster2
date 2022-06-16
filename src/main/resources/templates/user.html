@@ -15,7 +15,7 @@
 <body>
 <div class="container">
     <hr/>
-    <h3>Userdashboard</h3>g
+    <h3>Userdashboard</h3>
     <hr/>
     <form th:action="@{/user}" method="POST" class="form-horizontal">
         <div>
@@ -35,7 +35,7 @@
                     <a href="#">Admin</a>
                     <a href="#">User</a>
                     <li class="menu">
-                        <a class="dropbtn" tabindex="-1">Priorization<span class="caret"></span></a>
+                        <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
                         <ul class="dropdown-submenu">
                             <li><a class="btn dropbtn" tabindex="-1" onclick="getPrioHigh()">High</a></li>
                             <li><a class="btn dropbtn" tabindex="-1" onclick="getPrioMedium()">Medium</a></li>
@@ -83,7 +83,6 @@
                         <td class="col-md-2" th:text="${ticket.getCategorization()}"/>
                         <td class="col-md-3" th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
                         <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
-                        ;
                         <td class="col-md-5" th:text="${ticket.getStatus()}"/>
                         <td>
                             <a class="btn btn-info"
