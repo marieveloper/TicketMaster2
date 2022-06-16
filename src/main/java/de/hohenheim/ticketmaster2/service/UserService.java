@@ -115,4 +115,8 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
         return user;
     }
+
+    public User getByuserId(int id){
+        return userRepository.getById(id);
+    }
 }
