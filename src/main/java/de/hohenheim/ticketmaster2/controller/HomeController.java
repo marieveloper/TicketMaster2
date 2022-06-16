@@ -52,7 +52,7 @@ public class HomeController {
     @PostMapping("/saveTicket")
     public String createTicket(@ModelAttribute Ticket ticket){
         ticketService.saveTicket(ticket);
-        return "redirect:/userdashboard";
+        return "redirect:/user";
     }
 
 
