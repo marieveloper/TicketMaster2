@@ -108,7 +108,7 @@ public class UserService implements UserDetailsService {
     public User createUser(String name,String password, Role role){
         User user= new User();
         Set<Role> userRoles =  new HashSet<>();
-        userRoles.addAll(roleService.findAllRoles());
+        userRoles.add(role);
         user.setUsername(name);
         user.setPassword(password);
         user.setRoles(userRoles);
@@ -116,7 +116,7 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User getByuserId(int id){
+    public User getUserById(int id){
         return userRepository.getById(id);
     }
 }

@@ -15,14 +15,13 @@
     <h1>Create a Ticket</h1>
     <hr/>
     <div class="fieldContainer">
-        <br/><br/>
         <form th:action="@{/saveTicket}" th:object="${ticket}" method="POST">
             <br/>
             <div class="selection"> Select incident:
                 <select th:field="*{categorization}">
-                    <option th:value="'technical problem'" th:text="technicalProblem"> technical problem</option>
-                    <option th:value="'inactivity'" th:text="inactivity"> inactivity</option>
-                    <option th:value="'other'" th:text="other"> other</option>
+                    <option th:value="'technical problem'" th:text="technicalProblem"> TECHNICAL_PROBLEM</option>
+                    <option th:value="'inactivity'" th:text="inactivity"> INACTIVITY</option>
+                    <option th:value="'other'" th:text="other"> OTHER</option>
                 </select>
             </div>
             </br> </br>
@@ -31,6 +30,8 @@
                       placeholder="Describe your problem" class="form-control col-4 mb-4"></textarea>
             <button class="btn btn-primary" type="submit">submit</button>
         </form>
+        <hr/>
+        <a th:href="@{/back}" class ="btn btn-primary">Back</a>
     </div>
 </div>
 
