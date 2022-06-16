@@ -2,87 +2,90 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <link rel="stylesheet" href="/adminDashboardCss.css"/>
-      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-            crossorigin="anonymous"/>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/adminDashboardCss.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Home</title>
 </head>
 <body>
 <div class="container">
-    <br/><br/>
-    <hr/>
+    <hr>
+    <h3>Admindashboard</h3>
+    <hr>
     <form th:action="@{/admin}" method="POST" class="form-horizontal">
-    <button type="button" class="button" th:href="@{/getMyTickets}">My Tickets</button>
-    <div class="dropdown">
-        <button onclick="myFunction()" class="dropbtn"><img src="/images/filterButton.png"></button>
-         <div class="dropdown-content">
-             <li class="dropdown-submenu">
-                 <a class="test" tabindex="-1" >Status<span class="caret"></span></a>
-                 <ul class="dropdown-menu">
-                     <li><a tabindex="-1" onclick="getStatusOpen()">Open</a></li>
-                     <li><a tabindex="-1" onclick="getStatusClosed()">Closed</a></li>
-                     <li><a tabindex="-1" onclick="getStatusInProgress()">In progress</a></li>
-                 </ul>
-             </li>
-             <li class="dropdown-submenu">
-                 <a class="test" tabindex="-1" >Priorization<span class="caret"></span></a>
-                 <ul class="dropdown-menu">
-                     <li><a tabindex="-1" onclick="getPrioHigh()">High</a></li>
-                     <li><a tabindex="-1" onclick="getPrioMedium()">Medium</a></li>
-                     <li><a tabindex="-1" onclick="getPrioLow()">Low</a></li>
-                 </ul>
-             </li>
-             <li class="dropdown-submenu">
-                 <a class="test" tabindex="-1" >Incident<span class="caret"></span></a>
-                 <ul class="dropdown-menu">
-                     <li><a tabindex="-1" onclick="getIncidentInactivity()">Inactivity</a></li>
-                     <li><a tabindex="-1" onclick="getIncidentTechnicalProblems()">Technical problems</a></li>
-                     <li><a tabindex="-1" onclick="getIncidentOther()">Other</a></li>
-                 </ul>
-             </li>
-         </div>
-    </div>
-    <div type="button" class="btn" ><img src="/images/userbutton.png" ></div>
-    <div type="button" class="btn" ><img src="/images/notification.png" ></div>
-    <div>
-            <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png" ></a>
-    </div>
-    <br/><br/>
-    <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
-    <table class="table table-bordered table-striped" id="ticketTable">
-        <thead>
-        <tr>
-            <th>Priorization</th>
-            <th>Incident</th>
-            <th>Date</th>
-            <th>User</th>
-            <th>Admin</th>
-            <th>Status</th>
-            <th>Actions</th>
-        </tr>
+        <div>
+        <a th:href="@{/getMyTickets}" class="btn btn-primary">My Tickets</a>
+        <div class="dropdown">
+            <img src="/images/filterButton.png">
+            <div class="dropdown-content">
+                <li class="dropdown-submenu">
+                    <a class="test" tabindex="-1">Status<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" onclick="getStatusOpen()">Open</a></li>
+                        <li><a tabindex="-1" onclick="getStatusClosed()">Closed</a></li>
+                        <li><a tabindex="-1" onclick="getStatusInProgress()">In progress</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="test" tabindex="-1">Priorization<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" onclick="getPrioHigh()">High</a></li>
+                        <li><a tabindex="-1" onclick="getPrioMedium()">Medium</a></li>
+                        <li><a tabindex="-1" onclick="getPrioLow()">Low</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown-submenu">
+                    <a class="test" tabindex="-1">Incident<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a tabindex="-1" onclick="getIncidentInactivity()">Inactivity</a></li>
+                        <li><a tabindex="-1" onclick="getIncidentTechnicalProblems()">Technical problems</a></li>
+                        <li><a tabindex="-1" onclick="getIncidentOther()">Other</a></li>
+                    </ul>
+                </li>
+            </div>
+        </div>
+            <br>
+        <div style="float:right">
+            <div type="button" class="btn"><img src="/images/userbutton.png" content="width=device-width"></div>
+            <div type="button" class="btn"><img src="/images/notification.png" content="width=device-width"></div>
+            <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png" content="width=device-width"></a>
+        </div>
+        <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
+            <table class="table table-bordered table-striped" id="ticketTable">
+                <thead>
+                <tr>
+                    <th>Priorization</th>
+                    <th>Incident</th>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Admin</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
 
-        <tbody>
-    <!--TODO get the correct method declarations-->
-        <tr th:each="ticket: ${tickets}">
-            <td th:text="${ticket.getPrio()}"/>
-            <td th:text="${ticket.getCategorization()}"/>
-            <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
-            <td th:text="${ticket.getUser().getUsername()}"/>
-            <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
-            <td th:text="${ticket.getStatus()}"/>
-            <td>
-                <a class="btn btn-info" th:href="@{/showTicket(ticketId=${ticket.getTicketId()})}">Show Ticket</a>
-            </td>
-        </tr>
-        </tbody>
-    </table>
-    </form>
-    <a class="btn btn-info" th:href="@{/showTicket}">Show Ticket</a>
+                <tbody>
+                <!--TODO get the correct method declarations-->
+                <tr th:each="ticket: ${tickets}">
+                    <td th:text="${ticket.getPrio()}"/>
+                    <td th:text="${ticket.getCategorization()}"/>
+                    <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
+                    <td th:text="${ticket.getUser().getUsername()}"/>
+                    <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
+                    <td th:text="${ticket.getStatus()}"/>
+                    <td>
+                        <a class="btn btn-info" th:href="@{/showTicket(ticketId=${ticket.getTicketId()})}">Show Ticket</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+        <a class="btn btn-info" th:href="@{/showTicket}">Show Ticket</a>
     </form>
 </div>
 </body>

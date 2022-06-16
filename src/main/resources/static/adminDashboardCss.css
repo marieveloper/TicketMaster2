@@ -14,20 +14,12 @@ body {
   left: 0px;
   overflow: hidden;
 }
-.v23_5686 {
-  width: 100%;
-  height: 105px;
-  background: rgba(255,255,255,1);
-  opacity: 1;
-  position: absolute;
-  top: 255px;
-  left: 119px;
-  border-top-left-radius: 2px;
-  border-top-right-radius: 2px;
-  border-bottom-left-radius: 2px;
-  border-bottom-right-radius: 2px;
-  overflow: hidden;
+
+.li{
+  list-style: none;
+  display:block;
 }
+
 .name {
   color: #fff;
 }
@@ -36,102 +28,14 @@ body {
 }
 .name {
   color: #fff;
-}
-.v46_1329 {
-  width: 100%;
-  height: 174px;
-  background: url("../images/v46_1329.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
 }
 
 img{
   height: 57px;
-  width: 57px;
-}
-.filter{
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 74px;
-  left: 381px;
-  overflow: hidden;
-}
+  width: 100%;
 
-.personButton {
-  width: 57px;
-  height: 57px;
-  background: url("images/userButton.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 81px;
-  left: 1176px;
-  border-top-left-radius: 7px;
-  border-top-right-radius: 7px;
-  border-bottom-left-radius: 7px;
-  border-bottom-right-radius: 7px;
-  overflow: hidden;
+
 }
-.bellButton {
-  width: 57px;
-  height: 57px;
-  background: url("static/images/notification.png");
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-  opacity: 1;
-  position: absolute;
-  top: 81px;
-  left: 1322px;
-  overflow: hidden;
-}
-.myTicketsButton {
-  width: 241px;
-  height: 55px;
-  background: rgba(217,217,217,1);
-  opacity: 1;
-  position: absolute;
-  top: 78px;
-  left: 80px;
-  border: 1px solid rgba(0,0,0,1);
-  border-top-left-radius: 15px;
-  border-top-right-radius: 15px;
-  border-bottom-left-radius: 15px;
-  border-bottom-right-radius: 15px;
-  overflow: hidden;
-}
-.myTickets {
-  width: 172px;
-  color: rgba(0,0,0,1);
-  position: absolute;
-  top: 88px;
-  left: 135px;
-  font-family: Inter;
-  font-weight: 400;
-  font-size: 24px;
-  opacity: 1;
-  text-align: left;
-}
-.button {
-    background-color: #04AA6D;
-    color: white;
-    padding: 16px 20px;
-    border: none;
-    cursor: pointer;
-    width: 20%;
-    opacity: 0.9;
-    }
 
 .dropbtn {
   background-color: white;
@@ -167,55 +71,7 @@ img{
 
 .dropdown:hover .dropbtn {background-color: white;}
 
+.btn-primary{
 
-.notification {
-    width: 57px;
-    height: 57px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 100px;
-    left: 66%;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    overflow: hidden;
-    margin: 2px 2px 2px 2px;
 }
-.userbutton {
-    width: 57px;
-    height: 57px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 100px;
-    left: 72%;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    overflow: hidden;
-    margin: 2px 2px 2px 2px;
-}
-.exitButton {
-    width: 57px;
-    height: 57px;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-size: cover;
-    opacity: 1;
-    position: absolute;
-    top: 100px;
-    left: 78%;
-    border-top-left-radius: 7px;
-    border-top-right-radius: 7px;
-    border-bottom-left-radius: 7px;
-    border-bottom-right-radius: 7px;
-    overflow: hidden;
-    margin: 2px 2px 2px 2px;
-}
+

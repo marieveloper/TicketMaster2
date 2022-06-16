@@ -44,9 +44,7 @@ public class HomeController {
 
     @GetMapping("/admin")
     public String showAdminDashboard(Model model) {
-       
-        model.addAttribute("tickets"); 
-
+        model.addAttribute("tickets");
         return "admin";
     }
 
@@ -67,7 +65,7 @@ public class HomeController {
         return "redirect:/user";
     }
 
-    @GetMapping("/showTicket{ticketID}")
+    @GetMapping("/showTicket{ticketId}")
     public String gotoTicket(@RequestParam Integer ticketId, Model model){
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket",ticket);
@@ -83,8 +81,4 @@ public class HomeController {
         model.addAttribute("tickets", ticketService.findAllTickets());
         return "user";
     }
-
-
-
-
 }
