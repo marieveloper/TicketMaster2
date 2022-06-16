@@ -64,7 +64,6 @@ public class HomeController {
     public String createTicket(Ticket ticket,Model model){
         Ticket newTicket = new Ticket();
         model.addAttribute("ticket", newTicket);
-        System.out.print(newTicket.getTicketId());
         return "createTicket";
     }
 
@@ -89,11 +88,12 @@ public class HomeController {
         }
 
     @GetMapping("/withdrawTicket{ticketId}")
-    public String withdrawTicket(@PathVariable Integer ticketId){
-        ticketService.deleteTicket(ticketId);
-        return "redirect:/user?";
+    public String withdrawTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId,Model model){
+        ticketService.deleteTicket(ticket.getTicketId());
+        model.addAttribute("userTickets");
+        return "user";
     }
-
+    
     @GetMapping("/logout")
     public String logout(){
         return "redirect:/login?logout";
@@ -101,8 +101,7 @@ public class HomeController {
 
     @GetMapping("/back")
     public String backToUserDashboard(Model model){
-        model.addAttribute("tickets", ticketService.findAllTickets());
-        return "user";
+        return "redirect:/user";
     }
 
 
