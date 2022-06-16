@@ -15,7 +15,6 @@
     <h1>Create a Ticket</h1>
     <hr/>
     <div class="fieldContainer">
-        <br/><br/>
         <form th:action="@{/saveTicket}" th:object="${ticket}" method="POST">
             <br/>
             <div class="selection"> Select incident:
@@ -31,6 +30,8 @@
                       placeholder="Describe your problem" class="form-control col-4 mb-4"></textarea>
             <button class="btn btn-primary" type="submit">submit</button>
         </form>
+        <hr/>
+        <a th:href="@{/back}" class ="btn btn-primary">Back</a>
     </div>
 </div>
 

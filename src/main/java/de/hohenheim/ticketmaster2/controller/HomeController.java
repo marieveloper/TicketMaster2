@@ -74,4 +74,12 @@ public class HomeController {
     public String logout(){
         return "redirect:/login";
     }
+
+    @GetMapping("/back")
+    public String backToUserDashboard(Model model){
+        model.addAttribute("tickets", ticketService.findAllTickets());
+        return "user";
+    }
+
+
 }
