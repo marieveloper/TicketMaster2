@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,14 +69,17 @@ public class HomeController {
         return "redirect:/user";
     }
 
-    @GetMapping("/showTicket")
-    public String gotoTicket(@RequestParam int ticketID){
-        ticketService.getByTicketId(ticketID);
-        return "redirect:/showTicket";
+    @GetMapping("/showTicket/{ticketID}")
+    public String gotoTicket(@RequestParam int ticketID, Model model){
+        Ticket ticket = ticketService.getByTicketId(ticketID);
+        model.addAttribute("ticket",ticket);
+        return "showTicket";
         }
+
+
     @GetMapping("/logout")
     public String logout(){
-        return "redirect:/login";
+        return "redirect:/login?logout";
     }
 
     @GetMapping("/back")
