@@ -54,6 +54,11 @@ public class HomeController {
         ticketService.saveTicket(ticket);
         return "redirect:/userdashboard";
     }
+    @GetMapping("/showTicket")
+    public String gotoTicket(@ModelAttribute Ticket ticket){
+        ticketService.saveTicket(ticket);
+        return "redirect:/showTicket";
+    }
 
     @GetMapping("/back")
     public String backToUserDashboard(Model model){
