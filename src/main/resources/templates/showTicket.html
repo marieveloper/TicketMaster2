@@ -17,17 +17,12 @@
 <div class="container">
     <br/><br/>
     <hr/>
-
-    <div type="button" class="userbutton" ><img src="/images/userbutton.png" ></div>
-    <div type="button" class="notification" ><img src="/images/notification.png" ></div>
-    <br/><br/>
-    <div class="w3-panel w3-light-grey w3-bottombar w3-border-white w3-hover-border-green">
-        <div class="w3-panel w3-border" style="width: 200px">
-            <p></p>
-        </div>
-
-
+    <div class="container">
+        <form th:action="@{/getTicketData}" method="GET" class="form-horizontal">
+            <td class="col-md-1" th:text="*{ticket.getContent()}" />
+        </form>
     </div>
+
 </div>
 </body>
 </html>
