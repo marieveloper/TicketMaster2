@@ -18,7 +18,7 @@
     <br/><br/>
     <hr/>
     <div class="container">
-        <form th:object="@{/ticketGetTicketData}" method="GET" class="form-horizontal">
+        <form th:action="@{/getTicketData}" method="GET" class="form-horizontal">
             <td class="col-md-1" th:text="*{ticket.getContent()}" />
         </form>
     </div>
