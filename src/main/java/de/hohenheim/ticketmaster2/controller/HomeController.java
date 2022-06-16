@@ -7,10 +7,7 @@ import de.hohenheim.ticketmaster2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -76,6 +73,11 @@ public class HomeController {
         return "showTicket";
         }
 
+    @GetMapping("/withdrawTicket{ticketId}")
+    public String withdrawTicket(@PathVariable Integer ticketId){
+        ticketService.deleteTicket(ticketId);
+        return "redirect:/user?";
+    }
 
     @GetMapping("/logout")
     public String logout(){

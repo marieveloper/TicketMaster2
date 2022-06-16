@@ -6,6 +6,7 @@ import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
 import de.hohenheim.ticketmaster2.repository.TicketRepository;
+import org.hibernate.annotations.OnDelete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,8 +76,9 @@ public class TicketService {
         }
     }
 
+
     public void deleteTicket(int ticketId){
-        ticketRepository.delete(getByTicketId(ticketId)); //TODO: FK-Beziehungen mit @OnDelete versehen
+        ticketRepository.delete(ticketRepository.getById(ticketId)); //TODO: FK-Beziehungen mit @OnDelete versehen
     }
 
     public boolean canRequestStatus(int ticketId){
