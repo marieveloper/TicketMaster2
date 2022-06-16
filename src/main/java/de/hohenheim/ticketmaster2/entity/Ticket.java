@@ -1,13 +1,13 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
+import de.hohenheim.ticketmaster2.enums.Prioritization;
+import de.hohenheim.ticketmaster2.enums.Status;
 import javax.persistence.*;
-import de.hohenheim.ticketmaster2.enums.*;
-
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -20,6 +20,8 @@ public class Ticket {
     private Prioritization prio;
 
     private Timestamp creationTime;
+
+    private LocalDateTime actualTime;
     private Status status;
 
     private String content;
@@ -137,9 +139,7 @@ public class Ticket {
     }
 
 
-    public void setCreationTime(Timestamp timestamp) {
-        this.creationTime = timestamp;
-    }
+    public void setCreationTime(Timestamp timestamp) {this.creationTime = timestamp;}
 
     public User getResponsibleAdmin() {
         return responsibleAdmin;
@@ -164,4 +164,15 @@ public class Ticket {
     public void setTitle(String title) {
         this.title = title;
     }
+
+    public void setDate() {
+        actualTime = LocalDateTime.now();
+    }
+
+    public LocalDateTime getDate(){
+        return actualTime;
+    }
 }
+
+
+

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/static/adminDashboardCss.css">
+    <link rel="stylesheet" href="/userDashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -13,26 +13,24 @@
 
 <div class = "container">
     <form th:action="@{/user}" method="POST" class="form-horizontal">
-        <p th:text="'Dies ist Ihre initiale User Startseite'"></p>
-        <p th:text="${message}"></p>
     </form>
 
     <br/><br/>
 
     <hr/>
-    <button type="button" class="button" th:href="@{/createTicket}" >Create Ticket ➕</button>
+    <a th:href="@{/createTicket}" class ="btn btn-primary" >Create Ticket ➕</a>
     <div class="dropdown">
-        <button class="dropbtn"><img src="/static/images/filterButton.png"></button>
+        <button class="dropbtn"><img src="/images/filterButton.png"></button>
         <div class="dropdown-content">
             <a href="#">Status</a>
             <a href="#">Admin</a>
             <a href="#">User</a>
-            <a href="#">Priorization</a>
+            <a href="#">Prioritization</a>
             <a href="#">Incident</a>
         </div>
     </div>
-    <div type="button" class="userbutton" ><img src="/static/images/userbutton.png"></div>
-    <div type="button" class="notification" ><img src="/static/images/notification.png"></div>
+    <div type="button" class="userbutton" ><img src="/images/userButton.png"></div>
+    <div type="button" class="notification" ><img src="/images/notification.png"></div>
     <br/><br/>
 
     <table class="table table-bordered table-striped" id="ticketTable">
@@ -47,91 +45,24 @@
 
         <tbody>
         <tr th:each="ticket: ${tickets}">
-            <td th:text="${ticket.getPrio()}" />
-            <td th:text="${ticket.getIncident()}" />
-            <td th:text="${ticket.getDate()}" />
-            <td th:text="${ticket.getAdmin().getAdminname()}" />
-            <td th:text="${ticket.getStatus()}" />
+            <td class="col-md-1" th:text="${ticket.getPrio()}" />
+            <td class="col-md-2" th:text="${ticket.getIncident()}" />
+            <td class="col-md-3" th:text="${ticket.getDate()}" />
+            <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>;
+            <td class="col-md-5" th:text="${ticket.getStatus()}" />
         </tr>
         </tbody>
     </table>
+    <script>
+
+    </script>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<!-- Always remember to call the above files first before calling the bootstrap.min.js file -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
 </body>
-
-
-<script type="text/javascript">
-    // HTML-Tabelle sortieren
-
-    const table = document.getElementById("foobar-table");
-    const headers = table.querySelectorAll("th");
-    const tableBody = table.querySelector("tbody");
-    const rows = tableBody.querySelectorAll("tr");
-    const directions = Array.from(headers).map(function (header) {
-        return "";
-    });
-
-    const transform = function (index, content) {
-        const type = headers[index].getAttribute("data-type");
-        switch (type) {
-            case "number":
-                return parseFloat(content);
-            case "string":
-            default:
-                return content;
-        }
-    };
-
-    const sortColumn = function (index, headers) {
-
-        const cls = ["upArrow", "dnArrow"];
-        headers.forEach((header) => {
-            document.getElementById(header.id).classList.remove(...cls);
-        });
-
-        const direction = directions[index] || "asc";
-        const multiplier = (direction === "asc") ? 1 : -1;
-        const newRows = Array.from(rows);
-
-        if (direction === "asc") {
-            document.getElementById(index).classList.add("upArrow");
-        } else {
-            document.getElementById(index).classList.add("dnArrow");
-        }
-
-        newRows.sort((rowA, rowB) => {
-            const cellA = rowA.querySelectorAll("td")[index].textContent.toLowerCase();
-            const cellB = rowB.querySelectorAll("td")[index].textContent.toLowerCase();
-
-            const a = transform(index, cellA);
-            const b = transform(index, cellB);
-
-            switch (true) {
-                case a > b:
-                    return 1 * multiplier;
-                case a < b:
-                    return -1 * multiplier;
-                case a === b:
-                    return 0;
-            }
-        });
-
-        [].forEach.call(rows, function (row) {
-            tableBody.removeChild(row);
-        });
-
-        directions[index] = direction === "asc" ? "desc" : "asc";
-        newRows.forEach(function (newRow) {
-            tableBody.appendChild(newRow);
-        });
-    };
-
-    [].forEach.call(headers, function (header, index) {
-        header.setAttribute("id", index);
-        header.addEventListener("click", () => {
-            sortColumn(index, headers);
-        });
-    });
-</script>
 </html>
 
 <style>* {
@@ -208,11 +139,6 @@ table#foobar-table th[data-type="string"]:hover {
     cursor: Pointer;
 }
 
-.upArrow::after {
-    content: "\2191";
-    color: #FFFFFF;
-    position: absolute;
-}
 
 .dnArrow::after {
     content: "\2193";
