@@ -32,7 +32,7 @@
         <a href="" type="button" class="btn" style="left:66%"><img src="/images/userButton.png" class="img-responsive">
         </a>
         <a href="" type="button" class="btn" style="left:72%"><img src="/images/notification.png" class="img-responsive"></a>
-        <a href="" type="button" class="btn" style="left:78%"><img src="/images/exit.png" class="img-responsive"></a>
+        <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png" ></a>
     </div>
     <br/><br/>
     <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">

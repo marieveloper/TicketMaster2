@@ -79,7 +79,7 @@ public class HomeController {
 
     @GetMapping("/logout")
     public String logout(){
-        return "login";
+        return "redirect:/login?logout";
     }
 
     @GetMapping("/back")
