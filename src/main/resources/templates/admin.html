@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+
      <link rel="stylesheet" href="/adminDashboardCss.css"/>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -15,6 +16,7 @@
 <div class="container">
     <br/><br/>
     <hr/>
+    <form th:action="@{/admin}" method="POST" class="form-horizontal">
     <button type="button" class="button" th:href="@{/getMyTickets}">My Tickets</button>
     <div class="dropdown">
         <button class="dropbtn"><img src="/images/filterButton.png" ></button>
@@ -48,6 +50,7 @@
     <div type="button" class="userbutton" ><img src="/images/userbutton.png" ></div>
     <div type="button" class="notification" ><img src="/images/notification.png" ></div>
     <br/><br/>
+        <form th:action="@{/getAllTickets}" method="GET" class="form-horizontal">
     <table class="table table-bordered table-striped" id="ticketTable">
         <thead>
         <tr>
@@ -72,8 +75,10 @@
             <td><a class="btn btn-info" th:href="@{/gotoTicket}">Show Ticket</a></td>
         </tr>
         </tbody>
+        </form>
     </table>
     <a class="btn btn-info" th:href="@{/showTicket}">Show Ticket</a>
 </div>
+</form>
 </body>
 </html>
