@@ -52,21 +52,21 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
 
         Set<Role> userRoles = new HashSet<>();
         userRoles.add(userRole);
-        List<User> users =new LinkedList<>();
+
         Set<Role> adminRoles = new HashSet<>();
         adminRoles.add(adminRole);
+
+        List<User> users =new LinkedList<>();
         List<String> names = List.of("Trump", "Merkel", "Obama", "Potter", "Duck", "Master");
 
         for(int i =0; i<3; i++){
             userService.createUser(names.get(i),passwordEncoder.encode( i+"1000"), adminRole);
-            users.add(userService.getCurrentUser());
-            userService.saveUser(userService.getUserByUsername(names.get(i)));
+            users.add(userService.getUserByUsername(names.get(i)));
 
         }
         for(int i =3; i<6; i++){
             userService.createUser(names.get(i),passwordEncoder.encode( i+"1000"), userRole);
-            userService.saveUser(userService.getUserByUsername(names.get(i)));
-            users.add(userService.getCurrentUser());
+            users.add(userService.getUserByUsername(names.get(i)));
         }
 
         User normalUser = new User();
@@ -80,6 +80,10 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRoles(adminRoles);
         userService.saveUser(admin);
+        users.add(admin);
+        users.add(normalUser);
+
+        //userService.createUser("a",passwordEncoder.encode("a"),adminRole);
 
         ticketService.createTestTickets(users);
     }

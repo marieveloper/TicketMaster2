@@ -65,14 +65,14 @@ public class Ticket {
     }
 
     public void setCategorization(IncidentCategorization categorization) {
-        switch(categorization){
+        /*switch(categorization){
             case INACTIVITY: System.out.println("user is inactive");
                 break;
             case TECHNICAL_PROBLEMS: System.out.println("software/ hardware problems");
                 break;
             case OTHER: System.out.println("other");
                 break;
-        }
+        }*/
         this.categorization=categorization;
     }
 
@@ -81,24 +81,24 @@ public class Ticket {
     }
 
     public void setPrio(Prioritization prio) {
-        switch(prio){
+        /*switch(prio){
             case LOW: System.out.println("less important");
                 break;
             case MEDIUM: System.out.println("important");
                 break;
             case HIGH: System.out.println("urgent");
-        }
+        }*/
         this.prio = prio;
     }
 
     public void setStatus(Status status) {
-        switch(status){
+      /*  switch(status){
             case IN_PROCESS: System.out.println("in process");
                 break;
             case OPEN: System.out.println("open");
                 break;
             case CLOSED: System.out.println("closed");
-        }
+        }*/
         this.status = status;
     }
     public void setMessages(Set<Message> messages) {

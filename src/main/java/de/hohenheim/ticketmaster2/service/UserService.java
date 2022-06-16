@@ -2,6 +2,7 @@ package de.hohenheim.ticketmaster2.service;
 
 import de.hohenheim.ticketmaster2.entity.Role;
 import de.hohenheim.ticketmaster2.entity.User;
+import de.hohenheim.ticketmaster2.repository.RoleRepository;
 import de.hohenheim.ticketmaster2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,12 @@ import java.util.*;
 public class UserService implements UserDetailsService {
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private RoleService roleService;
 
     public User saveUser(User user) {
         return userRepository.save(user);
@@ -100,11 +107,12 @@ public class UserService implements UserDetailsService {
 
     public User createUser(String name,String password, Role role){
         User user= new User();
-        Set<Role> userRoles = new HashSet<>();
-        userRoles.add(role);
+        Set<Role> userRoles =  new HashSet<>();
+        userRoles.addAll(roleService.findAllRoles());
         user.setUsername(name);
         user.setPassword(password);
         user.setRoles(userRoles);
+        userRepository.save(user);
         return user;
     }
 }
