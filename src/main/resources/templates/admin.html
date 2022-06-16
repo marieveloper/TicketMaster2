@@ -19,37 +19,37 @@
     <form th:action="@{/admin}" method="POST" class="form-horizontal">
     <button type="button" class="button" th:href="@{/getMyTickets}">My Tickets</button>
     <div class="dropdown">
-        <button class="dropbtn"><img src="/images/filterButton.png" ></button>
-        <div class="dropdown-content">
-            <li class="dropdown-submenu">
-                <a class="test" tabindex="-1" >Status<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a tabindex="-1" onclick="getStatusOpen()">Open</a></li>
-                    <li><a tabindex="-1" onclick="getStatusClosed()">Closed</a></li>
-                    <li><a tabindex="-1" onclick="getStatusInProgress()">In progress</a></li>
-                </ul>
-            </li>
-            <li class="dropdown-submenu">
-                <a class="test" tabindex="-1" >Priorization<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a tabindex="-1" onclick="getPrioHigh()">High</a></li>
-                    <li><a tabindex="-1" onclick="getPrioMedium()">Medium</a></li>
-                    <li><a tabindex="-1" onclick="getPrioLow()">Low</a></li>
-                </ul>
-            </li>
-            <li class="dropdown-submenu">
-                <a class="test" tabindex="-1" >Incident<span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                    <li><a tabindex="-1" onclick="getIncidentInactivity()">Inactivity</a></li>
-                    <li><a tabindex="-1" onclick="getIncidentTechnicalProblems()">Technical problems</a></li>
-                    <li><a tabindex="-1" onclick="getIncidentOther()">Other</a></li>
-                </ul>
-            </li>
-        </div>
+        <button onclick="myFunction()" class="dropbtn"><img src="/images/filterButton.png"></button>
+         <div class="dropdown-content">
+             <li class="dropdown-submenu">
+                 <a class="test" tabindex="-1" >Status<span class="caret"></span></a>
+                 <ul class="dropdown-menu">
+                     <li><a tabindex="-1" onclick="getStatusOpen()">Open</a></li>
+                     <li><a tabindex="-1" onclick="getStatusClosed()">Closed</a></li>
+                     <li><a tabindex="-1" onclick="getStatusInProgress()">In progress</a></li>
+                 </ul>
+             </li>
+             <li class="dropdown-submenu">
+                 <a class="test" tabindex="-1" >Priorization<span class="caret"></span></a>
+                 <ul class="dropdown-menu">
+                     <li><a tabindex="-1" onclick="getPrioHigh()">High</a></li>
+                     <li><a tabindex="-1" onclick="getPrioMedium()">Medium</a></li>
+                     <li><a tabindex="-1" onclick="getPrioLow()">Low</a></li>
+                 </ul>
+             </li>
+             <li class="dropdown-submenu">
+                 <a class="test" tabindex="-1" >Incident<span class="caret"></span></a>
+                 <ul class="dropdown-menu">
+                     <li><a tabindex="-1" onclick="getIncidentInactivity()">Inactivity</a></li>
+                     <li><a tabindex="-1" onclick="getIncidentTechnicalProblems()">Technical problems</a></li>
+                     <li><a tabindex="-1" onclick="getIncidentOther()">Other</a></li>
+                 </ul>
+             </li>
+         </div>
     </div>
     <div type="button" class="userbutton" ><img src="/images/userbutton.png" ></div>
     <div type="button" class="notification" ><img src="/images/notification.png" ></div>
-        <div type="button" class="exitButton" ><img src="/images/exit.png" ></div>
+    <div th:href="@{/logout}" type="button" class="exitButton" ><img src="/images/exit.png" ></div>
     <br/><br/>
     <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
     <table class="table table-bordered table-striped" id="ticketTable">
