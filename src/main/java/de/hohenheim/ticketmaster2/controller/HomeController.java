@@ -73,7 +73,6 @@ public class HomeController {
         model.addAttribute("ticket",ticket);
         return "showTicket";
     }
-    
     @GetMapping("/logout")
     public String logout(){
         return "redirect:/login?logout";
