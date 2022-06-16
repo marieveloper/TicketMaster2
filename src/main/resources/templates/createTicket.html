@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <form  th:action="@{/createTicket}"  method= "POST" class="form-horizontal">
+    <form  th:action="@{/createTicket}"  method="GET" class="form-horizontal">
     </form>
     <br/><br/>
     <h1>Create a Ticket</h1>
@@ -19,15 +19,16 @@
             <br/>
             <div class="selection"> Select incident:
                 <select th:field="*{categorization}">
-                    <option th:value="'technical problem'" th:text="technicalProblem"> TECHNICAL_PROBLEM</option>
-                    <option th:value="'inactivity'" th:text="inactivity"> INACTIVITY</option>
-                    <option th:value="'other'" th:text="other"> OTHER</option>
+                    <option th:value="TECHNICAL_PROBLEMS" th:text="technicalProblems"> TECHNICAL_PROBLEM</option>
+                    <option th:value="INACTIVITY" th:text="inactivity"> INACTIVITY</option>
+                    <option th:value="OTHER" th:text="other"> OTHER</option>
                 </select>
             </div>
             </br> </br>
             <textarea name="problemspecification" rows="10" cols="80" style="margin-top: 10px"
                       th:field="*{content}"
                       placeholder="Describe your problem" class="form-control col-4 mb-4"></textarea>
+            <input type="hidden" th:field="*{ticketId}" />
             <button class="btn btn-primary" type="submit">submit</button>
         </form>
         <hr/>
