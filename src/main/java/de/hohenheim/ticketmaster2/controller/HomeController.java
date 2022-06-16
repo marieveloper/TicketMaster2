@@ -23,9 +23,9 @@ public class HomeController {
      */
     @GetMapping( "/")
     public String showHome(Model model) {
-        System.out.print(userService.getCurrentUser().getUsername());
+        //System.out.print(userService.getCurrentUser().getUsername());
         if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
-            System.out.print("Hallo");
+            //System.out.print("Hallo");
             return "admin";
         }
         return "user";
@@ -52,7 +52,7 @@ public class HomeController {
     @PostMapping("/saveTicket")
     public String createTicket(@ModelAttribute Ticket ticket){
         ticketService.saveTicket(ticket);
-        return "redirect:/userdashboard";
+        return "redirect:/user";
     }
     @GetMapping("/showTicket")
     public String gotoTicket(@ModelAttribute Ticket ticket){
