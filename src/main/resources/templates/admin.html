@@ -49,7 +49,7 @@
     </div>
     <div type="button" class="userbutton" ><img src="/images/userbutton.png" ></div>
     <div type="button" class="notification" ><img src="/images/notification.png" ></div>
-    <div th:href="@{/logout}" type="button" class="exitButton" ><img src="/images/exit.png" ></div>
+    <div type="button" class="exitButton" th:href="@{/logout}"><img src="/images/exit.png" ></div>
     <br/><br/>
     <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
     <table class="table table-bordered table-striped" id="ticketTable">
@@ -69,12 +69,12 @@
         <tr th:each="ticket: ${tickets}">
             <td th:text="${ticket.getPrio()}"/>
             <td th:text="${ticket.getCategorization()}"/>
-            <td th:text="${ticket.get}"/>
+            <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
             <td th:text="${ticket.getUser().getUsername()}"/>
-            <td th:text="${ticket.getResponsibleAdmin()}"/>
+            <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
             <td th:text="${ticket.getStatus()}"/>
             <td>
-                <a class="btn btn-info" th:href="@{/showTicket(ticketId=${ticket.ticketID})}">Show Ticket</a>
+                <a class="btn btn-info" th:href="@{/showTicket(ticketId=${ticket.getTicketId()})}">Show Ticket</a>
             </td>
         </tr>
         </tbody>
