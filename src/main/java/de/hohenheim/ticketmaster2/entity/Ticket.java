@@ -167,7 +167,6 @@ public class Ticket {
 
     public void setDate() {
         actualTime = LocalDateTime.now();
-
     }
 
     public LocalDateTime getDate(){
