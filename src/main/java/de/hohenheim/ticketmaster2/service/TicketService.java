@@ -64,6 +64,7 @@ public class TicketService {
         ticketRepository.save(ticket);
     }
 
+
     /**
      * Erzeugt 50 Test tickets, die 12h in der Vergangenheit liegen
      *
@@ -97,6 +98,12 @@ public class TicketService {
     public void changeTicketPriority(int ticketId, Prioritization prio){
         Ticket ticket = getByTicketId(ticketId);
         ticket.setPrio(prio);
+        ticketRepository.save(ticket);
+    }
+
+    public void add(Ticket ticket){
+
+
         ticketRepository.save(ticket);
     }
 
