@@ -40,11 +40,12 @@
     <table class="table table-bordered table-striped" id="ticketTable">
         <thead>
         <tr>
-            <th data-type="string">Priorization</th>
+            <th data-type="string">Prioritization</th>
             <th data-type="string">Incident</th>
             <th data-type="date">Date</th>
             <th data-type="string">Admin</th>
             <th data-type="string">Status</th>
+            <th>Actions</th>
         </tr>
         <tbody>
         <tr th:each="ticket: ${tickets}">
@@ -53,6 +54,9 @@
             <td class="col-md-3" th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}" />
             <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>;
             <td class="col-md-5" th:text="${ticket.getStatus()}" />
+            <td>
+                <a class="btn btn-info" th:href="@{/showTicket(ticketId=${ticket.getTicketId()})}">Show Ticket</a>
+            </td>
         </tr>
         </tbody>
     </table>
