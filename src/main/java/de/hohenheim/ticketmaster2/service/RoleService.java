@@ -20,4 +20,6 @@ public class RoleService {
     public List<Role> findAllRoles() {
         return roleRepository.findAll();
     }
+    public List<Role> getRoles(Role role){
+        return findAllRoles().stream().filter(r -> r.getRoleName().equals(role)).toList(); }
 }
