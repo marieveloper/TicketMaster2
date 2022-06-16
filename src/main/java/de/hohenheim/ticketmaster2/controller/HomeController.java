@@ -1,3 +1,4 @@
+
 package de.hohenheim.ticketmaster2.controller;
 
 import de.hohenheim.ticketmaster2.entity.Ticket;
@@ -9,6 +10,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -35,17 +39,21 @@ public class HomeController {
         return ticketService.findAllTickets();
     }
 
+    @ModelAttribute("userTickets")
+    public List<Ticket> getUserTickets() {
+        return ticketService.getAllTicketsByUserId(userService.getCurrentUser().getUserId());}
+
     @GetMapping("/admin")
     public String showAdminDashboard(Model model) {
        
         model.addAttribute("tickets"); 
-       // model.addAttribute("tickets", ticketService.findAllTickets());
+
         return "admin";
     }
 
     @GetMapping("/user")
     public String showUserDashboard(Model model) {
-        model.addAttribute("tickets", ticketService.findAllTickets());
+        model.addAttribute("userTickets");
         return "user";
     }
     @GetMapping("/createTicket")
@@ -60,11 +68,14 @@ public class HomeController {
         return "redirect:/user";
     }
 
-
     @GetMapping("/showTicket")
-    public String gotoTicket(@ModelAttribute Ticket ticket){
-        ticketService.showTicket(ticket);
+    public String gotoTicket(@RequestParam int ticketID){
+        ticketService.getByTicketId(ticketID);
         return "redirect:/showTicket";
+        }
+    @GetMapping("/logout")
+    public String logout(){
+        return "redirect:/login";
     }
 
     @GetMapping("/back")

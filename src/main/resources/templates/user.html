@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8">
+
     <link rel="stylesheet" href="/userDashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -10,29 +12,31 @@
     <title>User</title>
 </head>
 <body>
-
-<div class = "container">
-    <form th:action="@{/user}" method="POST" class="form-horizontal">
-    </form>
-
-    <br/><br/>
-
+<div class="container">
     <hr/>
-    <a th:href="@{/createTicket}" class ="btn btn-primary" >Create Ticket ➕</a>
-    <div class="dropdown">
-        <button class="dropbtn"><img src="/images/filterButton.png"></button>
-        <div class="dropdown-content">
-            <a href="#">Status</a>
-            <a href="#">Admin</a>
-            <a href="#">User</a>
-            <a href="#">Prioritization</a>
-            <a href="#">Incident</a>
+    <h3>Userdashboard</h3>
+    <form th:action="@{/user}" method="POST" class="form-horizontal">
+    <hr/>
+    <div>
+        <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕</a>
+        <div class="dropdown">
+            <button class="dropbtn"><img src="/images/filterButton.png"></button>
+            <div class="dropdown-content">
+                <a href="#">Status</a>
+                <a href="#">Admin</a>
+                <a href="#">User</a>
+                <a href="#">Prioritization</a>
+                <a href="#">Incident</a>
+            </div>
         </div>
+        <a href="" type="button" class="btn" style="left:66%"><img src="/images/userButton.png" class="img-responsive">
+        </a>
+        <a href="" type="button" class="btn" style="left:72%"><img src="/images/notification.png" class="img-responsive"></a>
+        <a href="" type="button" class="btn" style="left:78%"><img src="/images/exit.png" class="img-responsive"></a>
     </div>
-    <div type="button" class="userbutton" ><img src="/images/userButton.png"></div>
-    <div type="button" class="notification" ><img src="/images/notification.png"></div>
     <br/><br/>
-
+    <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
+    <div class="">
     <table class="table table-bordered table-striped" id="ticketTable">
         <thead>
         <tr>
@@ -42,108 +46,30 @@
             <th data-type="string">Admin</th>
             <th data-type="string">Status</th>
         </tr>
-
         <tbody>
         <tr th:each="ticket: ${tickets}">
             <td class="col-md-1" th:text="${ticket.getPrio()}" />
-            <td class="col-md-2" th:text="${ticket.getIncident()}" />
-            <td class="col-md-3" th:text="${ticket.getDate()}" />
+            <td class="col-md-2" th:text="${ticket.getCategorization()}" />
+            <td class="col-md-3" th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}" />
             <td class="col-md-4" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>;
             <td class="col-md-5" th:text="${ticket.getStatus()}" />
         </tr>
         </tbody>
     </table>
-    <script>
-
-    </script>
+    </div>
+    </form>
+    </form>
 </div>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+        integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+        crossorigin="anonymous"></script>
 <!-- Always remember to call the above files first before calling the bootstrap.min.js file -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+        integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
-
-<style>* {
-    box-sizing: border-box;
-}
-
-
-body {
-    position: center;
-    margin: 0 auto;
-    background-color: white;
-    text-align: left;
-}
-
-
-.dnArrow::after {
-    content: "\2193";
-    color: #FFFFFF;
-    position: absolute;
-}
-
-
-
-.dropdown-content a {
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-}
-
-.dropdown-content a:hover {
-    background-color: #ddd;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.dropdown:hover .dropbtn {
-    background-color: white;
-}
-table#foobar-table {
-    margin-left: 50px;
-}
-
-table#foobar-table thead {
-    position: sticky;
-    inset-block-start: 0;
-    user-select: None;
-}
-
-table#foobar-table,
-table#foobar-table > thead > tr > th,
-table#foobar-table > tbody > tr > td {
-    border: Solid 1px #888888;
-    padding: 5px 8px 5px 8px;
-    color: #000000;
-}
-
-table#foobar-table > thead > tr {
-    background-color: rgba(255, 174, 94, 0.8);
-    cursor: Pointer;
-}
-
-table#foobar-table > tbody > tr:nth-child(even) {
-    background-color: #FFFFFF;
-}
-
-table#foobar-table > tbody > tr:nth-child(odd) {
-    background-color: #FFD2A6;
-}
-
-table#foobar-table th[data-type="number"]:hover,
-table#foobar-table th[data-type="string"]:hover {
-    cursor: Pointer;
-}
-
-
-.dnArrow::after {
-    content: "\2193";
-    color: #FFFFFF;
-    position: absolute;
-}
-
-</style>
