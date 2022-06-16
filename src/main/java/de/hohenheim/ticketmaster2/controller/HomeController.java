@@ -73,7 +73,7 @@ public class HomeController {
         ticketService.getByTicketId(ticketID);
         return "redirect:/showTicket";
         }
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout(){
         return "redirect:/login";
     }

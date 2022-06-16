@@ -39,7 +39,7 @@ public class TicketService {
     }
 
     public List<Ticket> getAllTicketsByUserId(int id){
-        return findAllTickets().stream().filter(t -> t.getUser().getUserId().equals(id)).toList();
+        return findAllTickets().stream().filter(t -> t.getUser().getUserId()==id).toList();
     }
 
     public List<Ticket> getAllTicketsWithStatus(Status status){
