@@ -12,6 +12,7 @@ import de.hohenheim.ticketmaster2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.*;
 
 
@@ -19,6 +20,13 @@ import org.springframework.web.bind.annotation.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
+=======
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+>>>>>>> 0856a9750bb7fd441c6f79c1c0bf5e0eab9fb5ed
 import java.util.List;
 
 @Controller
@@ -106,6 +114,7 @@ public class HomeController {
             return "showTicketAdmin";
         }
         return "showTicket";
+<<<<<<< HEAD
         }
 
     @GetMapping("/notifications")
@@ -120,6 +129,9 @@ public class HomeController {
         return "redirect:/user";
     }
     
+=======
+    }
+>>>>>>> 0856a9750bb7fd441c6f79c1c0bf5e0eab9fb5ed
     @GetMapping("/logout")
     public String logout(){
         return "redirect:/login?logout";
@@ -132,6 +144,7 @@ public class HomeController {
         }
         return "redirect:/user";
     }
+<<<<<<< HEAD
 
 
 <<<<<<< HEAD
@@ -162,4 +175,6 @@ public class HomeController {
     }
 >>>>>>> eb0ee1bafd827ee1acc7044a2b9c3e72b069f731
 
+=======
+>>>>>>> 0856a9750bb7fd441c6f79c1c0bf5e0eab9fb5ed
 }
