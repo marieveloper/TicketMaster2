@@ -18,7 +18,7 @@
     <hr>
     <h3>Admindashboard</h3>
     <hr>
-    <form th:action="@{/admin}" method="POST" class="form-horizontal">
+    <form th:action="@{/admin}" th:object="${admin}" method="POST" class="form-horizontal">
         <div>
             <a th:href="@{/getMyTickets}" class="btn btn-primary">My Tickets</a>
             <div class="dropdown">
@@ -56,9 +56,17 @@
 
             <div style="float:right">
                 <div type="button" class="btn"><img src="/images/userbutton.png"></div>
-                <div type="button" class="btn"><img src="/images/notification.png" ></div>
-                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png"
-                                                                    ></a>
+                <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET" class="form-horizontal">
+                    <div th:switch="${notifications.isEmpty()}">
+                        <button th:case="${true}" type="button" class="btn">
+                            <span class="badge badge-light"></span>
+                        </button>
+                        <button th:case="${false}" type="button" class="btn btn-primary">Notifications
+                            <span class="badge badge-light">1</span>
+                        </button>
+                    </div>
+                </form>
+                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png"></a>
             </div>
             <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
                 <table class="table table-bordered table-striped" id="ticketTable">
