@@ -127,14 +127,10 @@ public class HomeController {
 
     @GetMapping("/back")
     public String backToUserDashboard(Model model){
-<<<<<<< HEAD
         if(userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             return "redirect:/admin";
         }
         return "redirect:/user";
-=======
-        return "redirect:/";
->>>>>>> Ley
     }
 
 
@@ -149,10 +145,8 @@ public class HomeController {
         notificationService.saveNotification(notificationTest);
     return "redirect:/user";
     }
-<<<<<<< HEAD
 
-=======
-    @GetMapping("/workinProgress")
+    @GetMapping("/workInProgress")
     public String workInProgress(){
         return "redirect:/workInProgress";
     }
@@ -163,5 +157,5 @@ public class HomeController {
         model.addAttribute("ticket",ticket);
         return "showTicketAdmin";
     }
->>>>>>> Ley
+
 }
