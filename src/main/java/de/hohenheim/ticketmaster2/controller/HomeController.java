@@ -102,6 +102,9 @@ public class HomeController {
     public String gotoTicket(@RequestParam Integer ticketId, Model model){
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket",ticket);
+        if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+            return "showTicketAdmin";
+        }
         return "showTicket";
         }
 
@@ -124,10 +127,14 @@ public class HomeController {
 
     @GetMapping("/back")
     public String backToUserDashboard(Model model){
+<<<<<<< HEAD
         if(userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             return "redirect:/admin";
         }
         return "redirect:/user";
+=======
+        return "redirect:/";
+>>>>>>> Ley
     }
 
 
@@ -142,5 +149,19 @@ public class HomeController {
         notificationService.saveNotification(notificationTest);
     return "redirect:/user";
     }
+<<<<<<< HEAD
 
+=======
+    @GetMapping("/workinProgress")
+    public String workInProgress(){
+        return "redirect:/workInProgress";
+    }
+
+    @GetMapping("/showTicketAdmin{ticketId}")
+    public String gotoTicketAdmin(@RequestParam Integer ticketId, Model model){
+        Ticket ticket = ticketService.getByTicketId(ticketId);
+        model.addAttribute("ticket",ticket);
+        return "showTicketAdmin";
+    }
+>>>>>>> Ley
 }
