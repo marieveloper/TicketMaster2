@@ -15,9 +15,8 @@ body {
   overflow: hidden;
 }
 
-.li{
+li{
   list-style: none;
-  display:block;
 }
 
 .name {
@@ -38,8 +37,6 @@ img{
 }
 
 .dropbtn {
-  background-color: white;
-  color: white;
   padding: 16px;
   font-size: 16px;
   border: none;
@@ -65,13 +62,9 @@ img{
   display: block;
 }
 
-.dropdown-content a:hover {background-color: #ddd;}
 
 .dropdown:hover .dropdown-content {display: block;}
+.dropdown-submenu:hover .dropdown-content {display: block;}
 
-.dropdown:hover .dropbtn {background-color: white;}
 
-.btn-primary{
-
-}
 

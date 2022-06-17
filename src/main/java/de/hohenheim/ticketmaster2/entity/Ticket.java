@@ -3,6 +3,7 @@ package de.hohenheim.ticketmaster2.entity;
 import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
+import org.hibernate.boot.archive.scan.spi.ClassDescriptor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -17,12 +18,17 @@ public class Ticket {
     @GeneratedValue
     private Integer ticketId;
 
+    @Enumerated(EnumType.STRING)
     private IncidentCategorization categorization;
+
+
+    @Enumerated(EnumType.STRING)
     private Prioritization prio;
+
 
     private Timestamp creationTime;
 
-    private LocalDateTime actualTime;
+
     private Status status;
 
     private String content;
@@ -68,16 +74,17 @@ public class Ticket {
         this.ticketId = number;
     }
 
+    public void setCategorizationStr(String categorizationStr) {
+        categorizationStr = categorizationStr.toUpperCase();
+        try {
+            this.categorization = IncidentCategorization.valueOf(categorizationStr);
+        } catch (Exception e) {
+            this.categorization = IncidentCategorization.UNKNOWN;
+        }
+    }
+
     public void setCategorization(IncidentCategorization categorization) {
-        /*switch(categorization){
-            case INACTIVITY: System.out.println("user is inactive");
-                break;
-            case TECHNICAL_PROBLEMS: System.out.println("software/ hardware problems");
-                break;
-            case OTHER: System.out.println("other");
-                break;
-        }*/
-        this.categorization=categorization;
+        this.categorization = categorization;
     }
 
     public Status getStatus() {
@@ -158,7 +165,6 @@ public class Ticket {
     public String getContent() {
         return content;
     }
-
     public void setContent(String content) {
         this.content = content;
     }
@@ -171,13 +177,6 @@ public class Ticket {
         this.title = title;
     }
 
-    public void setDate() {
-        actualTime = LocalDateTime.now();
-    }
-
-    public LocalDateTime getDate(){
-        return actualTime;
-    }
 }
 
 

@@ -1,28 +1,61 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/adminDashboardCss.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <title>Home</title>
 
 </head>
 <body>
 <div class="container">
     <br/><br/>
+    <h4>Ticket details</h4>
     <hr/>
-    <div class="container">
-        <form th:action="@{/getTicketData}" method="GET" class="form-horizontal">
-            <td class="col-md-1" th:text="*{ticket.getContent()}" />
-        </form>
+    <form th:action="@{/getTicket}" th:object="${ticket}" method="GET">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="row">
+                        <p>Ticket ID: </p>
+                        <p th:text="${ticket.getTicketId()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Prioritization: </p>
+                        <p th:text="${ticket.getPrio()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Categorization: </p>
+                        <p th:text="${ticket.getCategorization()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Date: </p>
+                        <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Admin: </p>
+                        <p th:text="${ticket.getResponsibleAdmin().getUsername()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Status: </p>
+                        <p th:text="${ticket.getStatus()}"></p>
+                    </div>
+                </div>
+                <div class="col-sm-6" >
+                    <p>Content: </p>
+                    <p th:text="${ticket.getContent()}"></p>
+                </div>
+                </div>
+        </div>
     </div>
-
+        <br>
+        <a th:href="@{/withdrawTicket(ticketId=${ticket.getTicketId()})}" class="btn btn-danger">Withdraw Ticket</a>
+    <a class="btn btn-primary" th:href="@{/requestStatus(ticketId=${ticket.getTicketId()})}">Request Status</a>
+    </form>
+    <hr/>
+    <a th:href="@{/back}" class ="btn btn-primary">Back</a>
 </div>
 </body>
 </html>
