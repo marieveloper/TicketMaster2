@@ -9,115 +9,107 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Home</title>
 </head>
 <body>
 <div class="container">
-    <hr>
+    <hr/>
     <h3>Admindashboard</h3>
-    <hr>
+    <hr/>
     <form th:action="@{/admin}" th:object="${admin}" method="POST" class="form-horizontal">
-        <div>
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <a th:href="@{/getMyTickets}" class="btn btn-primary">My Tickets</a>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="dropdown">
-                        <img src="/images/filterButton.png" alt="Filterbutton" class="img-responsive">
-                        <div class="dropdown-content">
-                            <li class="menu">
-                                <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
-                                <ul class="dropdown-submenu">
-                                    <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Open</a></li>
-                                    <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Closed</a></li>
-                                    <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">In
-                                        progress</a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="menu">
-                                <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
-                                <ul class="dropdown-submenu">
-                                    <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">High</a></li>
-                                    <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Medium</a></li>
-                                    <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Low</a></li>
-                                </ul>
-                            </li>
-                            <li class="menu">
-                                <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
-                                <ul class="dropdown-submenu">
-                                    <li><a class="btn dropbtn" tabindex="-1"
-                                           th:href="@{/workInProgess}">Inactivity</a>
-                                    </li>
-                                    <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Technical
-                                        problems</a></li>
-                                    <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Other</a></li>
-                                </ul>
-                            </li>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="float:right">
-                    <div class="col-lg-4 col-sm-6">
-                        <div type="button" class="btn"><img src="/images/userbutton.png"></div>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET"
-                              class="form-horizontal">
-                            <div th:switch="${adminNotifications.isEmpty()}">
-                                <a th:case="${true}" type="button" class="btn btn-primary">
-                                    <span class="badge badge-light"></span>
-                                </a>
-                                <!--<form th:action="@{/notifications}" method="POST" class="form-horizontal">-->
-                                    <a th:case="${false}" th:href="@{/notifications}" type="button"
-                                       class="btn btn-primary">Notifications
-                                        <span class="badge badge-light">1</span>
-                                    </a>
-                                <!--</form>-->
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-4 col-sm-6">
-                        <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png"></a>
-                    </div>
-                </div>
+        <a th:href="@{/getMyTickets}" class="btn btn-primary">My Tickets</a>
+        <div class="dropdown">
+            <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
+            <div class="dropdown-content">
+                <li class="menu">
+                    <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
+                    <ul class="dropdown-submenu">
+                        <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Open</a></li>
+                        <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Closed</a></li>
+                        <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">In
+                            progress</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
+                    <ul class="dropdown-submenu">
+                        <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">High</a></li>
+                        <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Medium</a></li>
+                        <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Low</a></li>
+                    </ul>
+                </li>
+                <li class="menu">
+                    <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
+                    <ul class="dropdown-submenu">
+                        <li><a class="btn dropbtn" tabindex="-1"
+                               th:href="@{/workInProgess}">Inactivity</a>
+                        </li>
+                        <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Technical
+                            problems</a></li>
+                        <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Other</a></li>
+                    </ul>
+                </li>
             </div>
-            <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
-                <table class="table table-bordered table-striped" id="ticketTable">
-                    <thead>
-                    <tr>
-                        <th>Prioritization</th>
-                        <th>Incident</th>
-                        <th>Date</th>
-                        <th>User</th>
-                        <th>Admin</th>
-                        <th>Status</th>
-                        <th>Actions</th>
-                    </tr>
-
-                    <tbody>
-                    <!--TODO get the correct method declarations-->
-                    <tr th:each="ticket: ${tickets}">
-                        <td th:text="${ticket.getPrio()}"/>
-                        <td th:text="${ticket.getCategorization()}"/>
-                        <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
-                        <td th:text="${ticket.getUser().getUsername()}"/>
-                        <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
-                        <td th:text="${ticket.getStatus()}"/>
-                        <td>
-                            <a class="btn btn-info"
-                               th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
-                                Ticket</a>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </form>
         </div>
+
+        <div style="float:right">
+            <div class="rightButtons">
+                <div style="float: left">
+            <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET" class="form-horizontal">
+                <div th:switch="${adminNotifications.isEmpty()}">
+                    <a th:case="${true}" type="button" class="btn">
+                        <span class="badge badge-light"></span>
+                    </a>
+                    <a th:case="${false}" th:href="@{/notifications}" type="button" class="btn btn-info px-3"><i
+                            class="bi bi-bell"></i>
+                        <span class="badge badge-light" style="color: red">1</span>
+                    </a>
+                </div>
+            </form>
+                </div>
+                <div style="float: left" class="px-4">
+                    <button type="button" class="btn btn-info px-3"><i class="bi bi-person-circle"></i></button>
+                </div>
+                <div style="float: right">
+            <a th:href="@{/logout}" class="btn btn-primary px-3"><i class="bi bi-door-closed"></i></a>
+        </div>
+        </div>
+        </div>
+        <br/><br/>
+        <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
+            <table class="table table-bordered table-striped" id="ticketTable">
+                <thead>
+                <tr>
+                    <th>Prioritization</th>
+                    <th>Incident</th>
+                    <th>Date</th>
+                    <th>User</th>
+                    <th>Admin</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+
+                <tbody>
+                <!--TODO get the correct method declarations-->
+                <tr th:each="ticket: ${tickets}">
+                    <td th:text="${ticket.getPrio()}"/>
+                    <td th:text="${ticket.getCategorization()}"/>
+                    <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
+                    <td th:text="${ticket.getUser().getUsername()}"/>
+                    <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
+                    <td th:text="${ticket.getStatus()}"/>
+                    <td>
+                        <a class="btn btn-info text-white" th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
+                            Ticket</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
     </form>
 </div>
 </body>
