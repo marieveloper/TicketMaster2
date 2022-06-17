@@ -122,10 +122,7 @@ public class HomeController {
 
     @GetMapping("/back")
     public String backToUserDashboard(Model model){
-        if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())){
-            return "redirect:/admin";
-        }
-        return "redirect:/user";
+        return "redirect:/";
     }
 
     @GetMapping("/requestStatus{ticketId}")
