@@ -3,12 +3,10 @@ package de.hohenheim.ticketmaster2.entity;
 import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
-import org.hibernate.boot.archive.scan.spi.ClassDescriptor;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
@@ -36,7 +34,7 @@ public class Ticket {
     private String title;
 
     @OneToMany(mappedBy = "ticket")
-    private Set<Message> messages;
+    private Set<Notification> notifications;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -60,8 +58,8 @@ public class Ticket {
 
     public Prioritization getPrio() {return prio; }
 
-    public Set<Message> getMessages() {
-        return messages;
+    public Set<Notification> getMessages() {
+        return notifications;
     }
 
 
@@ -112,8 +110,8 @@ public class Ticket {
         }*/
         this.status = status;
     }
-    public void setMessages(Set<Message> messages) {
-        this.messages = messages;
+    public void setMessages(Set<Notification> notifications) {
+        this.notifications = notifications;
     }
 
 
@@ -125,7 +123,7 @@ public class Ticket {
                 ", prio=" + prio +
                 ", timestamp=" + creationTime +
                 ", status=" + status +
-                ", messages=" + messages +
+                ", notifications=" + notifications +
                 ", user=" + user +
                 '}';
     }
