@@ -12,21 +12,14 @@ import de.hohenheim.ticketmaster2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-<<<<<<< HEAD
-import org.springframework.web.bind.annotation.*;
-
-
-
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
-=======
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
->>>>>>> 0856a9750bb7fd441c6f79c1c0bf5e0eab9fb5ed
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -38,12 +31,14 @@ public class HomeController {
 
     @Autowired
     private NotificationService notificationService;
+
     /**
      * Zeigt die Startseite Ihrer Anwendung.
+     *
      * @param model enthält alle ModelAttribute.
      * @return home-Seite.
      */
-    @GetMapping( "/")
+    @GetMapping("/")
     public String showHome(Model model) {
         if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             User admin = userService.getCurrentUser();
@@ -55,8 +50,12 @@ public class HomeController {
         model.addAttribute("user", user);
         return "user";
     }
+
     @ModelAttribute("admin")
-    public User getAdmin(){return userService.getCurrentUser();}
+    public User getAdmin() {
+        return userService.getCurrentUser();
+    }
+
     @ModelAttribute("tickets")
     public List<Ticket> getTickets() {
         return ticketService.findAllTickets();
@@ -65,14 +64,16 @@ public class HomeController {
 
     @ModelAttribute("userTickets")
     public List<Ticket> getUserTickets() {
-        return ticketService.getAllTicketsByUserId(userService.getCurrentUser().getUserId());}
+        return ticketService.getAllTicketsByUserId(userService.getCurrentUser().getUserId());
+    }
 
     @ModelAttribute("adminNotifications")
-    public List<Notification> getAdminNotifications(){
+    public List<Notification> getAdminNotifications() {
         return userService.getCurrentUser().getReceivedNotifications().stream().toList();
     }
+
     @ModelAttribute("notifications")
-    public List<Notification> getNotifications(){
+    public List<Notification> getNotifications() {
         return notificationService.findAllNotifications();
     }
 
@@ -87,15 +88,16 @@ public class HomeController {
         model.addAttribute("userTickets");
         return "user";
     }
+
     @GetMapping("/createTicket")
-    public String createTicket(Ticket ticket,Model model){
+    public String createTicket(Ticket ticket, Model model) {
         Ticket newTicket = new Ticket();
         model.addAttribute("ticket", newTicket);
         return "createTicket";
     }
 
     @PostMapping("/saveTicket")
-    public String createTicket(@ModelAttribute("ticket") Ticket ticket){
+    public String createTicket(@ModelAttribute("ticket") Ticket ticket) {
         ticket.setUser(userService.getCurrentUser());
         ticket.setTitle("title");
         ticket.setCreationTime(Timestamp.from(Instant.now().minus(12, ChronoUnit.HOURS)));
@@ -107,74 +109,61 @@ public class HomeController {
     }
 
     @GetMapping("/showTicket{ticketId}")
-    public String gotoTicket(@RequestParam Integer ticketId, Model model){
+    public String gotoTicket(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
-        model.addAttribute("ticket",ticket);
+        model.addAttribute("ticket", ticket);
         if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             return "showTicketAdmin";
         }
         return "showTicket";
-<<<<<<< HEAD
-        }
+    }
 
     @GetMapping("/notifications")
-    public String goToNotification( Model model){
+    public String goToNotification(Model model) {
         model.addAttribute("adminNotifications");
         return "notifications";
     }
 
     @GetMapping("/withdrawTicket{ticketId}")
-    public String withdrawTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId,Model model){
+    public String withdrawTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
         ticketService.deleteTicket(ticket.getTicketId());
         return "redirect:/user";
     }
-    
-=======
-    }
->>>>>>> 0856a9750bb7fd441c6f79c1c0bf5e0eab9fb5ed
+
     @GetMapping("/logout")
-    public String logout(){
+    public String logout() {
         return "redirect:/login?logout";
     }
 
     @GetMapping("/back")
-    public String backToUserDashboard(Model model){
-        if(userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+    public String backToUserDashboard(Model model) {
+        if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             return "redirect:/admin";
         }
         return "redirect:/user";
     }
-<<<<<<< HEAD
 
-
-<<<<<<< HEAD
-
-=======
     @GetMapping("/requestStatus{ticketId}")
-    public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model){
+    public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
         Notification notificationTest = new Notification();
         model.addAttribute("notifications", notificationTest);
         notificationTest.setTicket(ticketService.getByTicketId(ticketId));
-        notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId +"!");
+        notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
         notificationTest.setSender(notificationTest.getTicket().getUser());
         notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
         notificationService.saveNotification(notificationTest);
-    return "redirect:/user";
+        return "redirect:/user";
     }
 
     @GetMapping("/workInProgress")
-    public String workInProgress(){
+    public String workInProgress() {
         return "redirect:/workInProgress";
     }
 
     @GetMapping("/showTicketAdmin{ticketId}")
-    public String gotoTicketAdmin(@RequestParam Integer ticketId, Model model){
+    public String gotoTicketAdmin(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
-        model.addAttribute("ticket",ticket);
+        model.addAttribute("ticket", ticket);
         return "showTicketAdmin";
     }
->>>>>>> eb0ee1bafd827ee1acc7044a2b9c3e72b069f731
-
-=======
->>>>>>> 0856a9750bb7fd441c6f79c1c0bf5e0eab9fb5ed
 }
