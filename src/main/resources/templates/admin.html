@@ -20,7 +20,7 @@
     <hr>
     <form th:action="@{/admin}" th:object="${admin}" method="POST" class="form-horizontal">
         <div>
-            <div clas="row">
+            <div class="row">
                 <div class="col-lg-4 col-sm-6">
                     <a th:href="@{/getMyTickets}" class="btn btn-primary">My Tickets</a>
                 </div>
@@ -69,12 +69,15 @@
                         <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET"
                               class="form-horizontal">
                             <div th:switch="${adminNotifications.isEmpty()}">
-                                <button th:case="${true}" type="button" class="btn">
+                                <a th:case="${true}" type="button" class="btn btn-primary">
                                     <span class="badge badge-light"></span>
-                                </button>
-                                <button th:case="${false}" type="button" class="btn btn-primary">Notifications
-                                    <span class="badge badge-light">1</span>
-                                </button>
+                                </a>
+                                <!--<form th:action="@{/notifications}" method="POST" class="form-horizontal">-->
+                                    <a th:case="${false}" th:href="@{/notifications}" type="button"
+                                       class="btn btn-primary">Notifications
+                                        <span class="badge badge-light">1</span>
+                                    </a>
+                                <!--</form>-->
                             </div>
                         </form>
                     </div>

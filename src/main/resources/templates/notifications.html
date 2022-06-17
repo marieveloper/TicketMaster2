@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <title>Notifications</title>
+</head>
+<body>
+<div class="container">
+    <br/><br/>
+    <h4>Ticket details</h4>
+    <hr/>
+    <form th:action="@{/admin}" th:object="${admin}" method="POST" class="form-horizontal">
+        <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET"
+              class="form-horizontal">
+            <div class="card">
+                <table class="table table-bordered table-striped" id="ticketTable">
+                    <thead>
+                    <tr>
+                        <th>Text</th>
+                        <th>Sender</th>
+                        <th>Status</th>
+                    </tr>
+                    <tbody>
+                    <!--TODO get the correct method declarations-->
+                    <tr th:each="notification: ${adminNotifications}">
+                        <td th:text="${notification.getText()}"/>
+                        <td th:text="${notification.getSender().getUsername()}"/>
+                        <td th:text="${notification.getTicket().getStatus()}"/>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <a th:href="@{/back}" class="btn btn-primary">Back</a>
+        </form>
+    </form>
+</div>
+</body>
+</html>
