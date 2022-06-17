@@ -20,14 +20,14 @@
         <div>
             <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕</a>
             <div class="dropdown">
-                <img src="/images/filterButton.png" >
+                <img src="/images/filterButton.png" alt="Filterbutton" class="img-responsive" >
                 <div class="dropdown-content">
                     <li class="menu">
                         <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
                         <ul class="dropdown-submenu">
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getStatusOpen()">Open</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getStatusClosed()">Closed</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getStatusInProgress()">In progress</a>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Open</a></li>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Closed</a></li>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">In progress</a>
                             </li>
                         </ul>
                     </li>
@@ -36,31 +36,26 @@
                     <li class="menu">
                         <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
                         <ul class="dropdown-submenu">
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getPrioHigh()">High</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getPrioMedium()">Medium</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getPrioLow()">Low</a></li>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">High</a></li>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Medium</a></li>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Low</a></li>
                         </ul>
                     </li>
                     <li class="menu">
                         <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
                         <ul class="dropdown-submenu">
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getIncidentInactivity()">Inactivity</a>
-                            </li>
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getIncidentTechnicalProblems()">Technical
-                                problems</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" onclick="getIncidentOther()">Other</a></li>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Inactivity</a></li>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Technical problems</a></li>
+                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Other</a></li>
                         </ul>
                     </li>
                 </div>
             </div>
 
             <div style="float:right">
-                <a href="" type="button" class="btn" style="left:66%"><img src="/images/userButton.png"
-                                                                           class="img-responsive">
-                </a>
-                <a href="" type="button" class="btn" style="left:72%"><img src="/images/notification.png"
-                                                                           class="img-responsive"></a>
-                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png"class="img-responsive"></a>
+                <div type="button" class="btn"><img src="/images/userbutton.png" alt="Userbutton" class="img-responsive"></div>
+                <div type="button" class="btn"><img src="/images/notification.png" alt="Notification" class="img-responsive"></div>
+                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png" alt="Logout" class="img-responsive"></a>
             </div>
         </div>
         <br/><br/>
@@ -70,7 +65,7 @@
                     <thead>
                     <tr>
                         <th class="d-none d-md-table-cell" data-type="string">Prioritization</th>
-                        <th class="w-auto" data-type="string">Incident</th>
+                        <th data-type="string">Incident</th>
                         <th data-type="date">Date</th>
                         <th class="d-none d-md-table-cell" data-type="string">Admin</th>
                         <th data-type="string">Status</th>
