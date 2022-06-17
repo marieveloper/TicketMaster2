@@ -7,3 +7,16 @@ Mitglieder: 	Marie Kufner: marieveloper
 			Kevin Rosenauer: Kevin01001011
 			Marius Haueis: MariusHaueis
 			Annalena Schmid: AL218	
+
+Testdata to log in (Username, Password):
+Admins: - admin, admin
+	- Trump, 01000
+	- Merkel, 11000
+	- Obama, 21000
+
+Users:	- user, 1234
+	- Potter, 31000
+	- Duck, 41000
+	- Master, 51000
+
+If an user requests the status of a ticket, the responsible admin gets a notification (notification is incremented, as soon as a request is made).
