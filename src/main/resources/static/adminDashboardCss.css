@@ -35,7 +35,7 @@ img {
 }
 
 @media screen and (min-width: 577px) {
-  img {
+  .btn-info px-3 {
     position: relative;
     display: block;
     min-height: 100%;
@@ -46,9 +46,12 @@ img {
 }
 
 @media screen and (max-width: 576px) {
-  img {
-    width: 100%;
-    max-height: 25px;
+  .btn-info px-3 {
+    position: relative;
+    display: block;
+    min-height: 100%;
+    max-width: 100%;
+    opacity: 0.8;
   }
 
 }
@@ -112,6 +115,15 @@ img {
   }
 }
 
+.rightButtons{
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+.leftButtons{
+  margin-left: 5px;
+  margin-right: 5px;
+}
 
 .btn {
   padding: 16px;
