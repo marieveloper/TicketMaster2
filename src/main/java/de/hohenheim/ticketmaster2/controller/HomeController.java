@@ -47,7 +47,8 @@ public class HomeController {
         model.addAttribute("user", user);
         return "user";
     }
-
+    @ModelAttribute("admin")
+    public User getAdmin(){return userService.getCurrentUser();}
     @ModelAttribute("tickets")
     public List<Ticket> getTickets() {
         return ticketService.findAllTickets();
@@ -69,9 +70,7 @@ public class HomeController {
 
     @GetMapping("/admin")
     public String showAdminDashboard(Model model) {
-
         model.addAttribute("tickets");
-
         return "admin";
     }
 
@@ -109,6 +108,12 @@ public class HomeController {
         return "showTicket";
         }
 
+    @GetMapping("/notifications")
+    public String goToNotification( Model model){
+        model.addAttribute("adminNotifications");
+        return "notifications";
+    }
+
     @GetMapping("/withdrawTicket{ticketId}")
     public String withdrawTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId,Model model){
         ticketService.deleteTicket(ticket.getTicketId());
@@ -122,8 +127,16 @@ public class HomeController {
 
     @GetMapping("/back")
     public String backToUserDashboard(Model model){
+<<<<<<< HEAD
+        if(userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+            return "redirect:/admin";
+        }
+        return "redirect:/user";
+=======
         return "redirect:/";
+>>>>>>> Ley
     }
+
 
     @GetMapping("/requestStatus{ticketId}")
     public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model){
@@ -136,6 +149,9 @@ public class HomeController {
         notificationService.saveNotification(notificationTest);
     return "redirect:/user";
     }
+<<<<<<< HEAD
+
+=======
     @GetMapping("/workinProgress")
     public String workInProgress(){
         return "redirect:/workInProgress";
@@ -147,4 +163,5 @@ public class HomeController {
         model.addAttribute("ticket",ticket);
         return "showTicketAdmin";
     }
+>>>>>>> Ley
 }
