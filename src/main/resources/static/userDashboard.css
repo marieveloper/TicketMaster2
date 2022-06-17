@@ -23,29 +23,87 @@ body {
     max-height: 960px;
     max-width: 100%;
     margin: 0px auto;
+
 }
 
-.name {
-    color: #fff;
+.rightButtons{
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-.name {
-    color: #fff;
+.leftButtons{
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
-.name {
-    color: #fff;
+@media screen and (min-width: 577px) {
+    img {
+        width: 100%;
+        max-height: 50px;
+    }
+
 }
 
-img {
-    height: 57px;
-    width: 100%;
+@media screen and (max-width: 576px) {
+    img {
+        width: 100%;
+        max-height: 25px;
+    }
+
+}
+
+@media screen and (max-width: 42em) {
+    table, tbody, tr {
+        display: block;
+    }
+    thead {
+        display: none;
+    }
+    tr:first-child {
+        border-top: medium solid lightblue;
+    }
+    tr {
+        border-bottom: medium solid lightblue;
+        padding: .5em 2em 1em;
+    }
+
+    td:nth-child(2)::before {
+        content: "Incident: ";
+    }
+    td:nth-child(3)::before {
+        content: "Datum: ";
+    }
+    td:nth-child(5)::before {
+        content: "Status: ";
+    }
+    tbody th {
+        display: block;
+        font-weight: bold;
+    }
+    th a {
+        font-weight: normal;
+    }
+    td {
+        display: inline-block;
+        min-width: 30%;
+        padding: .2em 2em;
+        text-align: left;
+    }
+    td:nth-child(3) {
+        text-align: left;
+    }
+}
+@media screen and (max-width: 33em) {
+    td {
+        display: block;
+    }
+    tr {
+        padding: .5em .5em 1em;
+    }
 }
 
 
-
-
-.btn{
+.btn {
     padding: 16px;
     background-color: white;
     color: white;
@@ -71,7 +129,7 @@ img {
     position: absolute;
     background-color: #f1f1f1;
     min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
 
@@ -81,10 +139,16 @@ img {
     display: block;
 }
 
-li{
+li {
     list-style: none;
 }
-.dropdown:hover .dropdown-content {display: block;}
-.dropdown-submenu:hover .dropdown-content {display: block;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-submenu:hover .dropdown-content {
+    display: block;
+}
 
 
