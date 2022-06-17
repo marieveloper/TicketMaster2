@@ -24,6 +24,7 @@
     <form th:action="@{/getTicket}" th:object="${ticket}" method="GET">
     <div class="card">
         <div class="card-body">
+            <div class="row">
                 <div class="col-sm-6">
                     <div class="row">
                         <p>Ticket ID: </p>
@@ -50,7 +51,6 @@
                         <p th:text="${ticket.getStatus()}"></p>
                     </div>
                 </div>
-                <div class="topcorner">
                 <div class="col-sm-6" >
                     <p>Content: </p>
                     <p th:text="${ticket.getContent()}"></p>
@@ -60,8 +60,10 @@
     </div>
         <br>
         <a th:href="@{/withdrawTicket(ticketId=${ticket.getTicketId()})}" class="btn btn-danger">Withdraw Ticket</a>
-    <a class="btn btn-info" th:href="@{/requestStatus(ticketId=${ticket.getTicketId()})}">Request Status</a>
+    <a class="btn btn-primary" th:href="@{/requestStatus(ticketId=${ticket.getTicketId()})}">Request Status</a>
     </form>
+    <hr/>
+    <a th:href="@{/back}" class ="btn btn-primary">Back</a>
 </div>
 </body>
 </html>
