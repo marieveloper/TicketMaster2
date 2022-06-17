@@ -83,14 +83,13 @@
                         <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <td th:text="${ticket.getStatus()}"/>
                         <td>
-                            <a class="btn btn-info" th:href="@{/showTicket(ticketId=${ticket.getTicketId()})}">Show
+                            <a class="btn btn-info">Show
                                 Ticket</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </form>
-            <a class="btn btn-info" th:href="@{/showTicket}">Show Ticket</a>
         </div>
     </form>
 </div>
