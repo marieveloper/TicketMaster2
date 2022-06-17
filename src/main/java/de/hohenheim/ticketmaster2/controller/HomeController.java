@@ -47,7 +47,8 @@ public class HomeController {
         model.addAttribute("user", user);
         return "user";
     }
-
+    @ModelAttribute("admin")
+    public User getAdmin(){return userService.getCurrentUser();}
     @ModelAttribute("tickets")
     public List<Ticket> getTickets() {
         return ticketService.findAllTickets();
@@ -69,9 +70,7 @@ public class HomeController {
 
     @GetMapping("/admin")
     public String showAdminDashboard(Model model) {
-
         model.addAttribute("tickets");
-
         return "admin";
     }
 
@@ -103,8 +102,17 @@ public class HomeController {
     public String gotoTicket(@RequestParam Integer ticketId, Model model){
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket",ticket);
+        if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+            return "showTicketAdmin";
+        }
         return "showTicket";
         }
+
+    @GetMapping("/notifications")
+    public String goToNotification( Model model){
+        model.addAttribute("adminNotifications");
+        return "notifications";
+    }
 
     @GetMapping("/withdrawTicket{ticketId}")
     public String withdrawTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId,Model model){
@@ -119,8 +127,12 @@ public class HomeController {
 
     @GetMapping("/back")
     public String backToUserDashboard(Model model){
+        if(userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+            return "redirect:/admin";
+        }
         return "redirect:/user";
     }
+
 
     @GetMapping("/requestStatus{ticketId}")
     public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model){
@@ -133,8 +145,17 @@ public class HomeController {
         notificationService.saveNotification(notificationTest);
     return "redirect:/user";
     }
-    @GetMapping("/workinProgress")
+
+    @GetMapping("/workInProgress")
     public String workInProgress(){
         return "redirect:/workInProgress";
     }
+
+    @GetMapping("/showTicketAdmin{ticketId}")
+    public String gotoTicketAdmin(@RequestParam Integer ticketId, Model model){
+        Ticket ticket = ticketService.getByTicketId(ticketId);
+        model.addAttribute("ticket",ticket);
+        return "showTicketAdmin";
+    }
+
 }

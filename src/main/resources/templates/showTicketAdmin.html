@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <title>showTicketAdmin</title>
+
+</head>
+<body>
+<div class="container">
+    <br/><br/>
+    <h4>Ticket details</h4>
+    <hr/>
+    <form th:action="@{/getTicket}" th:object="${ticket}" method="GET">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="row">
+                            <p>Ticket ID: </p>
+                            <p th:text="${ticket.getTicketId()}"></p>
+                        </div>
+                        <div class="row">
+                            <p>Prioritization: </p>
+                            <p th:text="${ticket.getPrio()}"></p>
+                        </div>
+                        <div class="row">
+                            <p>Categorization: </p>
+                            <p th:text="${ticket.getCategorization()}"></p>
+                        </div>
+                        <div class="row">
+                            <p>Date: </p>
+                            <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"></p>
+                        </div>
+                        <div class="row">
+                            <p>Admin: </p>
+                            <p th:text="${ticket.getResponsibleAdmin().getUsername()}"></p>
+                        </div>
+                        <div class="row">
+                            <p>Status: </p>
+                            <p th:text="${ticket.getStatus()}"></p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6" >
+                        <p>Content: </p>
+                        <p th:text="${ticket.getContent()}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <a class="btn btn-danger" th:href="@{/WorkInProgress}">Send message</a>
+        <a class="btn btn-primary" th:href="@{/WorkInProgress}">Change Prioritization</a>
+        <a class="btn btn-primary" th:href="@{/WorkInProgress}">Change Admin</a>
+        <a class="btn btn-primary" th:href="@{/WorkInProgress}">Change Status</a>
+    </form>
+    <hr/>
+    <a th:href="@{/back}" class ="btn btn-primary">Back</a> <!--TODO-->
+</div>
+</body>
+</html>

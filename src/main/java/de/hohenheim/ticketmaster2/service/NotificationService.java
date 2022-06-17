@@ -23,7 +23,7 @@ public class NotificationService {
         return findAllNotifications().stream().filter(t -> t.getReceiver().getUserId()==adminId).toList();
     }
 
-
+public Notification getNotificationById(Integer id){return notificationRepository.getById(id);}
 
 
 }
