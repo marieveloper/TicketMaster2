@@ -19,5 +19,9 @@ public class NotificationService {
         return notificationRepository.findAll();
     }
 
+    public List<Notification> findAllAdminNotifications(Integer adminId) {
+        return findAllNotifications().stream().filter(t -> t.getReceiver().getUserId()==adminId).toList();
+    }
+
 
 }

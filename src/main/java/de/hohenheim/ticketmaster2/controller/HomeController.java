@@ -3,6 +3,7 @@ package de.hohenheim.ticketmaster2.controller;
 
 import de.hohenheim.ticketmaster2.entity.Notification;
 import de.hohenheim.ticketmaster2.entity.Ticket;
+import de.hohenheim.ticketmaster2.entity.User;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
 import de.hohenheim.ticketmaster2.service.NotificationService;
@@ -37,8 +38,12 @@ public class HomeController {
     @GetMapping( "/")
     public String showHome(Model model) {
         if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+            User admin = userService.getCurrentUser();
+            model.addAttribute("admin", admin);
             return "admin";
         }
+        User user = userService.getCurrentUser();
+        model.addAttribute("user", user);
         return "user";
     }
 
@@ -59,6 +64,7 @@ public class HomeController {
 
     @GetMapping("/admin")
     public String showAdminDashboard(Model model) {
+
         model.addAttribute("tickets");
 
         return "admin";
