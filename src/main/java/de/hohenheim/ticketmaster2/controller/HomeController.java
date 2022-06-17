@@ -40,6 +40,7 @@ public class HomeController {
         if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             User admin = userService.getCurrentUser();
             model.addAttribute("admin", admin);
+            model.addAttribute("adminNotifications");
             return "admin";
         }
         User user = userService.getCurrentUser();
@@ -57,6 +58,10 @@ public class HomeController {
     public List<Ticket> getUserTickets() {
         return ticketService.getAllTicketsByUserId(userService.getCurrentUser().getUserId());}
 
+    @ModelAttribute("adminNotifications")
+    public List<Notification> getAdminNotifications(){
+        return userService.getCurrentUser().getReceivedNotifications().stream().toList();
+    }
     @ModelAttribute("notifications")
     public List<Notification> getNotifications(){
         return notificationService.findAllNotifications();

@@ -57,7 +57,7 @@
             <div style="float:right">
                 <div type="button" class="btn"><img src="/images/userbutton.png"></div>
                 <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET" class="form-horizontal">
-                    <div th:switch="${notifications.isEmpty()}">
+                    <div th:switch="${adminNotifications.isEmpty()}">
                         <button th:case="${true}" type="button" class="btn">
                             <span class="badge badge-light"></span>
                         </button>
