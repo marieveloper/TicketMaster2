@@ -20,7 +20,7 @@
         <div>
             <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕</a>
             <div class="dropdown">
-                <img src="/images/filterButton.png" >
+                <img src="/images/filterButton.png" alt="Filterbutton" class="img-responsive" >
                 <div class="dropdown-content">
                     <li class="menu">
                         <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
@@ -55,12 +55,9 @@
             </div>
 
             <div style="float:right">
-                <a href="" type="button" class="btn" style="left:66%"><img src="/images/userButton.png"
-                                                                           class="img-responsive">
-                </a>
-                <a href="" type="button" class="btn" style="left:72%"><img src="/images/notification.png"
-                                                                           class="img-responsive"></a>
-                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png"class="img-responsive"></a>
+                <div type="button" class="btn"><img src="/images/userbutton.png" alt="Userbutton" class="img-responsive"></div>
+                <div type="button" class="btn"><img src="/images/notification.png" alt="Notification" class="img-responsive"></div>
+                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png" alt="Logout" class="img-responsive"></a>
             </div>
         </div>
         <br/><br/>
@@ -70,7 +67,7 @@
                     <thead>
                     <tr>
                         <th class="d-none d-md-table-cell" data-type="string">Prioritization</th>
-                        <th class="w-auto" data-type="string">Incident</th>
+                        <th data-type="string">Incident</th>
                         <th data-type="date">Date</th>
                         <th class="d-none d-md-table-cell" data-type="string">Admin</th>
                         <th data-type="string">Status</th>
