@@ -3,15 +3,15 @@ package de.hohenheim.ticketmaster2.entity;
 import javax.persistence.*;
 
 @Entity
-public class Message {
+public class Notification {
     @Id
     @GeneratedValue
     private Integer id;
 
     private String text;
     @ManyToOne
-    @JoinColumn(name = "authorId")
-    private User author;
+    @JoinColumn(name = "senderId")
+    private User sender;
     @ManyToOne
     @JoinColumn(name = "receiverId")
     private User receiver;
@@ -19,7 +19,7 @@ public class Message {
     @JoinColumn(name = "ticketId")
     private Ticket ticket;
 
-    public Message() {
+    public Notification() {
         //empty constructor for Hibernate
     }
 
@@ -31,8 +31,8 @@ public class Message {
         return text;
     }
 
-    public User getAuthor() {
-        return author;
+    public User getSender() {
+        return sender;
     }
 
     public User getReceiver() {
@@ -47,8 +47,8 @@ public class Message {
         this.text = text;
     }
 
-    public void setAuthor(User author) {
-        this.author = author;
+    public void setSender(User author) {
+        this.sender = author;
     }
 
     public void setReceiver(User receiver) {
