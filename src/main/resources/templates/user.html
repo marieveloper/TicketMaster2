@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 
     <title>Userdashboard</title>
 </head>
@@ -20,7 +21,7 @@
         <div>
             <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕</a>
             <div class="dropdown">
-                <img src="/images/filterButton.png" alt="Filterbutton" class="img-responsive" >
+                <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
                 <div class="dropdown-content">
                     <li class="menu">
                         <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
@@ -53,9 +54,9 @@
             </div>
 
             <div style="float:right">
-                <div type="button" class="btn"><img src="/images/userbutton.png" alt="Userbutton" class="img-responsive"></div>
-                <div type="button" class="btn"><img src="/images/notification.png" alt="Notification" class="img-responsive"></div>
-                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png" alt="Logout" class="img-responsive"></a>
+                <button type="button" class="btn btn-info px-3"><i class="bi bi-person-circle"></i></button>
+                <div type="button" class="btn"><button type="button" class="btn btn-info px-3"><i class="bi bi-bell"></i></button></div>
+                <a th:href="@{/logout}"><button type="button" class="btn btn-primary px-3"><i class="bi bi-door-closed"></i></button></a>
             </div>
         </div>
         <br/><br/>
@@ -79,7 +80,7 @@
                         <td class="d-none d-md-table-cell"th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <td th:text="${ticket.getStatus()}"/>
                         <td>
-                            <a class="btn btn-info"
+                            <a class="btn btn-info text-white"
                                th:onclick="'window.location.href=\'/showTicket?ticketId=' + ${ticket.getTicketId()} + '\''">Show
                                 Ticket</a>
                         </td>
