@@ -133,5 +133,8 @@ public class HomeController {
         notificationService.saveNotification(notificationTest);
     return "redirect:/user";
     }
-
+    @GetMapping("/workinProgress")
+    public String workInProgress(){
+        return "redirect:/workInProgress";
+    }
 }
