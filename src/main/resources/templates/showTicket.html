@@ -6,15 +6,7 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
     <title>Home</title>
-    <style>
-        .topcorner{
-            position:absolute;
-            top:18px;
-            left: 55%;
-            width: 80%;
-            heigth:auto;
-        }
-    </style>
+
 </head>
 <body>
 <div class="container">
@@ -28,23 +20,23 @@
                 <div class="col-sm-6">
                     <div class="row">
                         <p>Ticket ID: </p>
-                        <p th:text="${ticket.getTicketId()}"> ></p>
+                        <p th:text="${ticket.getTicketId()}"></p>
                     </div>
                     <div class="row">
                         <p>Prioritization: </p>
-                        <p th:text="${ticket.getPrio()}"> ></p>
+                        <p th:text="${ticket.getPrio()}"></p>
                     </div>
                     <div class="row">
                         <p>Categorization: </p>
-                        <p th:text="${ticket.getCategorization()}">> </p>
+                        <p th:text="${ticket.getCategorization()}"></p>
                     </div>
                     <div class="row">
                         <p>Date: </p>
-                        <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}">> </p>
+                        <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"></p>
                     </div>
                     <div class="row">
                         <p>Admin: </p>
-                        <p th:text="${ticket.getResponsibleAdmin().getUsername()}">> </p>
+                        <p th:text="${ticket.getResponsibleAdmin().getUsername()}"></p>
                     </div>
                     <div class="row">
                         <p>Status: </p>
