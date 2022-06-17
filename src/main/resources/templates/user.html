@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
 
     <link rel="stylesheet" type="text/css" href="/userDashboard.css"/>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -61,17 +60,17 @@
                 </a>
                 <a href="" type="button" class="btn" style="left:72%"><img src="/images/notification.png"
                                                                            class="img-responsive"></a>
-                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png"></a>
+                <a th:href="@{/logout}" class="btn btn-primary"><img src="/images/exit.png"class="img-responsive"></a>
             </div>
         </div>
         <br/><br/>
         <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
-            <div class="table-responsiven">
+            <div class="table-responsive">
                 <table class="table table-bordered table-striped" id="ticketTable">
                     <thead>
                     <tr>
                         <th class="d-none d-md-table-cell" data-type="string">Prioritization</th>
-                        <th data-type="string">Incident</th>
+                        <th class="w-auto" data-type="string">Incident</th>
                         <th data-type="date">Date</th>
                         <th class="d-none d-md-table-cell" data-type="string">Admin</th>
                         <th data-type="string">Status</th>
