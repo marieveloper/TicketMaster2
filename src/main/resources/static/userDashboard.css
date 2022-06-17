@@ -26,17 +26,13 @@ body {
 
 }
 
-@media screen and (min-width: 30em) and (orientation: landscape) {
+@media screen and (max-width: 450px) {
     img {
         width: 100%;
+        max-height: 20px;
+    }
 
-    }
-    table-responsive{
-        font-size: 14px;
-    }
 }
-
-
 
 @media screen and (min-width: 577px) {
     img {
@@ -44,22 +40,64 @@ body {
         max-height: 50px;
     }
 
-    body {
-        font-size: 14px;
-    }
-
-
-}
-table-responsive{
-    font-size: 14px;
 }
 
-@media screen and (max-width: 576px) {
+@media screen and (min-width: 576px) {
     img {
         width: 100%;
         max-height: 28px;
     }
 
+}
+
+@media screen and (max-width: 42em) {
+    table, tbody, tr {
+        display: block;
+    }
+    thead {
+        display: none;
+    }
+    tr:first-child {
+        border-top: medium solid lightblue;
+    }
+    tr {
+        border-bottom: medium solid lightblue;
+        padding: .5em 2em 1em;
+    }
+
+    td:nth-child(2)::before {
+        content: "Incident: ";
+    }
+    td:nth-child(3)::before {
+        content: "Datum: ";
+    }
+    td:nth-child(5)::before {
+        content: "Status: ";
+    }
+    tbody th {
+        display: block;
+        font-weight: bold;
+    }
+    th a {
+        font-weight: normal;
+    }
+    td {
+        display: inline-block;
+        min-width: 30%;
+        padding: .2em 2em;
+        text-align: left;
+    }
+    td:nth-child(3) {
+        text-align: left;
+    }
+}
+@media screen and (max-width: 33em) {
+    td {
+        display: block;
+    }
+    tr {
+        padding: .5em .5em 1em;
+    }
 }
 
 
