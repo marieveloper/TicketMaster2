@@ -91,7 +91,8 @@
                         <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <td th:text="${ticket.getStatus()}"/>
                         <td>
-                            <a class="btn btn-info">Show
+                            <a class="btn btn-info"
+                               th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
                                 Ticket</a>
                         </td>
                     </tr>
