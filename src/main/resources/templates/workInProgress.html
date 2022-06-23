@@ -1,26 +1,11 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <link rel="stylesheet" href="/static/stylesheet.css"/>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"/>
-    <title>Work in progress</title>
+    <meta charset="UTF-8">
+    <title>Home</title>
 </head>
 <body>
-<br><br><br><br>
-<div class="container">
-    <div class="card">
-        <div class="card-body">
-            <div class="container">
-                <center><p th:text="'Dies ist Ihre initiale Startseite'"></p>
-                    <p>This site is not running, we're working continiously to add new functions</p></center>
-                <br>
-                <center><img src="images/WorkInProgress.png" alt="WorkInProgress" class="img-responsive"></center>
-            </div>
-        </div>
-    </div>
-</div>
-</body>
+    <p th:text="'Dies ist Ihre initiale Startseite'"></p>
+    <p th:text="${message}"></p>
 </body>
 </html>
