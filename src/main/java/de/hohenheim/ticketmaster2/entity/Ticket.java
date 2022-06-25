@@ -26,6 +26,12 @@ public class Ticket {
 
     private Timestamp creationTime;
 
+    public Timestamp getRequestTime() {
+        return requestTime;
+    }
+
+    private Timestamp requestTime;
+
 
     private Status status;
 
@@ -150,7 +156,10 @@ public class Ticket {
     }
 
 
-    public void setCreationTime(Timestamp timestamp) {this.creationTime = timestamp;}
+    public void setCreationTime(Timestamp timestamp) {
+        this.creationTime = timestamp;
+        this.requestTime = timestamp;
+        }
 
     public User getResponsibleAdmin() {
         return responsibleAdmin;
@@ -175,6 +184,9 @@ public class Ticket {
         this.title = title;
     }
 
+    public void setRequestTime(Timestamp requestTime) {
+        this.requestTime = requestTime;
+    }
 }
 
 

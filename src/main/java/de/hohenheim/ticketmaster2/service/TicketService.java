@@ -83,7 +83,7 @@ public class TicketService {
     }
 
     public boolean canRequestStatus(int ticketId){
-        Timestamp timestamp = getByTicketId(ticketId).getCreationTime();
+        Timestamp timestamp = getByTicketId(ticketId).getRequestTime();
         long deltaTime = System.currentTimeMillis() - timestamp.getTime();
         if(deltaTime / 3600000 >= 12){
             return true;

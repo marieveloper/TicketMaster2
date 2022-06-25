@@ -100,7 +100,7 @@ public class HomeController {
     public String createTicket(@ModelAttribute("ticket") Ticket ticket) {
         ticket.setUser(userService.getCurrentUser());
         ticket.setTitle("title");
-        ticket.setCreationTime(Timestamp.from(Instant.now().minus(12, ChronoUnit.HOURS)));
+        ticket.setCreationTime(Timestamp.from(Instant.now()));
         ticket.setStatus(Status.OPEN);
         ticket.setPrio(Prioritization.HIGH);
         ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
@@ -145,14 +145,19 @@ public class HomeController {
 
     @GetMapping("/requestStatus{ticketId}")
     public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
-        Notification notificationTest = new Notification();
-        model.addAttribute("notifications", notificationTest);
-        notificationTest.setTicket(ticketService.getByTicketId(ticketId));
-        notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
-        notificationTest.setSender(notificationTest.getTicket().getUser());
-        notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
-        notificationService.saveNotification(notificationTest);
-        return "redirect:/user";
+        if (ticketService.canRequestStatus(ticketId)){
+            Notification notificationTest = new Notification();
+            model.addAttribute("notifications", notificationTest);
+            notificationTest.setTicket(ticketService.getByTicketId(ticketId));
+            notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
+            notificationTest.setSender(notificationTest.getTicket().getUser());
+            notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
+            notificationService.saveNotification(notificationTest);
+            ticket.setRequestTime(Timestamp.from(Instant.now()));
+            return "redirect:/user";
+        } System.out.print("Too soon ");
+        return gotoTicket(ticketId, model);
+
     }
 
     @GetMapping("/workInProgress")
