@@ -126,7 +126,18 @@ public class HomeController {
 
     @GetMapping("/withdrawTicket{ticketId}")
     public String withdrawTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
+        User receiver = ticket.getResponsibleAdmin();
+        User sender = ticket.getUser();
+
         ticketService.deleteTicket(ticket.getTicketId());
+
+        Notification notificationDelete = new Notification();
+        model.addAttribute("notifications", notificationDelete);
+        notificationDelete.setText("The ticket with id " + ticketId + " was deleted");
+        notificationDelete.setReceiver(receiver); //TODO ist null???
+        notificationDelete.setSender(sender); //TODO ist null???
+        notificationService.saveNotification(notificationDelete);
+        ticket.setRequestTime(Timestamp.from(Instant.now()));
         return "redirect:/user";
     }
 

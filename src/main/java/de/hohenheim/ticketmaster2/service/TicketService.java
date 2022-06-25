@@ -82,7 +82,7 @@ public class TicketService {
 
     public void deleteTicket(int ticketId){
         ticketRepository.delete(ticketRepository.getById(ticketId)); //TODO: FK-Beziehungen mit @OnDelete versehen
-        notificationService.deleteByTicketId(ticketId);
+       //TODO hier bisher manuell notificationService.deleteByTicketId(ticketId);
     }
 
     public boolean canRequestStatus(int ticketId){
