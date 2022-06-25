@@ -22,6 +22,8 @@ public class TicketService {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private NotificationService notificationService;
 
     public Ticket saveTicket(Ticket ticket) {
         return ticketRepository.save(ticket);
@@ -80,6 +82,7 @@ public class TicketService {
 
     public void deleteTicket(int ticketId){
         ticketRepository.delete(ticketRepository.getById(ticketId)); //TODO: FK-Beziehungen mit @OnDelete versehen
+        notificationService.deleteByTicketId(ticketId);
     }
 
     public boolean canRequestStatus(int ticketId){
