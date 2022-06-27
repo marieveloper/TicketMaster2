@@ -129,8 +129,9 @@ public class HomeController {
         Notification notificationDelete = new Notification();
         model.addAttribute("notifications", notificationDelete);
         notificationDelete.setText("The ticket with id " + ticketId + " was deleted");
-        notificationDelete.setReceiver(ticket.getResponsibleAdmin()); //TODO ist null???
-        notificationDelete.setSender(ticket.getUser()); //TODO ist null???
+        notificationDelete.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+        notificationDelete.setSender(ticketService.getByTicketId(ticketId).getUser());
+        //notificationDelete.setTicket(ticketService.getByTicketId(ticketId)); //TODO status nicht anzeigbar wenn Ticket null
         notificationService.saveNotification(notificationDelete);
         ticket.setRequestTime(Timestamp.from(Instant.now()));
 
