@@ -3,10 +3,8 @@ package de.hohenheim.ticketmaster2.service;
 import de.hohenheim.ticketmaster2.entity.Ticket;
 import de.hohenheim.ticketmaster2.entity.User;
 import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
-import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
 import de.hohenheim.ticketmaster2.repository.TicketRepository;
-import org.hibernate.annotations.OnDelete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -61,7 +59,7 @@ public class TicketService {
         ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
         ticket.setTitle(title);
         ticket.setContent(content);
-        ticket.setPrio(Prioritization.MEDIUM); //TODO: Automatische Priorisierung
+        ticket.setPrioAuto();
         ticket.setUser(userService.getUserByUsername(authorName));
         ticketRepository.save(ticket);
     }
@@ -97,9 +95,9 @@ public class TicketService {
         //TODO: Comment/Benachrichtigung erzeugen
     }
 
-    public void changeTicketPriority(int ticketId, Prioritization prio){
+    public void changeTicketPriority(int ticketId){
         Ticket ticket = getByTicketId(ticketId);
-        ticket.setPrio(prio);
+        ticket.setPrioAuto();
         ticketRepository.save(ticket);
     }
 

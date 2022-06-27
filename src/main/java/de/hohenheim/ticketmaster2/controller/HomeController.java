@@ -4,7 +4,6 @@ package de.hohenheim.ticketmaster2.controller;
 import de.hohenheim.ticketmaster2.entity.Notification;
 import de.hohenheim.ticketmaster2.entity.Ticket;
 import de.hohenheim.ticketmaster2.entity.User;
-import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
 import de.hohenheim.ticketmaster2.service.NotificationService;
 import de.hohenheim.ticketmaster2.service.TicketService;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -102,7 +100,7 @@ public class HomeController {
         ticket.setTitle("title");
         ticket.setCreationTime(Timestamp.from(Instant.now()));
         ticket.setStatus(Status.OPEN);
-        ticket.setPrio(Prioritization.HIGH);
+        ticket.setPrioAuto();
         ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
         ticketService.add(ticket);
         return "redirect:/user";
