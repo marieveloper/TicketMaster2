@@ -1,6 +1,7 @@
 
 package de.hohenheim.ticketmaster2.controller;
 
+import de.hohenheim.ticketmaster2.entity.Message;
 import de.hohenheim.ticketmaster2.entity.Notification;
 import de.hohenheim.ticketmaster2.entity.Ticket;
 import de.hohenheim.ticketmaster2.entity.User;
@@ -177,5 +178,16 @@ public class HomeController {
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket", ticket);
         return "showTicketAdmin";
+    }
+    @GetMapping("/gotoMessage{ticketID}")
+    public String sendMessage(@ModelAttribute("ticket") Ticket ticket,Model model){
+        model.addAttribute("ticket");
+        return "gotoMessage";
+    }
+    @GetMapping("/createMessage")
+    public String createMessage(Message message, Model model) {
+        Message newMessage = new Message();
+        model.addAttribute("message", newMessage);
+        return "createMessage";
     }
 }
