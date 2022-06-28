@@ -1,5 +1,8 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 
 @Entity
@@ -17,6 +20,7 @@ public class Notification {
     private User receiver;
     @ManyToOne
     @JoinColumn(name = "ticketId")
+    @OnDelete(action= OnDeleteAction.CASCADE)
     private Ticket ticket;
 
     public Notification() {
