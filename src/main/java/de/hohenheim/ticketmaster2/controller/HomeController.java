@@ -6,6 +6,7 @@ import de.hohenheim.ticketmaster2.entity.Notification;
 import de.hohenheim.ticketmaster2.entity.Ticket;
 import de.hohenheim.ticketmaster2.entity.User;
 import de.hohenheim.ticketmaster2.enums.Status;
+import de.hohenheim.ticketmaster2.service.MessageService;
 import de.hohenheim.ticketmaster2.service.NotificationService;
 import de.hohenheim.ticketmaster2.service.TicketService;
 import de.hohenheim.ticketmaster2.service.UserService;
@@ -27,6 +28,8 @@ public class HomeController {
     private TicketService ticketService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private NotificationService notificationService;
@@ -74,6 +77,11 @@ public class HomeController {
     @ModelAttribute("notifications")
     public List<Notification> getNotifications() {
         return notificationService.findAllNotifications();
+    }
+
+    @ModelAttribute("messages")
+    public List<Message> getMessages() {
+        return messageService.findAllMessages();
     }
 
     @GetMapping("/admin")
@@ -180,8 +188,9 @@ public class HomeController {
         return "showTicketAdmin";
     }
     @GetMapping("/gotoMessage{ticketID}")
-    public String sendMessage(@ModelAttribute("ticket") Ticket ticket,Model model){
-        model.addAttribute("ticket");
+    public String sendMessage(@RequestParam Integer ticketId,Model model){
+        Ticket ticket = ticketService.getByTicketId(ticketId);
+        model.addAttribute("ticket", ticket);
         return "gotoMessage";
     }
     @GetMapping("/createMessage")
