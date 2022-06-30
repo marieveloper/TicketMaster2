@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.time.Instant;
+import java.util.LinkedList;
 import java.util.List;
 
 @Controller
@@ -63,6 +64,17 @@ public class HomeController {
         return ticketService.findAllTickets();
     }
 
+    @ModelAttribute("admins")
+    public List<User> getAllAdmins() {
+        List<User> admins = new LinkedList<>();
+        List<User> allUsers = userService.findAllUsers();
+        for(User user : allUsers) {
+            if(userService.hasRole("ROLE_ADMIN", user)) {
+                admins.add(user);
+            }
+        }
+        return admins;
+    }
 
     @ModelAttribute("userTickets")
     public List<Ticket> getUserTickets() {
@@ -138,10 +150,8 @@ public class HomeController {
         notificationDelete.setText("The ticket with id " + ticketId + " was deleted");
         notificationDelete.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         notificationDelete.setSender(ticketService.getByTicketId(ticketId).getUser());
-        //notificationDelete.setTicket(ticketService.getByTicketId(ticketId)); //TODO status nicht anzeigbar wenn Ticket null
         notificationService.saveNotification(notificationDelete);
         ticket.setRequestTime(Timestamp.from(Instant.now()));
-
         ticketService.deleteTicket(ticket.getTicketId());
         return "redirect:/user";
     }
@@ -173,7 +183,6 @@ public class HomeController {
             return "redirect:/user";
         } System.out.print("Too soon ");
         return gotoTicket(ticketId, model);
-
     }
 
     @GetMapping("/workInProgress")
@@ -199,4 +208,14 @@ public class HomeController {
         model.addAttribute("message", newMessage);
         return "createMessage";
     }
+
+    @GetMapping ("/editTicket{ticketId}")
+    public String editTickets(@RequestParam Integer ticketId, Model model){
+        Ticket ticket = ticketService.getByTicketId(ticketId);
+        model.addAttribute("admins");
+
+        model.addAttribute("ticket", ticket);
+        return "editTicket";
+    }
+
 }

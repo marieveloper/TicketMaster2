@@ -100,6 +100,22 @@ public class TicketService {
         ticket.setPrioAuto();
         ticketRepository.save(ticket);
     }
+    public void changeTicketStatus(int ticketId, Status status){
+        Ticket ticket = getByTicketId(ticketId);
+        ticket.setStatus(status);
+        ticketRepository.save(ticket);
+    }
+public void changeTicketResponsibleAdmin(int ticketId, String username){
+        Ticket ticket = getByTicketId(ticketId);
+        ticket.setResponsibleAdmin(userService.getUserByUsername(username));
+        ticketRepository.save(ticket);
+    }
+    public void changeTicketIncidentCategorization(int ticketId, IncidentCategorization incidentCategorization){
+        Ticket ticket = getByTicketId(ticketId);
+        ticket.setCategorization(incidentCategorization);
+        ticketRepository.save(ticket);
+    }
+
 
     public void add(Ticket ticket){
 

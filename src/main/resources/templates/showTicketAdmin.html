@@ -52,9 +52,8 @@
         </div>
         <br>
         <a class="btn btn-danger" th:onclick="'window.location.href=\'/gotoMessage?ticketId=' + ${ticket.getTicketId()} + '\''">Show message</a>
-        <a class="btn btn-primary" th:href="@{/WorkInProgress}">Change Prioritization</a>
-        <a class="btn btn-primary" th:href="@{/WorkInProgress}">Change Admin</a>
-        <a class="btn btn-primary" th:href="@{/WorkInProgress}">Change Status</a>
+        <a class="btn btn-primary" th:onclick="'window.location.href=\'/editTicket?ticketId=' + ${ticket.getTicketId()} + '\''">Edit ticket</a>
+
     </form>
     <hr/>
     <a th:href="@{/back}" class ="btn btn-primary">Back</a> <!--TODO-->
