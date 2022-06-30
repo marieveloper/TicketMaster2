@@ -1,61 +1,10 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-size: 14px;
-  text-align: center;
-}
-
-
-.desktop {
-  width: 100%;
-  height: 1024px;
-  background: rgba(255, 255, 255, 1);
-  opacity: 1;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-
 .container {
-  max-height: 960px;
   max-width: 100%;
-  margin: 0px auto;
 
 }
-
-img {
-  position: relative;
-  display: block;
-  min-height: 100%;
-  max-width: 100%;
-  opacity: 0.8;
+tbody tr:nth-child(even) {
+  background-color: #D9D9D9;
 }
-
-@media screen and (min-width: 577px) {
-  .btn-info px-3 {
-    position: relative;
-    display: block;
-    min-height: 100%;
-    max-width: 100%;
-    opacity: 0.8;
-  }
-
-}
-
-@media screen and (max-width: 576px) {
-  .btn-info px-3 {
-    position: relative;
-    display: block;
-    min-height: 100%;
-    max-width: 100%;
-    opacity: 0.8;
-  }
-
-}
-
 @media screen and (max-width: 42em) {
   table, tbody, tr {
     display: block;
@@ -106,24 +55,7 @@ img {
     text-align: left;
   }
 }
-@media screen and (max-width: 33em) {
-  td {
-    display: block;
-  }
-  tr {
-    padding: .5em .5em 1em;
-  }
-}
 
-.rightButtons{
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.leftButtons{
-  margin-left: 5px;
-  margin-right: 5px;
-}
 
 .btn {
   padding: 16px;
@@ -172,5 +104,3 @@ li {
 .dropdown-submenu:hover .dropdown-content {
   display: block;
 }
-
-
