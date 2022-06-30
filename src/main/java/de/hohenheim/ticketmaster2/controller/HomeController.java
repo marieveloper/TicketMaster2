@@ -1,11 +1,12 @@
 
 package de.hohenheim.ticketmaster2.controller;
 
+import de.hohenheim.ticketmaster2.entity.Message;
 import de.hohenheim.ticketmaster2.entity.Notification;
 import de.hohenheim.ticketmaster2.entity.Ticket;
 import de.hohenheim.ticketmaster2.entity.User;
-import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
+import de.hohenheim.ticketmaster2.service.MessageService;
 import de.hohenheim.ticketmaster2.service.NotificationService;
 import de.hohenheim.ticketmaster2.service.TicketService;
 import de.hohenheim.ticketmaster2.service.UserService;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Controller
@@ -28,6 +28,8 @@ public class HomeController {
     private TicketService ticketService;
     @Autowired
     private UserService userService;
+    @Autowired
+    private MessageService messageService;
 
     @Autowired
     private NotificationService notificationService;
@@ -77,6 +79,11 @@ public class HomeController {
         return notificationService.findAllNotifications();
     }
 
+    @ModelAttribute("messages")
+    public List<Message> getMessages() {
+        return messageService.findAllMessages();
+    }
+
     @GetMapping("/admin")
     public String showAdminDashboard(Model model) {
         model.addAttribute("tickets");
@@ -100,9 +107,9 @@ public class HomeController {
     public String createTicket(@ModelAttribute("ticket") Ticket ticket) {
         ticket.setUser(userService.getCurrentUser());
         ticket.setTitle("title");
-        ticket.setCreationTime(Timestamp.from(Instant.now().minus(12, ChronoUnit.HOURS)));
+        ticket.setCreationTime(Timestamp.from(Instant.now()));
         ticket.setStatus(Status.OPEN);
-        ticket.setPrio(Prioritization.HIGH);
+        ticket.setPrioAuto();
         ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
         ticketService.add(ticket);
         return "redirect:/user";
@@ -126,6 +133,15 @@ public class HomeController {
 
     @GetMapping("/withdrawTicket{ticketId}")
     public String withdrawTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
+        Notification notificationDelete = new Notification();
+        model.addAttribute("notifications", notificationDelete);
+        notificationDelete.setText("The ticket with id " + ticketId + " was deleted");
+        notificationDelete.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+        notificationDelete.setSender(ticketService.getByTicketId(ticketId).getUser());
+        //notificationDelete.setTicket(ticketService.getByTicketId(ticketId)); //TODO status nicht anzeigbar wenn Ticket null
+        notificationService.saveNotification(notificationDelete);
+        ticket.setRequestTime(Timestamp.from(Instant.now()));
+
         ticketService.deleteTicket(ticket.getTicketId());
         return "redirect:/user";
     }
@@ -145,14 +161,19 @@ public class HomeController {
 
     @GetMapping("/requestStatus{ticketId}")
     public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
-        Notification notificationTest = new Notification();
-        model.addAttribute("notifications", notificationTest);
-        notificationTest.setTicket(ticketService.getByTicketId(ticketId));
-        notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
-        notificationTest.setSender(notificationTest.getTicket().getUser());
-        notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
-        notificationService.saveNotification(notificationTest);
-        return "redirect:/user";
+        if (ticketService.canRequestStatus(ticketId)){
+            Notification notificationTest = new Notification();
+            model.addAttribute("notifications", notificationTest);
+            notificationTest.setTicket(ticketService.getByTicketId(ticketId));
+            notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
+            notificationTest.setSender(notificationTest.getTicket().getUser());
+            notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
+            notificationService.saveNotification(notificationTest);
+            ticket.setRequestTime(Timestamp.from(Instant.now()));
+            return "redirect:/user";
+        } System.out.print("Too soon ");
+        return gotoTicket(ticketId, model);
+
     }
 
     @GetMapping("/workInProgress")
@@ -165,5 +186,17 @@ public class HomeController {
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket", ticket);
         return "showTicketAdmin";
+    }
+    @GetMapping("/gotoMessage{ticketID}")
+    public String sendMessage(@RequestParam Integer ticketId,Model model){
+        Ticket ticket = ticketService.getByTicketId(ticketId);
+        model.addAttribute("ticket", ticket);
+        return "gotoMessage";
+    }
+    @GetMapping("/createMessage")
+    public String createMessage(Message message, Model model) {
+        Message newMessage = new Message();
+        model.addAttribute("message", newMessage);
+        return "createMessage";
     }
 }

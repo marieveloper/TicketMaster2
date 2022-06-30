@@ -22,6 +22,14 @@ public class NotificationService {
     public List<Notification> findAllAdminNotifications(Integer adminId) {
         return findAllNotifications().stream().filter(t -> t.getReceiver().getUserId()==adminId).toList();
     }
+    public List<Notification> findAllTicketNotifications(Integer ticketId) {
+        return findAllNotifications().stream().filter(t -> t.getTicket().getTicketId()==ticketId).toList();
+    }
+    public void deleteByTicketId(int ticketId) {
+        for (Notification notification: this.findAllTicketNotifications(ticketId)) {
+            notificationRepository.delete(notification);
+        }
+    }
 
 public Notification getNotificationById(Integer id){return notificationRepository.getById(id);}
 
