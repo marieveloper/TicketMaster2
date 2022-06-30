@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <link rel="stylesheet" href="/static/createTicket.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <title> Message</title>
+</head>
+<body>
+<div class="container">
+    <form  th:action="@{/getMessages}"  th:object="ticket" method="GET" class="form-horizontal">
+    </form>
+    <br/><br/>
+    <h1>Create a Ticket</h1>
+    <hr/>
+    <form th:action="@{/findAllMessages}" method="GET" class="form-horizontal">
+        <table class="table table-bordered table-striped" id="ticketTable">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Text</th>
+            </tr>
+            <tbody>
+            <tr th:each="ticket.getMessages(): ${message}">
+                <td th:text="${message.getID()}"/>
+                <td th:text="${message.getText}"/>
+                <td>
+                    <a class="btn btn-info text-white"
+                       th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
+                        Ticket</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </form>
+    <div class="fieldContainer">
+        <form th:action="@{/saveMessage}" th:object="${message}" method="POST">
+            </br> </br>
+            <textarea name="messageText" minlength="30" rows="10" cols="80" style="margin-top: 10px"
+                      th:field="*{content}"
+                      placeholder="Insert message text" class="form-control col-4 mb-4"></textarea>
+            <input type="hidden" th:field="*{ticketId}" />
+            <button class="btn btn-primary" type="submit">submit</button>
+        </form>
+        <hr/>
+        <a th:href="@{/back}" class ="btn btn-primary">Back</a>
+    </div>
+</div>
+
+</body>
+</html>
