@@ -25,9 +25,9 @@
                 </select>
             </div>
             </br> </br>
-            <textarea name="problemspecification" rows="10" cols="80" style="margin-top: 10px"
+            <textarea name="problemspecification" minlength="30" rows="10" cols="80" style="margin-top: 10px"
                       th:field="*{content}"
-                      placeholder="Describe your problem" class="form-control col-4 mb-4"></textarea>
+                      placeholder="Describe your problem (min. 30 letters)" class="form-control col-4 mb-4"></textarea>
             <input type="hidden" th:field="*{ticketId}" />
             <button class="btn btn-primary" type="submit">submit</button>
         </form>

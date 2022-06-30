@@ -26,6 +26,12 @@ public class Ticket {
 
     private Timestamp creationTime;
 
+    public Timestamp getRequestTime() {
+        return requestTime;
+    }
+
+    private Timestamp requestTime;
+
 
     private Status status;
 
@@ -77,7 +83,7 @@ public class Ticket {
         try {
             this.categorization = IncidentCategorization.valueOf(categorizationStr);
         } catch (Exception e) {
-            this.categorization = IncidentCategorization.UNKNOWN;
+            this.categorization = IncidentCategorization.OTHER;
         }
     }
 
@@ -89,14 +95,15 @@ public class Ticket {
         return status;
     }
 
-    public void setPrio(Prioritization prio) {
-        /*switch(prio){
-            case LOW: System.out.println("less important");
+    public void setPrioAuto() {
+        switch(categorization){
+            case INACTIVITY: this.prio = Prioritization.MEDIUM;
                 break;
-            case MEDIUM: System.out.println("important");
+            case TECHNICAL_PROBLEMS: this.prio =Prioritization.HIGH;
                 break;
-            case HIGH: System.out.println("urgent");
-        }*/
+            case OTHER: this.prio =Prioritization.LOW;
+                break;
+        }
         this.prio = prio;
     }
 
@@ -150,7 +157,10 @@ public class Ticket {
     }
 
 
-    public void setCreationTime(Timestamp timestamp) {this.creationTime = timestamp;}
+    public void setCreationTime(Timestamp timestamp) {
+        this.creationTime = timestamp;
+        this.requestTime = timestamp;
+        }
 
     public User getResponsibleAdmin() {
         return responsibleAdmin;
@@ -175,6 +185,13 @@ public class Ticket {
         this.title = title;
     }
 
+    public void setRequestTime(Timestamp requestTime) {
+        this.requestTime = requestTime;
+    }
+
+    public void setPrio(Prioritization prio) {
+        this.prio = prio;
+    }
 }
 
 
