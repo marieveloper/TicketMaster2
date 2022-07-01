@@ -233,7 +233,7 @@ public class HomeController {
         oldTicket.setResponsibleAdmin(newTicket.getResponsibleAdmin());
         oldTicket.setCategorization(newTicket.getCategorization());
         oldTicket.setPrio(newTicket.getPrio());
-        oldTicket.setTitle(newTicket.getTitle());
+        oldTicket.setStatus(newTicket.getStatus());
         ticketService.saveTicket(oldTicket);
         return "redirect:/admin";
     }
