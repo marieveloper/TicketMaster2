@@ -33,6 +33,7 @@ public class Ticket {
     private Timestamp requestTime;
 
 
+    @Enumerated(EnumType.STRING)
     private Status status;
 
     private String content;

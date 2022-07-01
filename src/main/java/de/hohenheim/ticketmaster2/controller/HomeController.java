@@ -96,9 +96,16 @@ public class HomeController {
         return messageService.findAllMessages();
     }
 
+    //Mappings----------------------------------------------------------------------------------------------------------
     @GetMapping("/admin")
-    public String showAdminDashboard(Model model) {
-        model.addAttribute("tickets");
+    public String showAdminDashboard(Model model, String keyword) {
+        if(keyword != null){
+
+            model.addAttribute("tickets", ticketService.findByKeyword(keyword));
+        }
+        else {
+            model.addAttribute("tickets");
+        }
         return "admin";
     }
 
