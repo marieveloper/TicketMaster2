@@ -16,77 +16,78 @@
 </head>
 <body>
 <div class="container">
-    <form th:action="@{/admin}" th:object="${admin}" method="POST" class="form-horizontal">
+    <form th:action="@{/admin}" th:object="${admin}" method="GET" class="form-horizontal">
         <div>
-        <nav class="top-nav fixed-top" style="background-color: #D9D9D9" th:height="10" >
-            <a th:href="@{/getMyTickets}" class="btn btn-primary">My Tickets</a>
-            <div class="dropdown">
-                <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
-                <div class="dropdown-content">
-                    <li class="menu">
-                        <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
-                        <ul class="dropdown-submenu">
-                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Open</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Closed</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">In
-                                progress</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
-                        <ul class="dropdown-submenu">
-                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">High</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Medium</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Low</a></li>
-                        </ul>
-                    </li>
-                    <li class="menu">
-                        <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
-                        <ul class="dropdown-submenu">
-                            <li><a class="btn dropbtn" tabindex="-1"
-                                   th:href="@{/workInProgess}">Inactivity</a>
-                            </li>
-                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Technical
-                                problems</a></li>
-                            <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Other</a></li>
-                        </ul>
-                    </li>
-                </div>
-            </div>
-
-            <div style="float:right">
-                <div class="rightButtons">
-                    <div style="float: left">
-                        <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET"
-                              class="form-horizontal">
-                            <div th:switch="${adminNotifications.isEmpty()}">
-                                <a th:case="${true}">
-                                </a>
-                                <a th:case="${false}" th:href="@{/notifications}" type="button"
-                                   class="btn btn-info px-3"><i
-                                        class="bi bi-bell"></i>
-                                    <span class="badge badge-light" style="color: red">1</span>
-                                </a>
-                            </div>
-                        </form>
-                    </div>
-                    <div style="float: left" class="px-4">
-                        <button type="button" class="btn btn-info px-3"><i class="bi bi-person-circle"></i></button>
-                    </div>
-                    <div style="float: right">
-                        <a th:href="@{/logout}" class="btn btn-primary px-3"><i class="bi bi-door-closed"></i></a>
+            <nav class="top-nav fixed-top" style="background-color: #D9D9D9" th:height="10">
+                <a th:href="@{/getMyTickets}" class="btn btn-primary">My Tickets</a>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
+                    <div class="dropdown-content">
+                        <li class="menu">
+                            <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
+                            <ul class="dropdown-submenu">
+                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Open</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Closed</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">In
+                                    progress</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu">
+                            <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
+                            <ul class="dropdown-submenu">
+                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">High</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Medium</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Low</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu">
+                            <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
+                            <ul class="dropdown-submenu">
+                                <li><a class="btn dropbtn" tabindex="-1"
+                                       th:href="@{/workInProgess}">Inactivity</a>
+                                </li>
+                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Technical
+                                    problems</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Other</a></li>
+                            </ul>
+                        </li>
                     </div>
                 </div>
-            </div>
-            <br/><br/>
-            <form th:action="@{/admin}" method="GET">
-            <input name="keyword" id="txtSearch" type="text" th:placeholder="'keyword / empty to return'" autocomplete="on" aria-autocomplete="true" aria-controls="searchSuggestionTable" aria-expanded="false">
-                <button class="btn btn-info">Search</button>
-            </form>
-            <br/>
 
-        </nav>
+                <div style="float:right">
+                    <div class="rightButtons">
+                        <div style="float: left">
+                            <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET"
+                                  class="form-horizontal">
+                                <div th:switch="${adminNotifications.isEmpty()}">
+                                    <a th:case="${true}">
+                                    </a>
+                                    <a th:case="${false}" th:href="@{/notifications}" type="button"
+                                       class="btn btn-info px-3"><i
+                                            class="bi bi-bell"></i>
+                                        <span class="badge badge-light" style="color: red">1</span>
+                                    </a>
+                                </div>
+                            </form>
+                        </div>
+                        <div style="float: left" class="px-4">
+                            <button type="button" class="btn btn-info px-3"><i class="bi bi-person-circle"></i></button>
+                        </div>
+                        <div style="float: right">
+                            <a th:href="@{/logout}" class="btn btn-primary px-3"><i
+                                    class="bi bi-box-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <br/><br/>
+                <form th:action="@{/admin}" method="GET">
+                    <input name="keyword" id="txtSearch" type="text" th:placeholder="'keyword / empty to return'">
+                    <button class="btn btn-info"><i class="bi bi-search"></i></button>
+                </form>
+                <br/>
+
+            </nav>
         </div>
         <br/><br/><br/><br/><br/><br/>
         <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
