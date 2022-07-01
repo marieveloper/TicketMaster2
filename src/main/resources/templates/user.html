@@ -86,13 +86,13 @@
                     <tr th:each="ticket: ${userTickets}">
                         <a th:switch="${ticket.getPrio().toString()} ">
                             <a th:case="${'LOW'}">
-                                <td th:text="${ticket.getPrio().toString()}" th:bgcolor="green"></td>
+                                <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                             <a th:case="${'MEDIUM'}">
-                                <td th:text="${ticket.getPrio().toString()}" th:bgcolor="yellow"></td>
+                                <td> <span class="badge text-black-50" style="background-color: navajowhite" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                             <a th:case="${'HIGH'}">
-                                <td th:text="${ticket.getPrio().toString()}" th:bgcolor="red"></td>
+                                <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                         </a>
                         <td th:text="${ticket.getCategorization()}"/>
@@ -100,13 +100,13 @@
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <a th:switch="${ticket.getStatus().toString()} ">
                             <a th:case="${'OPEN'}">
-                                <td th:text="${ticket.getStatus().toString()}" th:bgcolor="green"></td>
+                                <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'IN_PROCESS'}">
-                                <td th:text="${ticket.getStatus().toString()}" th:bgcolor="yellow"></td>
+                                <td> <span class="badge text-black-50" style="background-color: navajowhite" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'CLOSED'}">
-                                <td th:text="${ticket.getStatus().toString()}" th:bgcolor="red"></td>
+                                <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                         </a>
                         <td>
