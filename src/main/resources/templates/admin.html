@@ -105,12 +105,32 @@
                 <tbody>
                 <!--TODO get the correct method declarations-->
                 <tr th:each="ticket: ${tickets}">
-                    <td th:text="${ticket.getPrio()}"/>
+                    <a th:switch="${ticket.getPrio().toString()} ">
+                        <a th:case="${'LOW'}">
+                            <td th:text="${ticket.getPrio().toString()}" th:bgcolor="green"></td>
+                        </a>
+                        <a th:case="${'MEDIUM'}">
+                            <td th:text="${ticket.getPrio().toString()}" th:bgcolor="yellow"></td>
+                        </a>
+                        <a th:case="${'HIGH'}">
+                            <td th:text="${ticket.getPrio().toString()}" th:bgcolor="red"></td>
+                        </a>
+                    </a>
                     <td th:text="${ticket.getCategorization()}"/>
                     <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
                     <td th:text="${ticket.getUser().getUsername()}"/>
                     <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
-                    <td th:text="${ticket.getStatus()}"/>
+                    <a th:switch="${ticket.getStatus().toString()} ">
+                        <a th:case="${'OPEN'}">
+                            <td th:text="${ticket.getStatus().toString()}" th:bgcolor="green"></td>
+                        </a>
+                        <a th:case="${'IN_PROCESS'}">
+                            <td th:text="${ticket.getStatus().toString()}" th:bgcolor="yellow"></td>
+                        </a>
+                        <a th:case="${'CLOSED'}">
+                            <td th:text="${ticket.getStatus().toString()}" th:bgcolor="red"></td>
+                        </a>
+                    </a>
                     <td>
                         <a class="btn btn-info text-white"
                            th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
