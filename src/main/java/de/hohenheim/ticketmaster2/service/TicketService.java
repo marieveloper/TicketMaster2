@@ -123,4 +123,8 @@ public void changeTicketResponsibleAdmin(int ticketId, String username){
         ticketRepository.save(ticket);
     }
 
+    public List<Ticket> findByKeyword(String keyword){
+        return ticketRepository.findByKeyword(keyword);
+    }
+
 }
