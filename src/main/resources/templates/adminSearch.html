@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title>Home</title>
+    <title>Home after searching</title>
 </head>
 <body>
 <div class="container">
@@ -80,10 +80,14 @@
                 </div>
             </div>
             <br/><br/>
+
             <form th:action="@{/admin}" method="GET">
-            <input name="keyword" id="txtSearch" type="text" th:placeholder="'keyword / empty to return'" autocomplete="on" aria-autocomplete="true" aria-controls="searchSuggestionTable" aria-expanded="false">
+                <input name="keyword" id="txtSearch" type="text">
                 <button class="btn btn-info">Search</button>
             </form>
+            <button th:href="@{/back}" class ="btn btn-info">Clear</button>
+
+
             <br/>
 
         </nav>
@@ -122,5 +126,7 @@
         </form>
     </form>
 </div>
+
+
 </body>
 </html>
