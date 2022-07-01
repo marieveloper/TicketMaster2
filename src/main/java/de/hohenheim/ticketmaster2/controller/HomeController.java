@@ -68,8 +68,8 @@ public class HomeController {
     public List<User> getAllAdmins() {
         List<User> admins = new LinkedList<>();
         List<User> allUsers = userService.findAllUsers();
-        for(User user : allUsers) {
-            if(userService.hasRole("ROLE_ADMIN", user)) {
+        for (User user : allUsers) {
+            if (userService.hasRole("ROLE_ADMIN", user)) {
                 admins.add(user);
             }
         }
@@ -99,12 +99,11 @@ public class HomeController {
     //Mappings----------------------------------------------------------------------------------------------------------
     @GetMapping("/admin")
     public String showAdminDashboard(Model model, String keyword) {
-        if(keyword != null){
-
+        if (keyword != null) {
             model.addAttribute("tickets", ticketService.findByKeyword(keyword));
-        }
-        else {
-            model.addAttribute("tickets");
+        } else {
+            model.addAttribute("tickets", ticketService.findAllTickets());
+
         }
         return "admin";
     }
@@ -178,7 +177,7 @@ public class HomeController {
 
     @GetMapping("/requestStatus{ticketId}")
     public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
-        if (ticketService.canRequestStatus(ticketId)){
+        if (ticketService.canRequestStatus(ticketId)) {
             Notification notificationTest = new Notification();
             model.addAttribute("notifications", notificationTest);
             notificationTest.setTicket(ticketService.getByTicketId(ticketId));
@@ -188,7 +187,8 @@ public class HomeController {
             notificationService.saveNotification(notificationTest);
             ticket.setRequestTime(Timestamp.from(Instant.now()));
             return "redirect:/user";
-        } System.out.print("Too soon ");
+        }
+        System.out.print("Too soon ");
         return gotoTicket(ticketId, model);
     }
 
@@ -203,12 +203,14 @@ public class HomeController {
         model.addAttribute("ticket", ticket);
         return "showTicketAdmin";
     }
+
     @GetMapping("/gotoMessage{ticketID}")
-    public String sendMessage(@RequestParam Integer ticketId,Model model){
+    public String sendMessage(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket", ticket);
         return "gotoMessage";
     }
+
     @GetMapping("/createMessage")
     public String createMessage(Message message, Model model) {
         Message newMessage = new Message();
@@ -216,13 +218,23 @@ public class HomeController {
         return "createMessage";
     }
 
-    @GetMapping ("/editTicket{ticketId}")
-    public String editTickets(@RequestParam Integer ticketId, Model model){
+    @GetMapping("/editTicket{ticketId}")
+    public String editTicket(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("admins");
-
         model.addAttribute("ticket", ticket);
         return "editTicket";
     }
 
+    @PostMapping("/saveEditedTicket{ticketId}")
+    public String editTicket(@ModelAttribute("ticket") Ticket ticket,@RequestParam Integer ticketId, Model model) {
+        Ticket oldTicket = ticketService.getByTicketId(ticketId);
+        Ticket newTicket = ticket;
+        oldTicket.setResponsibleAdmin(newTicket.getResponsibleAdmin());
+        oldTicket.setCategorization(newTicket.getCategorization());
+        oldTicket.setPrio(newTicket.getPrio());
+        oldTicket.setTitle(newTicket.getTitle());
+        ticketService.saveTicket(oldTicket);
+        return "redirect:/admin";
+    }
 }
