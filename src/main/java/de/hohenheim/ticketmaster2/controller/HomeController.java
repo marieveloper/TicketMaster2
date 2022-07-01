@@ -108,7 +108,8 @@ public class HomeController {
         if (keyword != null) {
             model.addAttribute("tickets", ticketService.findByKeyword(keyword));
         } else {
-            model.addAttribute("tickets");
+            model.addAttribute("tickets", ticketService.findAllTickets());
+
         }
         return "admin";
     }
@@ -229,12 +230,22 @@ public class HomeController {
     }
 
     @GetMapping("/editTicket{ticketId}")
-    public String editTickets(@RequestParam Integer ticketId, Model model) {
+    public String editTicket(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("admins");
-
         model.addAttribute("ticket", ticket);
         return "editTicket";
     }
 
+    @PostMapping("/saveEditedTicket{ticketId}")
+    public String editTicket(@ModelAttribute("ticket") Ticket ticket,@RequestParam Integer ticketId, Model model) {
+        Ticket oldTicket = ticketService.getByTicketId(ticketId);
+        Ticket newTicket = ticket;
+        oldTicket.setResponsibleAdmin(newTicket.getResponsibleAdmin());
+        oldTicket.setCategorization(newTicket.getCategorization());
+        oldTicket.setPrio(newTicket.getPrio());
+        oldTicket.setStatus(newTicket.getStatus());
+        ticketService.saveTicket(oldTicket);
+        return "redirect:/admin";
+    }
 }
