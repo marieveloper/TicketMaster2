@@ -9,58 +9,58 @@
     <title>editTicket</title>
 </head>
 <body>
-<div class= "container">
+<div class="container">
 
     <br/><br/>
     <h4>Edit Ticket</h4>
     <hr/>
 
 
+    <form th:action="@{/editTicket}" th:object="${ticket}" method="GET" class="form-horizontal">
+        </br></form>
+        <form th:action="@{/saveEditedTicket(ticketId=${ticket.getTicketId()})}" th:object="${ticket}" method="POST">
+            <div class="selection"> Select prioritization:
+                <select th:field="*{prio}">
+                    <option th:value="LOW" th:text="low"> LOW</option>
+                    <option th:value="MEDIUM" th:text="medium"> MEDIUM</option>
+                    <option th:value="HIGH" th:text="high"> HIGH</option>
+                </select>
+            </div>
+            </br>
+            <div class="selection"> Select categorization:
+                <select th:field="*{categorization}">
+                    <option th:value="TECHNICAL_PROBLEMS" th:text="technical_Problems"> TECHNICAL_PROBLEM</option>
+                    <option th:value="INACTIVITY" th:text="inactivity"> INACTIVITY</option>
+                    <option th:value="OTHER" th:text="other"> OTHER</option>
+                </select>
+            </div>
+            </br>
+            <div class="selection"> Select status:
+                <select th:field="*{status}">
+                    <option th:value="IN_PROCESS" th:text="in_process"> IN_PROCESS</option>
+                    <option th:value="OPEN" th:text="open"> OPEN</option>
+                    <option th:value="CLOSED" th:text="closed"> CLOSED</option>
+                </select>
+            </div>
+            </br>
 
-    <form th:action="@{/editTicket}" th:object="${ticket}" method="POST">
-       </br>
-       <div class="selection"> Select prioritization:
-       <select th:field="*{prio}">
-           <option th:value="LOW" th:text="low"> LOW</option>
-           <option th:value="MEDIUM" th:text="medium"> MEDIUM</option>
-           <option th:value="HIGH" th:text="high"> HIGH</option>
-       </select>
-       </div>
-       </br>
-       <div class="selection"> Select categorization:
-           <select th:field="*{categorization}">
-               <option th:value="TECHNICAL_PROBLEMS" th:text="technical_Problems"> TECHNICAL_PROBLEM</option>
-               <option th:value="INACTIVITY" th:text="inactivity"> INACTIVITY</option>
-               <option th:value="OTHER" th:text="other"> OTHER</option>
-           </select>
-       </div>
-       </br>
-       <div class="selection"> Select status:
-           <select th:field="*{status}">
-               <option th:value="IN_PROCESS" th:text="in_process"> IN_PROCESS</option>
-               <option th:value="OPEN" th:text="open"> OPEN</option>
-               <option th:value="CLOSED" th:text="closed"> CLOSED</option>
-           </select>
-       </div>
-       </br>
+            <div class="selection"> Select admin:
+                <select th:field="*{responsibleAdmin}">
 
-       <div class="selection"> Select admin:
-           <select th:field="*{responsibleAdmin}">
+                    <th:block th:each="admin: ${admins}">
+                        <option th:value="${admin.getUserId()}" th:text="${admin.getUsername()}">
+                        </option>
+                    </th:block>
 
-                   <th:block th:each="admin: ${admins}">
-                       <option th:value="${admin.getUserId()}" th:text="${admin.getUsername()}">
-               </option>
-                   </th:block>
+                </select>
+            </div>
+            </br>
+            <input type="hidden" th:field="*{ticketId}"/>
+            <button class="btn btn-primary" type="submit">submit</button>
+            <hr>
 
-           </select>
-       </div>
-       </br>
-       <input type="hidden" th:field="*{ticketId}" />
-       <button class="btn btn-primary" type="submit">submit</button>
-       <hr>
-       <a th:href="@{/back}" class ="btn btn-primary">Back</a>
-   </form>
-
+        </form>
+    <a th:href="@{/showTicketAdmin(ticketId=${ticket.getTicketId()})}" class="btn btn-primary">Back</a>
 
 </div>
 </body>
