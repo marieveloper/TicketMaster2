@@ -106,7 +106,11 @@ public class HomeController {
     @GetMapping("/admin")
     public String showAdminDashboard(Model model, String keyword) {
         if (keyword != null) {
-            model.addAttribute("tickets", ticketService.findByKeyword(keyword));
+            if(keyword.equals("ticket")){
+                model.addAttribute("tickets");
+            }else{
+                model.addAttribute("tickets", ticketService.findByKeyword(keyword));
+            }
         } else {
             model.addAttribute("tickets", ticketService.findAllTickets());
 
@@ -117,8 +121,11 @@ public class HomeController {
     @GetMapping("/user")
     public String showUserDashboard(Model model, String keyword) {
         if (keyword != null) {
-            System.out.print(keyword);
-            model.addAttribute("userTickets", ticketService.findByKeyword(keyword));
+            if(keyword.equals("ticket")){
+                model.addAttribute("userTickets");
+            }else{
+                model.addAttribute("userTickets", ticketService.findByKeyword(keyword));
+            }
         } else {
             model.addAttribute("userTickets");
         }
