@@ -48,10 +48,16 @@ public class HomeController {
             model.addAttribute("admin", admin);
             model.addAttribute("adminNotifications");
             return "admin";
+        }else {
+            User user = userService.getCurrentUser();
+            model.addAttribute("user", user);
+            return "user";
         }
-        User user = userService.getCurrentUser();
-        model.addAttribute("user", user);
-        return "user";
+    }
+
+    @ModelAttribute("user")
+    public User getUser() {
+        return userService.getCurrentUser();
     }
 
     @ModelAttribute("admin")
@@ -109,8 +115,13 @@ public class HomeController {
     }
 
     @GetMapping("/user")
-    public String showUserDashboard(Model model) {
-        model.addAttribute("userTickets");
+    public String showUserDashboard(Model model, String keyword) {
+        if (keyword != null) {
+            System.out.print(keyword);
+            model.addAttribute("userTickets", ticketService.findByKeyword(keyword));
+        } else {
+            model.addAttribute("userTickets");
+        }
         return "user";
     }
 
@@ -233,7 +244,7 @@ public class HomeController {
         oldTicket.setResponsibleAdmin(newTicket.getResponsibleAdmin());
         oldTicket.setCategorization(newTicket.getCategorization());
         oldTicket.setPrio(newTicket.getPrio());
-        oldTicket.setTitle(newTicket.getTitle());
+        oldTicket.setStatus(newTicket.getStatus());
         ticketService.saveTicket(oldTicket);
         return "redirect:/admin";
     }

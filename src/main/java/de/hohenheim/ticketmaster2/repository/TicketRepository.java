@@ -14,7 +14,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
             "t.responsibleAdmin.username like %:keyword% OR " +
             "t.title like %:keyword% OR " +
             "upper(t.prio) like %:keyword% OR " +
-            "upper(t.status) like %:keyword% OR "+
+            "upper(t.status) like %:keyword% OR " +
             "upper(t.categorization)  like %:keyword%")
     List<Ticket> findByKeyword(@Param("keyword") String keyword);
 }
