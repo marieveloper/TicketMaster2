@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
     <title>Userdashboard</title>
 </head>
 <body>
@@ -53,26 +55,34 @@
                         </li>
                     </div>
                 </div>
-                <div style="float:right">
-                    <button type="button" class="btn btn-info px-3"><i class="bi bi-bell"></i></button>
-                    <button type="button" class="btn btn-info px-3"><i class="bi bi-person-circle"></i></button>
+
+
+
+                <div class="form-inline" style="float:right">
+                    <input class="form-control mr-2" id="txtSearch" style="width: 100px"  type="text" th:placeholder="'Search... '">
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-bell "></i></button>
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                     <a th:href="@{/logout}">
-                        <button type="button" class="btn btn-primary px-3"><i class="bi bi-box-arrow-right"></i>
+                        <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
                         </button>
                     </a>
                 </div>
-                <br/><br/>
-                <form th:action="@{/user}" method="GET">
-                    <input name="keyword" id="txtSearch" type="text" th:placeholder="'keyword / empty to return'">
-                    <button class="btn btn-info"><i class="bi bi-search"></i></button>
-                </form>
-                <br/>
+                 <br/><br/>
             </nav>
+
+
+
+
+
+
+
         </div>
-        <br/><br/><br/><br/><br/><br/>
+        <br/><br/> <br/>
         <form th:action="@{/getUserTickets}" method="GET" class="form-horizontal">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="ticketTable">
+                <table class="table table-bordered table-striped" id="ticketTable" data-url="json/data1.json"
+                       data-filter-control="true"
+                       data-show-search-clear-button="true">
                     <thead>
                     <tr>
                         <th class="d-none d-md-table-cell" data-type="string">Prioritization</th>
@@ -82,7 +92,7 @@
                         <th data-type="string">Status</th>
                         <th>Actions</th>
                     </tr>
-                    <tbody>
+                    <tbody id="myTable">
                     <tr th:each="ticket: ${userTickets}">
                         <a th:switch="${ticket.getPrio().toString()} ">
                             <a th:case="${'LOW'}">
@@ -122,5 +132,16 @@
     </form>
 
 </div>
+<script>
+    $(document).ready(function(){
+        $("#txtSearch").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+</script>
 </body>
+
 </html>

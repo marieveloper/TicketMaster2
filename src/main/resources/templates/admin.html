@@ -26,7 +26,7 @@
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Open</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1">Open</a></li>
                                 <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Closed</a></li>
                                 <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">In
                                     progress</a>
@@ -36,7 +36,7 @@
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">High</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1">High</a></li>
                                 <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Medium</a></li>
                                 <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Low</a></li>
                             </ul>
@@ -54,42 +54,30 @@
                         </li>
                     </div>
                 </div>
-
-                <div style="float:right">
-                    <div class="rightButtons">
-                        <div style="float: left">
+                <div class="form-inline"  style="float:right">
+                            <input class="form-control mr-2" id="txtSearchAdmin" style="width: 100px"  type="text" th:placeholder="'Search... '">
                             <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET"
                                   class="form-horizontal">
                                 <div th:switch="${adminNotifications.isEmpty()}">
                                     <a th:case="${true}">
                                     </a>
                                     <a th:case="${false}" th:href="@{/notifications}" type="button"
-                                       class="btn btn-info px-3"><i
+                                       class="btn btn-info px-3 mr-2"><i
                                             class="bi bi-bell"></i>
                                         <span class="badge badge-light" style="color: red">1</span>
                                     </a>
                                 </div>
                             </form>
-                        </div>
-                        <div style="float: left" class="px-4">
-                            <button type="button" class="btn btn-info px-3"><i class="bi bi-person-circle"></i></button>
-                        </div>
-                        <div style="float: right">
-                            <a th:href="@{/logout}" class="btn btn-primary px-3"><i
+                            <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
+                            <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2"><i
                                     class="bi bi-box-arrow-right"></i></a>
-                        </div>
-                    </div>
                 </div>
                 <br/><br/>
-                <form th:action="@{/admin}" method="GET">
-                    <input name="keyword" id="txtSearch" type="text" th:placeholder="'keyword / empty to return'">
-                    <button class="btn btn-info"><i class="bi bi-search"></i></button>
-                </form>
-                <br/>
+
 
             </nav>
         </div>
-        <br/><br/><br/><br/><br/><br/>
+        <br/><br/><br/>
         <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
             <table class="table table-bordered table-striped" id="ticketTable">
                 <thead>
@@ -103,7 +91,7 @@
                     <th>Actions</th>
                 </tr>
 
-                <tbody>
+                <tbody id="myTable">
                 <!--TODO get the correct method declarations-->
                 <tr th:each="ticket: ${tickets}">
                     <a th:switch="${ticket.getPrio().toString()} ">
@@ -143,5 +131,16 @@
         </form>
     </form>
 </div>
+<script>
+    $(document).ready(function(){
+        $("#txtSearchAdmin").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    
+</script>
 </body>
 </html>

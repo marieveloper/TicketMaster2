@@ -48,7 +48,7 @@ public class HomeController {
             model.addAttribute("admin", admin);
             model.addAttribute("adminNotifications");
             return "admin";
-        }else {
+        } else {
             User user = userService.getCurrentUser();
             model.addAttribute("user", user);
             return "user";
@@ -105,23 +105,13 @@ public class HomeController {
     //Mappings----------------------------------------------------------------------------------------------------------
     @GetMapping("/admin")
     public String showAdminDashboard(Model model, String keyword) {
-        if (keyword != null) {
-            model.addAttribute("tickets", ticketService.findByKeyword(keyword));
-        } else {
-            model.addAttribute("tickets", ticketService.findAllTickets());
-
-        }
+        model.addAttribute("tickets", ticketService.findAllTickets());
         return "admin";
     }
 
     @GetMapping("/user")
     public String showUserDashboard(Model model, String keyword) {
-        if (keyword != null) {
-            System.out.print(keyword);
-            model.addAttribute("userTickets", ticketService.findByKeyword(keyword));
-        } else {
-            model.addAttribute("userTickets");
-        }
+        model.addAttribute("userTickets");
         return "user";
     }
 
@@ -238,7 +228,7 @@ public class HomeController {
     }
 
     @PostMapping("/saveEditedTicket{ticketId}")
-    public String editTicket(@ModelAttribute("ticket") Ticket ticket,@RequestParam Integer ticketId, Model model) {
+    public String editTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
         Ticket oldTicket = ticketService.getByTicketId(ticketId);
         Ticket newTicket = ticket;
         oldTicket.setResponsibleAdmin(newTicket.getResponsibleAdmin());
