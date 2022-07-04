@@ -28,29 +28,29 @@
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Open</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Closed</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">In progress</a>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="open">Open</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="closed">Closed</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="in progress">In progress</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">High</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Medium</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Low</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="high">High</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="medium">Medium</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="low">Low</a></li>
                             </ul>
                         </li>
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Inactivity</a>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="inactivity">Inactivity</a>
                                 </li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Technical
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="technical">Technical
                                     problems</a>
                                 </li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Other</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="other">Other</a></li>
                             </ul>
                         </li>
                     </div>
@@ -69,13 +69,6 @@
                 </div>
                  <br/><br/>
             </nav>
-
-
-
-
-
-
-
         </div>
         <br/><br/> <br/>
         <form th:action="@{/getUserTickets}" method="GET" class="form-horizontal">
@@ -110,13 +103,13 @@
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <a th:switch="${ticket.getStatus().toString()} ">
                             <a th:case="${'OPEN'}">
-                                <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'IN_PROCESS'}">
                                 <td> <span class="badge text-black-50" style="background-color: navajowhite" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'CLOSED'}">
-                                <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                         </a>
                         <td>
@@ -136,6 +129,15 @@
     $(document).ready(function(){
         $("#txtSearch").on("keyup", function() {
             var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    $(document).ready(function(){
+        $(".dropdown-submenu li").on('click', 'a', function() {
+            var value = $(this).attr('data-filter').toLowerCase();
+            console.log(value);
             $("#myTable tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });

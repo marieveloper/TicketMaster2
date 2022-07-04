@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <title>Home</title>
 </head>
 <body>
@@ -20,15 +23,15 @@
         <div>
             <nav class="top-nav fixed-top" style="background-color: #D9D9D9" th:height="10">
                 <a th:href="@{/getMyTickets}" class="btn btn-primary">My Tickets</a>
-                <div class="dropdown">
+                <div class="dropdown" id="dropdownFilter">
                     <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
                     <div class="dropdown-content">
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1">Open</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Closed</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">In
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="open">Open</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="closed">Closed</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="in progress">In
                                     progress</a>
                                 </li>
                             </ul>
@@ -36,20 +39,20 @@
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1">High</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Medium</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Low</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="high">High</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="medium">Medium</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="low">Low</a></li>
                             </ul>
                         </li>
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
                                 <li><a class="btn dropbtn" tabindex="-1"
-                                       th:href="@{/workInProgess}">Inactivity</a>
+                                       data-filter="inactivity">Inactivity</a>
                                 </li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Technical
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="technical">Technical
                                     problems</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgess}">Other</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="other">Other</a></li>
                             </ul>
                         </li>
                     </div>
@@ -95,13 +98,13 @@
                 <!--TODO get the correct method declarations-->
                 <tr th:each="ticket: ${tickets}">
                     <a th:switch="${ticket.getPrio().toString()} ">
-                        <a th:case="${'LOW'}">
+                        <a th:case="${'LOW'}" >
                             <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getPrio().toString()}"></span></td>
                         </a>
-                        <a th:case="${'MEDIUM'}">
+                        <a th:case="${'MEDIUM'}" >
                             <td> <span class="badge text-black-50" style="background-color: navajowhite" th:text="${ticket.getPrio().toString()}"></span></td>
                         </a>
-                        <a th:case="${'HIGH'}">
+                        <a th:case="${'HIGH'}" >
                             <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getPrio().toString()}"></span></td>
                         </a>
                     </a>
@@ -111,13 +114,13 @@
                     <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                     <a th:switch="${ticket.getStatus().toString()} ">
                         <a th:case="${'OPEN'}">
-                            <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getStatus().toString()}" th:bgcolor="green"></span></td>
+                            <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getStatus().toString()}"></span></td>
                         </a>
                         <a th:case="${'IN_PROCESS'}">
                             <td> <span class="badge text-black-50"  style="background-color: navajowhite" th:text="${ticket.getStatus().toString()}"></span></td>
                         </a>
                         <a th:case="${'CLOSED'}">
-                            <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getStatus().toString()}" th:bgcolor="red"></span></td>
+                            <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getStatus().toString()}"></span></td>
                         </a>
                     </a>
                     <td>
@@ -132,9 +135,20 @@
     </form>
 </div>
 <script>
+
     $(document).ready(function(){
         $("#txtSearchAdmin").on("keyup", function() {
             var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+    $(document).ready(function(){
+        $(".dropdown-submenu li").on('click', 'a', function() {
+            var value = $(this).attr('data-filter').toLowerCase();
+            console.log(value);
             $("#myTable tr").filter(function() {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
