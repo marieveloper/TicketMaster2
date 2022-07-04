@@ -201,21 +201,44 @@ public class HomeController {
     @GetMapping("/showTicketAdmin{ticketId}")
     public String gotoTicketAdmin(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
+        List messageList = ticketService.findAllTickets();
         model.addAttribute("ticket", ticket);
         return "showTicketAdmin";
     }
+<<<<<<< HEAD
 
     @GetMapping("/gotoMessage{ticketID}")
     public String sendMessage(@RequestParam Integer ticketId, Model model) {
+=======
+    @GetMapping("/gotoMessage{ticketId}")
+    public String sendMessage(@RequestParam Integer ticketId,Model model){
+>>>>>>> marius
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket", ticket);
+        Message message = new Message();
+        model.addAttribute("message", message);
+        message.setTicket(ticketService.getByTicketId(ticketId));
+        message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
+        message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+        message.setText("text");
+        messageService.saveMessage(message);
         return "gotoMessage";
     }
+<<<<<<< HEAD
 
     @GetMapping("/createMessage")
     public String createMessage(Message message, Model model) {
+=======
+    @GetMapping("/createMessage{ticketId}")
+    public String createMessage(@RequestParam Integer ticketId,Message message, Model model) {
+>>>>>>> marius
         Message newMessage = new Message();
         model.addAttribute("message", newMessage);
+        message.setTicket(ticketService.getByTicketId(ticketId));
+        message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
+        message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+        message.setText("text");
+        messageService.saveMessage(message);
         return "createMessage";
     }
 

@@ -43,6 +43,9 @@ public class Ticket {
     @OneToMany(mappedBy = "ticket")
     private Set<Notification> notifications;
 
+    @OneToMany(mappedBy = "ticket")
+    private Set<Message> messages;
+
     @ManyToOne
     @JoinColumn(name = "userId")
     private User user;
@@ -65,11 +68,11 @@ public class Ticket {
 
     public Prioritization getPrio() {return prio; }
 
-    public Set<Notification> getMessages() {
+    public Set<Notification> getNotifications() {
         return notifications;
     }
 
-
+    public Set<Message> getMessages() {return messages;}
 
     public User getUser() {
         return user;
@@ -118,10 +121,11 @@ public class Ticket {
         }*/
         this.status = status;
     }
-    public void setMessages(Set<Notification> notifications) {
+    public void setNotifications(Set<Notification> notifications) {
         this.notifications = notifications;
     }
 
+    public void setMessages(Set<Message> messages) {this.messages = messages; }
 
     @Override
     public String toString() {

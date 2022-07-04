@@ -9,10 +9,10 @@
 </head>
 <body>
 <div class="container">
-    <form  th:action="@{/getMessages}"  th:object="ticket" method="GET" class="form-horizontal">
-    </form>
+    <form  th:action="@{/getMessages}"  th:object="${ticket}" method="GET" class="form-horizontal">
+
     <br/><br/>
-    <h1>Create a Ticket</h1>
+    <h1>Messages</h1>
     <hr/>
     <form th:action="@{/findAllMessages}" method="GET" class="form-horizontal">
         <table class="table table-bordered table-striped" id="ticketTable">
@@ -21,10 +21,11 @@
                 <th>ID</th>
                 <th>Text</th>
             </tr>
+            </thead>
             <tbody>
-            <tr th:each="ticket.getMessages(): ${message}">
-                <td th:text="${message.getID()}"/>
-                <td th:text="${message.getText}"/>
+            <tr th:each="message: ${ticket.getMessages()}">
+                <td th:text="${message.getId()}"/>
+                <td th:text="${message.getText()}"/>
                 <td>
                     <a class="btn btn-info text-white"
                        th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
@@ -34,19 +35,8 @@
             </tbody>
         </table>
     </form>
-    <div class="fieldContainer">
-        <form th:action="@{/saveMessage}" th:object="${message}" method="POST">
-            </br> </br>
-            <textarea name="messageText" minlength="30" rows="10" cols="80" style="margin-top: 10px"
-                      th:field="*{content}"
-                      placeholder="Insert message text" class="form-control col-4 mb-4"></textarea>
-            <input type="hidden" th:field="*{ticketId}" />
-            <button class="btn btn-primary" type="submit">submit</button>
-        </form>
-        <hr/>
-        <a th:href="@{/back}" class ="btn btn-primary">Back</a>
-    </div>
-</div>
 
+    </form>
+</div>
 </body>
 </html>
