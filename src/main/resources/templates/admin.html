@@ -114,13 +114,13 @@
                     <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                     <a th:switch="${ticket.getStatus().toString()} ">
                         <a th:case="${'OPEN'}">
-                            <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getStatus().toString()}" th:bgcolor="green"></span></td>
+                            <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getStatus().toString()}"></span></td>
                         </a>
                         <a th:case="${'IN_PROCESS'}">
                             <td> <span class="badge text-black-50"  style="background-color: navajowhite" th:text="${ticket.getStatus().toString()}"></span></td>
                         </a>
                         <a th:case="${'CLOSED'}">
-                            <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getStatus().toString()}" th:bgcolor="red"></span></td>
+                            <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getStatus().toString()}"></span></td>
                         </a>
                     </a>
                     <td>
