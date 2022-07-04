@@ -126,7 +126,9 @@ public void changeTicketResponsibleAdmin(int ticketId, String username){
     public List<Ticket> findByKeyword(String keyword){
         return ticketRepository.findByKeyword(keyword);
     }
-
+    public List<Ticket> findByFilterKeyword(String FilterKeyword){
+        return ticketRepository.findByFilterKeyword(FilterKeyword);
+    }
 
 
 }
