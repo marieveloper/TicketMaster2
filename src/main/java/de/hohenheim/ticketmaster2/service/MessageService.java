@@ -19,4 +19,8 @@ public class MessageService {
     public List<Message> findAllMessages() {
         return messageRepository.findAll();
     }
+
+    public List<Message> findAllMessagesByTicket(Integer ticketId){
+        return messageRepository.findAll().stream().filter(n ->n.getTicket().getTicketId()==ticketId).toList();
+    }
 }
