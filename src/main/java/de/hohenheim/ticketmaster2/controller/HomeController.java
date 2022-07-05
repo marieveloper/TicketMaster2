@@ -87,6 +87,11 @@ public class HomeController {
         return ticketService.getAllTicketsByUserId(userService.getCurrentUser().getUserId());
     }
 
+    @ModelAttribute("adminTickets")
+    public List<Ticket> getAdminTickets() {
+        return ticketService.getAllTicketsByAdminId(userService.getCurrentUser().getUserId());
+    }
+
     @ModelAttribute("adminNotifications")
     public List<Notification> getAdminNotifications() {
         return userService.getCurrentUser().getReceivedNotifications().stream().toList();
@@ -256,5 +261,11 @@ public class HomeController {
         oldTicket.setStatus(newTicket.getStatus());
         ticketService.saveTicket(oldTicket);
         return "redirect:/admin";
+    }
+
+    @GetMapping("/adminTickets")
+    public String getMyTickets(Model model) {
+        model.addAttribute("tickets", ticketService.getAllTicketsByAdminId(userService.getCurrentUser().getUserId()));
+        return "adminTickets";
     }
 }

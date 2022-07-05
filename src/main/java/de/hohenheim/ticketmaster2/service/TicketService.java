@@ -43,6 +43,10 @@ public class TicketService {
         return findAllTickets().stream().filter(t -> t.getUser().getUserId()==id).toList();
     }
 
+    public List<Ticket> getAllTicketsByAdminId(Integer id){
+        return findAllTickets().stream().filter(t -> t.getResponsibleAdmin().getUserId()==id).toList();
+    }
+
     public List<Ticket> getAllTicketsWithStatus(Status status){
         return findAllTickets().stream().filter(t -> t.getStatus() == status).toList();
     }
