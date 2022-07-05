@@ -6,15 +6,18 @@ import javax.persistence.*;
 public class Message {
     @Id
     @GeneratedValue
-    private Integer id;
+    private Integer messageId;
 
     private String text;
+
     @ManyToOne
     @JoinColumn(name = "authorId")
     private User author;
+
     @ManyToOne
     @JoinColumn(name = "receiverId")
     private User receiver;
+
     @ManyToOne
     @JoinColumn(name = "ticketId")
     private Ticket ticket;
@@ -24,7 +27,7 @@ public class Message {
     }
 
     public Integer getId() {
-        return id;
+        return messageId;
     }
 
     public String getText() {
