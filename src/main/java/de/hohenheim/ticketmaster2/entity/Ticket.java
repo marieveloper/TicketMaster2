@@ -51,6 +51,7 @@ public class Ticket {
     private User user;
 
     @ManyToOne
+    @JoinColumn(name = "adminId")
     private User responsibleAdmin;
 
     public Ticket() {
