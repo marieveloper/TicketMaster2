@@ -10,8 +10,13 @@
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+    </script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js">
+    </script>
 
 
     <title>Userdashboard</title>
@@ -21,7 +26,8 @@
     <form th:action="@{/user}" th:object="${user}" method="GET" class="form-horizontal">
         <div>
             <nav class="top-nav fixed-top" style="background-color: #D9D9D9">
-                <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕</a>
+                <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
+                                                                                       style="color: white"></i></a>
                 <div class="dropdown">
                     <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
                     <div class="dropdown-content">
@@ -55,11 +61,7 @@
                         </li>
                     </div>
                 </div>
-
-
-
                 <div class="form-inline" style="float:right">
-                    <input class="form-control mr-2" id="txtSearch" style="width: 100px"  type="text" th:placeholder="'Search... '">
                     <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-bell "></i></button>
                     <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                     <a th:href="@{/logout}">
@@ -67,7 +69,7 @@
                         </button>
                     </a>
                 </div>
-                 <br/><br/>
+                <br/><br/>
             </nav>
         </div>
         <br/><br/> <br/>
@@ -89,13 +91,16 @@
                     <tr th:each="ticket: ${userTickets}">
                         <a th:switch="${ticket.getPrio().toString()} ">
                             <a th:case="${'LOW'}">
-                                <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getPrio().toString()}"></span></td>
+                                <td><span class="badge text-black-50" style="background-color: lightgreen"
+                                          th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                             <a th:case="${'MEDIUM'}">
-                                <td> <span class="badge text-black-50" style="background-color: navajowhite" th:text="${ticket.getPrio().toString()}"></span></td>
+                                <td><span class="badge text-black-50" style="background-color: navajowhite"
+                                          th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                             <a th:case="${'HIGH'}">
-                                <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getPrio().toString()}"></span></td>
+                                <td><span class="badge text-black-50" style="background-color: lightcoral"
+                                          th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                         </a>
                         <td th:text="${ticket.getCategorization()}"/>
@@ -103,13 +108,16 @@
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <a th:switch="${ticket.getStatus().toString()} ">
                             <a th:case="${'OPEN'}">
-                                <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-black-50" style="background-color: lightcoral"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'IN_PROCESS'}">
-                                <td> <span class="badge text-black-50" style="background-color: navajowhite" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-black-50" style="background-color: navajowhite"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'CLOSED'}">
-                                <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-black-50" style="background-color: lightgreen"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                         </a>
                         <td>
@@ -126,23 +134,28 @@
 
 </div>
 <script>
-    $(document).ready(function(){
-        $("#txtSearch").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-    $(document).ready(function(){
-        $(".dropdown-submenu li").on('click', 'a', function() {
+    $(document).ready(function () {
+        $(".dropdown-submenu li").on('click', 'a', function () {
             var value = $(this).attr('data-filter').toLowerCase();
             console.log(value);
-            $("#myTable tr").filter(function() {
+            $("#myTable tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
     });
+    $('#ticketTable').DataTable({
+        "columns": [{
+            "orderable": true
+        },
+            {"orderable": true},
+            {"orderable": true},
+            {"orderable": true},
+            {"orderable": true},
+            {
+                "orderable": false
+            }]
+    });
+
 </script>
 </body>
 
