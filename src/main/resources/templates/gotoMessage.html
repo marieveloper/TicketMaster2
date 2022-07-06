@@ -1,3 +1,4 @@
+<!--
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
@@ -37,6 +38,124 @@
         </form>
 
     </form>
+</div>
+</body>
+</html>
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <link rel="stylesheet" href="/static/createTicket.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <title> Message</title></head>
+<body>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-primary">
+                <div class="panel-heading" id="accordion">
+                        <span class="glyphicon glyphicon-comment"></span> Chat
+                    <!--         <div class="btn-group pull-right">
+                             <a type="button" class="btn btn-default btn-xs" data-toggle="collapse" data-parent="#accordion"
+                                href="#collapseOne">
+                                 <span class="glyphicon glyphicon-chevron-down"></span>
+                             </a>
+                         </div>-->
+                     </div>
+                <div class="panel-collapse collapse" id="collapseOne">
+                    <div class="panel-body">
+                        <form th:action="@{/getMessages}" th:object="${ticket}" method="GET" class="form-horizontal">
+                            <ul class="chat">
+                                <form th:action="@{/findAllMessages}" method="GET" class="form-horizontal">
+                                    <li class="left clearfix"><span class="chat-img pull-left">
+                           <!-- <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle" />-->
+                        </span>
+                                        <div class="chat-body clearfix">
+                                            <div class="header">
+                                                <strong class="primary-font">Jack Sparrow</strong> <small
+                                                    class="pull-right text-muted">
+                                                <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                            </div>
+                                            <tr th:each="message: ${ticket.getMessages()}">
+                                                <p th:text="${message.getText()}"></p>
+                                            </tr>
+                                        </div>
+                                    </li>
+                                    <li class="right clearfix"><span class="chat-img pull-right">
+                           <!-- <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle"/>-->
+                        </span>
+                                        <div class="chat-body clearfix">
+                                            <div class="header">
+                                                <small class=" text-muted"><span
+                                                        class="glyphicon glyphicon-time"></span>13 mins ago</small>
+                                                <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+                                                bibendum ornare
+                                                dolor, quis ullamcorper ligula sodales.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="left clearfix"><span class="chat-img pull-left">
+                          <!--  <img src="http://placehold.it/50/55C1E7/fff&text=U" alt="User Avatar" class="img-circle"/>-->
+                        </span>
+                                        <div class="chat-body clearfix">
+                                            <div class="header">
+                                                <strong class="primary-font">Jack Sparrow</strong> <small
+                                                    class="pull-right text-muted">
+                                                <span class="glyphicon glyphicon-time"></span>14 mins ago</small>
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+                                                bibendum ornare
+                                                dolor, quis ullamcorper ligula sodales.
+                                            </p>
+                                        </div>
+                                    </li>
+                                    <li class="right clearfix"><span class="chat-img pull-right">
+                          <!--  <img src="http://placehold.it/50/FA6F57/fff&text=ME" alt="User Avatar" class="img-circle"/>-->
+                        </span>
+                                        <div class="chat-body clearfix">
+                                            <div class="header">
+                                                <small class=" text-muted"><span
+                                                        class="glyphicon glyphicon-time"></span>15 mins ago</small>
+                                                <strong class="pull-right primary-font">Bhaumik Patel</strong>
+                                            </div>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
+                                                bibendum ornare
+                                                dolor, quis ullamcorper ligula sodales.
+                                            </p>
+                                        </div>
+                                    </li>
+                                </form>
+                            </ul>
+                        </form>
+                    </div>
+                    <div class="panel-footer">
+                        <div class="input-group">
+                            <input id="btn-input" type="text" class="form-control input-sm"
+                                   placeholder="Type your message here..."/>
+                            <span class="input-group-btn">
+                            <button class="btn btn-warning btn-sm" id="btn-chat">
+                                Send</button>
+                        </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+   </div>
 </div>
 </body>
 </html>
