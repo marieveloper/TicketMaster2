@@ -107,6 +107,8 @@ public class HomeController {
         return messageService.findAllMessages();
     }
 
+
+
     //Mappings----------------------------------------------------------------------------------------------------------
     @GetMapping("/admin")
     public String showAdminDashboard(Model model, String keyword) {
@@ -219,7 +221,7 @@ public class HomeController {
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket", ticket);
         Message message = new Message();
-        model.addAttribute("message", message);
+        model.addAttribute("messages", messageService.findAllMessagesByTicket(ticketId));
         message.setTicket(ticketService.getByTicketId(ticketId));
         message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
         message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
