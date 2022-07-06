@@ -48,7 +48,7 @@ public class HomeController {
             model.addAttribute("admin", admin);
             model.addAttribute("adminNotifications");
             return "admin";
-        }else {
+        } else {
             User user = userService.getCurrentUser();
             model.addAttribute("user", user);
             return "user";
@@ -87,6 +87,11 @@ public class HomeController {
         return ticketService.getAllTicketsByUserId(userService.getCurrentUser().getUserId());
     }
 
+    @ModelAttribute("adminTickets")
+    public List<Ticket> getAdminTickets() {
+        return ticketService.getAllTicketsByAdminId(userService.getCurrentUser().getUserId());
+    }
+
     @ModelAttribute("adminNotifications")
     public List<Notification> getAdminNotifications() {
         return userService.getCurrentUser().getReceivedNotifications().stream().toList();
@@ -105,23 +110,13 @@ public class HomeController {
     //Mappings----------------------------------------------------------------------------------------------------------
     @GetMapping("/admin")
     public String showAdminDashboard(Model model, String keyword) {
-        if (keyword != null) {
-            model.addAttribute("tickets", ticketService.findByKeyword(keyword));
-        } else {
-            model.addAttribute("tickets", ticketService.findAllTickets());
-
-        }
+        model.addAttribute("tickets", ticketService.findAllTickets());
         return "admin";
     }
 
     @GetMapping("/user")
     public String showUserDashboard(Model model, String keyword) {
-        if (keyword != null) {
-            System.out.print(keyword);
-            model.addAttribute("userTickets", ticketService.findByKeyword(keyword));
-        } else {
-            model.addAttribute("userTickets");
-        }
+        model.addAttribute("userTickets");
         return "user";
     }
 
@@ -211,21 +206,40 @@ public class HomeController {
     @GetMapping("/showTicketAdmin{ticketId}")
     public String gotoTicketAdmin(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
+        List messageList = ticketService.findAllTickets();
         model.addAttribute("ticket", ticket);
         return "showTicketAdmin";
     }
 
-    @GetMapping("/gotoMessage{ticketID}")
-    public String sendMessage(@RequestParam Integer ticketId, Model model) {
+
+
+
+    @GetMapping("/gotoMessage{ticketId}")
+    public String sendMessage(@RequestParam Integer ticketId,Model model){
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket", ticket);
+        Message message = new Message();
+        model.addAttribute("message", message);
+        message.setTicket(ticketService.getByTicketId(ticketId));
+        message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
+        message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+        message.setText("text");
+        messageService.saveMessage(message);
         return "gotoMessage";
     }
 
-    @GetMapping("/createMessage")
-    public String createMessage(Message message, Model model) {
+
+
+
+    @GetMapping("/createMessage{ticketId}")
+    public String createMessage(@RequestParam Integer ticketId,Message message, Model model) {
         Message newMessage = new Message();
         model.addAttribute("message", newMessage);
+        message.setTicket(ticketService.getByTicketId(ticketId));
+        message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
+        message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+        message.setText("text");
+        messageService.saveMessage(message);
         return "createMessage";
     }
 
@@ -238,7 +252,7 @@ public class HomeController {
     }
 
     @PostMapping("/saveEditedTicket{ticketId}")
-    public String editTicket(@ModelAttribute("ticket") Ticket ticket,@RequestParam Integer ticketId, Model model) {
+    public String editTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
         Ticket oldTicket = ticketService.getByTicketId(ticketId);
         Ticket newTicket = ticket;
         oldTicket.setResponsibleAdmin(newTicket.getResponsibleAdmin());
@@ -247,5 +261,11 @@ public class HomeController {
         oldTicket.setStatus(newTicket.getStatus());
         ticketService.saveTicket(oldTicket);
         return "redirect:/admin";
+    }
+
+    @GetMapping("/adminTickets")
+    public String getMyTickets(Model model) {
+        model.addAttribute("tickets", ticketService.getAllTicketsByAdminId(userService.getCurrentUser().getUserId()));
+        return "adminTickets";
     }
 }

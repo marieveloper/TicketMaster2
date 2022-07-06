@@ -10,8 +10,15 @@
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+    </script>
+    <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js">
+    </script>
+
+
     <title>Userdashboard</title>
 </head>
 <body>
@@ -19,60 +26,58 @@
     <form th:action="@{/user}" th:object="${user}" method="GET" class="form-horizontal">
         <div>
             <nav class="top-nav fixed-top" style="background-color: #D9D9D9">
-                <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket ➕</a>
+                <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
+                                                                                       style="color: white"></i></a>
                 <div class="dropdown">
                     <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
                     <div class="dropdown-content">
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Open</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Closed</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">In progress</a>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="open">Open</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="closed">Closed</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="in progress">In progress</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">High</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Medium</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Low</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="high">High</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="medium">Medium</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="low">Low</a></li>
                             </ul>
                         </li>
                         <li class="menu">
                             <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
                             <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Inactivity</a>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="inactivity">Inactivity</a>
                                 </li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Technical
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="technical">Technical
                                     problems</a>
                                 </li>
-                                <li><a class="btn dropbtn" tabindex="-1" th:href="@{/workInProgress}">Other</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="other">Other</a></li>
                             </ul>
                         </li>
                     </div>
                 </div>
-                <div style="float:right">
-                    <button type="button" class="btn btn-info px-3"><i class="bi bi-bell"></i></button>
-                    <button type="button" class="btn btn-info px-3"><i class="bi bi-person-circle"></i></button>
+                <div class="form-inline" style="float:right">
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-bell "></i></button>
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                     <a th:href="@{/logout}">
-                        <button type="button" class="btn btn-primary px-3"><i class="bi bi-box-arrow-right"></i>
+                        <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
                         </button>
                     </a>
                 </div>
                 <br/><br/>
-                <form th:action="@{/user}" method="GET">
-                    <input name="keyword" id="txtSearch" type="text" th:placeholder="'keyword / empty to return'">
-                    <button class="btn btn-info"><i class="bi bi-search"></i></button>
-                </form>
-                <br/>
             </nav>
         </div>
-        <br/><br/><br/><br/><br/><br/>
+        <br/><br/> <br/>
         <form th:action="@{/getUserTickets}" method="GET" class="form-horizontal">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="ticketTable">
+                <table class="table table-bordered table-striped" id="ticketTable" data-url="json/data1.json"
+                       data-filter-control="true"
+                       data-show-search-clear-button="true">
                     <thead>
                     <tr>
                         <th class="d-none d-md-table-cell" data-type="string">Prioritization</th>
@@ -82,17 +87,20 @@
                         <th data-type="string">Status</th>
                         <th>Actions</th>
                     </tr>
-                    <tbody>
+                    <tbody id="myTable">
                     <tr th:each="ticket: ${userTickets}">
                         <a th:switch="${ticket.getPrio().toString()} ">
                             <a th:case="${'LOW'}">
-                                <td th:text="${ticket.getPrio().toString()}" th:bgcolor="green"></td>
+                                <td><span class="badge text-black-50" style="background-color: lightgreen"
+                                          th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                             <a th:case="${'MEDIUM'}">
-                                <td th:text="${ticket.getPrio().toString()}" th:bgcolor="yellow"></td>
+                                <td><span class="badge text-black-50" style="background-color: navajowhite"
+                                          th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                             <a th:case="${'HIGH'}">
-                                <td th:text="${ticket.getPrio().toString()}" th:bgcolor="red"></td>
+                                <td><span class="badge text-black-50" style="background-color: lightcoral"
+                                          th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                         </a>
                         <td th:text="${ticket.getCategorization()}"/>
@@ -100,13 +108,16 @@
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <a th:switch="${ticket.getStatus().toString()} ">
                             <a th:case="${'OPEN'}">
-                                <td th:text="${ticket.getStatus().toString()}" th:bgcolor="green"></td>
+                                <td><span class="badge text-black-50" style="background-color: lightcoral"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'IN_PROCESS'}">
-                                <td th:text="${ticket.getStatus().toString()}" th:bgcolor="yellow"></td>
+                                <td><span class="badge text-black-50" style="background-color: navajowhite"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'CLOSED'}">
-                                <td th:text="${ticket.getStatus().toString()}" th:bgcolor="red"></td>
+                                <td><span class="badge text-black-50" style="background-color: lightgreen"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                         </a>
                         <td>
@@ -122,5 +133,30 @@
     </form>
 
 </div>
+<script>
+    $(document).ready(function () {
+        $(".dropdown-submenu li").on('click', 'a', function () {
+            var value = $(this).attr('data-filter').toLowerCase();
+            console.log(value);
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+    $('#ticketTable').DataTable({
+        "columns": [{
+            "orderable": true
+        },
+            {"orderable": true},
+            {"orderable": true},
+            {"orderable": true},
+            {"orderable": true},
+            {
+                "orderable": false
+            }]
+    });
+
+</script>
 </body>
+
 </html>

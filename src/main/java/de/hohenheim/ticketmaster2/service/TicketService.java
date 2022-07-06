@@ -43,6 +43,10 @@ public class TicketService {
         return findAllTickets().stream().filter(t -> t.getUser().getUserId()==id).toList();
     }
 
+    public List<Ticket> getAllTicketsByAdminId(Integer id){
+        return findAllTickets().stream().filter(t -> t.getResponsibleAdmin().getUserId()==id).toList();
+    }
+
     public List<Ticket> getAllTicketsWithStatus(Status status){
         return findAllTickets().stream().filter(t -> t.getStatus() == status).toList();
     }
@@ -126,7 +130,9 @@ public void changeTicketResponsibleAdmin(int ticketId, String username){
     public List<Ticket> findByKeyword(String keyword){
         return ticketRepository.findByKeyword(keyword);
     }
-
+    public List<Ticket> findByFilterKeyword(String FilterKeyword){
+        return ticketRepository.findByFilterKeyword(FilterKeyword);
+    }
 
 
 }
