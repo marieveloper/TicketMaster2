@@ -263,9 +263,5 @@ public class HomeController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/adminTickets")
-    public String getMyTickets(Model model) {
-        model.addAttribute("tickets", ticketService.getAllTicketsByAdminId(userService.getCurrentUser().getUserId()));
-        return "adminTickets";
-    }
+
 }
