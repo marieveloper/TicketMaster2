@@ -6,37 +6,93 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
     <title> Message</title>
+    <style>
+      .box {
+  width: 300px;
+  margin: 50px auto;
+  background: #00bfb6;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  font-family: arial;
+    position: absolute;
+    left: 10px;
+}
+.box_left {
+  width: 300px;
+  margin: 50px auto;
+  background: #00bfb6;
+  padding: 20px;
+  text-align: center;
+  font-weight: 900;
+  color: #fff;
+  font-family: arial;
+  position: relative;
+
+}
+/*right*/
+.sb1:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid #00bfb6;
+  border-right: 10px solid transparent;
+  border-top: 10px solid #00bfb6;
+  border-bottom: 10px solid transparent;
+  right: -19px;
+  top: 6px;
+}
+/*left*/
+.sb2:before {
+  content: "";
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  border-left: 10px solid transparent;
+  border-right: 10px solid #00bfb6;
+  border-top: 10px solid #00bfb6;
+  border-bottom: 10px solid transparent;
+  left: -19px;
+  top: 6px;
+}
+
+
+
+
+
+    </style>
 </head>
 <body>
 <div class="container">
-    <form  th:action="@{/getMessages}"  th:object="${ticket}" method="GET" class="form-horizontal">
-
-    <br/><br/>
-    <h1>Messages</h1>
-    <hr/>
-    <form th:action="@{/findAllMessages}" method="GET" class="form-horizontal">
-        <table class="table table-bordered table-striped" id="ticketTable">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Text</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="message: ${ticket.getMessages()}">
-                <td th:text="${message.getId()}"/>
-                <td th:text="${message.getText()}"/>
-                <td>
-                    <a class="btn btn-info text-white"
-                       th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
-                        Ticket</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
-
+    <form th:action="@{/getMessages}" th:object="${user}" method="GET" class="form-horizontal">
+        <br/><br/>
+        <h1>Messages</h1>
+        </hr>
+        <form th:action="@{/findAllMessages}" method="GET" class="form-horizontal">
+            <div class="card">
+                    <a th:each="message: ${messages}">
+                        <a th:switch="${message.getAuthor()} ">
+                            <a th:case="${user}">
+                                <div class="row">
+                                    <div class="box sb1" style="left: 10px"><p th:text="${message.getText()}"/></p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a th:case="*">
+                                <div class="row">
+                                    <div class="box sb2"><p th:text="${message.getText()}"/></p>
+                                    </div>
+                                </div>
+                            </a>
+                        </a>
+                    </a>
+                    </a>
+            </div>
+        </form>
     </form>
 </div>
 </body>
 </html>
+
