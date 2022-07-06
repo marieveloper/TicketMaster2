@@ -35,7 +35,7 @@
     <form th:action="@{/admin}" th:object="${admin}" method="GET" class="form-horizontal">
         <div>
             <nav class="navbar" style="background-color: #D9D9D9">
-                <a th:href="@{/adminTickets}" class="btn btn-primary">My Tickets</a>
+                <a  id="adminTickets" class="btn btn-primary"  onclick="myFunction()" >My Tickets</a>
                 <div class="row d-flex justify-content-center mt-100">
                     <div class="col-md-12"> <select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" multiple>
                         <optgroup label="Status">
@@ -145,6 +145,7 @@
     });
 
 
+
     $(document).ready(function(){
     $('#ticketTable').DataTable({
 
@@ -165,7 +166,7 @@
     });
     });
 
-    $(document).ready(function(){
+  /* $(document).ready(function(){
 
         var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
             removeItemButton: true,
@@ -175,7 +176,38 @@
         });
 
 
-    });
+    });*/
+
+</script>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var valueA = /*[[${admin}]]*/ "" ;
+
+
+    /*]]>*/
+    const btn =document.getElementById('adminTickets');
+    var value = valueA.username.toString();
+
+    function myFunction() {
+        const initialText = 'My Tickets';
+        if(btn.textContent.toLowerCase().includes(initialText.toLowerCase())) {
+            btn.textContent = 'All Tickets';
+            var value1 = value;
+            $("#ticketTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value1) > -1)
+            });
+        } else {
+            btn.textContent = initialText;
+            $("#ticketTable tr").filter(function() {
+                $(this).toggle($(this).text().toLowerCase().indexOf("") > -1)
+            });
+
+
+
+
+        }
+    }
+
 
 </script>
 </body>
