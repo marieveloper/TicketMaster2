@@ -35,7 +35,7 @@
     <form th:action="@{/admin}" th:object="${admin}" method="GET" class="form-horizontal">
         <div>
             <nav class="navbar" style="background-color: #D9D9D9">
-                <a  id="adminTickets" class="btn btn-primary"  onclick="myFunction()" >My Tickets</a>
+                <a  id="adminTickets" class="btn btn-primary text-white"  onclick="myFunction()" >My Tickets</a>
                 <div class="row d-flex justify-content-center mt-100">
                     <div class="col-md-12"> <select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" multiple>
                         <optgroup label="Status">
@@ -100,7 +100,7 @@
                             <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getPrio().toString()}"></span></td>
                         </a>
                         <a th:case="${'MEDIUM'}" >
-                            <td> <span class="badge text-black-50" style="background-color: navajowhite" th:text="${ticket.getPrio().toString()}"></span></td>
+                            <td> <p style="display:none">i</p><span class="badge text-black-50" style="background-color: navajowhite" th:text="${ticket.getPrio().toString()}"></span></td>
                         </a>
                         <a th:case="${'HIGH'}" >
                             <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getPrio().toString()}"></span></td>
@@ -159,6 +159,7 @@
             {"orderable": true},
             {
                 "orderable": false,
+                "searchable": false
             }],
         paging:false
 
