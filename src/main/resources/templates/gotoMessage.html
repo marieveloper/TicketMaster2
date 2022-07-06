@@ -9,32 +9,32 @@
 </head>
 <body>
 <div class="container">
-    <form  th:action="@{/getMessages}"  th:object="${ticket}" method="GET" class="form-horizontal">
+    <form th:action="@{/getMessages}" th:object="${ticket}" method="GET" class="form-horizontal">
 
-    <br/><br/>
-    <h1>Messages</h1>
-    <hr/>
-    <form th:action="@{/findAllMessages}" method="GET" class="form-horizontal">
-        <table class="table table-bordered table-striped" id="ticketTable">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>Text</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="message: ${ticket.getMessages()}">
-                <td th:text="${message.getId()}"/>
-                <td th:text="${message.getText()}"/>
-                <td>
-                    <a class="btn btn-info text-white"
-                       th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
-                        Ticket</a>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </form>
+        <br/><br/>
+        <h1>Messages</h1>
+        </hr>
+        <form th:action="@{/findAllMessages}" method="GET" class="form-horizontal">
+            <table class="table table-bordered table-striped" id="ticketTable">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Text</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="message: ${ticket.getMessages()}">
+                    <td th:text="${message.getId()}"/>
+                    <td th:text="${message.getText()}"/>
+                    <td>
+                        <a class="btn btn-info text-white"
+                           th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
+                            Ticket</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
 
     </form>
 </div>
