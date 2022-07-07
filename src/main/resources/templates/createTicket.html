@@ -1,38 +1,70 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <link rel="stylesheet" href="/static/createTicket.css">
+
+    <link rel="stylesheet" href="/adminDashboardCss.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title> create Ticket </title>
 </head>
 <body>
 <div class="container">
-    <form  th:action="@{/createTicket}"  method="GET" class="form-horizontal">
+    <div>
+        <nav class="top-nav fixed-top" style="background-color: #D9D9D9">
+            <div class="container-fluid">
+                <div class="form-inline" style="float:left">
+                    <a th:href="@{/back}">
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
+                    </a>
+                </div>
+                <div class="form-inline" style="float:right">
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
+                    <a th:href="@{/logout}">
+                        <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
+                        </button>
+                    </a>
+                </div>
+
+            </div>
+            </br>
+        </nav>
+    </div>
+    <form th:action="@{/createTicket}" method="GET" class="form-horizontal">
     </form>
     <br/><br/>
-    <h1>Create a Ticket</h1>
+    <h3>Create a Ticket</h3>
     <hr/>
     <div class="fieldContainer">
         <form th:action="@{/saveTicket}" th:object="${ticket}" method="POST">
             <br/>
+            <h5>Title:</h5>
+            <input name="title" minlength="2" maxlength="50" rows="10" cols="80" style="margin-top: 10px"
+                   th:field="*{title}"
+                   placeholder="Title (2-50 letters)" class="form-control col-4 mb-4"></input>
+
+            <br/>
             <div class="selection"> Select incident:
                 <select th:field="*{categorization}">
-                    <option th:value="TECHNICAL_PROBLEMS" th:text="technicalProblems"> TECHNICAL_PROBLEM</option>
-                    <option th:value="INACTIVITY" th:text="inactivity"> INACTIVITY</option>
-                    <option th:value="OTHER" th:text="other"> OTHER</option>
+                    <option th:value="TECHNICAL_PROBLEMS" th:text="technicalProblems"> Technical problem</option>
+                    <option th:value="INACTIVITY" th:text="inactivity"> Inactivity</option>
+                    <option th:value="OTHER" th:text="other"> Other</option>
                 </select>
             </div>
-            </br> </br>
+            </br>
             <textarea name="problemspecification" minlength="30" rows="10" cols="80" style="margin-top: 10px"
                       th:field="*{content}"
                       placeholder="Describe your problem (min. 30 letters)" class="form-control col-4 mb-4"></textarea>
             <input type="hidden" th:field="*{ticketId}"/>
-            <button class="btn btn-primary" type="submit">submit</button>
+            <button class="btn btn-primary" type="submit">Submit</button>
         </form>
         <hr/>
-        <a th:href="@{/back}" class ="btn btn-primary">Back</a>
+        <a th:href="@{/back}" class="btn btn-primary">Back</a>
     </div>
 </div>
 
