@@ -10,7 +10,14 @@ form{
     background: darkgray;
     margin: 0 auto;
 }
-
+.btn {
+    padding: 16px;
+    background-color: white;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
 
 
 
