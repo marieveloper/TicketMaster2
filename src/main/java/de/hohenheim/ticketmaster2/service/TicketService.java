@@ -76,8 +76,9 @@ public class TicketService {
      */
     public void createTestTickets(List<User> authorList){
         List<IncidentCategorization> incidentCategorizations = List.of(IncidentCategorization.INACTIVITY, IncidentCategorization.OTHER, IncidentCategorization.TECHNICAL_PROBLEMS);
+        List<String> titles = List.of("user xy inactive", "no delivery", "edit ticket defect");
         for(int i = 0; i< 50; i++){
-            createTicket("ticket" + i, "Das ist ein Testticket", authorList.get(i % authorList.size()).getUsername(), incidentCategorizations.get(i % incidentCategorizations.size()), Timestamp.from(Instant.now().minus(12, ChronoUnit.HOURS)));
+            createTicket(titles.get(i % titles.size()), "Das ist ein Testticket", authorList.get(i % authorList.size()).getUsername(), incidentCategorizations.get(i % incidentCategorizations.size()), Timestamp.from(Instant.now().minus(12, ChronoUnit.HOURS)));
         }
     }
 

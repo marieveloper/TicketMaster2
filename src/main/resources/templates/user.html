@@ -92,6 +92,7 @@
                        data-show-search-clear-button="true">
                     <thead>
                     <tr>
+                        <th data-type="string">Title</th>
                         <th class="d-none d-md-table-cell" data-type="string">Prioritization</th>
                         <th data-type="string">Incident</th>
                         <th data-type="date">Date</th>
@@ -101,6 +102,7 @@
                     </tr>
                     <tbody id="myTable">
                     <tr th:each="ticket: ${userTickets}">
+                        <td th:text="${ticket.getTitle()}"/>
                         <a th:switch="${ticket.getPrio().toString()} ">
                             <a th:case="${'LOW'}">
                                 <td><p style="display:none">a</p><span class="badge text-black-50"
@@ -121,7 +123,7 @@
                                 </td>
                             </a>
                         </a>
-                        <td th:text="${ticket.getCategorization()}"/>
+                        <td th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
                         <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <a th:switch="${ticket.getStatus().toString()} ">

@@ -83,6 +83,7 @@
             <table class="table table-bordered table-striped" id="ticketTable" data-toggle= data-filter-control="true">
                 <thead>
                 <tr>
+                    <th>Title</th>
                     <th>Prioritization</th>
                     <th>Incident</th>
                     <th>Date</th>
@@ -95,6 +96,7 @@
                 <tbody id="myTable">
                 <!--TODO get the correct method declarations-->
                 <tr th:each="ticket: ${tickets}">
+                    <td th:text="${ticket.getTitle()}"/>
                     <a th:switch="${ticket.getPrio().toString()} ">
                         <a th:case="${'LOW'}" >
                             <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${ticket.getPrio().toString()}"></span></td>
@@ -106,7 +108,7 @@
                             <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${ticket.getPrio().toString()}"></span></td>
                         </a>
                     </a>
-                    <td th:text="${ticket.getCategorization()}"/>
+                    <td th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
                     <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
                     <td th:text="${ticket.getUser().getUsername()}"/>
                     <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
