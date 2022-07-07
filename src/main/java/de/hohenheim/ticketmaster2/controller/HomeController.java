@@ -216,7 +216,7 @@ public class HomeController {
 
 
 
-    @GetMapping("/gotoMessage{ticketId}")
+    @GetMapping("/chat{ticketId}")
     public String sendMessage(@RequestParam Integer ticketId,Model model){
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket", ticket);
@@ -227,7 +227,7 @@ public class HomeController {
         message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         message.setText("text");
         messageService.saveMessage(message);
-        return "gotoMessage";
+        return "chat";
     }
 
 
