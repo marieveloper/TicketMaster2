@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="">
 <head>
-    <link rel="stylesheet" href="/static/createTicket.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
-          crossorigin="anonymous"/>
-    <link rel="stylesheet" href="/adminDashboardCss.css"/>
+    <meta th:name="_csrf" th:content="${_csrf.token}"/>
+    <meta th:name="_csrf_header" th:content="${_csrf.headerName}"/>
+    <link rel="stylesheet" href="/static/chat.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -14,64 +12,8 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <title> Message</title>
-    <style>
-      .box {
-  width: 300px;
-  margin: 50px auto;
-  background: #00bfb6;
-  padding: 20px;
-  text-align: center;
-  font-weight: 900;
-  color: #fff;
-  font-family: arial;
-    position: absolute;
-    left: 10px;
-}
-.box_left {
-  width: 300px;
-  margin: 50px auto;
-  background: #00bfb6;
-  padding: 20px;
-  text-align: center;
-  font-weight: 900;
-  color: #fff;
-  font-family: arial;
-  position: relative;
+    <title>Chat</title>
 
-}
-/*right*/
-.sb1:before {
-  content: "";
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  border-left: 10px solid #00bfb6;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #00bfb6;
-  border-bottom: 10px solid transparent;
-  right: -19px;
-  top: 6px;
-}
-/*left*/
-.sb2:before {
-  content: "";
-  width: 0px;
-  height: 0px;
-  position: absolute;
-  border-left: 10px solid transparent;
-  border-right: 10px solid #00bfb6;
-  border-top: 10px solid #00bfb6;
-  border-bottom: 10px solid transparent;
-  left: -19px;
-  top: 6px;
-}
-
-
-
-
-
-    </style>
 </head>
 <body>
 <div class="container">
@@ -97,7 +39,7 @@
     </div>
     <form th:action="@{/getMessages}" th:object="${user}" method="GET" class="form-horizontal">
         <br/><br/>
-        <h3>Messages</h3>
+        <h3>Chat</h3>
         </hr>
         <form th:action="@{/findAllMessages}" method="GET" class="form-horizontal">
             <div class="card">
@@ -118,10 +60,17 @@
                         </a>
                     </a>
                     </a>
+                <form th:action="@{/saveMessage}" th:object="${message}" method="POST">
+                <input name="text" minlength="2" maxlength="50" rows="10" cols="80" style="margin-top: 10px"
+                       th:field="*{text}"
+                       placeholder="Insert your message" class="form-control col-4 mb-4">
+                </form>
             </div>
+
         </form>
     </form>
 </div>
+<script type="text/javascript" src="static/js/chat.js"></script>
 </body>
 </html>
 
