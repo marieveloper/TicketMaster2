@@ -107,6 +107,8 @@ public class HomeController {
         return messageService.findAllMessages();
     }
 
+
+
     //Mappings----------------------------------------------------------------------------------------------------------
     @GetMapping("/admin")
     public String showAdminDashboard(Model model, String keyword) {
@@ -214,18 +216,18 @@ public class HomeController {
 
 
 
-    @GetMapping("/gotoMessage{ticketId}")
+    @GetMapping("/chat{ticketId}")
     public String sendMessage(@RequestParam Integer ticketId,Model model){
         Ticket ticket = ticketService.getByTicketId(ticketId);
         model.addAttribute("ticket", ticket);
         Message message = new Message();
-        model.addAttribute("message", message);
+        model.addAttribute("messages", messageService.findAllMessagesByTicket(ticketId));
         message.setTicket(ticketService.getByTicketId(ticketId));
         message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
         message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         message.setText("text");
         messageService.saveMessage(message);
-        return "gotoMessage";
+        return "chat";
     }
 
 
@@ -263,9 +265,5 @@ public class HomeController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/adminTickets")
-    public String getMyTickets(Model model) {
-        model.addAttribute("tickets", ticketService.getAllTicketsByAdminId(userService.getCurrentUser().getUserId()));
-        return "adminTickets";
-    }
+
 }
