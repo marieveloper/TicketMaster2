@@ -265,5 +265,10 @@ public class HomeController {
         return "redirect:/admin";
     }
 
+    @GetMapping("/chatWebSockets")
+    public String chatWebSockets(Model model) {
+        return "chatWebSockets";
+    }
+
 
 }
