@@ -164,6 +164,7 @@ public class HomeController {
         notificationDelete.setText("The ticket with id " + ticketId + " was deleted");
         notificationDelete.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         notificationDelete.setSender(ticketService.getByTicketId(ticketId).getUser());
+        notificationDelete.setRead(false);
         notificationService.saveNotification(notificationDelete);
         ticket.setRequestTime(Timestamp.from(Instant.now()));
         ticketService.deleteTicket(ticket.getTicketId());
@@ -192,6 +193,7 @@ public class HomeController {
             notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
             notificationTest.setSender(notificationTest.getTicket().getUser());
             notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
+            notificationTest.setRead(false);
             notificationService.saveNotification(notificationTest);
             ticket.setRequestTime(Timestamp.from(Instant.now()));
             return "redirect:/user";

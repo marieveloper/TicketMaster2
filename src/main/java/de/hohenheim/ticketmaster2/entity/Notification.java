@@ -23,6 +23,17 @@ public class Notification {
     @OnDelete(action= OnDeleteAction.CASCADE)
     private Ticket ticket;
 
+    public void setRead(boolean read) {
+        this.read = read;
+    }
+
+    private boolean read;
+    public boolean isRead() {
+        return read;
+    }
+
+
+
     public Notification() {
         //empty constructor for Hibernate
     }
