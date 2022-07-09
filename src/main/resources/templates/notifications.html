@@ -35,7 +35,8 @@
             </div>
             </br>
         </nav>
-    </div><br/><br/>
+    </div>
+    <br/><br/>
     <h4>Ticket details</h4>
     <hr/>
 
@@ -49,6 +50,7 @@
                         <th>Text</th>
                         <th>Sender</th>
                         <th>Status</th>
+                        <th>Action</th>
                     </tr>
                     <tbody>
                     <!--TODO get the correct method declarations-->
@@ -56,23 +58,36 @@
                         <td th:text="${notification.getText()}"/>
                         <td th:text="${notification.getSender().getUsername()}"/>
                         <a th:switch="${notification.getTicket()!=null} ">
-                        <a th:case="${true}" >
-                            <a th:switch="${notification.getTicket().getPrio().toString()} ">
-                                <a th:case="${'LOW'}">
-                                    <td> <span class="badge text-black-50" style="background-color: lightgreen" th:text="${notification.getTicket().getPrio().toString()}"></span></td>
-                                </a>
-                                <a th:case="${'MEDIUM'}">
-                                    <td> <span class="badge text-black-50" style="background-color: navajowhite" th:text="${notification.getTicket().getPrio().toString()}"></span></td>
-                                </a>
-                                <a th:case="${'HIGH'}">
-                                    <td> <span class="badge text-black-50" style="background-color: lightcoral" th:text="${notification.getTicket().getPrio().toString()}"></span></td>
+                            <a th:case="${true}">
+                                <a th:switch="${notification.getTicket().getPrio().toString()} ">
+                                    <a th:case="${'LOW'}">
+                                        <td><span class="badge text-black-50" style="background-color: lightgreen"
+                                                  th:text="${notification.getTicket().getPrio().toString()}"></span>
+                                        </td>
+                                    </a>
+                                    <a th:case="${'MEDIUM'}">
+                                        <td><span class="badge text-black-50" style="background-color: navajowhite"
+                                                  th:text="${notification.getTicket().getPrio().toString()}"></span>
+                                        </td>
+                                    </a>
+                                    <a th:case="${'HIGH'}">
+                                        <td><span class="badge text-black-50" style="background-color: lightcoral"
+                                                  th:text="${notification.getTicket().getPrio().toString()}"></span>
+                                        </td>
+                                    </a>
                                 </a>
                             </a>
+                            <a th:case="${false}">
+                                <td><span class="badge text-black-50" style="background-color: indianred"
+                                          th:text="${'WITHDRAWN'}"></span>
+                                </td>
+                            </a>
                         </a>
-                        <a th:case="${false}" >
-                            <td><span class="badge text-white" style="background-color: indianred" th:text="${'WITHDRAWN'}"></span><td/>
-                        </a>
-                        </a>
+
+                        <form th:action="@{/notificationRead}" th:object="${notification}" method="POST">
+                            <td><a class="btn btn-primary text-white" type="submit">Read Notification</a></td>
+                        </form>
+
                     </tr>
                     </tbody>
                 </table>

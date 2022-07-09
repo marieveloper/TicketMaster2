@@ -267,5 +267,10 @@ public class HomeController {
         return "redirect:/admin";
     }
 
+    @PostMapping("/notificationRead")
+    public String notificationRead(@ModelAttribute("notification") Notification notification, Model model){
+        notification.setRead(true);
+        return "redirect:/notifications";
+    }
 
 }
