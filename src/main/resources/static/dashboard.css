@@ -1,10 +1,17 @@
+body {
+    background: linear-gradient(to right, white,  azure, paleturquoise, paleturquoise, paleturquoise,lightgreen);
+    min-height: 100vh
+}
 .container {
     max-width: 100%;
+    background: white;
 
+    box-shadow: 10px 20px 15px silver;
 }
 
-tbody tr:nth-child(even) {
-    background-color: #D9D9D9;
+
+.top-nav{
+    box-shadow: 10px 10px 10px silver;
 }
 
 @media screen and (max-width: 42em) {
@@ -12,9 +19,6 @@ tbody tr:nth-child(even) {
         display: block;
     }
 
-    thead {
-        display: none;
-    }
 
     tr:first-child {
         border-top: medium solid lightblue;
@@ -119,7 +123,4 @@ li {
     display: block;
 }
 
-.mt-100 {
-    max-width: 100%;
-}
 

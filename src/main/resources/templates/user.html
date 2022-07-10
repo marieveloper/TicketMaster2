@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <link rel="stylesheet" href="/adminDashboardCss.css"/>
+    <link rel="stylesheet" href="/dashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -34,10 +31,14 @@
     <title>Userdashboard</title>
 </head>
 <body>
+<div class="container-fluid">
+    <a class="navbar- brand" ><img src="images/Logo.png"></a>
+</div>
 <div class="container">
     <form th:action="@{/user}" th:object="${user}" method="GET" class="form-horizontal">
         <div>
-            <nav class="top-nav fixed-top" style="background-color: #D9D9D9">
+
+            <nav class="top-nav fixed-top" style="background: white">
                 <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
                                                                                        style="color: white"></i></a>
                 <div class="dropdown">
@@ -48,7 +49,7 @@
                             <ul class="dropdown-submenu">
                                 <li><a class="btn dropbtn" tabindex="-1" data-filter="open">Open</a></li>
                                 <li><a class="btn dropbtn" tabindex="-1" data-filter="closed">Closed</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="in progress">In progress</a>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="in process">In process</a>
                                 </li>
                             </ul>
                         </li>
@@ -104,23 +105,14 @@
                     <tr th:each="ticket: ${userTickets}">
                         <td th:text="${ticket.getTitle()}"/>
                         <a th:switch="${ticket.getPrio().toString()} ">
-                            <a th:case="${'LOW'}">
-                                <td><p style="display:none">a</p><span class="badge text-black-50"
-                                                                       style="background-color: lightgreen"
-                                                                       th:text="${ticket.getPrio().toString()}"></span>
-                                </td>
+                            <a th:case="${'LOW'}" >
+                                <td> <span class="badge text-white" style="background-color: #00E676" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
-                            <a th:case="${'MEDIUM'}">
-                                <td><p style="display:none">b</p> <span class="badge text-black-50"
-                                                                        style="background-color: navajowhite"
-                                                                        th:text="${ticket.getPrio().toString()}"></span>
-                                </td>
+                            <a th:case="${'MEDIUM'}" >
+                                <td> <p style="display:none">i</p><span class="badge text-white" style="background-color: #FFEA00" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
-                            <a th:case="${'HIGH'}">
-                                <td><p style="display:none">c</p><span class="badge text-black-50"
-                                                                       style="background-color: lightcoral"
-                                                                       th:text="${ticket.getPrio().toString()}"></span>
-                                </td>
+                            <a th:case="${'HIGH'}" >
+                                <td> <span class="badge text-white" style="background-color: #F93154" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                         </a>
                         <td th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
@@ -128,16 +120,13 @@
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <a th:switch="${ticket.getStatus().toString()} ">
                             <a th:case="${'OPEN'}">
-                                <td><span class="badge text-black-50" style="background-color: lightcoral"
-                                          th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td> <span class="badge text-white" style="background-color: #F93154" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'IN_PROCESS'}">
-                                <td><span class="badge text-black-50" style="background-color: navajowhite"
-                                          th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td> <span class="badge text-white"  style="background-color: #FFEA00" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'CLOSED'}">
-                                <td><span class="badge text-black-50" style="background-color: lightgreen"
-                                          th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td> <span class="badge text-white" style="background-color: #00E676" th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                         </a>
                         <td>
@@ -178,7 +167,7 @@
                 {
                     "orderable": false,
                     "searchable": false
-                }]
+                }],
         });
     });
 
