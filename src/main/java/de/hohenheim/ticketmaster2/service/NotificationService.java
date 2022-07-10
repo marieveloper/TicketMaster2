@@ -27,6 +27,10 @@ public class NotificationService {
         return findAllNotifications().stream().filter(t -> t.getTicket().getTicketId()==ticketId).toList();
     }
 
+    public List<Notification> findAllUnreadNotifications(List<Notification> notifications){
+        return notifications.stream().filter(t -> t.isRead()==false).toList();
+    }
+
     public void deleteByTicketId(Integer ticketId) {
         for (Notification notification: this.findAllTicketNotifications(ticketId)) {
             notificationRepository.delete(notification);
