@@ -107,6 +107,12 @@ public class HomeController {
         return messageService.findAllMessages();
     }
 
+    @ModelAttribute("unreadAdminNotifications")
+    public List<Notification> getUnreadAdminNotifications(){
+        List<Notification> notifications = userService.getCurrentUser().getReceivedNotifications().stream().toList();
+        return notificationService.findAllUnreadNotifications(notifications);
+    }
+
 
 
     //Mappings----------------------------------------------------------------------------------------------------------

@@ -57,18 +57,18 @@
                     </div>
                 </div>
                 <div class="block"  style="float:right">
-                            <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET"
-                                  class="form-horizontal">
-                                <div th:switch="${adminNotifications.isEmpty()}">
-                                    <a th:case="${true}">
+                                <a th:switch="${unreadAdminNotifications.isEmpty()}">
+                                    <a th:case="${true}" th:href="@{/notifications}" type="button"
+                                        class="btn btn-info px-3 mr-2"><i
+                                            class="bi bi-bell"></i>
                                     </a>
                                     <a th:case="${false}" th:href="@{/notifications}" type="button"
                                        class="btn btn-info px-3 mr-2"><i
                                             class="bi bi-bell"></i>
                                         <span class="badge badge-light" style="color: red">1</span>
                                     </a>
-                                </div>
-                            </form>
+                                </a>
+
                             <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                             <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2"><i
                                     class="bi bi-box-arrow-right"></i></a>
