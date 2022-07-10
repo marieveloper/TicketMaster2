@@ -54,6 +54,8 @@ public class Message {
         this.author = author;
     }
 
+
+
     public void setReceiver(User receiver) {
         this.receiver = receiver;
     }

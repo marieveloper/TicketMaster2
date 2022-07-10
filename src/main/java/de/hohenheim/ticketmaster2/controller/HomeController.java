@@ -132,7 +132,6 @@ public class HomeController {
     @PostMapping("/saveTicket")
     public String createTicket(@ModelAttribute("ticket") Ticket ticket) {
         ticket.setUser(userService.getCurrentUser());
-        ticket.setTitle("title");
         ticket.setCreationTime(Timestamp.from(Instant.now()));
         ticket.setStatus(Status.OPEN);
         ticket.setPrioAuto();
@@ -271,11 +270,16 @@ public class HomeController {
         return "redirect:/admin";
     }
 
+    @GetMapping("/chatWebSockets")
+    public String chatWebSockets(Model model) {
+        return "chatWebSockets";
+    }
     @PostMapping("/notificationRead")
     public String notificationRead(@ModelAttribute("notification") Notification notification){
         notification.setRead(true);
         notificationService.saveNotification(notification);
         return "redirect:/notifications";
     }
+
 
 }

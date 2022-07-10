@@ -1,5 +1,7 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -54,12 +56,15 @@ public class User {
     }
 
     @OneToMany(mappedBy="receiver")
+
     private Set<Message> receivedMessages;
 
     @OneToMany(mappedBy = "receiver")
+    @JsonManagedReference
     private Set<Notification> receivedNotifications;
 
     @OneToMany(mappedBy = "sender")
+    @JsonManagedReference
     private Set<Notification> sentNotifications;
 
     public Set<Notification> getReceivedNotifications() {
