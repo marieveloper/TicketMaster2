@@ -163,6 +163,9 @@ public class HomeController {
         notificationDelete.setText("The ticket with id " + ticketId + " was deleted");
         notificationDelete.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         notificationDelete.setSender(ticketService.getByTicketId(ticketId).getUser());
+        notificationDelete.setRead(false);
+        ticketService.getByTicketId(ticketId).getUser().getSentNotifications().add(notificationDelete);
+        ticketService.getByTicketId(ticketId).getResponsibleAdmin().getReceivedNotifications().add(notificationDelete);
         notificationService.saveNotification(notificationDelete);
         ticket.setRequestTime(Timestamp.from(Instant.now()));
         ticketService.deleteTicket(ticket.getTicketId());
@@ -191,6 +194,9 @@ public class HomeController {
             notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
             notificationTest.setSender(notificationTest.getTicket().getUser());
             notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
+            notificationTest.setRead(false);
+            notificationTest.getTicket().getUser().getSentNotifications().add(notificationTest);
+            notificationTest.getTicket().getResponsibleAdmin().getReceivedNotifications().add(notificationTest);
             notificationService.saveNotification(notificationTest);
             ticket.setRequestTime(Timestamp.from(Instant.now()));
             return "redirect:/user";
@@ -267,6 +273,12 @@ public class HomeController {
     @GetMapping("/chatWebSockets")
     public String chatWebSockets(Model model) {
         return "chatWebSockets";
+    }
+    @PostMapping("/notificationRead")
+    public String notificationRead(@ModelAttribute("notification") Notification notification){
+        notification.setRead(true);
+        notificationService.saveNotification(notification);
+        return "redirect:/notifications";
     }
 
 
