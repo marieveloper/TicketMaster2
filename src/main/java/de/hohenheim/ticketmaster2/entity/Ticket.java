@@ -9,6 +9,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -181,6 +182,7 @@ public class Ticket {
     public String getContent() {
         return content;
     }
+
     public void setContent(String content) {
         this.content = content;
     }
@@ -199,6 +201,16 @@ public class Ticket {
 
     public void setPrio(Prioritization prio) {
         this.prio = prio;
+    }
+
+    public boolean canRequestStatus(){
+        Date date = new Date(System.currentTimeMillis());
+        date.setHours(date.getHours()-12);
+        if(this.getCreationTime().before(date)){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 
