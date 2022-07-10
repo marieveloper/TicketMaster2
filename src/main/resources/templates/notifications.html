@@ -39,9 +39,8 @@
     <h3>Ticket details</h3>
     <hr/>
 
-    <form th:action="@{/admin}" th:object="${admin}" method="POST" class="form-horizontal">
-        <form th:action="@{/findAllAdminNotifications(adminId=${admin.getUserId()})}" method="GET"
-              class="form-horizontal">
+
+
             <div class="card">
                 <table class="table table-bordered table-striped" id="ticketTable">
                     <thead>
@@ -83,8 +82,8 @@
                             </a>
                         </a>
 
-                        <form th:action="@{/notificationRead}" th:object="${notification}" method="POST">
-                            <td><a class="btn btn-primary text-white" type="submit">Read Notification</a></td>
+                        <form th:action="@{/notificationRead(id=${notification.getId()})}"  method="POST">
+                            <td><button class="btn btn-primary text-white" type="submit">Read Notification</button></td>
                         </form>
 
                     </tr>
@@ -92,8 +91,8 @@
                 </table>
             </div>
             <a th:href="@{/back}" class="btn btn-primary">Back</a>
-        </form>
-    </form>
+
+
 </div>
 </body>
 </html>

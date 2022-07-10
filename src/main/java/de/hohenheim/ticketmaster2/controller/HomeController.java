@@ -274,8 +274,9 @@ public class HomeController {
     public String chatWebSockets(Model model) {
         return "chatWebSockets";
     }
-    @PostMapping("/notificationRead")
-    public String notificationRead(@ModelAttribute("notification") Notification notification){
+    @PostMapping("/notificationRead{id}")
+    public String notificationRead(@RequestParam Integer id, Model model) {
+        Notification notification = notificationService.getNotificationById(id);
         notification.setRead(true);
         notificationService.saveNotification(notification);
         return "redirect:/notifications";
