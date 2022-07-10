@@ -82,13 +82,16 @@
         </div>
         <br>
         <a th:href="@{/withdrawTicket(ticketId=${ticket.getTicketId()})}" class="btn btn-danger">Withdraw Ticket</a>
-            <a th:if="${ticket.canRequestStatus()}">
-                <a class="btn btn-primary" th:href="@{/requestStatus(ticketId=${ticket.getTicketId()})}">Request
-                    Status</a>
-            </a>
-        </form>
-        <a class="btn btn-primary text-white"
-           th:onclick="'window.location.href=\'/chat?ticketId=' + ${ticket.getTicketId()} + '\''">Chat</a>
+        <a th:if="${ticket.canRequestStatus()}">
+            <a class="btn btn-primary" th:href="@{/requestStatus(ticketId=${ticket.getTicketId()})}">Request
+                Status</a>
+        </a>
+        <a th:if="${!ticket.canRequestStatus()}">
+        <a class="btn btn-primary" style="background-color:grey">Request Status</a>
+        </a>
+    </form>
+    <a class="btn btn-primary text-white"
+       th:onclick="'window.location.href=\'/chat?ticketId=' + ${ticket.getTicketId()} + '\''">Chat</a>
     </form>
     <hr/>
     <a th:href="@{/back}" class="btn btn-primary">Back</a>
