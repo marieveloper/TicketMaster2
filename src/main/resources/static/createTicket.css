@@ -1,3 +1,7 @@
+body {
+    background: linear-gradient(to right, lightgrey ,azure, azure, lightgrey);
+    min-height: 100vh
+}
 * {
     box-sizing: border-box;
 }

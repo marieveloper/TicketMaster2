@@ -34,50 +34,53 @@
 <div class="container">
     <form th:action="@{/admin}" th:object="${admin}" method="GET" class="form-horizontal">
         <div>
-            <nav class="navbar" style="background-color: #D9D9D9">
+            <nav class="top-nav fixed-top" style="background-color: #D9D9D9">
                 <a  id="adminTickets" class="btn btn-primary text-white"  onclick="myFunction()" >My Tickets</a>
-                <div class="row d-flex justify-content-center mt-100">
-                    <div class="col-md-12"> <select id="choices-multiple-remove-button" placeholder="Select upto 5 tags" multiple>
-                        <optgroup label="Status">
-                        <option data-filter="open">Open</option>
-                        <option data-filter="in progress">In progress</option>
-                        <option data-filter="closed">Closed</option>
-                        </optgroup>
-                        <optgroup label="Prioritization">
-                        <option data-filter="high">High</option>
-                        <option data-filter="medium">Medium</option>
-                        <option data-filter="low">Low</option>
-                        </optgroup>
-                        <optgroup label="Incident">
-                        <option data-filter="inactivity">Inactivity</option>
-                        <option data-filter="technical">Technical_Problems</option>
-                        <option data-filter="other">Other</option>
-                        </optgroup>
-                    </select>
+                <div class="dropdown">
+                    <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
+                    <div class="dropdown-content">
+                        <li class="menu">
+                            <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
+                            <ul class="dropdown-submenu">
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="open">Open</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="closed">Closed</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="in process">In process</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="menu">
+                            <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
+                            <ul class="dropdown-submenu">
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="high">High</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="medium">Medium</a></li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="low">Low</a></li>
+                            </ul>
+                        </li>
+                        <li class="menu">
+                            <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
+                            <ul class="dropdown-submenu">
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="inactivity">Inactivity</a>
+                                </li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="technical">Technical
+                                    problems</a>
+                                </li>
+                                <li><a class="btn dropbtn" tabindex="-1" data-filter="other">Other</a></li>
+                            </ul>
+                        </li>
                     </div>
                 </div>
-                <div class="block"  style="float:right">
-                                <a th:switch="${unreadAdminNotifications.isEmpty()}">
-                                    <a th:case="${true}" th:href="@{/notifications}" type="button"
-                                        class="btn btn-info px-3 mr-2"><i
-                                            class="bi bi-bell"></i>
-                                    </a>
-                                    <a th:case="${false}" th:href="@{/notifications}" type="button"
-                                       class="btn btn-info px-3 mr-2"><i
-                                            class="bi bi-bell"></i>
-                                        <span class="badge badge-light" style="color: red">!</span>
-                                    </a>
-                                </a>
-
-                            <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
-                            <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2"><i
-                                    class="bi bi-box-arrow-right"></i></a>
+                <div class="form-inline" style="float:right">
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-bell "></i></button>
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
+                    <a th:href="@{/logout}">
+                        <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
+                        </button>
+                    </a>
                 </div>
                 <br/><br/>
-
-
             </nav>
         </div>
+        <br/><br/> <br/>
         <br/><br/><br/>
         <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
             <table class="table table-bordered table-striped" id="ticketTable" data-toggle= data-filter-control="true">
@@ -136,11 +139,11 @@
 </div>
 <script>
 
-    $(document).ready(function(){
-        $("#choices-multiple-remove-button").on('click', 'option', function() {
+    $(document).ready(function () {
+        $(".dropdown-submenu li").on('click', 'a', function () {
             var value = $(this).attr('data-filter').toLowerCase();
             console.log(value);
-            $("#ticketTable tr").filter(function() {
+            $("#myTable tr").filter(function () {
                 $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         });
@@ -162,8 +165,9 @@
             {"orderable": true},
             {
                 "orderable": false,
-                "searchable": false
+
             }],
+        paging: false
 
 
     });
