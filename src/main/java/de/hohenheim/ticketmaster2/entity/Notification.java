@@ -24,6 +24,12 @@ public class Notification {
     @OnDelete(action= OnDeleteAction.CASCADE)
     private Ticket ticket;
 
+
+
+    private Boolean read;
+
+
+
     public Notification() {
         //empty constructor for Hibernate
     }
@@ -51,7 +57,12 @@ public class Notification {
     public void setText(String text) {
         this.text = text;
     }
-
+    public Boolean isRead() {
+        return read;
+    }
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
     public void setSender(User author) {
         this.sender = author;
     }
