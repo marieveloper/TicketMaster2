@@ -132,7 +132,6 @@ public class HomeController {
     @PostMapping("/saveTicket")
     public String createTicket(@ModelAttribute("ticket") Ticket ticket) {
         ticket.setUser(userService.getCurrentUser());
-        ticket.setTitle("title");
         ticket.setCreationTime(Timestamp.from(Instant.now()));
         ticket.setStatus(Status.OPEN);
         ticket.setPrioAuto();
@@ -263,6 +262,11 @@ public class HomeController {
         oldTicket.setStatus(newTicket.getStatus());
         ticketService.saveTicket(oldTicket);
         return "redirect:/admin";
+    }
+
+    @GetMapping("/chatWebSockets")
+    public String chatWebSockets(Model model) {
+        return "chatWebSockets";
     }
 
 

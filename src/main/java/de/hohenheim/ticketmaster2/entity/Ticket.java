@@ -1,5 +1,6 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
@@ -41,6 +42,7 @@ public class Ticket {
     private String title;
 
     @OneToMany(mappedBy = "ticket")
+    @JsonManagedReference
     private Set<Notification> notifications;
 
     @OneToMany(mappedBy = "ticket")
