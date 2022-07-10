@@ -1,26 +1,29 @@
 body {
-    background: linear-gradient(to right, lightgrey ,azure, azure, lightgrey);
+    background: linear-gradient(to right, white,  azure, paleturquoise, paleturquoise, paleturquoise,lightgreen);
     min-height: 100vh
 }
-
 .container {
     max-width: 100%;
-    margin: 0px auto;
+    background: white;
 
+    box-shadow: 10px 20px 15px silver;
 }
-tbody tr:nth-child(even) {
-    background-color: #D9D9D9;
+
+
+.top-nav{
+    box-shadow: 10px 10px 10px silver;
 }
+
 @media screen and (max-width: 42em) {
     table, tbody, tr {
         display: block;
     }
-    thead {
-        display: none;
-    }
+
+
     tr:first-child {
         border-top: medium solid lightblue;
     }
+
     tr {
         border-bottom: medium solid lightblue;
         padding: .5em 2em 1em;
@@ -29,34 +32,43 @@ tbody tr:nth-child(even) {
     td:nth-child(1)::before {
         content: "Prioritization: ";
     }
+
     td:nth-child(2)::before {
         content: "Incident: ";
     }
+
     td:nth-child(3)::before {
         content: "Datum: ";
     }
+
     td:nth-child(4)::before {
         content: "User: ";
     }
+
     td:nth-child(5)::before {
         content: "Admin: ";
     }
+
     td:nth-child(6)::before {
         content: "Status: ";
     }
+
     tbody th {
         display: block;
         font-weight: bold;
     }
+
     th a {
         font-weight: normal;
     }
+
     td {
         display: inline-block;
         min-width: 30%;
         padding: .2em 2em;
         text-align: left;
     }
+
     td:nth-child(3) {
         text-align: left;
     }
@@ -64,9 +76,12 @@ tbody tr:nth-child(even) {
 
 
 .btn {
-    padding: 16px 16px 16px 16px;
-    margin: 16px 16px 16px 16px;
+    padding: 16px;
     background-color: white;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
 }
 
 
@@ -107,3 +122,5 @@ li {
 .dropdown-submenu:hover .dropdown-content {
     display: block;
 }
+
+

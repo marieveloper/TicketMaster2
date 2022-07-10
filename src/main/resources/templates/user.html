@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/adminDashboardCss.css"/>
+    <link rel="stylesheet" href="/dashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -31,10 +31,14 @@
     <title>Userdashboard</title>
 </head>
 <body>
+<div class="container-fluid">
+    <a class="navbar- brand" ><img src="images/Logo.png"></a>
+</div>
 <div class="container">
     <form th:action="@{/user}" th:object="${user}" method="GET" class="form-horizontal">
         <div>
-            <nav class="top-nav fixed-top" style="background-color: #D9D9D9">
+
+            <nav class="top-nav fixed-top" style="background: white">
                 <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
                                                                                        style="color: white"></i></a>
                 <div class="dropdown">
@@ -176,7 +180,6 @@
                     "orderable": false,
                     "searchable": false
                 }],
-            paging: false
         });
     });
 

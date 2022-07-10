@@ -1,9 +1,17 @@
 body {
-    background: linear-gradient(to right, lightgrey ,azure, azure, lightgrey);
+    background: linear-gradient(to right, white,  azure, paleturquoise, paleturquoise, paleturquoise,lightgreen);
     min-height: 100vh
 }
-* {
-    box-sizing: border-box;
+.container {
+    max-width: 100%;
+    background: white;
+
+    box-shadow: 10px 20px 15px silver;
+}
+
+
+.top-nav{
+    box-shadow: 10px 10px 10px silver;
 }
 
 .container{
