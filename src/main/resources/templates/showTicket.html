@@ -39,11 +39,11 @@
     <br/><br/><br/>
     <h3>Ticket details</h3>
     <hr/>
-    <form th:action="@{/getTicket}" th:object="${ticket}" method="GET">
+
         <div class="card">
             <div class="card-body">
-                <div class="row">
-                    <div class="col-sm-6">
+
+                    <div class="col-sm-5">
                         <div class="row">
                             <p>Ticket ID: </p>
                             <p th:text="${ticket.getTicketId()}"></p>
@@ -73,11 +73,11 @@
                             <p th:text="${ticket.getStatus()}"></p>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <p>Content: </p>
                         <p th:text="${ticket.getContent()}"></p>
                     </div>
-                </div>
+
             </div>
         </div>
         <br>
@@ -89,10 +89,10 @@
         <a th:if="${!ticket.canRequestStatus()}">
         <a class="btn btn-primary" style="background-color:grey">Request Status</a>
         </a>
-    </form>
+
     <a class="btn btn-primary text-white"
        th:onclick="'window.location.href=\'/chat?ticketId=' + ${ticket.getTicketId()} + '\''">Chat</a>
-    </form>
+
     <hr/>
     <a th:href="@{/back}" class="btn btn-primary">Back</a>
 </div>
