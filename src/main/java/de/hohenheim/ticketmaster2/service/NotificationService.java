@@ -4,8 +4,9 @@ import de.hohenheim.ticketmaster2.entity.Notification;
 import de.hohenheim.ticketmaster2.repository.NotificationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+
+
 @Service
 public class NotificationService {
     @Autowired
@@ -25,12 +26,19 @@ public class NotificationService {
     public List<Notification> findAllTicketNotifications(Integer ticketId) {
         return findAllNotifications().stream().filter(t -> t.getTicket().getTicketId()==ticketId).toList();
     }
-    public void deleteByTicketId(int ticketId) {
+
+    public List<Notification> findAllUnreadNotifications(List<Notification> notifications){
+        return notifications.stream().filter(t -> t.isRead()==false).toList();
+    }
+
+    public void deleteByTicketId(Integer ticketId) {
         for (Notification notification: this.findAllTicketNotifications(ticketId)) {
             notificationRepository.delete(notification);
         }
     }
-
+    public void deleteNotification(Notification notification){
+            notificationRepository.delete(notification);
+        }
 public Notification getNotificationById(Integer id){return notificationRepository.getById(id);}
 
 

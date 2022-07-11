@@ -1,5 +1,6 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
@@ -8,6 +9,7 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -41,6 +43,7 @@ public class Ticket {
     private String title;
 
     @OneToMany(mappedBy = "ticket")
+    @JsonManagedReference
     private Set<Notification> notifications;
 
     @OneToMany(mappedBy = "ticket")
@@ -179,6 +182,7 @@ public class Ticket {
     public String getContent() {
         return content;
     }
+
     public void setContent(String content) {
         this.content = content;
     }
@@ -197,6 +201,16 @@ public class Ticket {
 
     public void setPrio(Prioritization prio) {
         this.prio = prio;
+    }
+
+
+    public boolean canRequestStatus(){
+        Timestamp timestamp = this.getRequestTime();
+        long deltaTime = System.currentTimeMillis() - timestamp.getTime();
+        if(deltaTime / 3600000 >= 12){
+            return true;
+        }
+        return false;
     }
 }
 

@@ -1,5 +1,6 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -13,15 +14,21 @@ public class Notification {
 
     private String text;
     @ManyToOne
-    @JoinColumn(name = "senderId")
+    @JsonBackReference
     private User sender;
     @ManyToOne
-    @JoinColumn(name = "receiverId")
+    @JsonBackReference
     private User receiver;
     @ManyToOne
-    @JoinColumn(name = "ticketId")
+    @JsonBackReference
     @OnDelete(action= OnDeleteAction.CASCADE)
     private Ticket ticket;
+
+
+
+    private Boolean read;
+
+
 
     public Notification() {
         //empty constructor for Hibernate
@@ -50,7 +57,12 @@ public class Notification {
     public void setText(String text) {
         this.text = text;
     }
-
+    public Boolean isRead() {
+        return read;
+    }
+    public void setRead(Boolean read) {
+        this.read = read;
+    }
     public void setSender(User author) {
         this.sender = author;
     }

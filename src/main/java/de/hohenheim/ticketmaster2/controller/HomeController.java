@@ -107,6 +107,12 @@ public class HomeController {
         return messageService.findAllMessages();
     }
 
+    @ModelAttribute("unreadAdminNotifications")
+    public List<Notification> getUnreadAdminNotifications(){
+        List<Notification> notifications = userService.getCurrentUser().getReceivedNotifications().stream().toList();
+        return notificationService.findAllUnreadNotifications(notifications);
+    }
+
 
 
     //Mappings----------------------------------------------------------------------------------------------------------
@@ -132,7 +138,6 @@ public class HomeController {
     @PostMapping("/saveTicket")
     public String createTicket(@ModelAttribute("ticket") Ticket ticket) {
         ticket.setUser(userService.getCurrentUser());
-        ticket.setTitle("title");
         ticket.setCreationTime(Timestamp.from(Instant.now()));
         ticket.setStatus(Status.OPEN);
         ticket.setPrioAuto();
@@ -164,9 +169,12 @@ public class HomeController {
         notificationDelete.setText("The ticket with id " + ticketId + " was deleted");
         notificationDelete.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         notificationDelete.setSender(ticketService.getByTicketId(ticketId).getUser());
+        notificationDelete.setRead(false);
+        ticketService.getByTicketId(ticketId).getUser().getSentNotifications().add(notificationDelete);
+        ticketService.getByTicketId(ticketId).getResponsibleAdmin().getReceivedNotifications().add(notificationDelete);
         notificationService.saveNotification(notificationDelete);
         ticket.setRequestTime(Timestamp.from(Instant.now()));
-        ticketService.deleteTicket(ticket.getTicketId());
+        ticketService.deleteTicket(ticketId);
         return "redirect:/user";
     }
 
@@ -184,16 +192,21 @@ public class HomeController {
     }
 
     @GetMapping("/requestStatus{ticketId}")
-    public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
+    public String requestStatus( @RequestParam Integer ticketId, Model model) {
         if (ticketService.canRequestStatus(ticketId)) {
             Notification notificationTest = new Notification();
+            Ticket ticket = ticketService.getByTicketId(ticketId);
             model.addAttribute("notifications", notificationTest);
             notificationTest.setTicket(ticketService.getByTicketId(ticketId));
             notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
             notificationTest.setSender(notificationTest.getTicket().getUser());
             notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
+            notificationTest.setRead(false);
+            notificationTest.getTicket().getUser().getSentNotifications().add(notificationTest);
+            notificationTest.getTicket().getResponsibleAdmin().getReceivedNotifications().add(notificationTest);
             notificationService.saveNotification(notificationTest);
             ticket.setRequestTime(Timestamp.from(Instant.now()));
+            ticketService.saveTicket(ticket);
             return "redirect:/user";
         }
         System.out.print("Too soon ");
@@ -263,6 +276,18 @@ public class HomeController {
         oldTicket.setStatus(newTicket.getStatus());
         ticketService.saveTicket(oldTicket);
         return "redirect:/admin";
+    }
+
+    @GetMapping("/chatWebSockets")
+    public String chatWebSockets(Model model) {
+        return "chatWebSockets";
+    }
+    @PostMapping("/notificationRead{id}")
+    public String notificationRead(@RequestParam Integer id, Model model) {
+        Notification notification = notificationService.getNotificationById(id);
+        notification.setRead(true);
+        notificationService.saveNotification(notification);
+        return "redirect:/notifications";
     }
 
 
