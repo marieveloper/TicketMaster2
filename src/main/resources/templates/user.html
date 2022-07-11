@@ -32,7 +32,7 @@
 </head>
 <body>
 <div class="container-fluid">
-    <a class="navbar- brand" ><img src="images/Logo.png"></a>
+    <a class="navbar- brand"><img src="images/Logo.png"></a>
 </div>
 <div class="container">
     <form th:action="@{/user}" th:object="${user}" method="GET" class="form-horizontal">
@@ -105,14 +105,23 @@
                     <tr th:each="ticket: ${userTickets}">
                         <td th:text="${ticket.getTitle()}"/>
                         <a th:switch="${ticket.getPrio().toString()} ">
-                            <a th:case="${'LOW'}" >
-                                <td> <p style="display:none">a</p><span class="badge text-white" style="background-color: #00E676" th:text="${ticket.getPrio().toString()}"></span></td>
+                            <a th:case="${'LOW'}">
+                                <td><p style="display:none">a</p><span class="badge text-white"
+                                                                       style="background-color: #00E676"
+                                                                       th:text="${ticket.getPrio().toString()}"></span>
+                                </td>
                             </a>
-                            <a th:case="${'MEDIUM'}" >
-                                <td> <p style="display:none">b</p><span class="badge text-white" style="background-color: #FFEA00" th:text="${ticket.getPrio().toString()}"></span></td>
+                            <a th:case="${'MEDIUM'}">
+                                <td><p style="display:none">b</p><span class="badge text-white"
+                                                                       style="background-color: #FFEA00"
+                                                                       th:text="${ticket.getPrio().toString()}"></span>
+                                </td>
                             </a>
-                            <a th:case="${'HIGH'}" >
-                                <td><p style="display:none">c</p> <span class="badge text-white" style="background-color: #F93154" th:text="${ticket.getPrio().toString()}"></span></td>
+                            <a th:case="${'HIGH'}">
+                                <td><p style="display:none">c</p> <span class="badge text-white"
+                                                                        style="background-color: #F93154"
+                                                                        th:text="${ticket.getPrio().toString()}"></span>
+                                </td>
                             </a>
                         </a>
                         <td th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
@@ -120,13 +129,16 @@
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <a th:switch="${ticket.getStatus().toString()} ">
                             <a th:case="${'OPEN'}">
-                                <td> <span class="badge text-white" style="background-color: #F93154" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-white" style="background-color: #F93154"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'IN_PROCESS'}">
-                                <td> <span class="badge text-white"  style="background-color: #FFEA00" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-white" style="background-color: #FFEA00"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'CLOSED'}">
-                                <td> <span class="badge text-white" style="background-color: #00E676" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-white" style="background-color: #00E676"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                         </a>
                         <td>
