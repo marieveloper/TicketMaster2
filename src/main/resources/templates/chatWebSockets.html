@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -7,15 +8,23 @@
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-
+    <script src="app.js"></script>
     <title>Chat</title>
 </head>
 <body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var user = /*[[${user}]]*/ null;
+    var ticket = /*[[${ticket}]]*/ null;
+    var message = /*[[${message}]]*/ null;
+    /*]]>*/
+</script>
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
 <div id="main-content" class="container">
     <div class="row">
+
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
@@ -29,8 +38,8 @@
         <div class="col-md-6">
             <form class="form-inline">
                 <div class="form-group">
-                    <label for="message">What is your message?</label>
-                    <input type="text" id="message" class="form-control" placeholder="Your message here...">
+                    <label for="messageInput">What is your message?</label>
+                    <input type="text" id="messageInput" class="form-control" placeholder="Your message here...">
                 </div>
                 <button id="send" class="btn btn-default" type="submit">Send</button>
             </form>
@@ -51,5 +60,5 @@
     </div>
 </div>
 
-</body><script th:inline="javascript" src="app.js" ></script>
+</body>
 </html>

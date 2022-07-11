@@ -21,8 +21,8 @@ public class ChatController {
     @Autowired
     MessageService messageService;
 
-    @MessageMapping("/hello")
-    @SendTo("/topic/chatWebSockets{ticketId}")
+   /* @MessageMapping("/hello")
+    @SendTo("/topic/chatWebSocket{ticketId}")
     public Message chatMessage(@PathVariable String ticketId, Message message) throws Exception {
         Thread.sleep(1000); // simulated delay
         message.setText("text");
@@ -30,11 +30,12 @@ public class ChatController {
         messageService.saveMessage(message);
         System.out.print(message);
         return message;
-
-        @MessageMapping("/chat.sendMessage")
-        @SendTo("/topic/public")
-        public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+   } */
+        @MessageMapping("/hello/{ticketId}")
+        @SendTo("/topic/chatWebSocket/{ticketId}")
+        public Message sendMessage(Message chatMessage,@PathVariable String ticketId) {
+        messageService.saveMessage(chatMessage);
             return chatMessage;
         }
-    }
+
 }
