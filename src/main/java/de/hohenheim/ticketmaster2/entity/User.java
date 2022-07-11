@@ -1,10 +1,11 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Set;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class User {
     @Id
@@ -37,6 +38,7 @@ public class User {
     private Set<Role> roles;
 
     @OneToMany(mappedBy="author")
+
     private Set<Message> sendMessages;
 
     public Set<Message> getSendMessages() {
@@ -60,11 +62,11 @@ public class User {
     private Set<Message> receivedMessages;
 
     @OneToMany(mappedBy = "receiver")
-    @JsonManagedReference
+
     private Set<Notification> receivedNotifications;
 
     @OneToMany(mappedBy = "sender")
-    @JsonManagedReference
+
     private Set<Notification> sentNotifications;
 
     public Set<Notification> getReceivedNotifications() {
@@ -85,6 +87,11 @@ public class User {
 
     public User() {
         // empty constructor for Hibernate
+    }
+
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
     public Integer getUserId() {

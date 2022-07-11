@@ -13,10 +13,7 @@ import de.hohenheim.ticketmaster2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -227,37 +224,6 @@ public class HomeController {
     }
 
 
-
-
-    @GetMapping("/chat{ticketId}")
-    public String sendMessage(@RequestParam Integer ticketId,Model model){
-        Ticket ticket = ticketService.getByTicketId(ticketId);
-        model.addAttribute("ticket", ticket);
-        Message message = new Message();
-        model.addAttribute("messages", messageService.findAllMessagesByTicket(ticketId));
-        message.setTicket(ticketService.getByTicketId(ticketId));
-        message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
-        message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
-        message.setText("text");
-        messageService.saveMessage(message);
-        return "chat";
-    }
-
-
-
-
-    @GetMapping("/createMessage{ticketId}")
-    public String createMessage(@RequestParam Integer ticketId,Message message, Model model) {
-        Message newMessage = new Message();
-        model.addAttribute("message", newMessage);
-        message.setTicket(ticketService.getByTicketId(ticketId));
-        message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
-        message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
-        message.setText("text");
-        messageService.saveMessage(message);
-        return "createMessage";
-    }
-
     @GetMapping("/editTicket{ticketId}")
     public String editTicket(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
@@ -278,10 +244,15 @@ public class HomeController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/chatWebSockets")
-    public String chatWebSockets(Model model) {
+    @GetMapping("/chatWebSockets{ticketId}")
+    public String chatWebSockets(@RequestParam Integer ticketId,  Model model) {
+        model.addAttribute("user", userService.getCurrentUser());
+        model.addAttribute("ticket", ticketService.getByTicketId(ticketId));
+        Message message = new Message("bla", userService.getCurrentUser(), userService.getCurrentUser(), ticketService.getByTicketId(ticketId));
+        model.addAttribute("message", message);
         return "chatWebSockets";
     }
+
     @PostMapping("/notificationRead{id}")
     public String notificationRead(@RequestParam Integer id, Model model) {
         Notification notification = notificationService.getNotificationById(id);
@@ -289,6 +260,4 @@ public class HomeController {
         notificationService.saveNotification(notification);
         return "redirect:/notifications";
     }
-
-
 }

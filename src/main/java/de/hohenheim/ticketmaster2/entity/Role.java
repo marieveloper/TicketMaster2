@@ -1,9 +1,11 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Role {
 
@@ -16,6 +18,7 @@ public class Role {
     public Role() {
         //empty constructor for Hibernate
     }
+
 
     public Role(String roleName) {
         this.roleName = roleName;
