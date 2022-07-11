@@ -17,84 +17,86 @@
 <body>
 <div class="container">
     <div>
-    <div>
-        <nav class="top-nav fixed-top" style="background-color: white">
-            <div class="container-fluid">
-                <div class="form-inline" style="float:left">
-                    <a th:href="@{/back}">
-                        <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
-                    </a>
-                </div>
-                <div class="form-inline" style="float:right">
-                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
-                    <a th:href="@{/logout}">
-                        <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
+        <div>
+            <nav class="top-nav fixed-top" style="background-color: white">
+                <div class="container-fluid">
+                    <div class="form-inline" style="float:left">
+                        <a th:href="@{/back}">
+                            <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
+                        </a>
+                    </div>
+                    <div class="form-inline" style="float:right">
+                        <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i>
                         </button>
-                    </a>
-                </div>
+                        <a th:href="@{/logout}">
+                            <button type="button" class="btn btn-primary px-3 mr-2"><i
+                                    class="bi bi-box-arrow-right"></i>
+                            </button>
+                        </a>
+                    </div>
 
-            </div>
-            </br>
-        </nav>
-    </div>
-    <br/><br/><br/><br/>
-    <h3>Ticket details</h3>
-    <hr/>
-
-    <div class="card">
-        <div class="card-body">
-            <div class="col-sm-5">
-                <div class="row">
-                    <p>Ticket ID: </p>
-                    <p th:text="${ticket.getTicketId()}"></p>
                 </div>
-                <div class="row">
-                    <p>Title: </p>
-                    <p th:text="${ticket.getTitle()}"></p>
-                </div>
-                <div class="row">
-                    <p>Prioritization: </p>
-                    <p th:text="${ticket.getPrio()}"></p>
-                </div>
-                <div class="row">
-                    <p>Categorization: </p>
-                    <p th:text="${ticket.getCategorization()}"></p>
-                </div>
-                <div class="row">
-                    <p>Date: </p>
-                    <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"></p>
-                </div>
-                <div class="row">
-                    <p>Admin: </p>
-                    <p th:text="${ticket.getResponsibleAdmin().getUsername()}"></p>
-                </div>
-                <div class="row">
-                    <p>Status: </p>
-                    <p th:text="${ticket.getStatus()}"></p>
-                </div>
-            </div>
-            <div class="col-sm-5">
-                <p>Content: </p>
-                <p th:text="${ticket.getContent()}"></p>
-            </div>
-
+                </br>
+            </nav>
         </div>
-    </div>
-    <br>
-    <a th:href="@{/withdrawTicket(ticketId=${ticket.getTicketId()})}" class="btn btn-danger">Withdraw Ticket</a>
-    <a th:if="${ticket.canRequestStatus()}">
-        <a class="btn btn-primary" th:href="@{/requestStatus(ticketId=${ticket.getTicketId()})}">Request
-            Status</a>
-    </a>
-    <a th:if="${!ticket.canRequestStatus()}">
-        <a class="btn btn-primary" style="background-color:grey">Request Status</a>
-    </a>
+        <br/><br/><br/><br/>
+        <h3>Ticket details</h3>
+        <hr/>
 
-    <a class="btn btn-primary text-white"
-       th:onclick="'window.location.href=\'/chatWebSockets?ticketId=' + ${ticket.getTicketId()} + '\''">Chat</a>
+        <div class="card">
+            <div class="card-body">
+                <div class="col-sm-5">
+                    <div class="row">
+                        <p>Ticket ID: </p>
+                        <p th:text="${ticket.getTicketId()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Title: </p>
+                        <p th:text="${ticket.getTitle()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Prioritization: </p>
+                        <p th:text="${ticket.getPrio()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Categorization: </p>
+                        <p th:text="${ticket.getCategorization()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Date: </p>
+                        <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Admin: </p>
+                        <p th:text="${ticket.getResponsibleAdmin().getUsername()}"></p>
+                    </div>
+                    <div class="row">
+                        <p>Status: </p>
+                        <p th:text="${ticket.getStatus()}"></p>
+                    </div>
+                </div>
+                <div class="col-sm-5">
+                    <p>Content: </p>
+                    <p th:text="${ticket.getContent()}"></p>
+                </div>
 
-    <hr/>
-    <a th:href="@{/back}" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+        <br>
+        <a th:href="@{/withdrawTicket(ticketId=${ticket.getTicketId()})}" class="btn btn-danger">Withdraw Ticket</a>
+        <a th:if="${ticket.canRequestStatus()}">
+            <a class="btn btn-primary" th:href="@{/requestStatus(ticketId=${ticket.getTicketId()})}">Request
+                Status</a>
+        </a>
+        <a th:if="${!ticket.canRequestStatus()}">
+            <a class="btn btn-primary" style="background-color:grey">Request Status</a>
+        </a>
+
+        <a class="btn btn-primary text-white"
+           th:onclick="'window.location.href=\'/chatWebSockets?ticketId=' + ${ticket.getTicketId()} + '\''">Chat</a>
+
+        <hr/>
+        <a th:href="@{/back}" class="btn btn-primary">Back</a>
     </div>
     </br>
 </div>

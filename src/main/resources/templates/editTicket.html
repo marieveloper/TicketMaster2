@@ -35,13 +35,13 @@
             </br>
         </nav>
     </div>
-    <br/><br/></br>
+    <br/><br/></br></br>
     <h3>Edit Ticket</h3>
     <hr/>
 
-<div>
-    <form th:action="@{/editTicket}" th:object="${ticket}" method="GET" class="form-horizontal">
-        </br></form>
+    <div>
+        <form th:action="@{/editTicket}" th:object="${ticket}" method="GET" class="form-horizontal">
+            </br></form>
         <form th:action="@{/saveEditedTicket(ticketId=${ticket.getTicketId()})}" th:object="${ticket}" method="POST">
             <div class="selection"> Select prioritization:
                 <select th:field="*{prio}">
@@ -84,7 +84,7 @@
             <hr>
 
         </form>
-    <a th:href="@{/showTicketAdmin(ticketId=${ticket.getTicketId()})}" class="btn btn-primary">Back</a>
+        <a th:href="@{/showTicketAdmin(ticketId=${ticket.getTicketId()})}" class="btn btn-primary">Back</a>
     </div>
     </br>
 </div>
