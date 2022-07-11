@@ -1,11 +1,9 @@
-// includes the csrf token in all ajax requests of this file
-$(function () {
-    var token = $("meta[name='_csrf']").attr("content");
-    var header = $("meta[name='_csrf_header']").attr("content"); $(document).ajaxSend(function (e, xhr, options) {
-        xhr.setRequestHeader(header, token); });
-});
-
 var stompClient = null;
+/*<![CDATA[*/
+var admin = /*[[${admin}]]*/ "" ;
+var message = /*[[${message}]]*/"";
+
+/*]]>*/
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -16,18 +14,16 @@ function setConnected(connected) {
     else {
         $("#conversation").hide();
     }
-    $("#greetings").html("");
+    $("#chatMessage").html("");
 }
 
 function connect() {
-    var socket = new SockJS('/gs-guide-websocket');
+    var socket = new SockJS('/chatWebSockets');
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/chatWebSockets', function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
-        });
+        stompClient.subscribe('/topic/chatWebSockets', onMessageReceived);
     });
 }
 
@@ -40,11 +36,13 @@ function disconnect() {
 }
 
 function sendName() {
-    stompClient.send("/app/hello", {}, JSON.stringify({'name': $("#name").val()}));
+    stompClient.send("/app/hello", {}, JSON.stringify({'message':  $("#message").val()}));
+    message=$("#message").val();
+    //stompClient.send("/topic/chatWebSocket", {}, JSON.stringify({'name': $("#name").val()}));
 }
 
 function showGreeting(message) {
-    $("#greetings").append("<tr><td>" + message + "</td></tr>");
+    $("#chatMessage").append("<tr><td>" + message + "</td></tr>");
 }
 
 $(function () {

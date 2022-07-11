@@ -9,7 +9,6 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Set;
 
 @Entity

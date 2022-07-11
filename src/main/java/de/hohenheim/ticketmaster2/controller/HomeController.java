@@ -13,10 +13,7 @@ import de.hohenheim.ticketmaster2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -278,8 +275,8 @@ public class HomeController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/chatWebSockets")
-    public String chatWebSockets(Model model) {
+    @GetMapping("/chatWebSockets{ticketId}")
+    public String chatWebSockets(@PathVariable String ticketId,  Model model) {
         return "chatWebSockets";
     }
     @PostMapping("/notificationRead{id}")

@@ -41,53 +41,61 @@
     <h3>Ticket details</h3>
     <hr/>
 
-        <div class="card">
-            <div class="card-body">
+    <div class="card">
+        <div class="card-body">
 
-                    <div class="col-sm-5">
-                        <div class="row">
-                            <p>Ticket ID: </p>
-                            <p th:text=" ${ticket.getTicketId()}"></p>
-                        </div>
-                        <div class="row">
-                            <p>Title: </p>
-                            <p th:text="${ticket.getTitle()}"></p>
-                        </div>
-                        <div class="row">
-                            <p>Prioritization: </p>
-                            <p th:text="${ticket.getPrio()}"></p>
-                        </div>
-                        <div class="row">
-                            <p>Categorization: </p>
-                            <p th:text="${ticket.getCategorization()}"></p>
-                        </div>
-                        <div class="row">
-                            <p>Date: </p>
-                            <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"></p>
-                        </div>
-                        <div class="row">
-                            <p>Admin: </p>
-                            <p th:text="${ticket.getResponsibleAdmin().getUsername()}"></p>
-                        </div>
-                        <div class="row">
-                            <p>Status: </p>
-                            <p th:text="${ticket.getStatus()}"></p>
-                        </div>
-                    </div>
-                    <div class="col-sm-5" >
-                        <p>Content: </p>
-                        <p th:text="${ticket.getContent()}"></p>
-                    </div>
-
+            <div class="col-sm-5">
+                <div class="row">
+                    <p>Ticket ID: </p>
+                    <p th:text=" ${ticket.getTicketId()}"></p>
+                </div>
+                <div class="row">
+                    <p>Title: </p>
+                    <p th:text="${ticket.getTitle()}"></p>
+                </div>
+                <div class="row">
+                    <p>Prioritization: </p>
+                    <p th:text="${ticket.getPrio()}"></p>
+                </div>
+                <div class="row">
+                    <p>Categorization: </p>
+                    <p th:text="${ticket.getCategorization()}"></p>
+                </div>
+                <div class="row">
+                    <p>Date: </p>
+                    <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"></p>
+                </div>
+                <div class="row">
+                    <p>Admin: </p>
+                    <p th:text="${ticket.getResponsibleAdmin().getUsername()}"></p>
+                </div>
+                <div class="row">
+                    <p>Status: </p>
+                    <p th:text="${ticket.getStatus()}"></p>
+                </div>
+            </div>
+            <div class="col-sm-5">
+                <p>Content: </p>
+                <p th:text="${ticket.getContent()}"></p>
             </div>
 
-        <br>
-        <a class="btn btn-primary text-white" th:onclick="'window.location.href=\'/chatWebSockets?ticketId=' + ${ticket.getTicketId()} + '\''">Chat</a>
-        <a class="btn btn-primary text-white" th:href="@{/editTicket(ticketId=${ticket.getTicketId()})}">Edit ticket</a>
+        </div>
+
+
+    </div><br>
+            <a class="btn btn-primary text-white"
+                    th:onclick="'window.location.href=\'/chatWebSockets?ticketId=' + ${ticket.getTicketId()} + '\''">
+                Chat
+            </a>
+            <a class="btn btn-primary text-white" th:href="@{/editTicket(ticketId=${ticket.getTicketId()})}">Edit
+                ticket
+            </a>
 
 
     <hr/>
-    <a th:href="@{/back}" class ="btn btn-primary">Back</a>
+
+    <a th:href="@{/back}" class="btn btn-primary">Back</a>
+
 </div>
 </body>
 </html>
