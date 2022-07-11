@@ -1,5 +1,5 @@
 body {
-    background: linear-gradient(to right, azure,  azure, paleturquoise, paleturquoise, paleturquoise,lightgreen);
+    background: linear-gradient(to right, white, azure,  azure, paleturquoise, paleturquoise, paleturquoise,lightgreen);
     min-height: 100vh;
 }
 .container {
@@ -9,6 +9,12 @@ body {
     box-shadow: 10px 20px 15px silver;
 }
 
+.image-blurred-edge{
+    background-image: url("images/Logo.png");
+    width: 200px;
+    height: 200px;
+}
+
 
 .top-nav{
     box-shadow: 10px 10px 10px silver;
@@ -16,9 +22,6 @@ body {
 }
 
 
-.img{
-    object-fit: cover;
-}
 
 #ticketTable{
     overflow: scroll;

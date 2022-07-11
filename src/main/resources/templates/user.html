@@ -32,13 +32,12 @@
 </head>
 <body>
 <br>
-<div class="container-fluid">
-    <a class="navbar- brand"><img src="images/Logo.png"></a>
-</div>
+
 <div class="container">
     <form th:action="@{/user}" th:object="${user}" method="GET" class="form-horizontal">
         <div>
-
+            <div class="image-blurred-edge">
+            </div>
             <nav class="top-nav fixed-top" style="background: white">
                 <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
                                                                                        style="color: white"></i></a>
@@ -77,16 +76,15 @@
                 </div>
                 <div class="form-inline" style="float:right">
                     <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-bell "></i></button>
-                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                     <a th:href="@{/logout}">
                         <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
                         </button>
                     </a>
                 </div>
-                <br/><br/>
+
             </nav>
         </div>
-        <br/><br/> <br/>
+
         <form th:action="@{/getUserTickets}" method="GET" class="form-horizontal">
             <div class="table-responsive">
                 <table class=" table table-bordered table-striped" id="ticketTable"

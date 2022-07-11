@@ -30,12 +30,11 @@
 </head>
 <body>
 <br/>
-<div class="container-fluid">
-    <a class="navbar- brand" ><img class="img-responsive" src="images/Logo.png"  ></a>
-</div>
 <div class="container">
     <form th:action="@{/admin}" th:object="${admin}" method="GET" class="form-horizontal">
         <div>
+            <div class="image-blurred-edge">
+            </div>
             <nav class="top-nav fixed-top" style="background: white">
                 <a id="adminTickets" class="btn btn-primary text-white" onclick="myFunction()">My Tickets</a>
                 <div class="dropdown">
@@ -83,15 +82,12 @@
                             <span class="badge badge-light" style="color: red">!</span>
                         </a>
                     </a>
-
-                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                     <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2"><i
                             class="bi bi-box-arrow-right"></i></a>
                 </div>
-                <br/><br/>
+
             </nav>
         </div>
-        </br>
 
         <form th:action="@{/findAllTickets}" method="GET" class="form-horizontal">
             <table class="table table-bordered table-striped" id="ticketTable" data-toggle=data-filter-control="true">

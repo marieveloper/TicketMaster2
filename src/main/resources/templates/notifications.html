@@ -2,12 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/adminDashboard.css"/>
+    <link rel="stylesheet" href="/notifications.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
-
-
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
@@ -35,7 +33,6 @@
                     </a>
                 </div>
                 <div class="form-inline" style="float:right">
-                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                     <a th:href="@{/logout}">
                         <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
                         </button>
@@ -55,11 +52,11 @@
         <table class="table table-bordered table-striped" id="notificationTable" data-toggle=data-filter-control="true">
             <thead>
             <tr>
-                <th>Text</th>
-                <th>Sender</th>
-                <th>Ticket Status</th>
-                <th>Notification Status</th>
-                <th>Action</th>
+                <th data-type="string">Text</th>
+                <th data-type="string">Sender</th>
+                <th data-type="string">Ticket Status</th>
+                <th data-type="string">Notification Status</th>
+                <th>Actions</th>
             </tr>
             <tbody>
             <!--TODO get the correct method declarations-->
