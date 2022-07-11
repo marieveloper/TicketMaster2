@@ -174,7 +174,7 @@ public class HomeController {
         ticketService.getByTicketId(ticketId).getResponsibleAdmin().getReceivedNotifications().add(notificationDelete);
         notificationService.saveNotification(notificationDelete);
         ticket.setRequestTime(Timestamp.from(Instant.now()));
-        ticketService.deleteTicket(ticket.getTicketId());
+        ticketService.deleteTicket(ticketId);
         return "redirect:/user";
     }
 
@@ -192,9 +192,10 @@ public class HomeController {
     }
 
     @GetMapping("/requestStatus{ticketId}")
-    public String requestStatus(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
+    public String requestStatus( @RequestParam Integer ticketId, Model model) {
         if (ticketService.canRequestStatus(ticketId)) {
             Notification notificationTest = new Notification();
+            Ticket ticket = ticketService.getByTicketId(ticketId);
             model.addAttribute("notifications", notificationTest);
             notificationTest.setTicket(ticketService.getByTicketId(ticketId));
             notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
@@ -205,6 +206,7 @@ public class HomeController {
             notificationTest.getTicket().getResponsibleAdmin().getReceivedNotifications().add(notificationTest);
             notificationService.saveNotification(notificationTest);
             ticket.setRequestTime(Timestamp.from(Instant.now()));
+            ticketService.saveTicket(ticket);
             return "redirect:/user";
         }
         System.out.print("Too soon ");
