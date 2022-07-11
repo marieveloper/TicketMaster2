@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/dashboard.css"/>
+    <link rel="stylesheet" href="/userDashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -31,8 +31,9 @@
     <title>Userdashboard</title>
 </head>
 <body>
+<br>
 <div class="container-fluid">
-    <a class="navbar- brand" ><img src="images/Logo.png"></a>
+    <a class="navbar- brand"><img src="images/Logo.png"></a>
 </div>
 <div class="container">
     <form th:action="@{/user}" th:object="${user}" method="GET" class="form-horizontal">
@@ -88,45 +89,55 @@
         <br/><br/> <br/>
         <form th:action="@{/getUserTickets}" method="GET" class="form-horizontal">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="ticketTable" data-url="json/data1.json"
+                <table class=" table table-bordered table-striped" id="ticketTable"
                        data-filter-control="true"
                        data-show-search-clear-button="true">
                     <thead>
                     <tr>
+                        <th data-type="=int">Ticket-ID</th>
                         <th data-type="string">Title</th>
-                        <th class="d-none d-md-table-cell" data-type="string">Prioritization</th>
+                        <th  data-type="string">Prioritization</th>
                         <th data-type="string">Incident</th>
                         <th data-type="date">Date</th>
-                        <th class="d-none d-md-table-cell" data-type="string">Admin</th>
+                        <th  data-type="string">Admin</th>
                         <th data-type="string">Status</th>
                         <th>Actions</th>
                     </tr>
                     <tbody id="myTable">
                     <tr th:each="ticket: ${userTickets}">
+                        <td th:text="${ticket.getTicketId()}"/>
                         <td th:text="${ticket.getTitle()}"/>
                         <a th:switch="${ticket.getPrio().toString()} ">
-                            <a th:case="${'LOW'}" >
-                                <td> <span class="badge text-white" style="background-color: #00E676" th:text="${ticket.getPrio().toString()}"></span></td>
+                            <a th:case="${'LOW'}">
+                                <td><span class="badge text-white" style="background-color: #00E676"
+                                          th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
-                            <a th:case="${'MEDIUM'}" >
-                                <td> <p style="display:none">i</p><span class="badge text-white" style="background-color: #FFEA00" th:text="${ticket.getPrio().toString()}"></span></td>
+                            <a th:case="${'MEDIUM'}">
+                                <td><p style="display:none">i</p><span class="badge text-white"
+                                                                       style="background-color: #FFEA00"
+                                                                       th:text="${ticket.getPrio().toString()}"></span>
+                                </td>
                             </a>
-                            <a th:case="${'HIGH'}" >
-                                <td> <span class="badge text-white" style="background-color: #F93154" th:text="${ticket.getPrio().toString()}"></span></td>
+                            <a th:case="${'HIGH'}">
+                                <td><span class="badge text-white" style="background-color: #F93154"
+                                          th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                         </a>
                         <td th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
                         <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
-                        <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
+                        <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <a th:switch="${ticket.getStatus().toString()} ">
                             <a th:case="${'OPEN'}">
-                                <td> <span class="badge text-white" style="background-color: #F93154" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-white" style="background-color: #F93154"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'IN_PROCESS'}">
-                                <td> <span class="badge text-white"  style="background-color: #FFEA00" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-white" style="background-color: #FFEA00"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                             <a th:case="${'CLOSED'}">
-                                <td> <span class="badge text-white" style="background-color: #00E676" th:text="${ticket.getStatus().toString()}"></span></td>
+                                <td><span class="badge text-white" style="background-color: #00E676"
+                                          th:text="${ticket.getStatus().toString()}"></span></td>
                             </a>
                         </a>
                         <td>
@@ -164,9 +175,9 @@
                 {"orderable": true},
                 {"orderable": true},
                 {"orderable": true},
+                {"orderable": true},
                 {
                     "orderable": false,
-                    "searchable": false
                 }],
         });
     });
