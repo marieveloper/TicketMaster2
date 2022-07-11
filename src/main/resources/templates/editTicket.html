@@ -39,7 +39,7 @@
     <h3>Edit Ticket</h3>
     <hr/>
 
-
+<div>
     <form th:action="@{/editTicket}" th:object="${ticket}" method="GET" class="form-horizontal">
         </br></form>
         <form th:action="@{/saveEditedTicket(ticketId=${ticket.getTicketId()})}" th:object="${ticket}" method="POST">
@@ -85,7 +85,10 @@
 
         </form>
     <a th:href="@{/showTicketAdmin(ticketId=${ticket.getTicketId()})}" class="btn btn-primary">Back</a>
-
+    </div>
+    </br>
 </div>
+
+
 </body>
 </html>
