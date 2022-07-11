@@ -108,19 +108,14 @@
                         <td th:text="${ticket.getTicketId()}"/>
                         <td th:text="${ticket.getTitle()}"/>
                         <a th:switch="${ticket.getPrio().toString()} ">
-                            <a th:case="${'LOW'}">
-                                <td><span class="badge text-white" style="background-color: #00E676"
-                                          th:text="${ticket.getPrio().toString()}"></span></td>
+                            <a th:case="${'LOW'}" >
+                                <td> <p style="display:none">a</p><span class="badge text-white" style="background-color: #00E676" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
-                            <a th:case="${'MEDIUM'}">
-                                <td><p style="display:none">i</p><span class="badge text-white"
-                                                                       style="background-color: #FFEA00"
-                                                                       th:text="${ticket.getPrio().toString()}"></span>
-                                </td>
+                            <a th:case="${'MEDIUM'}" >
+                                <td> <p style="display:none">b</p><span class="badge text-white" style="background-color: #FFEA00" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
-                            <a th:case="${'HIGH'}">
-                                <td><span class="badge text-white" style="background-color: #F93154"
-                                          th:text="${ticket.getPrio().toString()}"></span></td>
+                            <a th:case="${'HIGH'}" >
+                                <td><p style="display:none">c</p> <span class="badge text-white" style="background-color: #F93154" th:text="${ticket.getPrio().toString()}"></span></td>
                             </a>
                         </a>
                         <td th:text="${ticket.getCategorization().toString().toLowerCase()}"/>

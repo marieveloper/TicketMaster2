@@ -203,14 +203,14 @@ public class Ticket {
         this.prio = prio;
     }
 
+
     public boolean canRequestStatus(){
-        Date date = new Date(System.currentTimeMillis());
-        date.setHours(date.getHours()-12);
-        if(this.getCreationTime().before(date)){
+        Timestamp timestamp = this.getRequestTime();
+        long deltaTime = System.currentTimeMillis() - timestamp.getTime();
+        if(deltaTime / 3600000 >= 12){
             return true;
-        }else{
-            return false;
         }
+        return false;
     }
 }
 
