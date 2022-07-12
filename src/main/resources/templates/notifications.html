@@ -66,7 +66,7 @@
                     <th>Action</th>
                 </tr>
                 <tbody>
-                <tr th:each="notification: ${adminNotifications}">
+                <tr th:each="notification: ${userNotifications}">
                     <td th:text="${notification.getText()}"/>
                     <td th:text="${notification.getSender().getUsername()}"/>
                     <a th:switch="${notification.getTicket()!=null} ">

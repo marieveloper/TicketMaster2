@@ -89,7 +89,7 @@ public class HomeController {
         return ticketService.getAllTicketsByAdminId(userService.getCurrentUser().getUserId());
     }
 
-    @ModelAttribute("adminNotifications")
+    @ModelAttribute("userNotifications")
     public List<Notification> getCurrentUserNotifications() {
         return notificationService.findAllNotifications().stream()
                 .filter(n -> n.getReceiver().getUserId() == userService.getCurrentUser().getUserId()).toList();
@@ -105,8 +105,8 @@ public class HomeController {
         return messageService.findAllMessages();
     }
 
-    @ModelAttribute("unreadAdminNotifications")
-    public List<Notification> getUnreadAdminNotifications(){
+    @ModelAttribute("unreadUserNotifications")
+    public List<Notification> getUnreadUserNotifications(){
         List<Notification> notifications = notificationService.findAllNotifications().stream()
                 .filter(n -> n.getReceiver().getUserId() == userService.getCurrentUser().getUserId()).toList();
         return notificationService.findAllUnreadNotifications(notifications);
