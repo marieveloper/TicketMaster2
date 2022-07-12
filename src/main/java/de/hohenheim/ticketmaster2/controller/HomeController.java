@@ -234,19 +234,19 @@ public class HomeController {
     public String editTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
         Ticket oldTicket = ticketService.getByTicketId(ticketId);
         Ticket newTicket = ticket;
+        if(newTicket.getStatus()!= oldTicket.getStatus()){
+            Notification notificationStatus = new Notification();
+            notificationStatus.setTicket(oldTicket);
+            notificationStatus.setRead(false);
+            notificationStatus.setReceiver(oldTicket.getUser());
+            notificationStatus.setSender(oldTicket.getResponsibleAdmin());
+            notificationStatus.setText("The status of your Ticket (ID: " + ticketId + ") has changed to "+ newTicket.getStatus());
+            notificationService.saveNotification(notificationStatus);
+        }
         oldTicket.setResponsibleAdmin(newTicket.getResponsibleAdmin());
         oldTicket.setCategorization(newTicket.getCategorization());
         oldTicket.setPrio(newTicket.getPrio());
         oldTicket.setStatus(newTicket.getStatus());
-        if(newTicket.getStatus()!= oldTicket.getStatus()){
-            Notification notificationStatus = new Notification();
-            notificationStatus.setTicket(ticket);
-            notificationStatus.setRead(false);
-            notificationStatus.setReceiver(ticket.getUser());
-            notificationStatus.setSender(ticket.getResponsibleAdmin());
-            notificationStatus.setText("The status of your Ticket (ID: " + ticketId + ") has changed to "+ newTicket.getStatus());
-            notificationService.saveNotification(notificationStatus);
-        }
         ticketService.saveTicket(oldTicket);
         return "redirect:/admin";
     }

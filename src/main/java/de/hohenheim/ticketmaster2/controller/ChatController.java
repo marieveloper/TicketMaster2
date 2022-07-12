@@ -2,7 +2,9 @@ package de.hohenheim.ticketmaster2.controller;
 
 
 import de.hohenheim.ticketmaster2.entity.Message;
+import de.hohenheim.ticketmaster2.entity.Notification;
 import de.hohenheim.ticketmaster2.service.MessageService;
+import de.hohenheim.ticketmaster2.service.NotificationService;
 import de.hohenheim.ticketmaster2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,7 +19,8 @@ import org.springframework.web.util.HtmlUtils;
 public class ChatController {
     @Autowired
     UserService userService;
-
+    @Autowired
+    NotificationService notificationService;
     @Autowired
     MessageService messageService;
 
@@ -35,6 +38,13 @@ public class ChatController {
         @SendTo("/topic/chatWebSocket/{ticketId}")
         public Message sendMessage(Message chatMessage,@PathVariable String ticketId) {
         messageService.saveMessage(chatMessage);
+            Notification notificationMessage = new Notification();
+            notificationMessage.setTicket(chatMessage.getTicket());
+            notificationMessage.setRead(false);
+            notificationMessage.setSender(chatMessage.getAuthor());
+            notificationMessage.setReceiver(chatMessage.getReceiver());
+            notificationMessage.setText("There´s a new chat message concerning ticket " + chatMessage.getTicket().getTicketId());
+            notificationService.saveNotification(notificationMessage);
             return chatMessage;
         }
 
