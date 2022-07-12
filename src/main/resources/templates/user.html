@@ -52,7 +52,7 @@
                             <label><input type="checkbox" name="filter" value="CLOSED"> Closed</label>
                             <hr style="border-color:lightskyblue">
                             <h5 style="color: #555555">Prioritization</h5>
-                            <label><input type="checkbox" name="filter" value="HIGH"> High</label> <br>
+                            <label><input type="checkbox" name="filter" value="zHIGH"> High</label> <br>
                             <label><input type="checkbox" name="filter" value="MEDIUM"> Medium</label> <br>
                             <label><input type="checkbox" name="filter" value="LOW"> Low</label>
                             <hr style="border-color:lightskyblue">
@@ -100,7 +100,7 @@
                     <tr th:each="ticket: ${userTickets}">
                         <td th:text="${ticket.getTitle()}"/>
                         <div>
-                        <td th:if="${ticket.getPrio().toString()} == 'HIGH'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
+                        <td th:if="${ticket.getPrio().toString()} == 'HIGH'" class="incident"><span style="display:none">z</span><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
                         <td th:if="${ticket.getPrio().toString()} == 'MEDIUM'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #FFEA00"></span></td>
                         <td th:if="${ticket.getPrio().toString()} == 'LOW'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
                         </div>
