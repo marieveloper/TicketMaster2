@@ -210,8 +210,8 @@ public class HomeController {
     }
 
     @GetMapping("/imprint")
-    public String workInProgress() {
-        return "redirect:/imprint";
+    public String imprint() {
+        return "imprint";
     }
 
     @GetMapping("/showTicketAdmin{ticketId}")
