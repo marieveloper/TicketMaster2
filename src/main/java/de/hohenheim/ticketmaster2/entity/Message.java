@@ -1,7 +1,12 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.context.annotation.Bean;
+
 import javax.persistence.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Message {
     @Id
@@ -10,26 +15,33 @@ public class Message {
 
     private String text;
 
-    @ManyToOne
-    @JoinColumn(name = "authorId")
+    @ManyToOne(fetch = FetchType.EAGER)
     private User author;
 
-    @ManyToOne
-    @JoinColumn(name = "receiverId")
+    @ManyToOne(fetch = FetchType.EAGER)
     private User receiver;
 
-    @ManyToOne
-    @JoinColumn(name = "ticketId")
+    @ManyToOne(fetch = FetchType.EAGER)
     private Ticket ticket;
 
-    public Message() {
-        //empty constructor for Hibernate
+    public Message(String text, User author, User receiver, Ticket ticket) {
+        this.text = text;
+        this.author = author;
+        this.receiver = receiver;
+        this.ticket = ticket;
     }
 
-    public Integer getId() {
+    public Message() {
+
+    }
+
+    public Integer getMessageId() {
         return messageId;
     }
 
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
+    }
     public String getText() {
         return text;
     }
@@ -54,8 +66,6 @@ public class Message {
         this.author = author;
     }
 
-
-
     public void setReceiver(User receiver) {
         this.receiver = receiver;
     }
@@ -63,4 +73,5 @@ public class Message {
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
     }
+
 }

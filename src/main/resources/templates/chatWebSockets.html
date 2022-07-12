@@ -1,54 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link href="/webjars/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="/dashboard.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
-    <script src="/chat.js"></script>
+    <script src="app.js"></script>
     <title>Chat</title>
 </head>
 <body>
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    var receiver = /*[[${receiver}]]*/ null;
+    var user = /*[[${user}]]*/ null;
+    var ticket = /*[[${ticket}]]*/ null;
+    var message = /*[[${message}]]*/ null;
+    /*]]>*/
+</script>
 <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websocket relies on Javascript being
     enabled. Please enable
     Javascript and reload this page!</h2></noscript>
-<div id="main-content" class="container">
-    <div class="row">
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="connect">WebSocket connection:</label>
-                    <button id="connect" class="btn btn-default" type="submit">Connect</button>
-                    <button id="disconnect" class="btn btn-default" type="submit" disabled="disabled">Disconnect
+<div class="container">
+<div>
+    <nav class="top-nav fixed-top" style="background-color: white">
+        <div class="container-fluid">
+            <div class="form-inline" style="float:left">
+                <a th:href="@{/back}">
+                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
+                </a>
+            </div>
+            <div class="form-inline" style="float:right">
+                <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
+                <a th:href="@{/logout}">
+                    <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
                     </button>
-                </div>
-            </form>
+                </a>
+            </div>
+
         </div>
-        <div class="col-md-6">
-            <form class="form-inline">
-                <div class="form-group">
-                    <label for="name">What is your name?</label>
-                    <input type="text" id="name" class="form-control" placeholder="Your name here...">
-                </div>
-                <button id="send" class="btn btn-default" type="submit">Send</button>
-            </form>
-        </div>
-    </div>
+        </br>
+    </nav>
+</div>
+<br/><br/></br></br>
+<h3>Chat</h3>
+<hr/>
+<div id="main-content" class="container">
     <div class="row">
         <div class="col-md-12">
             <table id="conversation" class="table table-striped">
                 <thead>
                 <tr>
-                    <th>Greetings</th>
+                    <th>Chat message</th>
                 </tr>
                 </thead>
-                <tbody id="greetings">
+                <tbody id="chatMessage">
                 </tbody>
             </table>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form class="form-inline">
+                <div class="form-group">
+                    <label for="messageInput">What is your message?</label>
+                    <input type="text" id="messageInput" class="form-control" placeholder="Your message here...">
+                </div>
+                <button id="send" class="btn btn-primary" type="submit">Send</button>
+            </form>
+        </div>
+    </div>
+
+    <a th:href="@{/showTicketAdmin(ticketId=${ticket.getTicketId()})}" class="btn btn-primary" onclick="disconnect()">Back</a>
 </div>
+    </div>
+
 </body>
 </html>

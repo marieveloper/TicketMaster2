@@ -1,11 +1,13 @@
 package de.hohenheim.ticketmaster2.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Notification {
     @Id
@@ -14,13 +16,13 @@ public class Notification {
 
     private String text;
     @ManyToOne
-    @JsonBackReference
+
     private User sender;
     @ManyToOne
-    @JsonBackReference
+
     private User receiver;
     @ManyToOne
-    @JsonBackReference
+
     @OnDelete(action= OnDeleteAction.CASCADE)
     private Ticket ticket;
 
@@ -32,6 +34,13 @@ public class Notification {
 
     public Notification() {
         //empty constructor for Hibernate
+    }
+    public Notification(String text, User sender, User receiver, Ticket ticket) {
+        this.text = text;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.ticket = ticket;
+        this.read = false;
     }
 
     public Integer getId() {
