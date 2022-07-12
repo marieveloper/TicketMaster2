@@ -209,9 +209,9 @@ public class HomeController {
         return gotoTicket(ticketId, model);
     }
 
-    @GetMapping("/workInProgress")
+    @GetMapping("/imprint")
     public String workInProgress() {
-        return "redirect:/workInProgress";
+        return "redirect:/imprint";
     }
 
     @GetMapping("/showTicketAdmin{ticketId}")
