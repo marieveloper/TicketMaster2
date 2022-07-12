@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/dashboard.css"/>
+    <link rel="stylesheet" href="/adminDashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -29,12 +29,12 @@
     <title>Home</title>
 </head>
 <body>
-<div class="container-fluid">
-    <a class="navbar- brand"><img src="images/Logo.png"></a>
-</div>
+<br/>
 <div class="container">
     <form th:action="@{/admin}" th:object="${admin}" method="GET" class="form-horizontal">
         <div>
+            <div class="image-blurred-edge">
+            </div>
             <nav class="top-nav fixed-top" style="background: white">
                 <a id="adminTickets" class="btn btn-primary text-white" onclick="myFunction()">My Tickets</a>
                 <div class="dropdown">
@@ -82,12 +82,10 @@
                             <span class="badge badge-light" style="color: red">!</span>
                         </a>
                     </a>
-
-                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                     <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2"><i
                             class="bi bi-box-arrow-right"></i></a>
                 </div>
-                <br/><br/>
+
             </nav>
         </div>
         </br>
@@ -96,19 +94,20 @@
             <table class="table table-bordered table-striped" id="ticketTable" data-toggle=data-filter-control="true">
                 <thead>
                 <tr>
-                    <th>Title</th>
-                    <th>Prioritization</th>
-                    <th>Incident</th>
-                    <th>Date</th>
-                    <th>User</th>
-                    <th>Admin</th>
-                    <th>Status</th>
+                    <th data-type="=int">Ticket-ID</th>
+                    <th data-type="string">Title</th>
+                    <th  data-type="string">Prioritization</th>
+                    <th data-type="string">Incident</th>
+                    <th data-type="date">Date</th>
+                    <th  data-type="string">User</th>
+                    <th data-type="string">Admin</th>
+                    <th data-type="string">Status</th>
                     <th>Actions</th>
                 </tr>
 
                 <tbody id="myTable">
-                <!--TODO get the correct method declarations-->
                 <tr th:each="ticket: ${tickets}">
+                    <td th:text="${ticket.getTicketId()}"/>
                     <td th:text="${ticket.getTitle()}"/>
                     <a th:switch="${ticket.getPrio().toString()} ">
                         <a th:case="${'LOW'}">
@@ -179,11 +178,8 @@
                 {"orderable": true},
                 {"orderable": true},
                 {"orderable": true},
-                {
-                    "orderable": false,
-
-                }],
-
+                {"orderable": true},
+                {"orderable": false}]
 
         });
     });

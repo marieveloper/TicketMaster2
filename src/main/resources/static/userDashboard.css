@@ -1,0 +1,190 @@
+body {
+    background: linear-gradient(to right, white, azure,  azure, paleturquoise, paleturquoise, paleturquoise,lightgreen);
+    min-height: 100vh;
+}
+.container {
+    max-width: 100%;
+    background: white;
+
+    box-shadow: 10px 20px 15px silver;
+}
+
+.image-blurred-edge{
+    background-image: url("images/Logo.png");
+    width: 200px;
+    height: 200px;
+}
+
+
+.top-nav{
+    box-shadow: 10px 10px 10px silver;
+
+}
+
+
+
+#ticketTable{
+    overflow: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media ( max-width: 990px )
+and ( orientation: portrait ) {
+
+    @media ( max-width: 20rem )
+    and
+    ( orientation: portrait ) {
+        table {
+            text-align: center;}
+
+        thead {
+            display: none;}
+
+        td {
+            display: block;
+            text-align: left;
+        }
+
+
+
+        td:nth-of-type(5) {
+            padding-bottom:1rem;}
+
+        main, body {
+            background: #fff;
+            box-shadow: none!important;}
+
+        .pad {
+            padding: 0.1rem 0.2rem 0.3rem 0.2rem}
+    }}
+
+@media screen and (max-width: 990px) {
+    table tbody td::before {
+        content: attr(data-label) " ";
+        display: block;
+        min-width: 150px;
+    }
+    thead tr{
+        display: none;
+    }
+
+
+    tr:first-child {
+        border-top: medium solid powderblue;
+    }
+
+    tr {
+        border-bottom: medium solid powderblue;
+
+    }
+    td:nth-child(1)::before {
+        content: "Ticket-ID: ";
+        font-weight: bold;
+    }
+
+    td:nth-child(2)::before {
+        content: "Titel: ";
+        font-weight: bold;
+    }
+
+    td:nth-child(3)::before {
+        content: "Prioritization: ";
+        font-weight: bold;
+    }
+
+    td:nth-child(4)::before {
+        content: "Incident: ";
+        font-weight: bold;
+    }
+
+
+    td:nth-child(5)::before {
+        content: "Date: ";
+        font-weight: bold;
+    }
+
+
+
+    td:nth-child(6)::before {
+        content: "Admin: ";
+        font-weight: bold;
+    }
+
+    td:nth-child(7)::before {
+        content: "Status: ";
+        font-weight: bold;
+    }
+
+    td:nth-child(8)::before {
+        content: "Actions: ";
+        font-weight: bold;
+    }
+
+
+    tbody th {
+        display: block;
+        font-weight: bold;
+    }
+
+
+    td {
+        display: block;
+        min-width: 50%;
+        padding: .2em 2em;
+        text-align: left;
+    }
+
+
+}
+
+
+.btn {
+    padding: 16px;
+    background-color: white;
+    color: white;
+    font-size: 16px;
+    border: none;
+
+}
+
+
+.dropbtn {
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+li {
+    list-style: none;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-submenu:hover .dropdown-content {
+    display: block;
+}
+
+
