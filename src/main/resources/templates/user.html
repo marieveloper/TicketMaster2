@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="/dashboard.css"/>
+    <link rel="stylesheet" href="/userDashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
@@ -31,49 +31,44 @@
     <title>Userdashboard</title>
 </head>
 <body>
-<div class="container-fluid">
-    <a class="navbar- brand"><img src="images/Logo.png"></a>
-</div>
+<br>
+
 <div class="container">
     <form th:action="@{/user}" th:object="${user}" method="GET" class="form-horizontal">
         <div>
-
+            <div class="image-blurred-edge">
+            </div>
             <nav class="top-nav fixed-top" style="background: white">
                 <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
                                                                                        style="color: white"></i></a>
                 <div class="dropdown">
                     <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
                     <div class="dropdown-content">
-                        <li class="menu">
-                            <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
-                            <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="open">Open</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="closed">Closed</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="in process">In process</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu">
-                            <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
-                            <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="high">High</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="medium">Medium</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="low">Low</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu">
-                            <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
-                            <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="inactivity">Inactivity</a>
-                                </li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="technical">Technical
-                                    problems</a>
-                                </li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="other">Other</a></li>
-                            </ul>
-                        </li>
+                        <div class="dropdown-content">
+                            <h5 style="color: #555555">Status</h5>
+                            <label><input type="checkbox" name="filter" value="OPEN"> Open</label> <br>
+                            <label><input type="checkbox" name="filter" value="IN_PROGRESS"> In
+                                progress</label> <br>
+                            <label><input type="checkbox" name="filter" value="CLOSED"> Closed</label>
+                            <hr style="border-color:lightskyblue">
+                            <h5 style="color: #555555">Prioritization</h5>
+                            <label><input type="checkbox" name="filter" value="zHIGH"> High</label> <br>
+                            <label><input type="checkbox" name="filter" value="MEDIUM"> Medium</label> <br>
+                            <label><input type="checkbox" name="filter" value="LOW"> Low</label>
+                            <hr style="border-color:lightskyblue">
+                            <h5 style="color: #555555">Incident</h5>
+                            <label ><input type="checkbox" name="filter" value="inactivity"> Inactivity</label>
+                            <br>
+                            <label><input type="checkbox" name="filter" value="technical_problems"
+                                                                 > Technical Problem</label> <br>
+                            <label><input type="checkbox" name="filter" value="other"> Other</label>
+                            <hr style="border-color:lightskyblue">
+                            <button id="reset" class="btn btn-info mr-2">Reset</button>
+                        </div>
                     </div>
+
                 </div>
+
                 <div class="form-inline" style="float:right">
                     <a th:switch="${unreadUserNotifications.isEmpty()}">
                         <a th:case="${true}" th:href="@{/notifications}" type="button"
@@ -83,74 +78,52 @@
                         <a th:case="${false}" th:href="@{/notifications}" type="button"
                            class="btn btn-info px-3 mr-2"><i
                                 class="bi bi-bell"></i>
-                            <span class="badge badge-light" style="color: red">!</span>
+                            <span class="badge badge-light" style="color: #F93154" th:text="${unreadUserNotifications.size()}"></span>
                         </a>
                     </a>
-                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
                     <a th:href="@{/logout}">
                         <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
                         </button>
                     </a>
                 </div>
-                <br/><br/>
+
             </nav>
         </div>
-        <br/><br/> <br/>
+
         <form th:action="@{/getUserTickets}" method="GET" class="form-horizontal">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="ticketTable" data-url="json/data1.json"
+                <table class="table table-bordered table-striped" id="ticketTable"
                        data-filter-control="true"
                        data-show-search-clear-button="true">
                     <thead>
                     <tr>
+                        <th data-type="=int">Ticket-ID</th>
                         <th data-type="string">Title</th>
-                        <th class="d-none d-md-table-cell" data-type="string">Prioritization</th>
+                        <th  data-type="string">Prioritization</th>
                         <th data-type="string">Incident</th>
                         <th data-type="date">Date</th>
-                        <th class="d-none d-md-table-cell" data-type="string">Admin</th>
+                        <th  data-type="string">Admin</th>
                         <th data-type="string">Status</th>
                         <th>Actions</th>
                     </tr>
                     <tbody id="myTable">
                     <tr th:each="ticket: ${userTickets}">
+                        <td th:text="${ticket.getTicketId()}"/>
                         <td th:text="${ticket.getTitle()}"/>
-                        <a th:switch="${ticket.getPrio().toString()} ">
-                            <a th:case="${'LOW'}">
-                                <td><p style="display:none">a</p><span class="badge text-white"
-                                                                       style="background-color: #00E676"
-                                                                       th:text="${ticket.getPrio().toString()}"></span>
-                                </td>
-                            </a>
-                            <a th:case="${'MEDIUM'}">
-                                <td><p style="display:none">b</p><span class="badge text-white"
-                                                                       style="background-color: #FFEA00"
-                                                                       th:text="${ticket.getPrio().toString()}"></span>
-                                </td>
-                            </a>
-                            <a th:case="${'HIGH'}">
-                                <td><p style="display:none">c</p> <span class="badge text-white"
-                                                                        style="background-color: #F93154"
-                                                                        th:text="${ticket.getPrio().toString()}"></span>
-                                </td>
-                            </a>
-                        </a>
-                        <td th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
+                        <div>
+                        <td th:if="${ticket.getPrio().toString()} == 'HIGH'" class="incident"><span style="display:none">z</span><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
+                        <td th:if="${ticket.getPrio().toString()} == 'MEDIUM'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></td>
+                        <td th:if="${ticket.getPrio().toString()} == 'LOW'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
+                        </div>
+                        <td class="incident" th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
                         <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
-                        <a th:switch="${ticket.getStatus().toString()} ">
-                            <a th:case="${'OPEN'}">
-                                <td><span class="badge text-white" style="background-color: #F93154"
-                                          th:text="${ticket.getStatus().toString()}"></span></td>
-                            </a>
-                            <a th:case="${'IN_PROCESS'}">
-                                <td><span class="badge text-white" style="background-color: #FFEA00"
-                                          th:text="${ticket.getStatus().toString()}"></span></td>
-                            </a>
-                            <a th:case="${'CLOSED'}">
-                                <td><span class="badge text-white" style="background-color: #00E676"
-                                          th:text="${ticket.getStatus().toString()}"></span></td>
-                            </a>
-                        </a>
+                        <div>
+                            <td th:if="${ticket.getStatus().toString()} == 'OPEN'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
+                            <td th:if="${ticket.getStatus().toString()} == 'IN_PROCESS'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></td>
+                            <td th:if="${ticket.getStatus().toString()} == 'CLOSED'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
+
+                        </div>
                         <td>
                             <a class="btn btn-info text-white"
                                th:onclick="'window.location.href=\'/showTicket?ticketId=' + ${ticket.getTicketId()} + '\''">Show
@@ -165,15 +138,6 @@
 
 </div>
 <script>
-    $(document).ready(function () {
-        $(".dropdown-submenu li").on('click', 'a', function () {
-            var value = $(this).attr('data-filter').toLowerCase();
-            console.log(value);
-            $("#myTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
 
 
     $(document).ready(function () {
@@ -186,12 +150,41 @@
                 {"orderable": true},
                 {"orderable": true},
                 {"orderable": true},
+                {"orderable": true},
                 {
                     "orderable": false,
-                    "searchable": false
                 }],
+            paging:false
         });
     });
+
+    $(document).ready(function () {
+        $("#reset").click(function(){
+            $("#myTable tr").show();
+            $( "input:checkbox:checked" ).prop( "checked", false );
+        });
+
+        $("input:checkbox").on("change", function () {
+            var a = $("input:checkbox:checked").map(function () {
+                return $(this).val()
+            }).get()
+            $("#myTable tr").hide();
+            var incidents = $(".incident").filter(function () {
+                var incident = $(this).text(),
+                    index = $.inArray(incident, a);
+                return index >= 0
+            }).parent().show();
+        })
+
+    });
+
+
+    function colorPrio(){
+        var prio = document.getElementById('prio').value;
+       if(prio == "HIGH"){
+           document.getElementById('prio').style.color = "#F93154";
+       }
+    };
 
 </script>
 </body>

@@ -1,5 +1,7 @@
+'use strict';
 var stompClient = null;
-$(window).onload = connect ();
+
+$(window).onload = connect();
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -18,7 +20,7 @@ function connect() {
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/chatWebSocket/' + ticket.ticketId,function(chatMessage){
+        stompClient.subscribe('/topic/chatWebSocket/' + ticket.ticketId, function (chatMessage) {
             console.log("Hallleluja!");
             showGreeting(chatMessage);
         });
@@ -37,18 +39,43 @@ function sendMessage() {
     //stompClient.send("/topic/chatWebSocket", {}, JSON.stringify({'name': $("#name").val()}));
     var chatMessage = {
         'text': $("#messageInput").val(),
-        'author': user,
+        'author': author,
         'receiver': receiver,
         'ticket': ticket
     }
     stompClient.send("/app/hello/" + ticket.ticketId, {}, JSON.stringify(chatMessage));
-   $("#messageInput").val("");
+    $("#messageInput").val("");
 };
 
 function showGreeting(message) {
-    console.log(message);
+
     var chatMessageTest = JSON.parse(message.body);
-    $("#chatMessage").append("<tr><td>" + chatMessageTest.text + "</td></tr>");
+    var list = $("#messageArea");
+    var messageElement = document.createElement('li');
+    messageElement.classList.add('chat-message');
+    var usernameElement = document.createElement('span');
+    usernameElement.classList.add('badge');
+    usernameElement.classList.add('badge-primary');
+    usernameElement.classList.add('text-white');
+    if (chatMessageTest.author.username == author.username) {
+        var usernameText = document.createTextNode("You");
+    } else {
+        var usernameText = document.createTextNode(chatMessageTest.author.username);
+
+    }
+    usernameElement.appendChild(usernameText);
+    messageElement.appendChild(usernameElement);
+    var textElement = document.createElement('p');
+    var messageText = document.createTextNode(chatMessageTest.text);
+
+    textElement.appendChild(messageText);
+
+    messageElement.appendChild(textElement);
+console.log(messageElement);
+    list.append(messageElement);
+
+
+    //$("#chatMessage").append("<tr><td>" + chatMessageTest.text + "</td></tr>");
 };
 
 /*function onMessageReceived(payload) {

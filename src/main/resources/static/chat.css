@@ -1,6 +1,7 @@
 body {
     background: linear-gradient(to right, white,  azure, paleturquoise, paleturquoise, paleturquoise,lightgreen);
-    min-height: 100vh
+    min-height: 100vh;
+    font-size: 50vh;
 }
 .container {
     max-width: 100%;
@@ -15,16 +16,16 @@ body {
 }
 
 .box {
-    width: 300px;
-    margin: 50px auto;
+    width: 300vh;
+    margin: 50vh auto;
     background: #00bfb6;
-    padding: 20px;
+    padding: 20vh;
     text-align: center;
     font-weight: 900;
     color: #fff;
     font-family: arial;
     position: absolute;
-    left: 10px;
+    left: 10vh;
 }
 
 .box_left {

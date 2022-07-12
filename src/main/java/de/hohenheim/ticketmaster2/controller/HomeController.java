@@ -111,6 +111,7 @@ public class HomeController {
                 .filter(n -> n.getReceiver().getUserId() == userService.getCurrentUser().getUserId()).toList();
         return notificationService.findAllUnreadNotifications(notifications);
     }
+    
 
 
 
@@ -253,7 +254,9 @@ public class HomeController {
 
     @GetMapping("/chatWebSockets{ticketId}")
     public String chatWebSockets(@RequestParam Integer ticketId,  Model model) {
-        model.addAttribute("user", userService.getCurrentUser());
+        List<Message> tMessages = messageService.findAllMessages().stream().filter(m -> m.getTicket().getTicketId() == ticketId).toList();
+        model.addAttribute("messages", tMessages);
+        model.addAttribute("author", userService.getCurrentUser());
         model.addAttribute("ticket", ticketService.getByTicketId(ticketId));
         if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             model.addAttribute("receiver", ticketService.getByTicketId(ticketId).getUser());
