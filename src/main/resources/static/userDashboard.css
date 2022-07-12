@@ -188,5 +188,8 @@ li {
 .dropdown-submenu:hover .dropdown-content {
     display: block;
 }
-
+.footer {
+  text-align: center;
+  padding: 3px;
+}
 

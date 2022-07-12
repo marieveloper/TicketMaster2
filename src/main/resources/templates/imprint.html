@@ -14,14 +14,17 @@
 <body>
 <br><br>
 <div>
-    <div class="image-blurred-edge">
-    </div>
     <nav class="top-nav fixed-top" style="background: white">
-        <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
-        <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2"><i
+        <div class="form-inline" style="float:left">
+            <a th:href="@{/back}">
+                <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
+            </a>
+        </div>
+        <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2" style="float: right"><i
                 class="bi bi-box-arrow-right"></i></a>
     </nav>
     <div class="container">
+        <div class="image-blurred-edge"></div>
         <h1>Imprint</h1>
         <br>
         <h2>Contact information</h2>
