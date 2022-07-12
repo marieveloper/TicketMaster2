@@ -66,7 +66,6 @@
                     <th>Action</th>
                 </tr>
                 <tbody>
-                <!--TODO get the correct method declarations-->
                 <tr th:each="notification: ${adminNotifications}">
                     <td th:text="${notification.getText()}"/>
                     <td th:text="${notification.getSender().getUsername()}"/>
