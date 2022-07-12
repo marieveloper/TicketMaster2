@@ -12,6 +12,7 @@ body {
 
 .top-nav{
     box-shadow: 10px 10px 10px silver;
+    padding: 10px;
 }
 
 @media screen and (max-width: 578px) {
