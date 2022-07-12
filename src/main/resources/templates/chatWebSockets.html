@@ -27,7 +27,7 @@
     var author = /*[[${author}]]*/ null;
     var ticket = /*[[${ticket}]]*/ null;
     var timestamp = /*[[${timestamp}]]*/ null;
-    var timeStampString = /*[[${timeStampString}]]*/ null;
+
     var message = /*[[${message}]]*/ null;
     /*]]>*/
 </script>
@@ -64,7 +64,7 @@
         <ul id="messageArea">
             <li class="chat-message"><span class="badge text-white" style="background-color: #5BC0DE">Title:</span>&nbsp;<span th:text="${ticket.getTitle()}"style="background-color: white"></span><p th:text="${ticket.getContent()}"></p></li>
             <a th:each="message : ${messages}" >
-                <li class="chat-message"><span class="badge text-white" style="background-color: #5BC0DE" th:text="${message.getAuthor().getUsername()}"></span><p th:text="${message.getText()}"></p></li>
+                <li class="chat-message"><span class="badge text-white" style="background-color: #5BC0DE" th:text="${message.getAuthor().getUsername()}"></span><span class="timeClass" th:text="${message.getCreationTimeString(message.getCreationTime())}"></span> <p th:text="${message.getText()}"></p></li>
             </a>
 
 
@@ -91,7 +91,12 @@
     </div>
     </br>
 </div>
-
-
+<br>
+<footer>
+    <div class="footer">
+        <p><a th:href="@{/imprint}">Imprint</a></p>
+        <p>©1996-2022 Gebrauchtwaren GmbH</p>
+    </div>
+</footer>
 </body>
 </html>

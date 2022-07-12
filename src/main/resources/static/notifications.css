@@ -18,6 +18,7 @@ body {
 
 .top-nav{
     box-shadow: 10px 10px 10px silver;
+    padding: 10px;
 
 }
 
@@ -145,6 +146,10 @@ li {
 
 .dropdown-submenu:hover .dropdown-content {
     display: block;
+}
+.footer {
+  text-align: center;
+  padding: 3px;
 }
 
 

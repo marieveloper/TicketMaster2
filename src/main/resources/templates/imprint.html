@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/adminDashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -14,21 +15,24 @@
 <body>
 <br><br>
 <div>
-    <div class="image-blurred-edge">
-    </div>
     <nav class="top-nav fixed-top" style="background: white">
-        <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
-        <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2"><i
+        <div class="form-inline" style="float:left">
+            <a th:href="@{/back}">
+                <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
+            </a>
+        </div>
+        <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2" style="float: right"><i
                 class="bi bi-box-arrow-right"></i></a>
     </nav>
     <div class="container">
+        <div class="image-blurred-edge"></div>
         <h1>Imprint</h1>
         <br>
         <h2>Contact information</h2>
         <br>
         <p><b>Gebrauchtwaren GmbH</b></p>
         <p>Gartenstraße 34, 73669 Lichtenwald,</p>
-        <p>Registernummer: B-180022; Business Licence Number: 10040783; Ust-ID: LU 26375245). Die Gesellschaft wird
+        <p>Registernummer: B-180022; Business Licence Number: 10040783; Ust-ID: LU 26375245. <br>Die Gesellschaft wird
             gesetzlich vertreten durch Marius Haueis.</p>
         <br>
         <h2>Copyright</h2>
@@ -40,7 +44,9 @@
             Jede andere Verwendung der auf dieser Website verfügbaren Materialien bzw. Informationen -- inklusive der
             Reproduktion, des Weitervertriebs, der Veränderung und der Veröffentlichung zu einem anderen als dem oben
             genannten Zweck -- ist untersagt, es sei denn, Gebrauchtwaren GmbH hat dem vorher schriftlich zugestimmt.
+
         </p>
+        <br>
     </div>
 </div>
 

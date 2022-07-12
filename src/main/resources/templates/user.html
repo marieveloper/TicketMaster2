@@ -122,7 +122,6 @@
                             <td th:if="${ticket.getStatus().toString()} == 'OPEN'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
                             <td th:if="${ticket.getStatus().toString()} == 'IN_PROCESS'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></td>
                             <td th:if="${ticket.getStatus().toString()} == 'CLOSED'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
-
                         </div>
                         <td>
                             <a class="btn btn-info text-white"
@@ -178,15 +177,14 @@
 
     });
 
-
-    function colorPrio(){
-        var prio = document.getElementById('prio').value;
-       if(prio == "HIGH"){
-           document.getElementById('prio').style.color = "#F93154";
-       }
-    };
-
 </script>
+<br>
+<footer>
+    <div class="footer">
+        <p><a th:href="@{/imprint}">Imprint</a></p>
+        <p>©1996-2022 Gebrauchtwaren GmbH</p>
+    </div>
+</footer>
 </body>
 
 </html>

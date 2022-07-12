@@ -30,36 +30,6 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-@media ( max-width: 990px )
-and ( orientation: portrait ) {
-
-    @media ( max-width: 20rem )
-    and
-    ( orientation: portrait ) {
-        table {
-            text-align: center;}
-
-        thead {
-            display: none;}
-
-        td {
-            display: block;
-            text-align: left;
-        }
-
-
-
-        td:nth-of-type(5) {
-            padding-bottom:1rem;}
-
-        main, body {
-            background: #fff;
-            box-shadow: none!important;}
-
-        .pad {
-            padding: 0.1rem 0.2rem 0.3rem 0.2rem}
-    }}
-
 @media screen and (max-width: 990px) {
     table tbody td::before {
         content: attr(data-label) " ";
@@ -188,5 +158,8 @@ li {
 .dropdown-submenu:hover .dropdown-content {
     display: block;
 }
-
+.footer {
+  text-align: center;
+  padding: 3px;
+}
 

@@ -125,9 +125,9 @@ a {
     font-weight: 600;
     background-color:#5BC0DE;
 }
-#chat-page .chat-message .timeClass {
-
-    font-weight: 600;
+#chat-page .chat-message  .timeClass {
+    font-weight: 400;
+   padding-left: 2em;
     background-color:white;
 }
 
@@ -201,4 +201,8 @@ a {
     .chat-header h2 {
         font-size: 1.1em;
     }
+}
+.footer {
+  text-align: center;
+  padding: 3px;
 }
