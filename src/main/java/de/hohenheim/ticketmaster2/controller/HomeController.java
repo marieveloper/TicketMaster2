@@ -290,5 +290,12 @@ public class HomeController {
         return "redirect:/notifications";
     }
 
+    @GetMapping("/prio")
+    public String getPrioritization(@RequestParam Integer ticketId, Model model){
+        Ticket ticket = ticketService.getByTicketId(ticketId);
+        model.addAttribute("ticket", ticket);
+        return ticket.getStatus().toString();
+    }
+
 
 }

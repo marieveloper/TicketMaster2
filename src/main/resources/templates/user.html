@@ -47,21 +47,21 @@
                         <div class="dropdown-content">
                             <h5 style="color: #555555">Status</h5>
                             <label><input type="checkbox" name="filter" value="OPEN"> Open</label> <br>
-                            <label for="inProgress"><input type="checkbox" name="filter" value="IN_PROGRESS"> In
+                            <label><input type="checkbox" name="filter" value="IN_PROGRESS"> In
                                 progress</label> <br>
                             <label><input type="checkbox" name="filter" value="CLOSED"> Closed</label>
                             <hr style="border-color:lightskyblue">
                             <h5 style="color: #555555">Prioritization</h5>
-                            <label for="high"><input type="checkbox" name="filter" value="HIGH" id="high"> High</label> <br>
-                            <label for="medium"><input type="checkbox" name="filter" value="MEDIUM" id="medium"> Medium</label> <br>
-                            <label for="low"><input type="checkbox" name="filter" value="LOW" id="low"> Low</label>
+                            <label><input type="checkbox" name="filter" value="HIGH"> High</label> <br>
+                            <label><input type="checkbox" name="filter" value="MEDIUM"> Medium</label> <br>
+                            <label><input type="checkbox" name="filter" value="LOW"> Low</label>
                             <hr style="border-color:lightskyblue">
                             <h5 style="color: #555555">Incident</h5>
-                            <label for="inactivity"><input type="checkbox" name="filter" value="inactivity" id="inactivity"> Inactivity</label>
+                            <label ><input type="checkbox" name="filter" value="inactivity"> Inactivity</label>
                             <br>
-                            <label for="technicalProblem"><input type="checkbox" name="filter" value="technical_problems"
-                                                                 id="technicalProblem"> Technical Problem</label> <br>
-                            <label for="other"><input type="checkbox" name="filter" value="other" id="other"> Other</label>
+                            <label><input type="checkbox" name="filter" value="technical_problems"
+                                                                 > Technical Problem</label> <br>
+                            <label><input type="checkbox" name="filter" value="other"> Other</label>
                             <hr style="border-color:lightskyblue">
                             <button id="reset" class="btn btn-info mr-2">Reset</button>
                         </div>
@@ -83,7 +83,7 @@
         <br/><br/> <br/>
         <form th:action="@{/getUserTickets}" method="GET" class="form-horizontal">
             <div class="table-responsive">
-                <table class="table table-bordered table-striped" id="ticketTable" data-url="json/data1.json"
+                <table class="table table-bordered table-striped" id="ticketTable"
                        data-filter-control="true"
                        data-show-search-clear-button="true">
                     <thead>
@@ -99,35 +99,20 @@
                     <tbody id="myTable">
                     <tr th:each="ticket: ${userTickets}">
                         <td th:text="${ticket.getTitle()}"/>
-                        <td class="incident" id="prio" th:text="${ticket.getPrio().toString()}">
-                            <a th:switch="${ticket.getPrio().toString()}">
-                            <a th:case="${'LOW'}" >
-                                <a> <p style="display:none">a</p><span class="badge text-white" style="background-color: #00E676" th:text="${ticket.getPrio().toString()}"></span></a>
-                            </a>
-                            <a th:case="${'MEDIUM'}"  >
-                                <a> <p style="display:none">b</p><span class="badge text-white" style="background-color: #FFEA00" th:text="${ticket.getPrio().toString()}"></span></a>
-                            </a>
-                            <a th:case="${'HIGH'}" >
-                                <a><p style="display:none">c</p> <span class="badge text-white" style="background-color: #F93154" th:text="${ticket.getPrio().toString()}"></span></a>
-                            </a>
-                        </a>
-                        </td>
+                        <div>
+                        <td th:if="${ticket.getPrio().toString()} == 'HIGH'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
+                        <td th:if="${ticket.getPrio().toString()} == 'MEDIUM'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #FFEA00"></span></td>
+                        <td th:if="${ticket.getPrio().toString()} == 'LOW'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
+                        </div>
                         <td class="incident" th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
                         <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
-                        <a type="text" th:switch="${ticket.getStatus().toString()}">
-                            <a th:case="${'OPEN'}">
-                                <td th:text="${ticket.getStatus().toString()}" class="incident" id="open" style="background-color: #F93154"></td>
-                            </a>
-                            <a th:case="${'IN_PROCESS'}">
-                                <td th:text="${ticket.getStatus().toString()}" ><span class="incident" id="inProgress" style="background-color: #FFEA00"
-                                          ></span></td>
-                            </a>
-                            <a th:case="${'CLOSED'}">
-                                <td th:text="${ticket.getStatus().toString()}"><span class="incident" id="closed" style="background-color: #00E676"
-                                          ></span></td>
-                            </a>
-                        </a>
+                        <div>
+                            <td th:if="${ticket.getStatus().toString()} == 'OPEN'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
+                            <td th:if="${ticket.getStatus().toString()} == 'IN_PROCESS'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #FFEA00"></span></td>
+                            <td th:if="${ticket.getStatus().toString()} == 'CLOSED'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
+
+                        </div>
                         <td>
                             <a class="btn btn-info text-white"
                                th:onclick="'window.location.href=\'/showTicket?ticketId=' + ${ticket.getTicketId()} + '\''">Show
@@ -179,7 +164,7 @@
                 return index >= 0
             }).parent().show();
         })
-        
+
     });
 
 
