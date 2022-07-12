@@ -5,7 +5,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Set;
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonIgnoreProperties(value = {"hibernateLazyInitializer", "handler"}, ignoreUnknown = true)
+
 @Entity
 public class User {
     @Id
@@ -36,54 +37,6 @@ public class User {
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
-
-    @OneToMany(mappedBy="author")
-
-    private Set<Message> sendMessages;
-
-    public Set<Message> getSendMessages() {
-        return sendMessages;
-    }
-
-    public void setSendMessages(Set<Message> sendMessages) {
-        this.sendMessages = sendMessages;
-    }
-
-    public Set<Message> getReceivedMessages() {
-        return receivedMessages;
-    }
-
-    public void setReceivedMessages(Set<Message> receivedMessages) {
-        this.receivedMessages = receivedMessages;
-    }
-
-    @OneToMany(mappedBy="receiver")
-
-    private Set<Message> receivedMessages;
-
-    @OneToMany(mappedBy = "receiver")
-
-    private Set<Notification> receivedNotifications;
-
-    @OneToMany(mappedBy = "sender")
-
-    private Set<Notification> sentNotifications;
-
-    public Set<Notification> getReceivedNotifications() {
-        return receivedNotifications;
-    }
-
-    public Set<Notification> getSentNotifications(){
-        return sentNotifications;
-    }
-
-    public void setSentNotifications(Set<Notification> sentNotifications) {
-        this.sentNotifications = sentNotifications;
-    }
-
-    public void setReceivedNotifications(Set<Notification> receivedNotifications) {
-        this.receivedNotifications = receivedNotifications;
-    }
 
     public User() {
         // empty constructor for Hibernate
