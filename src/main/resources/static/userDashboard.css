@@ -18,6 +18,7 @@ body {
 
 .top-nav{
     box-shadow: 10px 10px 10px silver;
+    padding: 10px;
 
 }
 
@@ -161,10 +162,11 @@ and ( orientation: portrait ) {
 }
 
 .dropdown-content {
+    padding: 10px;
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
+    min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }

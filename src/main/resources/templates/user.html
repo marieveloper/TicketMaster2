@@ -113,7 +113,7 @@
                         <td th:text="${ticket.getTitle()}"/>
                         <div>
                         <td th:if="${ticket.getPrio().toString()} == 'HIGH'" class="incident"><span style="display:none">z</span><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
-                        <td th:if="${ticket.getPrio().toString()} == 'MEDIUM'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #FFEA00"></span></td>
+                        <td th:if="${ticket.getPrio().toString()} == 'MEDIUM'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></td>
                         <td th:if="${ticket.getPrio().toString()} == 'LOW'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
                         </div>
                         <td class="incident" th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
@@ -121,7 +121,7 @@
                         <td class="d-none d-md-table-cell" th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
                         <div>
                             <td th:if="${ticket.getStatus().toString()} == 'OPEN'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
-                            <td th:if="${ticket.getStatus().toString()} == 'IN_PROCESS'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #FFEA00"></span></td>
+                            <td th:if="${ticket.getStatus().toString()} == 'IN_PROCESS'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></td>
                             <td th:if="${ticket.getStatus().toString()} == 'CLOSED'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
 
                         </div>
