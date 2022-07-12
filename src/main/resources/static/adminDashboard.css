@@ -181,6 +181,10 @@ and ( orientation: portrait ) {
 li {
     list-style: none;
 }
+span {
+    color: #333;
+    font-weight: 600;
+}
 
 .dropdown:hover .dropdown-content {
     display: block;

@@ -49,36 +49,42 @@
 
                 <div class="col-sm-5">
                     <div class="row">
-                        <p>Ticket ID: </p>
+                        <span>Ticket ID: </span>&nbsp;
                         <p th:text=" ${ticket.getTicketId()}"></p>
                     </div>
                     <div class="row">
-                        <p>Title: </p>
-                        <p th:text="${ticket.getTitle()}"></p>
-                    </div>
-                    <div class="row">
-                        <p>Prioritization: </p>
+                        <span>Prioritization: </span>&nbsp;
                         <p th:text="${ticket.getPrio()}"></p>
                     </div>
                     <div class="row">
-                        <p>Categorization: </p>
+                        <span>Categorization: </span>&nbsp;
                         <p th:text="${ticket.getCategorization()}"></p>
                     </div>
                     <div class="row">
-                        <p>Date: </p>
+                        <span>Date: </span>&nbsp;
                         <p th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"></p>
                     </div>
                     <div class="row">
-                        <p>Admin: </p>
+                        <span>Admin: </span>&nbsp;
                         <p th:text="${ticket.getResponsibleAdmin().getUsername()}"></p>
                     </div>
+
                     <div class="row">
-                        <p>Status: </p>
-                        <p th:text="${ticket.getStatus()}"></p>
+                        <span>User: </span>&nbsp;
+                        <p th:text="${ticket.getUser().getUsername()}"></p>
                     </div>
+                    <div class="row">
+                    <span>Status: </span>&nbsp;
+                    <p th:text="${ticket.getStatus()}"></p>
+                </div>
                 </div>
                 <div class="col-sm-5">
-                    <p>Content: </p>
+
+                        <span>Title: </span>&nbsp;
+                        <p th:text="${ticket.getTitle()}"></p>
+
+
+                    <span>Content: </span>
                     <p th:text="${ticket.getContent()}"></p>
                 </div>
 

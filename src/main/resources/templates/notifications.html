@@ -25,6 +25,7 @@
     <title>Notifications</title>
 </head>
 <body>
+<br/>
 <div class="container">
     <div>
         <div>
@@ -78,7 +79,7 @@
                                 </a>
                                 <a th:case="${'MEDIUM'}">
                                     <td><p style="display:none">i</p><span class="badge text-white"
-                                                                           style="background-color: #FFEA00"
+                                                                           style="background-color: #39C0ED"
                                                                            th:text="${notification.getTicket().getPrio().toString()}"></span>
                                     </td>
                                 </a>
@@ -96,12 +97,12 @@
                     </a>
                     <a th:switch="${notification.isRead()} ">
                         <a th:case="${true}">
-                            <td><span class="badge text-black" style="background-color: lightgray"
+                            <td><span class="badge text-black-50" style="background-color: lightgray"
                                       th:text="${'READ'}"></span>
                             </td>
                         </a>
                         <a th:case="${false}">
-                            <td><span class="badge text-black" style="background-color: lightgray"
+                            <td><span class="badge text-black-50" style="background-color: lightgray"
                                       th:text="${'UNREAD'}"></span>
                             </td>
                         </a>
