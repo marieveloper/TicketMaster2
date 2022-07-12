@@ -41,7 +41,8 @@ function sendMessage() {
         'text': $("#messageInput").val(),
         'author': author,
         'receiver': receiver,
-        'ticket': ticket
+        'ticket': ticket,
+        'creationTime': timestamp
     }
     stompClient.send("/app/hello/" + ticket.ticketId, {}, JSON.stringify(chatMessage));
     $("#messageInput").val("");
@@ -63,15 +64,20 @@ function showGreeting(message) {
         var usernameText = document.createTextNode(chatMessageTest.author.username);
 
     }
+    var messageTimeElement= document.createElement('span');
+    messageTimeElement.classList.add('timeClass');
+    var messageTimeText = document.createTextNode(timeStampString);
+    messageTimeElement.appendChild(messageTimeText);
     usernameElement.appendChild(usernameText);
     messageElement.appendChild(usernameElement);
+    messageElement.appendChild(messageTimeElement);
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(chatMessageTest.text);
 
     textElement.appendChild(messageText);
 
     messageElement.appendChild(textElement);
-console.log(messageElement);
+    console.log(messageElement);
     list.append(messageElement);
     list.scrollTop(list.prop('scrollHeight'));
 
