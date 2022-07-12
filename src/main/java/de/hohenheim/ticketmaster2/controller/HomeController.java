@@ -90,8 +90,9 @@ public class HomeController {
     }
 
     @ModelAttribute("adminNotifications")
-    public List<Notification> getAdminNotifications() {
-        return userService.getCurrentUser().getReceivedNotifications().stream().toList();
+    public List<Notification> getCurrentUserNotifications() {
+        return notificationService.findAllNotifications().stream()
+                .filter(n -> n.getReceiver().getUserId() == userService.getCurrentUser().getUserId()).toList();
     }
 
     @ModelAttribute("notifications")
@@ -106,7 +107,8 @@ public class HomeController {
 
     @ModelAttribute("unreadAdminNotifications")
     public List<Notification> getUnreadAdminNotifications(){
-        List<Notification> notifications = userService.getCurrentUser().getReceivedNotifications().stream().toList();
+        List<Notification> notifications = notificationService.findAllNotifications().stream()
+                .filter(n -> n.getReceiver().getUserId() == userService.getCurrentUser().getUserId()).toList();
         return notificationService.findAllUnreadNotifications(notifications);
     }
 
@@ -167,8 +169,6 @@ public class HomeController {
         notificationDelete.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         notificationDelete.setSender(ticketService.getByTicketId(ticketId).getUser());
         notificationDelete.setRead(false);
-        ticketService.getByTicketId(ticketId).getUser().getSentNotifications().add(notificationDelete);
-        ticketService.getByTicketId(ticketId).getResponsibleAdmin().getReceivedNotifications().add(notificationDelete);
         notificationService.saveNotification(notificationDelete);
         ticket.setRequestTime(Timestamp.from(Instant.now()));
         ticketService.deleteTicket(ticketId);
@@ -199,8 +199,6 @@ public class HomeController {
             notificationTest.setSender(notificationTest.getTicket().getUser());
             notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
             notificationTest.setRead(false);
-            notificationTest.getTicket().getUser().getSentNotifications().add(notificationTest);
-            notificationTest.getTicket().getResponsibleAdmin().getReceivedNotifications().add(notificationTest);
             notificationService.saveNotification(notificationTest);
             ticket.setRequestTime(Timestamp.from(Instant.now()));
             ticketService.saveTicket(ticket);
@@ -248,6 +246,12 @@ public class HomeController {
     public String chatWebSockets(@RequestParam Integer ticketId,  Model model) {
         model.addAttribute("user", userService.getCurrentUser());
         model.addAttribute("ticket", ticketService.getByTicketId(ticketId));
+        if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+            model.addAttribute("receiver", ticketService.getByTicketId(ticketId).getUser());
+        }else{
+            model.addAttribute("receiver", ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+        }
+
         Message message = new Message("bla", userService.getCurrentUser(), userService.getCurrentUser(), ticketService.getByTicketId(ticketId));
         model.addAttribute("message", message);
         return "chatWebSockets";

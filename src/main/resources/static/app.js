@@ -1,4 +1,5 @@
 var stompClient = null;
+$(window).onload = connect ();
 
 function setConnected(connected) {
     $("#connect").prop("disabled", connected);
@@ -19,7 +20,7 @@ function connect() {
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/chatWebSocket/' + ticket.ticketId,function(chatMessage){
             console.log("Hallleluja!");
-            showGreeting(JSON.parse(chatMessage.body).content);
+            showGreeting(chatMessage);
         });
     });
 }
@@ -37,14 +38,17 @@ function sendMessage() {
     var chatMessage = {
         'text': $("#messageInput").val(),
         'author': user,
-        'receiver': user,
+        'receiver': receiver,
         'ticket': ticket
     }
     stompClient.send("/app/hello/" + ticket.ticketId, {}, JSON.stringify(chatMessage));
+   $("#messageInput").val("");
 };
 
 function showGreeting(message) {
-    $("#chatMessage").append("<tr><td>" + message + "</td></tr>");
+    console.log(message);
+    var chatMessageTest = JSON.parse(message.body);
+    $("#chatMessage").append("<tr><td>" + chatMessageTest.text + "</td></tr>");
 };
 
 /*function onMessageReceived(payload) {
