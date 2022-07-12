@@ -267,8 +267,6 @@ public class HomeController {
 
         Message message = new Message("bla", userService.getCurrentUser(), userService.getCurrentUser(), ticketService.getByTicketId(ticketId),Timestamp.from(Instant.now()));
         System.out.print(message.getCreationTime());
-        model.addAttribute("timeStampString", message.getCreationTimeString(Timestamp.from(Instant.now())));
-        System.out.print(message.getCreationTimeString(Timestamp.from(Instant.now())));
         model.addAttribute("message", message);
         return "chatWebSockets";
     }
