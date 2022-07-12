@@ -191,15 +191,15 @@ public class HomeController {
     @GetMapping("/requestStatus{ticketId}")
     public String requestStatus( @RequestParam Integer ticketId, Model model) {
         if (ticketService.canRequestStatus(ticketId)) {
-            Notification notificationTest = new Notification();
+            Notification notificationRequest = new Notification();
             Ticket ticket = ticketService.getByTicketId(ticketId);
-            model.addAttribute("notifications", notificationTest);
-            notificationTest.setTicket(ticketService.getByTicketId(ticketId));
-            notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
-            notificationTest.setSender(notificationTest.getTicket().getUser());
-            notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
-            notificationTest.setRead(false);
-            notificationService.saveNotification(notificationTest);
+            model.addAttribute("notifications", notificationRequest);
+            notificationRequest.setTicket(ticketService.getByTicketId(ticketId));
+            notificationRequest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
+            notificationRequest.setSender(notificationRequest.getTicket().getUser());
+            notificationRequest.setReceiver(notificationRequest.getTicket().getResponsibleAdmin());
+            notificationRequest.setRead(false);
+            notificationService.saveNotification(notificationRequest);
             ticket.setRequestTime(Timestamp.from(Instant.now()));
             ticketService.saveTicket(ticket);
             return "redirect:/user";
@@ -238,6 +238,15 @@ public class HomeController {
         oldTicket.setCategorization(newTicket.getCategorization());
         oldTicket.setPrio(newTicket.getPrio());
         oldTicket.setStatus(newTicket.getStatus());
+        if(newTicket.getStatus()!= oldTicket.getStatus()){
+            Notification notificationStatus = new Notification();
+            notificationStatus.setTicket(ticket);
+            notificationStatus.setRead(false);
+            notificationStatus.setReceiver(ticket.getUser());
+            notificationStatus.setSender(ticket.getResponsibleAdmin());
+            notificationStatus.setText("The status of your Ticket (ID: " + ticketId + ") has changed to "+ newTicket.getStatus());
+            notificationService.saveNotification(notificationStatus);
+        }
         ticketService.saveTicket(oldTicket);
         return "redirect:/admin";
     }
