@@ -2,11 +2,10 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/dashboard.css"/>
+    <link rel="stylesheet" href="/notifications.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
-
 
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -18,97 +17,109 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+            integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
     <title>Notifications</title>
 </head>
 <body>
 <div class="container">
-
     <div>
-        <nav class="top-nav fixed-top" style="background-color: white">
-            <div class="container-fluid">
-                <div class="form-inline" style="float:left">
-                    <a th:href="@{/back}">
-                        <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
-                    </a>
-                </div>
-                <div class="form-inline" style="float:right">
-                    <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i></button>
-                    <a th:href="@{/logout}">
-                        <button type="button" class="btn btn-primary px-3 mr-2"><i class="bi bi-box-arrow-right"></i>
+        <div>
+            <nav class="top-nav fixed-top" style="background-color: white">
+                <div class="container-fluid">
+                    <div class="form-inline" style="float:left">
+                        <a th:href="@{/back}">
+                            <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
+                        </a>
+                    </div>
+                    <div class="form-inline" style="float:right">
+                        <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-person-circle"></i>
                         </button>
-                    </a>
+                        <a th:href="@{/logout}">
+                            <button type="button" class="btn btn-primary px-3 mr-2"><i
+                                    class="bi bi-box-arrow-right"></i>
+                            </button>
+                        </a>
+                    </div>
+
                 </div>
-
-            </div>
-            </br>
-        </nav>
-    </div>
-    <br/><br/></br>
-    <h3>Notifications</h3>
-    <hr/>
+                </br>
+            </nav>
+        </div>
+        <br/><br/></br></br>
+        <h3>Notifications</h3>
+        <hr/>
 
 
-    <div>
-        <table class="table table-bordered table-striped" id="notificationTable" data-toggle=data-filter-control="true">
-            <thead>
-            <tr>
-                <th>Text</th>
-                <th>Sender</th>
-                <th>Ticket Status</th>
-                <th>Notification Status</th>
-                <th>Action</th>
-            </tr>
-            <tbody>
-            <!--TODO get the correct method declarations-->
-            <tr th:each="notification: ${adminNotifications}">
-                <td th:text="${notification.getText()}"/>
-                <td th:text="${notification.getSender().getUsername()}"/>
-                <a th:switch="${notification.getTicket()!=null} ">
-                    <a th:case="${true}">
-                        <a th:switch="${notification.getTicket().getPrio().toString()} ">
-                            <a th:case="${'LOW'}" >
-                                <td> <span class="badge text-white" style="background-color: #00E676" th:text="${notification.getTicket().getPrio().toString()}"></span></td>
-                            </a>
-                            <a th:case="${'MEDIUM'}" >
-                                <td> <p style="display:none">i</p><span class="badge text-white" style="background-color: #FFEA00" th:text="${notification.getTicket().getPrio().toString()}"></span></td>
-                            </a>
-                            <a th:case="${'HIGH'}" >
-                                <td> <span class="badge text-white" style="background-color: #F93154" th:text="${notification.getTicket().getPrio().toString()}"></span></td>
+        <div>
+            <table class="table table-bordered table-striped" id="notificationTable"
+                   data-toggle=data-filter-control="true">
+                <thead>
+                <tr>
+                    <th>Text</th>
+                    <th>Sender</th>
+                    <th>Ticket Status</th>
+                    <th>Notification Status</th>
+                    <th>Action</th>
+                </tr>
+                <tbody>
+                <tr th:each="notification: ${userNotifications}">
+                    <td th:text="${notification.getText()}"/>
+                    <td th:text="${notification.getSender().getUsername()}"/>
+                    <a th:switch="${notification.getTicket()!=null} ">
+                        <a th:case="${true}">
+                            <a th:switch="${notification.getTicket().getPrio().toString()} ">
+                                <a th:case="${'LOW'}">
+                                    <td><span class="badge text-white" style="background-color: #00E676"
+                                              th:text="${notification.getTicket().getPrio().toString()}"></span></td>
+                                </a>
+                                <a th:case="${'MEDIUM'}">
+                                    <td><p style="display:none">i</p><span class="badge text-white"
+                                                                           style="background-color: #FFEA00"
+                                                                           th:text="${notification.getTicket().getPrio().toString()}"></span>
+                                    </td>
+                                </a>
+                                <a th:case="${'HIGH'}">
+                                    <td><span class="badge text-white" style="background-color: #F93154"
+                                              th:text="${notification.getTicket().getPrio().toString()}"></span></td>
+                                </a>
                             </a>
                         </a>
+                        <a th:case="${false}">
+                            <td><span class="badge text-black-50" style="background-color: indianred"
+                                      th:text="${'WITHDRAWN'}"></span>
+                            </td>
+                        </a>
                     </a>
-                    <a th:case="${false}">
-                        <td><span class="badge text-black-50" style="background-color: indianred"
-                                  th:text="${'WITHDRAWN'}"></span>
-                        </td>
-                    </a>
-                </a>
-                <a th:switch="${notification.isRead()} ">
-                    <a th:case="${true}">
-                        <td><span class="badge text-black" style="background-color: lightgray"
-                                  th:text="${'READ'}"></span>
-                        </td>
-                    </a>
-                    <a th:case="${false}">
-                        <td><span class="badge text-black" style="background-color: lightgray"
-                                  th:text="${'UNREAD'}"></span>
-                        </td>
-                    </a>
+                    <a th:switch="${notification.isRead()} ">
+                        <a th:case="${true}">
+                            <td><span class="badge text-black" style="background-color: lightgray"
+                                      th:text="${'READ'}"></span>
+                            </td>
+                        </a>
+                        <a th:case="${false}">
+                            <td><span class="badge text-black" style="background-color: lightgray"
+                                      th:text="${'UNREAD'}"></span>
+                            </td>
+                        </a>
 
-                    <form th:action="@{/notificationRead(id=${notification.getId()})}" method="POST">
-                        <td>
-                            <button class="btn btn-primary text-white" type="submit">Mark Notification as Read</button>
-                        </td>
-                    </form>
-                </a>
-            </tr>
-            </tbody>
-        </table>
+                        <form th:action="@{/notificationRead(id=${notification.getId()})}" method="POST">
+                            <td>
+                                <button class="btn btn-primary text-white" type="submit">Mark Notification as Read
+                                </button>
+                            </td>
+                        </form>
+                    </a>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <a th:href="@{/back}" class="btn btn-primary">Back</a>
     </div>
-    <a th:href="@{/back}" class="btn btn-primary">Back</a>
+    </br>
 </div>
 <script>
     $(document).ready(function () {

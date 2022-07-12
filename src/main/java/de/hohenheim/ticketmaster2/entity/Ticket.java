@@ -1,5 +1,6 @@
 package de.hohenheim.ticketmaster2.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
@@ -9,9 +10,8 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
 import java.util.Set;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 public class Ticket {
     @Id
@@ -42,12 +42,6 @@ public class Ticket {
 
     private String title;
 
-    @OneToMany(mappedBy = "ticket")
-    @JsonManagedReference
-    private Set<Notification> notifications;
-
-    @OneToMany(mappedBy = "ticket")
-    private Set<Message> messages;
 
     @ManyToOne
     @JoinColumn(name = "userId")
@@ -60,7 +54,17 @@ public class Ticket {
     public Ticket() {
         // empty constructor for Hibernate
     }
-
+public Ticket(IncidentCategorization categorization, Prioritization prio, Timestamp creationTime, Timestamp requestTime, Status status, String content, String title, User user, User responsibleAdmin) {
+        this.categorization = categorization;
+        this.prio = prio;
+        this.creationTime = creationTime;
+        this.requestTime = requestTime;
+        this.status = status;
+        this.content = content;
+        this.title = title;
+        this.user = user;
+        this.responsibleAdmin = responsibleAdmin;
+    }
 
     public Integer getTicketId() {
         return ticketId;
@@ -72,11 +76,7 @@ public class Ticket {
 
     public Prioritization getPrio() {return prio; }
 
-    public Set<Notification> getNotifications() {
-        return notifications;
-    }
 
-    public Set<Message> getMessages() {return messages;}
 
     public User getUser() {
         return user;
@@ -125,11 +125,7 @@ public class Ticket {
         }*/
         this.status = status;
     }
-    public void setNotifications(Set<Notification> notifications) {
-        this.notifications = notifications;
-    }
 
-    public void setMessages(Set<Message> messages) {this.messages = messages; }
 
     @Override
     public String toString() {
@@ -139,7 +135,6 @@ public class Ticket {
                 ", prio=" + prio +
                 ", timestamp=" + creationTime +
                 ", status=" + status +
-                ", notifications=" + notifications +
                 ", user=" + user +
                 '}';
     }

@@ -13,10 +13,7 @@ import de.hohenheim.ticketmaster2.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -92,9 +89,10 @@ public class HomeController {
         return ticketService.getAllTicketsByAdminId(userService.getCurrentUser().getUserId());
     }
 
-    @ModelAttribute("adminNotifications")
-    public List<Notification> getAdminNotifications() {
-        return userService.getCurrentUser().getReceivedNotifications().stream().toList();
+    @ModelAttribute("userNotifications")
+    public List<Notification> getCurrentUserNotifications() {
+        return notificationService.findAllNotifications().stream()
+                .filter(n -> n.getReceiver().getUserId() == userService.getCurrentUser().getUserId()).toList();
     }
 
     @ModelAttribute("notifications")
@@ -107,11 +105,13 @@ public class HomeController {
         return messageService.findAllMessages();
     }
 
-    @ModelAttribute("unreadAdminNotifications")
-    public List<Notification> getUnreadAdminNotifications(){
-        List<Notification> notifications = userService.getCurrentUser().getReceivedNotifications().stream().toList();
+    @ModelAttribute("unreadUserNotifications")
+    public List<Notification> getUnreadUserNotifications(){
+        List<Notification> notifications = notificationService.findAllNotifications().stream()
+                .filter(n -> n.getReceiver().getUserId() == userService.getCurrentUser().getUserId()).toList();
         return notificationService.findAllUnreadNotifications(notifications);
     }
+    
 
 
 
@@ -170,8 +170,6 @@ public class HomeController {
         notificationDelete.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         notificationDelete.setSender(ticketService.getByTicketId(ticketId).getUser());
         notificationDelete.setRead(false);
-        ticketService.getByTicketId(ticketId).getUser().getSentNotifications().add(notificationDelete);
-        ticketService.getByTicketId(ticketId).getResponsibleAdmin().getReceivedNotifications().add(notificationDelete);
         notificationService.saveNotification(notificationDelete);
         ticket.setRequestTime(Timestamp.from(Instant.now()));
         ticketService.deleteTicket(ticketId);
@@ -194,17 +192,15 @@ public class HomeController {
     @GetMapping("/requestStatus{ticketId}")
     public String requestStatus( @RequestParam Integer ticketId, Model model) {
         if (ticketService.canRequestStatus(ticketId)) {
-            Notification notificationTest = new Notification();
+            Notification notificationRequest = new Notification();
             Ticket ticket = ticketService.getByTicketId(ticketId);
-            model.addAttribute("notifications", notificationTest);
-            notificationTest.setTicket(ticketService.getByTicketId(ticketId));
-            notificationTest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
-            notificationTest.setSender(notificationTest.getTicket().getUser());
-            notificationTest.setReceiver(notificationTest.getTicket().getResponsibleAdmin());
-            notificationTest.setRead(false);
-            notificationTest.getTicket().getUser().getSentNotifications().add(notificationTest);
-            notificationTest.getTicket().getResponsibleAdmin().getReceivedNotifications().add(notificationTest);
-            notificationService.saveNotification(notificationTest);
+            model.addAttribute("notifications", notificationRequest);
+            notificationRequest.setTicket(ticketService.getByTicketId(ticketId));
+            notificationRequest.setText("Get Statusupdate for ticket with id: " + ticketId + "!");
+            notificationRequest.setSender(notificationRequest.getTicket().getUser());
+            notificationRequest.setReceiver(notificationRequest.getTicket().getResponsibleAdmin());
+            notificationRequest.setRead(false);
+            notificationService.saveNotification(notificationRequest);
             ticket.setRequestTime(Timestamp.from(Instant.now()));
             ticketService.saveTicket(ticket);
             return "redirect:/user";
@@ -227,37 +223,6 @@ public class HomeController {
     }
 
 
-
-
-    @GetMapping("/chat{ticketId}")
-    public String sendMessage(@RequestParam Integer ticketId,Model model){
-        Ticket ticket = ticketService.getByTicketId(ticketId);
-        model.addAttribute("ticket", ticket);
-        Message message = new Message();
-        model.addAttribute("messages", messageService.findAllMessagesByTicket(ticketId));
-        message.setTicket(ticketService.getByTicketId(ticketId));
-        message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
-        message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
-        message.setText("text");
-        messageService.saveMessage(message);
-        return "chat";
-    }
-
-
-
-
-    @GetMapping("/createMessage{ticketId}")
-    public String createMessage(@RequestParam Integer ticketId,Message message, Model model) {
-        Message newMessage = new Message();
-        model.addAttribute("message", newMessage);
-        message.setTicket(ticketService.getByTicketId(ticketId));
-        message.setAuthor(ticketService.getByTicketId(ticketId).getUser());
-        message.setReceiver(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
-        message.setText("text");
-        messageService.saveMessage(message);
-        return "createMessage";
-    }
-
     @GetMapping("/editTicket{ticketId}")
     public String editTicket(@RequestParam Integer ticketId, Model model) {
         Ticket ticket = ticketService.getByTicketId(ticketId);
@@ -270,6 +235,15 @@ public class HomeController {
     public String editTicket(@ModelAttribute("ticket") Ticket ticket, @RequestParam Integer ticketId, Model model) {
         Ticket oldTicket = ticketService.getByTicketId(ticketId);
         Ticket newTicket = ticket;
+        if(newTicket.getStatus()!= oldTicket.getStatus()){
+            Notification notificationStatus = new Notification();
+            notificationStatus.setTicket(oldTicket);
+            notificationStatus.setRead(false);
+            notificationStatus.setReceiver(oldTicket.getUser());
+            notificationStatus.setSender(oldTicket.getResponsibleAdmin());
+            notificationStatus.setText("The status of your Ticket (ID: " + ticketId + ") has changed to "+ newTicket.getStatus());
+            notificationService.saveNotification(notificationStatus);
+        }
         oldTicket.setResponsibleAdmin(newTicket.getResponsibleAdmin());
         oldTicket.setCategorization(newTicket.getCategorization());
         oldTicket.setPrio(newTicket.getPrio());
@@ -278,10 +252,23 @@ public class HomeController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/chatWebSockets")
-    public String chatWebSockets(Model model) {
+    @GetMapping("/chatWebSockets{ticketId}")
+    public String chatWebSockets(@RequestParam Integer ticketId,  Model model) {
+        List<Message> tMessages = messageService.findAllMessages().stream().filter(m -> m.getTicket().getTicketId() == ticketId).toList();
+        model.addAttribute("messages", tMessages);
+        model.addAttribute("author", userService.getCurrentUser());
+        model.addAttribute("ticket", ticketService.getByTicketId(ticketId));
+        if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
+            model.addAttribute("receiver", ticketService.getByTicketId(ticketId).getUser());
+        }else{
+            model.addAttribute("receiver", ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+        }
+
+        Message message = new Message("bla", userService.getCurrentUser(), userService.getCurrentUser(), ticketService.getByTicketId(ticketId));
+        model.addAttribute("message", message);
         return "chatWebSockets";
     }
+
     @PostMapping("/notificationRead{id}")
     public String notificationRead(@RequestParam Integer id, Model model) {
         Notification notification = notificationService.getNotificationById(id);
@@ -289,13 +276,4 @@ public class HomeController {
         notificationService.saveNotification(notification);
         return "redirect:/notifications";
     }
-
-    @GetMapping("/prio")
-    public String getPrioritization(@RequestParam Integer ticketId, Model model){
-        Ticket ticket = ticketService.getByTicketId(ticketId);
-        model.addAttribute("ticket", ticket);
-        return ticket.getStatus().toString();
-    }
-
-
 }
