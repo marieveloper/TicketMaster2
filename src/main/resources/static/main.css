@@ -123,11 +123,7 @@ a {
     color: #333;
     font-weight: 600;
 }
-#chat-page .chat-message span .badge {
-    text: white;
-    color: #00E676;
-    font-weight: 600;
-}
+
 
 #chat-page .chat-message p {
     color: #43464b;

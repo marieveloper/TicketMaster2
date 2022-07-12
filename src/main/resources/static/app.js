@@ -55,13 +55,13 @@ function showGreeting(message) {
     messageElement.classList.add('chat-message');
     var usernameElement = document.createElement('span');
     usernameElement.classList.add('badge');
+    usernameElement.classList.add('badge-primary');
     usernameElement.classList.add('text-white');
     if (chatMessageTest.author.username == author.username) {
         var usernameText = document.createTextNode("You");
     } else {
         var usernameText = document.createTextNode(chatMessageTest.author.username);
-        console.log("Receiver: " + chatMessageTest.receiver.username);
-        console.log("Author: " + author.username);
+
     }
     usernameElement.appendChild(usernameText);
     messageElement.appendChild(usernameElement);
@@ -71,7 +71,7 @@ function showGreeting(message) {
     textElement.appendChild(messageText);
 
     messageElement.appendChild(textElement);
-
+console.log(messageElement);
     list.append(messageElement);
 
 
