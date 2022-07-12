@@ -60,7 +60,7 @@
     <div class="chat-container">
 
         <ul id="messageArea">
-            <li class="chat-message"><span class="badge text-white" style="background-color: #5BC0DE">Title:</span>&nbsp;<span th:text="${ticket.getTitle()}"></span><p th:text="${ticket.getContent()}"></p></li>
+            <li class="chat-message"><span class="badge text-white" style="background-color: #5BC0DE">Title:</span>&nbsp;<span th:text="${ticket.getTitle()}"style="background-color: white"></span><p th:text="${ticket.getContent()}"></p></li>
             <a th:each="message : ${messages}" >
                 <li class="chat-message"><span class="badge text-white" style="background-color: #5BC0DE" th:text="${message.getAuthor().getUsername()}"></span><p th:text="${message.getText()}"></p></li>
             </a>
@@ -72,7 +72,7 @@
                 <div class="form-group">
                     <div class="input-group clearfix">
 
-                        <input type="text" id="messageInput" class="form-control" placeholder="Your message here...">
+                        <input type="text" id="messageInput" class="form-control" placeholder="Type a message..." minlenght="1">
 
                     <button id="send" class="btn btn-info" type="submit">Send</button></div>
                 </div>

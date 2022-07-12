@@ -73,6 +73,7 @@ function showGreeting(message) {
     messageElement.appendChild(textElement);
 console.log(messageElement);
     list.append(messageElement);
+    list.scrollTop(list.prop('scrollHeight'));
 
 
     //$("#chatMessage").append("<tr><td>" + chatMessageTest.text + "</td></tr>");

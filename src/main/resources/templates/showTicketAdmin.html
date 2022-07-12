@@ -39,7 +39,7 @@
         </div>
         </br></br></br></br>
 
-        <h3>Ticket details</h3>
+        <h3 th:text="${ticket.getTitle()}"></h3>
         <hr/>
 
         <div class="card">
@@ -47,16 +47,19 @@
 
                 <div class="col-sm-5">
                     <div class="row">
-                        <span>Ticket ID: </span>&nbsp;
-                        <p th:text=" ${ticket.getTicketId()}"></p>
+                        <span>Ticket ID: </span>&nbsp;<span>
+                        <p th:text=" ${ticket.getTicketId()}"></p></span>
                     </div>
                     <div class="row">
                         <span>Prioritization: </span>&nbsp;
-                        <p th:text="${ticket.getPrio()}"></p>
+                        <p th:if="${ticket.getPrio().toString()} == 'HIGH'" class="incident"><span style="display:none">z</span><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></p>
+                        <p th:if="${ticket.getPrio().toString()} == 'MEDIUM'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></p>
+                        <p th:if="${ticket.getPrio().toString()} == 'LOW'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></p>
+
                     </div>
                     <div class="row">
                         <span>Categorization: </span>&nbsp;
-                        <p th:text="${ticket.getCategorization()}"></p>
+                        <p th:text="${ticket.getCategorization().toString().toLowerCase()}"></p>
                     </div>
                     <div class="row">
                         <span>Date: </span>&nbsp;
@@ -73,15 +76,14 @@
                     </div>
                     <div class="row">
                     <span>Status: </span>&nbsp;
-                    <p th:text="${ticket.getStatus()}"></p>
+                        <p th:if="${ticket.getStatus().toString()} == 'OPEN'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></p>
+                        <p th:if="${ticket.getStatus().toString()} == 'IN_PROCESS'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></p>
+                        <p th:if="${ticket.getStatus().toString()} == 'CLOSED'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></p>
+
+
                 </div>
                 </div>
                 <div class="col-sm-5">
-
-                        <span>Title: </span>&nbsp;
-                        <p th:text="${ticket.getTitle()}"></p>
-
-
                     <span>Content: </span>
                     <p th:text="${ticket.getContent()}"></p>
                 </div>
