@@ -66,7 +66,7 @@ function showGreeting(message) {
     fillingElement.classList.add("row");
     fillingRight.classList.add("right");
     var messageElement = document.createElement('li');
-    if (chatMessageTest.author.id == author.id) {
+    if (chatMessageTest.author.username == author.username) {
         messageElement.classList.add('chat-message-right');
     } else {
         messageElement.classList.add('chat-message');
