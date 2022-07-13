@@ -63,9 +63,9 @@
 
                 <ul id="messageArea">
                     <div class="row">
-                    <li class="chat-message">
+                    <li class="chat-message" style="background-color: #E0F7FA">
                         <span class="badge text-white" style="background-color: #5BC0DE">Title:</span>&nbsp;
-                        <span th:text="${ticket.getTitle()}" style="background-color: white"></span>
+                        <span th:text="${ticket.getTitle()}" style="background-color: #E0F7FA"></span>
                         <p th:text="${ticket.getContent()}"></p></li>
                     </div>
                     <a th:each="message : ${messages}">
@@ -74,7 +74,7 @@
                                 <div class="row">
                                     <div class="right">
                                         <li class="chat-message-right">
-                                        <span class="badge text-white" style="background-color: #337AB7"
+                                        <span class="badge text-white" style="background-color: #5BC0DE"
                                               th:text="You"></span>
                                         <span class="timeClass"
                                               th:text="${message.getCreationTimeString(message.getCreationTime())}"></span>
@@ -87,7 +87,7 @@
 
                                 <div class="row">
                             <li class="chat-message">
-                                        <span class="badge text-white" style="background-color: #337AB7"
+                                        <span class="badge text-white" style="background-color: #5BC0DE"
                                               th:text="${message.getAuthor().getUsername()}"></span>
                                         <span class="timeClass"
                                               th:text="${message.getCreationTimeString(message.getCreationTime())}"></span>
