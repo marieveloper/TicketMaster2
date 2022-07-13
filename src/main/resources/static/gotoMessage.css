@@ -12,6 +12,7 @@ body {
 
 .top-nav{
     box-shadow: 10px 10px 10px silver;
+    padding: 10px;
 }
 
 @media screen and (max-width: 578px) {
@@ -78,4 +79,8 @@ body {
 {
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
+}
+.footer {
+  text-align: center;
+  padding: 3px;
 }

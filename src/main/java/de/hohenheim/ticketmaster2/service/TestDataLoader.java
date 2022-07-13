@@ -41,7 +41,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
      */
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
-        logger.info("Initialisiere Datenbank mit Testdaten...");
+
 
         // Initialisieren Sie Beispielobjekte und speichern Sie diese über Ihre Services
         Role userRole = new Role("ROLE_USER");

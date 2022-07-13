@@ -164,9 +164,8 @@ public class Ticket {
     public Timestamp getCreationTime() {
         return this.creationTime;
     }
-
-    public String getCreationTimeString(Timestamp timestamp) {
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd, HH:mm:ss").format(timestamp);
+    public String getCreationTimeString(Timestamp timestamp){
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd, HH:mm").format(timestamp);
         return timeStamp;
     }
 

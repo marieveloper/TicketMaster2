@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/error.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous"/>
+    <title>Error Page</title>
+</head>
+<body>
+<br><br><br><br>
+<div class="container">
+    <div class="card">
+        <div class="card-body">
+            <div class=".container">
+                <center><p>Oh no! An error has occurred.</p></center>
+                <br>
+                <center><p>We´re working on finding a solution.</p></center>
+                <center>
+                  <a th:href="@{/back}">
+                        <button type="button" class="btn btn-info px-3 mr-2" style="background-color: black">Return to Dashoard</button>
+                    </a>
+                </center>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

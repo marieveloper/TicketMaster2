@@ -1,0 +1,8 @@
+.container {
+        position: relative;
+        margin-right: auto;
+        margin-left: auto;
+        max-width: 600px;
+        padding: 16px;
+        background-color: #111111;
+    }

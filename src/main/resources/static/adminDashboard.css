@@ -13,7 +13,7 @@ body {
 
 .top-nav{
     box-shadow: 10px 10px 10px silver;
-
+    padding: 10px;
 }
 
 .image-blurred-edge{
@@ -28,35 +28,7 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
-@media ( max-width: 990px )
-and ( orientation: portrait ) {
 
-    @media ( max-width: 20rem )
-    and
-    ( orientation: portrait ) {
-        table {
-            text-align: center;}
-
-        thead {
-            display: none;}
-
-        td {
-            display: block;
-            text-align: left;
-        }
-
-
-
-        td:nth-of-type(5) {
-            padding-bottom:1rem;}
-
-        main, body {
-            background: #fff;
-            box-shadow: none!important;}
-
-        .pad {
-            padding: 0.1rem 0.2rem 0.3rem 0.2rem}
-    }}
 
 @media screen and (max-width: 990px) {
     table tbody td::before {
@@ -151,6 +123,10 @@ and ( orientation: portrait ) {
 
 }
 
+.btn btn-info{
+    background-color:#5BC0DE;
+}
+
 
 .dropbtn {
     padding: 16px;
@@ -164,10 +140,11 @@ and ( orientation: portrait ) {
 }
 
 .dropdown-content {
+    padding: 10px;
     display: none;
     position: absolute;
     background-color: #f1f1f1;
-    min-width: 160px;
+    min-width: 180px;
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
@@ -181,6 +158,10 @@ and ( orientation: portrait ) {
 li {
     list-style: none;
 }
+span {
+    color: #333;
+    font-weight: 600;
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -188,6 +169,10 @@ li {
 
 .dropdown-submenu:hover .dropdown-content {
     display: block;
+}
+.footer {
+  text-align: center;
+  padding: 3px;
 }
 
 

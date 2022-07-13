@@ -13,6 +13,7 @@ body {
 
 .top-nav{
     box-shadow: 10px 10px 10px silver;
+    padding: 10px;
 }
 
 .box {
@@ -67,6 +68,10 @@ body {
     border-bottom: 10px solid transparent;
     left: -19px;
     top: 6px;
+}
+.footer {
+  text-align: center;
+  padding: 3px;
 }
 
 
