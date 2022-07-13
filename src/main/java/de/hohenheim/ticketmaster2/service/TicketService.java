@@ -62,7 +62,7 @@ public class TicketService {
         ticket.setCategorization(incidentCategorization);
         ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
         //TODO!
-        //this.setResponsibleAdminAuto(ticket);
+        this.setResponsibleAdminAuto(ticket);
         ticket.setTitle(title);
         ticket.setContent(content);
         ticket.setPrioAuto();
@@ -134,11 +134,12 @@ public void changeTicketResponsibleAdmin(int ticketId, String username){
         return ticketRepository.findByFilterKeyword(FilterKeyword);
     }
     public void setResponsibleAdminAuto(Ticket ticket) {
+        ticketRepository.save(ticket);
         if (ticket.getCategorization() == IncidentCategorization.TECHNICAL_PROBLEMS) {
             if (ticket.getTicketId() % 2 == 0) {
                 ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
             } else {
-                ticket.setResponsibleAdmin(userService.getUserByUsername("Trump"));
+                ticket.setResponsibleAdmin(userService.getUserByUsername("Merkel"));
             }
         }
         if (ticket.getCategorization() == IncidentCategorization.INACTIVITY) {
