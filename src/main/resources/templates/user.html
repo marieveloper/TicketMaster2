@@ -71,11 +71,11 @@
 
                 <div class="form-inline" style="float:right">
                     <a th:switch="${unreadUserNotifications.isEmpty()}">
-                        <a th:case="${true}" th:href="@{/notifications}" type="button"
+                        <a th:case="${true}" th:href="@{/notifications}"
                            class="btn btn-info px-3 mr-2"><i
                                 class="bi bi-bell"></i>
                         </a>
-                        <a th:case="${false}" th:href="@{/notifications}" type="button"
+                        <a th:case="${false}" th:href="@{/notifications}"
                            class="btn btn-info px-3 mr-2"><i
                                 class="bi bi-bell"></i>
                             <span class="badge badge-light" style="color: #F93154" th:text="${unreadUserNotifications.size()}"></span>
