@@ -61,7 +61,8 @@ public class TicketService {
         ticket.setStatus(Status.OPEN);
         ticket.setCategorization(incidentCategorization);
         ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
-        //ticket.setResponsibleAdminAuto();
+        //TODO!
+        this.setResponsibleAdminAuto(ticket);
         ticket.setTitle(title);
         ticket.setContent(content);
         ticket.setPrioAuto();
@@ -131,6 +132,30 @@ public void changeTicketResponsibleAdmin(int ticketId, String username){
     }
     public List<Ticket> findByFilterKeyword(String FilterKeyword){
         return ticketRepository.findByFilterKeyword(FilterKeyword);
+    }
+    public void setResponsibleAdminAuto(Ticket ticket) {
+        ticketRepository.save(ticket);
+        if (ticket.getCategorization() == IncidentCategorization.TECHNICAL_PROBLEMS) {
+            if (ticket.getTicketId() % 2 == 0) {
+                ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
+            } else {
+                ticket.setResponsibleAdmin(userService.getUserByUsername("Merkel"));
+            }
+        }
+        if (ticket.getCategorization() == IncidentCategorization.INACTIVITY) {
+            if (ticket.getTicketId() % 2 == 0) {
+                ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
+            } else {
+                ticket.setResponsibleAdmin(userService.getUserByUsername("Trump"));
+            }
+        }
+        if (ticket.getCategorization() == IncidentCategorization.OTHER) {
+            if (ticket.getTicketId() % 2 == 0) {
+                ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
+            } else {
+                ticket.setResponsibleAdmin(userService.getUserByUsername("Obama"));
+            }
+        }
     }
 
 

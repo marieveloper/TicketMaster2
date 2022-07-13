@@ -63,7 +63,8 @@
                     <th>Prioritization</th>
                     <th>Ticket-Status</th>
                     <th>Notification Status</th>
-                    <th>Actions</th>
+                    <th colspan="2">Actions</th>
+                    <th style="display: none"> Actions</th>
                 </tr>
                 <tbody>
                 <tr th:each="notification: ${userNotifications}">
@@ -78,13 +79,15 @@
                                 </a>
                                 <a th:case="${'MEDIUM'}">
                                     <td><span class="badge text-white"
-                                                                           style="background-color: #39C0ED"
-                                                                           th:text="${notification.getTicket().getPrio().toString()}"></span>
+                                              style="background-color: #39C0ED"
+                                              th:text="${notification.getTicket().getPrio().toString()}"></span>
                                     </td>
                                 </a>
                                 <a th:case="${'HIGH'}">
-                                    <td><p style="display:none">z</p><span  class="badge text-white" style="background-color: #F93154"
-                                              th:text="${notification.getTicket().getPrio().toString()}"></span></td>
+                                    <td><p style="display:none">z</p><span class="badge text-white"
+                                                                           style="background-color: #F93154"
+                                                                           th:text="${notification.getTicket().getPrio().toString()}"></span>
+                                    </td>
                                 </a>
                             </a>
                             <a th:switch="${notification.getTicket().getStatus().toString()} ">
@@ -121,14 +124,18 @@
                                       th:text="${'UNREAD'}"></span>
                             </td>
                         </a>
-
                         <form th:action="@{/notificationRead(id=${notification.getId()})}" method="POST">
                             <td>
-                                <button class="btn btn-primary text-white" type="submit">Mark Notification as Read
+                                <button class="btn btn-primary text-white">Mark Notification as Read
                                 </button>
                             </td>
                         </form>
                     </a>
+                    <td>
+                        <a th:onclick="'window.location.href=\'/showTicket?ticketId=' + ${notification.getTicket().getTicketId()} + '\''"
+                           class="btn btn-primary text-white">Show Ticket
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -147,6 +154,7 @@
                 {"orderable": true},
                 {"orderable": true},
                 {"orderable": true},
+                {"orderable": false},
                 {
                     "orderable": false,
                 }],

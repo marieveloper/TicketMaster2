@@ -37,16 +37,24 @@ body {
 
     }
 
-    table tbody td tr th ::before {
+    table tbody td::before {
         content: attr(data-label) " ";
         display: block;
-
+        min-width: 150px;
     }
-
-    th {
+    thead tr{
         display: none;
     }
 
+
+    tr:first-child {
+        border-top: medium solid powderblue;
+    }
+
+    tr {
+        border-bottom: medium solid powderblue;
+
+    }
 
     tr:first-child {
         border-top: medium solid powderblue;
