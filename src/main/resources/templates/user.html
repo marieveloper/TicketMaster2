@@ -39,12 +39,17 @@
             <div class="image-blurred-edge">
             </div>
             <nav class="top-nav fixed-top" style="background: white">
-                <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
-                                                                                       style="color: white"></i></a>
+                <a th:if="${user.hasWritingPermission()}">
+                    <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
+                                                                                                         style="color: white"></i></a>
+                </a>
+                <a th:if="${!user.hasWritingPermission()}">
+                    <a title="You have been blocked" class="btn btn-primary" style="background-color:grey">Create Ticket <i class="bi bi-plus-circle" style="color: white"></i></a>
+                </a>
                 <div class="dropdown">
                     <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
                     <div class="dropdown-content">
-                        <div class="dropdown-content">
+                        <form class="dropdown-content" id="filter">
                             <h5 style="color: #555555">Status</h5>
                             <label><input type="checkbox" name="filter" value="OPEN"> Open</label> <br>
                             <label><input type="checkbox" name="filter" value="IN_PROGRESS"> In
@@ -64,7 +69,7 @@
                             <label><input type="checkbox" name="filter" value="other"> Other</label>
                             <hr style="border-color:lightskyblue">
                             <button id="reset" class="btn btn-info mr-2">Reset</button>
-                        </div>
+                        </form>
                     </div>
 
                 </div>
@@ -174,7 +179,12 @@
                 return index >= 0
             }).parent().show();
         })
-
+        $("input:checkbox").on("change", function () {
+        if($("input:checkbox:checked").length < 1) {
+            $("#myTable tr").show();
+            $("input:checkbox:checked").prop("checked", false);
+        };
+        })
     });
 
 </script>

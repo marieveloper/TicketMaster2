@@ -5,11 +5,16 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import de.hohenheim.ticketmaster2.enums.IncidentCategorization;
 import de.hohenheim.ticketmaster2.enums.Prioritization;
 import de.hohenheim.ticketmaster2.enums.Status;
+import de.hohenheim.ticketmaster2.repository.UserRepository;
+import de.hohenheim.ticketmaster2.service.TicketService;
+import de.hohenheim.ticketmaster2.service.UserService;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Set;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
@@ -54,7 +59,8 @@ public class Ticket {
     public Ticket() {
         // empty constructor for Hibernate
     }
-public Ticket(IncidentCategorization categorization, Prioritization prio, Timestamp creationTime, Timestamp requestTime, Status status, String content, String title, User user, User responsibleAdmin) {
+
+    public Ticket(IncidentCategorization categorization, Prioritization prio, Timestamp creationTime, Timestamp requestTime, Status status, String content, String title, User user, User responsibleAdmin) {
         this.categorization = categorization;
         this.prio = prio;
         this.creationTime = creationTime;
@@ -74,8 +80,9 @@ public Ticket(IncidentCategorization categorization, Prioritization prio, Timest
         return categorization;
     }
 
-    public Prioritization getPrio() {return prio; }
-
+    public Prioritization getPrio() {
+        return prio;
+    }
 
 
     public User getUser() {
@@ -104,12 +111,15 @@ public Ticket(IncidentCategorization categorization, Prioritization prio, Timest
     }
 
     public void setPrioAuto() {
-        switch(categorization){
-            case INACTIVITY: this.prio = Prioritization.MEDIUM;
+        switch (categorization) {
+            case INACTIVITY:
+                this.prio = Prioritization.MEDIUM;
                 break;
-            case TECHNICAL_PROBLEMS: this.prio =Prioritization.HIGH;
+            case TECHNICAL_PROBLEMS:
+                this.prio = Prioritization.HIGH;
                 break;
-            case OTHER: this.prio =Prioritization.LOW;
+            case OTHER:
+                this.prio = Prioritization.LOW;
                 break;
         }
         this.prio = prio;
@@ -149,10 +159,9 @@ public Ticket(IncidentCategorization categorization, Prioritization prio, Timest
     }
 
     /**
-     *
      * @return a Timestamp of the creation time. You should probably not use this, use the one that returns a String
      */
-    public Timestamp getCreationTime(){
+    public Timestamp getCreationTime() {
         return this.creationTime;
     }
     public String getCreationTimeString(Timestamp timestamp){
@@ -164,7 +173,7 @@ public Ticket(IncidentCategorization categorization, Prioritization prio, Timest
     public void setCreationTime(Timestamp timestamp) {
         this.creationTime = timestamp;
         this.requestTime = timestamp;
-        }
+    }
 
     public User getResponsibleAdmin() {
         return responsibleAdmin;
@@ -199,14 +208,38 @@ public Ticket(IncidentCategorization categorization, Prioritization prio, Timest
     }
 
 
-    public boolean canRequestStatus(){
+    public boolean canRequestStatus() {
         Timestamp timestamp = this.getRequestTime();
         long deltaTime = System.currentTimeMillis() - timestamp.getTime();
-        if(deltaTime / 3600000 >= 12){
+        if (deltaTime / 3600000 >= 12) {
             return true;
         }
         return false;
     }
+   /* public void setResponsibleAdminAuto() {
+        UserRepository userRepository;
+        if (this.getCategorization() == IncidentCategorization.TECHNICAL_PROBLEMS) {
+            if (this.getTicketId() % 2 == 0) {
+                this.setResponsibleAdmin(admin);
+            } else {
+                this.setResponsibleAdmin(2);
+            }
+        }
+        if (this.getCategorization() == IncidentCategorization.INACTIVITY) {
+            if (this.getTicketId() % 2 == 0) {
+                this.setResponsibleAdmin(userRepository.findByUsername("admin"));
+            } else {
+                this.setResponsibleAdmin(1);
+            }
+        }
+        if (this.getCategorization() == IncidentCategorization.OTHER) {
+            if (this.getTicketId() % 2 == 0) {
+                this.setResponsibleAdmin(admin);
+            } else {
+                this.setResponsibleAdmin(3);
+            }
+        }
+    }*/
 }
 
 

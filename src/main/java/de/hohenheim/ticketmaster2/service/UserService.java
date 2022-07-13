@@ -1,6 +1,7 @@
 package de.hohenheim.ticketmaster2.service;
 
 import de.hohenheim.ticketmaster2.entity.Role;
+import de.hohenheim.ticketmaster2.entity.Ticket;
 import de.hohenheim.ticketmaster2.entity.User;
 import de.hohenheim.ticketmaster2.repository.RoleRepository;
 import de.hohenheim.ticketmaster2.repository.UserRepository;
@@ -95,9 +96,9 @@ public class UserService implements UserDetailsService {
         return grantedAuthorities;
     }
 
-    public boolean hasRole(String roleName, User user){
-        for(Role role: user.getRoles()){
-            if(role.getRoleName().equals(roleName)){
+    public boolean hasRole(String roleName, User user) {
+        for (Role role : user.getRoles()) {
+            if (role.getRoleName().equals(roleName)) {
                 return true;
             }
         }
@@ -105,9 +106,9 @@ public class UserService implements UserDetailsService {
     }
 
 
-    public User createUser(String name,String password, Role role){
-        User user= new User();
-        Set<Role> userRoles =  new HashSet<>();
+    public User createUser(String name, String password, Role role) {
+        User user = new User();
+        Set<Role> userRoles = new HashSet<>();
         userRoles.add(role);
         user.setUsername(name);
         user.setPassword(password);
@@ -116,11 +117,9 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
-    public User getUserById(int id){
+    public User getUserById(int id) {
         return userRepository.getById(id);
     }
-
-   
 
 
 }
