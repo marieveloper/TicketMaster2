@@ -101,6 +101,7 @@ a {
 #chat-page .chat-message {
     padding-left: 68px;
     position: relative;
+
 }
 
 #chat-page .chat-message i {
@@ -131,9 +132,50 @@ a {
     background-color:white;
 }
 
-
-
 #chat-page .chat-message p {
+    color: #43464b;
+}
+/*right*/
+#chat-page .chat-message-right {
+    padding-left: 68px;
+    padding-right: 68px;
+    position: relative;
+    float: right;
+
+
+}
+
+#chat-page .chat-message-right i {
+    position: absolute;
+    width: 42px;
+    height: 42px;
+    overflow: hidden;
+    left: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 18px;
+    line-height: 42px;
+    color: #fff;
+    text-align: center;
+    border-radius: 50%;
+    font-style: normal;
+    text-transform: uppercase;
+}
+
+#chat-page .chat-message-right span {
+
+    font-weight: 600;
+    background-color:#5BC0DE;
+}
+#chat-page .chat-message-right  .timeClass {
+    font-weight: 400;
+    padding-left: 2em;
+    background-color:white;
+}
+
+
+
+#chat-page .chat-message-right p {
     color: #43464b;
 }
 
@@ -201,6 +243,9 @@ a {
     .chat-header h2 {
         font-size: 1.1em;
     }
+}
+.right{
+    float:right;
 }
 .footer {
   text-align: center;
