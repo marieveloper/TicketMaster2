@@ -43,6 +43,7 @@ function disconnect() {
 }
 
 function sendMessage() {
+
     var chatMessage = {
         'text': $("#messageInput").val(),
         'author': author,
@@ -51,8 +52,11 @@ function sendMessage() {
         'creationTime': Date.now()
 
     }
+    if(chatMessage.text.length <1){
+        $("#messageInput").val("");
+    }else{
     stompClient.send("/app/hello/" + ticket.ticketId, {}, JSON.stringify(chatMessage));
-    $("#messageInput").val("");
+    $("#messageInput").val("");}
 };
 
 function showGreeting(message) {
