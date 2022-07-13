@@ -59,35 +59,66 @@
     <hr/>
     <div>
         <div id="chat-page">
-    <div class="chat-container">
+            <div class="chat-container">
 
-        <ul id="messageArea">
-            <li class="chat-message"><span class="badge text-white" style="background-color: #5BC0DE">Title:</span>&nbsp;<span th:text="${ticket.getTitle()}"style="background-color: white"></span><p th:text="${ticket.getContent()}"></p></li>
-            <a th:each="message : ${messages}" >
-                <li class="chat-message"><span class="badge text-white" style="background-color: #5BC0DE" th:text="${message.getAuthor().getUsername()}"></span><span class="timeClass" th:text="${message.getCreationTimeString(message.getCreationTime())}"></span> <p th:text="${message.getText()}"></p></li>
-            </a>
+                <ul id="messageArea">
+                    <div class="row">
+                    <li class="chat-message">
+                        <span class="badge text-white" style="background-color: #5BC0DE">Title:</span>&nbsp;
+                        <span th:text="${ticket.getTitle()}" style="background-color: white"></span>
+                        <p th:text="${ticket.getContent()}"></p></li>
+                    </div>
+                    <a th:each="message : ${messages}">
+                        <a th:if="${message.getAuthor() == author}">
+
+                                <div class="row">
+                                    <div class="right">
+                                        <li class="chat-message-right">
+                                        <span class="badge text-white" style="background-color: #337AB7"
+                                              th:text="You"></span>
+                                        <span class="timeClass"
+                                              th:text="${message.getCreationTimeString(message.getCreationTime())}"></span>
+                                        <p th:text="${message.getText()}"></p></li>
+                                    </div>
+                                </div>
+
+                        </a>
+                        <a th:if="${message.getAuthor() != author}">
+
+                                <div class="row">
+                            <li class="chat-message">
+                                        <span class="badge text-white" style="background-color: #337AB7"
+                                              th:text="${message.getAuthor().getUsername()}"></span>
+                                        <span class="timeClass"
+                                              th:text="${message.getCreationTimeString(message.getCreationTime())}"></span>
+                                        <p th:text="${message.getText()}"></p>
+                            </li>
+                                </div>
+
+                        </a>
+                    </a>
+                </ul>
+                <form id="messageForm" name="messageForm">
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <div class="input-group clearfix">
+
+                                <input type="text" id="messageInput" class="form-control"
+                                       placeholder="Type a message..." minlenght="1">
+
+                                <button id="send" class="btn btn-info" type="submit">Send</button>
+                            </div>
+                        </div>
+                    </form>
+                </form>
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
 
 
-        </ul>
-        <form id="messageForm" name="messageForm">
-            <form class="form-inline">
-                <div class="form-group">
-                    <div class="input-group clearfix">
-
-                        <input type="text" id="messageInput" class="form-control" placeholder="Type a message..." minlenght="1">
-
-                    <button id="send" class="btn btn-info" type="submit">Send</button></div>
-                </div>
-            </form>
-        </form>
-    </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
-
-
-    <a th:href="@{/back}" class="btn btn-primary" onclick="disconnect()">Back</a>
+        <a th:href="@{/back}" class="btn btn-primary" onclick="disconnect()">Back</a>
     </div>
     </br>
 </div>
