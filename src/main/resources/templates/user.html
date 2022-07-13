@@ -39,8 +39,13 @@
             <div class="image-blurred-edge">
             </div>
             <nav class="top-nav fixed-top" style="background: white">
-                <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
-                                                                                       style="color: white"></i></a>
+                <a th:if="${user.hasWritingPermission()}">
+                    <a th:href="@{/createTicket}" class="btn btn-primary">Create Ticket <i class="bi bi-plus-circle"
+                                                                                                         style="color: white"></i></a>
+                </a>
+                <a th:if="${!user.hasWritingPermission()}">
+                    <a title="You have been blocked" class="btn btn-primary" style="background-color:grey">Create Ticket <i class="bi bi-plus-circle" style="color: white"></i></a>
+                </a>
                 <div class="dropdown">
                     <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
                     <div class="dropdown-content">
