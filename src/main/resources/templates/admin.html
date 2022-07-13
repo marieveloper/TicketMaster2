@@ -174,6 +174,12 @@
                 return index >= 0
             }).parent().show();
         })
+        $("input:checkbox").on("change", function () {
+            if($("input:checkbox:checked").length < 1) {
+                $("#myTable tr").show();
+                $("input:checkbox:checked").prop("checked", false);
+            };
+        })
 
     });
 
