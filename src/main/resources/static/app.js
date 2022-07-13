@@ -98,6 +98,8 @@ function showGreeting(message) {
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(chatMessageTest.text);
     textElement.appendChild(messageText);
+    var breakElement = document.createElement('br');
+    messageElement.appendChild(breakElement);
     messageElement.appendChild(textElement);
     if (chatMessageTest.author.username == author.username) {
         fillingRight.appendChild(messageElement);
