@@ -118,6 +118,7 @@ public class HomeController {
     //Mappings----------------------------------------------------------------------------------------------------------
     @GetMapping("/admin")
     public String showAdminDashboard(Model model, String keyword) {
+        model.addAttribute("admin", userService.getCurrentUser());
         model.addAttribute("tickets", ticketService.findAllTickets());
         return "admin";
     }

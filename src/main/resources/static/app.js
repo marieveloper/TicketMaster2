@@ -66,7 +66,7 @@ function showGreeting(message) {
     fillingElement.classList.add("row");
     fillingRight.classList.add("right");
     var messageElement = document.createElement('li');
-    if (chatMessageTest.author.id == author.id) {
+    if (chatMessageTest.author.username == author.username) {
         messageElement.classList.add('chat-message-right');
     } else {
         messageElement.classList.add('chat-message');
@@ -98,6 +98,8 @@ function showGreeting(message) {
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(chatMessageTest.text);
     textElement.appendChild(messageText);
+    var breakElement = document.createElement('br');
+    messageElement.appendChild(breakElement);
     messageElement.appendChild(textElement);
     if (chatMessageTest.author.username == author.username) {
         fillingRight.appendChild(messageElement);

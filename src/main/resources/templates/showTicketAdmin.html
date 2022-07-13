@@ -95,7 +95,7 @@
         <br>
         <a class="btn btn-primary text-white"
            th:onclick="'window.location.href=\'/chatWebSockets?ticketId=' + ${ticket.getTicketId()} + '\''">
-            Chat
+            Chat <i class="bi bi-chat-dots"></i>
         </a>
         <a class="btn btn-primary text-white" th:href="@{/editTicket(ticketId=${ticket.getTicketId()})}">Edit
             ticket
