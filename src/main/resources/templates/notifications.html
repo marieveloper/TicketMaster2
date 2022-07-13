@@ -60,9 +60,10 @@
                 <tr>
                     <th>Text</th>
                     <th>Sender</th>
-                    <th>Ticket Status</th>
+                    <th>Prioritization</th>
+                    <th>Ticket-Status</th>
                     <th>Notification Status</th>
-                    <th>Action</th>
+                    <th>Actions</th>
                 </tr>
                 <tbody>
                 <tr th:each="notification: ${userNotifications}">
@@ -76,14 +77,30 @@
                                               th:text="${notification.getTicket().getPrio().toString()}"></span></td>
                                 </a>
                                 <a th:case="${'MEDIUM'}">
-                                    <td><p style="display:none">i</p><span class="badge text-white"
+                                    <td><span class="badge text-white"
                                                                            style="background-color: #39C0ED"
                                                                            th:text="${notification.getTicket().getPrio().toString()}"></span>
                                     </td>
                                 </a>
                                 <a th:case="${'HIGH'}">
-                                    <td><span class="badge text-white" style="background-color: #F93154"
+                                    <td><p style="display:none">z</p><span  class="badge text-white" style="background-color: #F93154"
                                               th:text="${notification.getTicket().getPrio().toString()}"></span></td>
+                                </a>
+                            </a>
+                            <a th:switch="${notification.getTicket().getStatus().toString()} ">
+                                <a th:case="${'CLOSED'}">
+                                    <td><span class="badge text-white" style="background-color: #00E676"
+                                              th:text="${notification.getTicket().getStatus().toString()}"></span></td>
+                                </a>
+                                <a th:case="${'IN_PROCESS'}">
+                                    <td><p style="display:none">i</p><span class="badge text-white"
+                                                                           style="background-color: #39C0ED"
+                                                                           th:text="${notification.getTicket().getStatus().toString()}"></span>
+                                    </td>
+                                </a>
+                                <a th:case="${'OPEN'}">
+                                    <td><span class="badge text-white" style="background-color: #F93154"
+                                              th:text="${notification.getTicket().getStatus().toString()}"></span></td>
                                 </a>
                             </a>
                         </a>
@@ -123,7 +140,18 @@
 <script>
     $(document).ready(function () {
         $('#notificationTable').DataTable({
-            responsive: true
+            "columns": [{
+                "orderable": true
+            },
+                {"orderable": true},
+                {"orderable": true},
+                {"orderable": true},
+                {"orderable": true},
+                {
+                    "orderable": false,
+                }],
+            responsive: true,
+            paging: false
         });
     });
 </script>
