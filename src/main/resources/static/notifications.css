@@ -67,15 +67,20 @@ body {
     }
 
     td:nth-child(3)::before {
-        content: "Ticket Status: ";
+        content: "Prioritization: ";
         font-weight: bold;
     }
 
     td:nth-child(4)::before {
+        content: "Ticket-Status: ";
+        font-weight: bold;
+    }
+
+    td:nth-child(5)::before {
         content: "Notification Status: ";
         font-weight: bold;
     }
-    td:nth-child(5)::before {
+    td:nth-child(6)::before {
         content: "Actions: ";
         font-weight: bold;
     }
