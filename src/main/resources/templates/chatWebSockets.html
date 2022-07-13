@@ -104,22 +104,25 @@
                             <div class="input-group clearfix">
 
                                 <input type="text" id="messageInput" class="form-control" required="required"
-                                       pattern="[A-Za-z0-9,.:!?;()&öäüÖÄÜ%'/ß={}]{1,50}"
+                                       pattern="[A-Za-z0-9,.:!?;()&öäüÖÄÜ%'/ß={}_-]{1,50}"
                                        placeholder="Type a message...    (max.  255 chars)" minlenght="1">
                                 <a th:if="${!role}">
-                                <a th:if="${ticket.getStatus().toString() == 'CLOSED'}">
+                                    <a th:switch="${ticket.getStatus().toString() == 'CLOSED'}">
 
+                                        <a th:case="${true}">
+                                            <button title="The ticket is already closed" class="btn btn-primary"
+                                                    style="background-color:grey">Send
+                                            </button>
+                                        </a>
 
-                                    <button title="The ticket is already closed" class="btn btn-primary"
-                                            style="background-color:grey">Send
-                                    </button>
-                                    <a th:if="${ticket.getStatus().toString() != 'CLOSED'}">
-                                        <button id="send1" class="btn btn-info" type="submit">Send</button>
+                                        <a th:case="${false}">
+                                            <button id="send1" class="btn btn-info" type="submit">Send</button>
+                                        </a>
                                     </a>
                                 </a>
-                                </a>
                                 <a th:if="${role}">
-                                    <button id="send" class="btn btn-info" type="submit">Send</button></a>
+                                    <button id="send" class="btn btn-info" type="submit">Send</button>
+                                </a>
 
 
                             </div>
