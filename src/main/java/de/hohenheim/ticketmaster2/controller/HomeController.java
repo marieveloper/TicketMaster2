@@ -284,10 +284,25 @@ public class HomeController {
         User user = userService.getUserById(ticketService.getByTicketId(ticketId).getUser().getUserId());
         if(user.hasWritingPermission()){
             user.setWritingPermission(false);
+            Notification notificationBlock = new Notification();
+            notificationBlock.setTicket(ticketService.getByTicketId(ticketId));
+            notificationBlock.setRead(false);
+            notificationBlock.setReceiver(ticketService.getByTicketId(ticketId).getUser());
+            notificationBlock.setSender(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+            notificationBlock.setText("You have been blocked by an admin");
+            notificationService.saveNotification(notificationBlock);
         }else{
             user.setWritingPermission(true);
+            Notification notificationUnblock = new Notification();
+            notificationUnblock.setTicket(ticketService.getByTicketId(ticketId));
+            notificationUnblock.setRead(false);
+            notificationUnblock.setReceiver(ticketService.getByTicketId(ticketId).getUser());
+            notificationUnblock.setSender(ticketService.getByTicketId(ticketId).getResponsibleAdmin());
+            notificationUnblock.setText("You have been unblocked by an admin");
+            notificationService.saveNotification(notificationUnblock);
         }
         userService.saveUser(user);
+
         return "redirect:/back";
     }
 }
