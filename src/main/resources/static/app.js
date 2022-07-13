@@ -65,9 +65,21 @@ function showGreeting(message) {
     var fillingRight = document.createElement("div");
     fillingElement.classList.add("row");
     fillingRight.classList.add("right");
+
+    var fillingElement1 = document.createElement("div");
+    var fillingRight1 = document.createElement("div");
+    fillingElement1.classList.add("row");
+    fillingRight1.classList.add("right");
+
+    var fillingElement2 = document.createElement("div");
+    var fillingRight2 = document.createElement("div");
+    fillingElement2.classList.add("row");
+    fillingRight2.classList.add("right");
+
     var messageElement = document.createElement('li');
     if (chatMessageTest.author.id == author.id) {
         messageElement.classList.add('chat-message-right');
+
     } else {
         messageElement.classList.add('chat-message');
     }
@@ -93,11 +105,17 @@ function showGreeting(message) {
     var messageTimeText = document.createTextNode(dateStr);
     messageTimeElement.appendChild(messageTimeText);
     usernameElement.appendChild(usernameText);
+    messageElement.appendChild(fillingElement1);
+    messageElement.appendChild(fillingRight1);
     messageElement.appendChild(usernameElement);
     messageElement.appendChild(messageTimeElement);
+
+
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(chatMessageTest.text);
     textElement.appendChild(messageText);
+    messageElement.appendChild(fillingElement2);
+    messageElement.appendChild(fillingRight2);
     messageElement.appendChild(textElement);
     if (chatMessageTest.author.username == author.username) {
         fillingRight.appendChild(messageElement);

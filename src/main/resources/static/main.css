@@ -133,6 +133,7 @@ a {
 }
 
 #chat-page .chat-message p {
+    padding-top: 0.5em;
     color: #43464b;
 }
 /*right*/
@@ -146,6 +147,7 @@ a {
 }
 
 #chat-page .chat-message-right i {
+    float:right;
     position: absolute;
     width: 42px;
     height: 42px;
@@ -163,19 +165,22 @@ a {
 }
 
 #chat-page .chat-message-right span {
-
+float:right;
     font-weight: 600;
     background-color:#5BC0DE;
 }
 #chat-page .chat-message-right  .timeClass {
+    float:right;
     font-weight: 400;
-    padding-left: 2em;
+    padding-right: 2em;
     background-color:white;
 }
 
 
 
 #chat-page .chat-message-right p {
+    float:right;
+    padding-top: 0.5em;
     color: #43464b;
 }
 
