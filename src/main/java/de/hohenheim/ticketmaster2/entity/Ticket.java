@@ -216,30 +216,7 @@ public class Ticket {
         }
         return false;
     }
-   /* public void setResponsibleAdminAuto() {
-        UserRepository userRepository;
-        if (this.getCategorization() == IncidentCategorization.TECHNICAL_PROBLEMS) {
-            if (this.getTicketId() % 2 == 0) {
-                this.setResponsibleAdmin(admin);
-            } else {
-                this.setResponsibleAdmin(2);
-            }
-        }
-        if (this.getCategorization() == IncidentCategorization.INACTIVITY) {
-            if (this.getTicketId() % 2 == 0) {
-                this.setResponsibleAdmin(userRepository.findByUsername("admin"));
-            } else {
-                this.setResponsibleAdmin(1);
-            }
-        }
-        if (this.getCategorization() == IncidentCategorization.OTHER) {
-            if (this.getTicketId() % 2 == 0) {
-                this.setResponsibleAdmin(admin);
-            } else {
-                this.setResponsibleAdmin(3);
-            }
-        }
-    }*/
+
 }
 
 

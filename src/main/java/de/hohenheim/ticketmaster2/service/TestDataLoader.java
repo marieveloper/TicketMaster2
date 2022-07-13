@@ -77,7 +77,7 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         normalUser.setUsername("user");
         normalUser.setPassword(passwordEncoder.encode("1234"));
         normalUser.setRoles(userRoles);
-        normalUser.setWritingPermission(false);
+        normalUser.setWritingPermission(true);
         userService.saveUser(normalUser);
 
         User admin = new User();
@@ -86,8 +86,6 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         admin.setRoles(adminRoles);
         userService.saveUser(admin);
         users.add(normalUser);
-
-        //userService.createUser("a",passwordEncoder.encode("a"),adminRole);
 
         ticketService.createTestTickets(users);
 
