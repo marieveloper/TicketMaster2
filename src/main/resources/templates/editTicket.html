@@ -70,19 +70,18 @@
 
             <div class="selection"> Select admin:
                 <select th:field="*{responsibleAdmin}">
-
                     <th:block th:each="admin: ${admins}">
                         <option th:value="${admin.getUserId()}" th:text="${admin.getUsername()}">
                         </option>
                     </th:block>
-
                 </select>
             </div>
             </br>
-            <input type="hidden" th:field="*{ticketId}"/>
-            <button class="btn btn-primary" type="submit">submit</button>
-            <hr>
 
+                </br>
+                <input type="hidden" th:field="*{ticketId}"/>
+                <button class="btn btn-primary" type="submit">submit</button>
+                <hr>
         </form>
         <a th:href="@{/showTicketAdmin(ticketId=${ticket.getTicketId()})}" class="btn btn-primary">Back</a>
     </div>

@@ -97,7 +97,21 @@
 
 
         <hr/>
-
+        <div>
+            <form th:action="@{/userBlock(ticketId=${ticket.getTicketId()})}" method="POST">
+                <a th:switch="${ticket.getUser().hasWritingPermission()} ">
+                    <a th:case="${true}">
+                        <button class="btn btn-danger text-white" type="submit">Block User
+                        </button>
+                    </a>
+                    <a th:case="${false}">
+                        <button class="btn btn-primary text-white" type="submit" >Unblock User
+                        </button>
+                    </a>
+                </a>
+            </form>
+        </div>
+        </br>
         <a th:href="@{/back}" class="btn btn-primary">Back</a>
     </div>
     </br>

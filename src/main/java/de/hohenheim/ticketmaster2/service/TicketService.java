@@ -61,6 +61,7 @@ public class TicketService {
         ticket.setStatus(Status.OPEN);
         ticket.setCategorization(incidentCategorization);
         ticket.setResponsibleAdmin(userService.getUserByUsername("admin"));
+        //ticket.setResponsibleAdminAuto();
         ticket.setTitle(title);
         ticket.setContent(content);
         ticket.setPrioAuto();
@@ -95,10 +96,6 @@ public class TicketService {
             return true;
         }
         return false;
-    }
-
-    public void requestStatus(){
-        //TODO: Comment/Benachrichtigung erzeugen
     }
 
     public void changeTicketPriority(int ticketId){

@@ -46,6 +46,9 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
         // Initialisieren Sie Beispielobjekte und speichern Sie diese über Ihre Services
         Role userRole = new Role("ROLE_USER");
         Role adminRole = new Role("ROLE_ADMIN");
+        Role technicalAdminRole = new Role("ROLE_TECHNICAL_ADMIN");
+        Role inactivityAdminRole = new Role("ROLE_INACTIVITY_ADMIN");
+        Role otherAdminRole = new Role("ROLE_OTHER_ADMIN");
         roleService.saveRole(userRole);
         roleService.saveRole(adminRole);
 
@@ -66,11 +69,15 @@ public class TestDataLoader implements ApplicationListener<ContextRefreshedEvent
             userService.createUser(names.get(i),passwordEncoder.encode( i+"1000"), userRole);
             users.add(userService.getUserByUsername(names.get(i)));
         }
+        userService.getUserByUsername("Trump").getRoles().add(inactivityAdminRole);
+        userService.getUserByUsername("Merkel").getRoles().add(technicalAdminRole);
+        userService.getUserByUsername("Obama").getRoles().add(otherAdminRole);
 
         User normalUser = new User();
         normalUser.setUsername("user");
         normalUser.setPassword(passwordEncoder.encode("1234"));
         normalUser.setRoles(userRoles);
+        normalUser.setWritingPermission(false);
         userService.saveUser(normalUser);
 
         User admin = new User();

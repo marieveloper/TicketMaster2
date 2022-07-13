@@ -1,7 +1,6 @@
 package de.hohenheim.ticketmaster2.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -18,6 +17,16 @@ public class User {
     private String password;
 
     private boolean enabled = true;
+
+    public boolean hasWritingPermission() {
+        return writingPermission;
+    }
+
+    public void setWritingPermission(boolean writingPermission) {
+        this.writingPermission = writingPermission;
+    }
+
+    private boolean writingPermission = true;
 
     public Set<Role> getRoles() {
         return roles;
