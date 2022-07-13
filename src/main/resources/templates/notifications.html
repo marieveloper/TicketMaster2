@@ -123,7 +123,17 @@
 <script>
     $(document).ready(function () {
         $('#notificationTable').DataTable({
-            responsive: true
+            "columns": [{
+                "orderable": true
+            },
+                {"orderable": true},
+                {"orderable": true},
+                {"orderable": true},
+                {
+                    "orderable": false,
+                }],
+            responsive: true,
+            paging: false
         });
     });
 </script>
