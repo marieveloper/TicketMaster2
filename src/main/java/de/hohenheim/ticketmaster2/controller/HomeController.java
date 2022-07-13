@@ -280,7 +280,6 @@ public class HomeController {
     }
     @PostMapping("/userBlock{ticketId}")
     public String userBlock(@RequestParam Integer ticketId, Model model) {
-        System.out.print(ticketId);
         User user = userService.getUserById(ticketService.getByTicketId(ticketId).getUser().getUserId());
         if(user.hasWritingPermission()){
             user.setWritingPermission(false);
