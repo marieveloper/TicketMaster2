@@ -29,7 +29,6 @@ function connect() {
         setConnected(true);
         console.log('Connected: ' + frame);
         stompClient.subscribe('/topic/chatWebSocket/' + ticket.ticketId, function (chatMessage) {
-            console.log("Hallleluja!");
             showGreeting(chatMessage);
         });
     });
@@ -44,7 +43,7 @@ function disconnect() {
 }
 
 function sendMessage() {
-    //stompClient.send("/topic/chatWebSocket", {}, JSON.stringify({'name': $("#name").val()}));
+
     var chatMessage = {
         'text': $("#messageInput").val(),
         'author': author,
@@ -53,8 +52,11 @@ function sendMessage() {
         'creationTime': Date.now()
 
     }
+    if(chatMessage.text.length <1){
+        $("#messageInput").val("");
+    }else{
     stompClient.send("/app/hello/" + ticket.ticketId, {}, JSON.stringify(chatMessage));
-    $("#messageInput").val("");
+    $("#messageInput").val("");}
 };
 
 function showGreeting(message) {
@@ -113,13 +115,9 @@ function showGreeting(message) {
     list.scrollTop(list.prop('scrollHeight'));
 
 
-    //$("#chatMessage").append("<tr><td>" + chatMessageTest.text + "</td></tr>");
 };
 
-/*function onMessageReceived(payload) {
-    var message = JSON.parse(payload.body);
-    $("#chatMessage").append("<tr><td>" + message.message + "</td></tr>");
-}*/
+
 
 
 $(function () {
@@ -133,6 +131,9 @@ $(function () {
         disconnect();
     });
     $("#send").click(function () {
+        sendMessage();
+    });
+    $("#send1").click(function () {
         sendMessage();
     });
 });
