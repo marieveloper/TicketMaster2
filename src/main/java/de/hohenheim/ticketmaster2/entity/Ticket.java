@@ -156,7 +156,7 @@ public Ticket(IncidentCategorization categorization, Prioritization prio, Timest
         return this.creationTime;
     }
     public String getCreationTimeString(Timestamp timestamp){
-        String timeStamp = new SimpleDateFormat("yyyy.MM.dd, HH:mm:ss").format(timestamp);
+        String timeStamp = new SimpleDateFormat("yyyy.MM.dd, HH:mm").format(timestamp);
         return timeStamp;
     }
 

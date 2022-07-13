@@ -1,28 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/adminDashboard.css"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css">
     <title>Imprint</title>
 </head>
 <body>
 <br><br>
-<div class="container">
-<h1>Imprint</h1>
-    <br>
-    <h2>Contact information</h2>
-    <br>
-    <p><b>Gebrauchtwaren GmbH</b></p>
-    <p>Gartenstraße 34, 73669 Lichtenwald,</p>
-    <p>Registernummer: B-180022; Business Licence Number: 10040783; Ust-ID: LU 26375245). Die Gesellschaft wird gesetzlich vertreten durch Marius Haueis.</p>
-    <br>
-    <h2>Copyright</h2>
-    <p>Jedes Website-Design, jeder Text, alle Grafiken, jede Auswahl bzw. jedes Layout davon und jede Software sind rechtlich geschütztes Eigentum von Gebrauchtwaren GmbH. Das Kopieren oder die Reproduktion (inklusive des Ausdrucks auf Papier) der gesamten Website bzw. von Teilen dieser Website werden nur zu dem Zweck gestattet, ein Ticket zu erstellen, anzuzeigen oder zu löschen.
+<div>
+    <nav class="top-nav fixed-top" style="background: white">
+        <div class="form-inline" style="float:left">
+            <a th:href="@{/back}">
+                <button type="button" class="btn btn-info px-3 mr-2"><i class="bi bi-house"></i></button>
+            </a>
+        </div>
+        <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2" style="float: right"><i
+                class="bi bi-box-arrow-right"></i></a>
+    </nav>
+    <div class="container">
+        <div class="image-blurred-edge"></div>
+        <h1>Imprint</h1>
+        <br>
+        <h2>Contact information</h2>
+        <br>
+        <p><b>Gebrauchtwaren GmbH</b></p>
+        <p>Gartenstraße 34, 73669 Lichtenwald,</p>
+        <p>Registernummer: B-180022; Business Licence Number: 10040783; Ust-ID: LU 26375245. <br>Die Gesellschaft wird
+            gesetzlich vertreten durch Marius Haueis.</p>
+        <br>
+        <h2>Copyright</h2>
+        <p>Jedes Website-Design, jeder Text, alle Grafiken, jede Auswahl bzw. jedes Layout davon und jede Software sind
+            rechtlich geschütztes Eigentum von Gebrauchtwaren GmbH. Das Kopieren oder die Reproduktion (inklusive des
+            Ausdrucks auf Papier) der gesamten Website bzw. von Teilen dieser Website werden nur zu dem Zweck gestattet,
+            ein Ticket zu erstellen, anzuzeigen oder zu löschen.
 
-        Jede andere Verwendung der auf dieser Website verfügbaren Materialien bzw. Informationen -- inklusive der Reproduktion, des Weitervertriebs, der Veränderung und der Veröffentlichung zu einem anderen als dem oben genannten Zweck -- ist untersagt, es sei denn, Gebrauchtwaren GmbH hat dem vorher schriftlich zugestimmt.
-    </p>
+            Jede andere Verwendung der auf dieser Website verfügbaren Materialien bzw. Informationen -- inklusive der
+            Reproduktion, des Weitervertriebs, der Veränderung und der Veröffentlichung zu einem anderen als dem oben
+            genannten Zweck -- ist untersagt, es sei denn, Gebrauchtwaren GmbH hat dem vorher schriftlich zugestimmt.
+
+        </p>
+        <br>
+    </div>
 </div>
+
 </body>
 </html>

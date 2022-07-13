@@ -1,5 +1,13 @@
 'use strict';
+
 var stompClient = null;
+const options = {
+    year: 'numeric', month: 'numeric', day: 'numeric',
+    hour: 'numeric', minute: 'numeric', second: 'numeric',
+    hour12: false,
+    timeZone: 'America/Los_Angeles'
+};
+
 
 $(window).onload = connect();
 
@@ -41,7 +49,9 @@ function sendMessage() {
         'text': $("#messageInput").val(),
         'author': author,
         'receiver': receiver,
-        'ticket': ticket
+        'ticket': ticket,
+        'creationTime': Date.now()
+
     }
     stompClient.send("/app/hello/" + ticket.ticketId, {}, JSON.stringify(chatMessage));
     $("#messageInput").val("");
@@ -63,16 +73,29 @@ function showGreeting(message) {
         var usernameText = document.createTextNode(chatMessageTest.author.username);
 
     }
+    var messageTimeElement= document.createElement('span');
+    messageTimeElement.classList.add('timeClass');
+    const date = new Date(chatMessageTest.creationTime);
+    var dateStr =
+        ("00" + (date.getMonth() + 1)).slice(-2) + "/" +
+        ("00" + date.getDate()).slice(-2) + "/" +
+        date.getFullYear() + " " +
+        ("00" + date.getHours()).slice(-2) + ":" +
+        ("00" + date.getMinutes()).slice(-2) ;
+    var messageTimeText = document.createTextNode(dateStr);
+    messageTimeElement.appendChild(messageTimeText);
     usernameElement.appendChild(usernameText);
     messageElement.appendChild(usernameElement);
+    messageElement.appendChild(messageTimeElement);
     var textElement = document.createElement('p');
     var messageText = document.createTextNode(chatMessageTest.text);
 
     textElement.appendChild(messageText);
 
     messageElement.appendChild(textElement);
-console.log(messageElement);
+    console.log(messageElement);
     list.append(messageElement);
+    list.scrollTop(list.prop('scrollHeight'));
 
 
     //$("#chatMessage").append("<tr><td>" + chatMessageTest.text + "</td></tr>");

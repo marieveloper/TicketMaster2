@@ -40,35 +40,29 @@
                 <div class="dropdown">
                     <button type="button" class="btn btn-info px-3"><i class="bi bi-funnel"></i></button>
                     <div class="dropdown-content">
-                        <li class="menu">
-                            <a class="dropbtn" tabindex="-1">Status<span class="caret"></span></a>
-                            <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="open">Open</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="closed">Closed</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="in process">In process</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu">
-                            <a class="dropbtn" tabindex="-1">Prioritization<span class="caret"></span></a>
-                            <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="high">High</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="medium">Medium</a></li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="low">Low</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu">
-                            <a class="dropbtn" tabindex="-1">Incident<span class="caret"></span></a>
-                            <ul class="dropdown-submenu">
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="inactivity">Inactivity</a>
-                                </li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="technical">Technical
-                                    problems</a>
-                                </li>
-                                <li><a class="btn dropbtn" tabindex="-1" data-filter="other">Other</a></li>
-                            </ul>
-                        </li>
+                        <div class="dropdown-content">
+                            <h5 style="color: #555555">Status</h5>
+                            <label><input type="checkbox" name="filter" value="OPEN"> Open</label> <br>
+                            <label><input type="checkbox" name="filter" value="IN_PROGRESS"> In
+                                progress</label> <br>
+                            <label><input type="checkbox" name="filter" value="CLOSED"> Closed</label>
+                            <hr style="border-color:lightskyblue">
+                            <h5 style="color: #555555">Prioritization</h5>
+                            <label><input type="checkbox" name="filter" value="zHIGH"> High</label> <br>
+                            <label><input type="checkbox" name="filter" value="MEDIUM"> Medium</label> <br>
+                            <label><input type="checkbox" name="filter" value="LOW"> Low</label>
+                            <hr style="border-color:lightskyblue">
+                            <h5 style="color: #555555">Incident</h5>
+                            <label><input type="checkbox" name="filter" value="inactivity"> Inactivity</label>
+                            <br>
+                            <label><input type="checkbox" name="filter" value="technical_problems"
+                            > Technical Problem</label> <br>
+                            <label><input type="checkbox" name="filter" value="other"> Other</label>
+                            <hr style="border-color:lightskyblue">
+                            <button id="reset" class="btn btn-info mr-2">Reset</button>
+                        </div>
                     </div>
+
                 </div>
                 <div class="block" style="float:right">
                     <a th:switch="${unreadUserNotifications.isEmpty()}">
@@ -79,7 +73,8 @@
                         <a th:case="${false}" th:href="@{/notifications}" type="button"
                            class="btn btn-info px-3 mr-2"><i
                                 class="bi bi-bell"></i>
-                            <span class="badge badge-light" style="color: red">!</span>
+                            <span class="badge badge-light" style="color: #F93154"
+                                  th:text="${unreadUserNotifications.size()}"></span>
                         </a>
                     </a>
                     <a th:href="@{/logout}" class="btn btn-primary px-3 mr-2"><i
@@ -96,10 +91,10 @@
                 <tr>
                     <th data-type="=int">Ticket-ID</th>
                     <th data-type="string">Title</th>
-                    <th  data-type="string">Prioritization</th>
+                    <th data-type="string">Prioritization</th>
                     <th data-type="string">Incident</th>
                     <th data-type="date">Date</th>
-                    <th  data-type="string">User</th>
+                    <th data-type="string">User</th>
                     <th data-type="string">Admin</th>
                     <th data-type="string">Status</th>
                     <th>Actions</th>
@@ -109,39 +104,20 @@
                 <tr th:each="ticket: ${tickets}">
                     <td th:text="${ticket.getTicketId()}"/>
                     <td th:text="${ticket.getTitle()}"/>
-                    <a th:switch="${ticket.getPrio().toString()} ">
-                        <a th:case="${'LOW'}">
-                            <td><span class="badge text-white" style="background-color: #00E676"
-                                      th:text="${ticket.getPrio().toString()}"></span></td>
-                        </a>
-                        <a th:case="${'MEDIUM'}">
-                            <td><p style="display:none">i</p><span class="badge text-white"
-                                                                   style="background-color: #FFEA00"
-                                                                   th:text="${ticket.getPrio().toString()}"></span></td>
-                        </a>
-                        <a th:case="${'HIGH'}">
-                            <td><span class="badge text-white" style="background-color: #F93154"
-                                      th:text="${ticket.getPrio().toString()}"></span></td>
-                        </a>
-                    </a>
-                    <td th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
+                    <div>
+                        <td th:if="${ticket.getPrio().toString()} == 'HIGH'" class="incident"><span style="display:none">z</span><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
+                        <td th:if="${ticket.getPrio().toString()} == 'MEDIUM'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></td>
+                        <td th:if="${ticket.getPrio().toString()} == 'LOW'" class="incident"><span th:text="${ticket.getPrio().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
+                    </div>
+                    <td class="incident" th:text="${ticket.getCategorization().toString().toLowerCase()}"/>
                     <td th:text="${ticket.getCreationTimeString(ticket.getCreationTime())}"/>
                     <td th:text="${ticket.getUser().getUsername()}"/>
                     <td th:text="${ticket.getResponsibleAdmin().getUsername()}"/>
-                    <a th:switch="${ticket.getStatus().toString()} ">
-                        <a th:case="${'OPEN'}">
-                            <td><span class="badge text-white" style="background-color: #F93154"
-                                      th:text="${ticket.getStatus().toString()}"></span></td>
-                        </a>
-                        <a th:case="${'IN_PROCESS'}">
-                            <td><span class="badge text-white" style="background-color: #FFEA00"
-                                      th:text="${ticket.getStatus().toString()}"></span></td>
-                        </a>
-                        <a th:case="${'CLOSED'}">
-                            <td><span class="badge text-white" style="background-color: #00E676"
-                                      th:text="${ticket.getStatus().toString()}"></span></td>
-                        </a>
-                    </a>
+                    <div>
+                        <td th:if="${ticket.getStatus().toString()} == 'OPEN'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #F93154"></span></td>
+                        <td th:if="${ticket.getStatus().toString()} == 'IN_PROCESS'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #39C0ED"></span></td>
+                        <td th:if="${ticket.getStatus().toString()} == 'CLOSED'" class="incident"><span th:text="${ticket.getStatus().toString()}" class="incident badge text-white" style="background-color: #00E676"></span></td>
+                    </div>
                     <td>
                         <a class="btn btn-info text-white"
                            th:onclick="'window.location.href=\'/showTicketAdmin?ticketId=' + ${ticket.getTicketId()} + '\''">Show
@@ -153,22 +129,17 @@
         </form>
     </form>
 </div>
+<br>
+<footer>
+    <div class="footer">
+        <p><a th:href="@{/imprint}">Imprint</a></p>
+        <p>©1996-2022 Gebrauchtwaren GmbH</p>
+    </div>
+</footer>
 <script>
 
     $(document).ready(function () {
-        $(".dropdown-submenu li").on('click', 'a', function () {
-            var value = $(this).attr('data-filter').toLowerCase();
-            console.log(value);
-            $("#myTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
-
-
-    $(document).ready(function () {
         $('#ticketTable').DataTable({
-
             "columns": [{
                 "orderable": true
             },
@@ -179,29 +150,37 @@
                 {"orderable": true},
                 {"orderable": true},
                 {"orderable": true},
-                {"orderable": false}]
-
-            }],
-            paging:false
+                {
+                    "orderable": false,
+                }],
+            paging: false
         });
     });
 
-    /* $(document).ready(function(){
+    $(document).ready(function () {
+        $("#reset").click(function(){
+            $("#myTable tr").show();
+            $( "input:checkbox:checked" ).prop( "checked", false );
+        });
 
-          var multipleCancelButton = new Choices('#choices-multiple-remove-button', {
-              removeItemButton: true,
-              maxItemCount:5,
-              searchResultLimit:5,
-              renderChoiceLimit:5
-          });
+        $("input:checkbox").on("change", function () {
+            var a = $("input:checkbox:checked").map(function () {
+                return $(this).val()
+            }).get()
+            $("#myTable tr").hide();
+            var incidents = $(".incident").filter(function () {
+                var incident = $(this).text(),
+                    index = $.inArray(incident, a);
+                return index >= 0
+            }).parent().show();
+        })
 
-
-      });*/
+    });
 
 </script>
 <script th:inline="javascript">
     /*<![CDATA[*/
-    var valueA = /*[[${admin}]]*/ "" ;
+    var valueA = /*[[${admin}]]*/ "";
     /*]]>*/
     const btn = document.getElementById('adminTickets');
     var value = valueA.username.toString();

@@ -19,6 +19,7 @@ body {
     color: #333;
     background-color: #f4f4f4;
     height: 100%;
+    overflow: scroll;
 }
 
 
@@ -120,9 +121,16 @@ a {
 }
 
 #chat-page .chat-message span {
-    color: #333;
+
     font-weight: 600;
+    background-color:#5BC0DE;
 }
+#chat-page .chat-message  .timeClass {
+    font-weight: 400;
+   padding-left: 2em;
+    background-color:white;
+}
+
 
 
 #chat-page .chat-message p {
@@ -193,4 +201,8 @@ a {
     .chat-header h2 {
         font-size: 1.1em;
     }
+}
+.footer {
+  text-align: center;
+  padding: 3px;
 }

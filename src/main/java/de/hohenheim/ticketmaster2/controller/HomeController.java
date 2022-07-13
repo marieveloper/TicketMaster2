@@ -209,9 +209,9 @@ public class HomeController {
         return gotoTicket(ticketId, model);
     }
 
-    @GetMapping("/workInProgress")
-    public String workInProgress() {
-        return "redirect:/workInProgress";
+    @GetMapping("/imprint")
+    public String imprint() {
+        return "imprint";
     }
 
     @GetMapping("/showTicketAdmin{ticketId}")
@@ -263,8 +263,10 @@ public class HomeController {
         }else{
             model.addAttribute("receiver", ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         }
+        model.addAttribute("timestamp", Timestamp.from(Instant.now()));
 
-        Message message = new Message("bla", userService.getCurrentUser(), userService.getCurrentUser(), ticketService.getByTicketId(ticketId));
+        Message message = new Message("bla", userService.getCurrentUser(), userService.getCurrentUser(), ticketService.getByTicketId(ticketId),Timestamp.from(Instant.now()));
+        System.out.print(message.getCreationTime());
         model.addAttribute("message", message);
         return "chatWebSockets";
     }
