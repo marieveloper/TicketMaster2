@@ -189,15 +189,16 @@
     var valueA = /*[[${admin}]]*/ "";
     /*]]>*/
     const btn = document.getElementById('adminTickets');
-    var value = valueA.username.toString();
+    var value = valueA.username.toString().toLowerCase();
 
     function myFunction() {
         const initialText = 'My Tickets';
         if (btn.textContent.toLowerCase().includes(initialText.toLowerCase())) {
             btn.textContent = 'All Tickets';
+            console.log(value);
             var value1 = value;
-            $("#ticketTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf(value1) > -1)
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
             });
         } else {
             btn.textContent = initialText;
