@@ -203,7 +203,8 @@
         } else {
             btn.textContent = initialText;
             $("#ticketTable tr").filter(function () {
-                $(this).toggle($(this).text().toLowerCase().indexOf("") > -1)
+                $("#myTable tr").show();
+
             });
 
 
