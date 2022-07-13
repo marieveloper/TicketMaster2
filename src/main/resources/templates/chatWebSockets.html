@@ -63,37 +63,37 @@
 
                 <ul id="messageArea">
                     <div class="row">
-                    <li class="chat-message" style="background-color: #E0F7FA">
-                        <span class="badge text-white" style="background-color: #5BC0DE">Title:</span>&nbsp;
-                        <span th:text="${ticket.getTitle()}" style="background-color: #E0F7FA"></span></br>
-                        <p th:text="${ticket.getContent()}"></p></li>
+                        <li class="chat-message" style="background-color: #E0F7FA">
+                            <span class="badge text-white" style="background-color: #5BC0DE">Title:</span>&nbsp;
+                            <span th:text="${ticket.getTitle()}" style="background-color: #E0F7FA"></span></br>
+                            <p th:text="${ticket.getContent()}"></p></li>
                     </div>
                     <a th:each="message : ${messages}">
                         <a th:if="${message.getAuthor() == author}">
 
-                                <div class="row">
-                                    <div class="right">
-                                        <li class="chat-message-right">
+                            <div class="row">
+                                <div class="right">
+                                    <li class="chat-message-right">
                                         <span class="badge text-white" style="background-color: #5BC0DE"
                                               th:text="You"></span>
                                         <span class="timeClass"
                                               th:text="${message.getCreationTimeString(message.getCreationTime())}"></span></br>
                                         <p th:text="${message.getText()}"></p></li>
-                                    </div>
                                 </div>
+                            </div>
 
                         </a>
                         <a th:if="${message.getAuthor() != author}">
 
-                                <div class="row">
-                            <li class="chat-message">
+                            <div class="row">
+                                <li class="chat-message">
                                         <span class="badge text-white" style="background-color: #5BC0DE"
                                               th:text="${message.getAuthor().getUsername()}"></span>
-                                        <span class="timeClass"
-                                              th:text="${message.getCreationTimeString(message.getCreationTime())}"></span>
-                                        <p th:text="${message.getText()}"></p>
-                            </li>
-                                </div>
+                                    <span class="timeClass"
+                                          th:text="${message.getCreationTimeString(message.getCreationTime())}"></span>
+                                    <p th:text="${message.getText()}"></p>
+                                </li>
+                            </div>
 
                         </a>
                     </a>
@@ -105,8 +105,22 @@
 
                                 <input type="text" id="messageInput" class="form-control"
                                        placeholder="Type a message...    (max.  255 chars)" minlenght="1">
+                                <a th:if="${!role}">
+                                <a th:if="${ticket.getStatus().toString() == 'CLOSED'}">
 
-                                <button id="send" class="btn btn-info" type="submit">Send</button>
+
+                                    <button title="The ticket is already closed" class="btn btn-primary"
+                                            style="background-color:grey">Send
+                                    </button>
+                                    <a th:if="${ticket.getStatus().toString() != 'CLOSED'}">
+                                        <button id="send1" class="btn btn-info" type="submit">Send</button>
+                                    </a>
+                                </a>
+                                </a>
+                                <a th:if="${role}">
+                                    <button id="send" class="btn btn-info" type="submit">Send</button></a>
+
+
                             </div>
                         </div>
                     </form>

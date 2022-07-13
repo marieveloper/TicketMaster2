@@ -259,15 +259,14 @@ public class HomeController {
         model.addAttribute("messages", tMessages);
         model.addAttribute("author", userService.getCurrentUser());
         model.addAttribute("ticket", ticketService.getByTicketId(ticketId));
+        model.addAttribute("role",  userService.hasRole("ROLE_ADMIN",userService.getCurrentUser()));
         if (userService.hasRole("ROLE_ADMIN", userService.getCurrentUser())) {
             model.addAttribute("receiver", ticketService.getByTicketId(ticketId).getUser());
         }else{
             model.addAttribute("receiver", ticketService.getByTicketId(ticketId).getResponsibleAdmin());
         }
         model.addAttribute("timestamp", Timestamp.from(Instant.now()));
-
         Message message = new Message("bla", userService.getCurrentUser(), userService.getCurrentUser(), ticketService.getByTicketId(ticketId),Timestamp.from(Instant.now()));
-        System.out.print(message.getCreationTime());
         model.addAttribute("message", message);
         return "chatWebSockets";
     }
