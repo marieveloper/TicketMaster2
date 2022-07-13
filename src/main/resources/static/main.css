@@ -134,6 +134,7 @@ a {
 
 #chat-page .chat-message p {
     padding-top: 0.5em;
+    width: 75%;
     color: #43464b;
 }
 /*right*/
@@ -178,6 +179,7 @@ float:right;
 
 
 #chat-page .chat-message-right p {
+    width: 75%;
     padding-top: 0.5em;
     float:right;
     color: #43464b;
