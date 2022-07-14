@@ -44,7 +44,7 @@
         <form th:action="@{/saveTicket}" th:object="${ticket}" method="POST">
             <br/>
             <h5>Title:</h5>
-            <input name="title" required="required" minlength="2" maxlength="50" pattern="[A-Za-z0-9,.:!?;()&öäüÖÄÜ%'/ß={}_-]{2,50}" rows="10" cols="80" style="margin-top: 10px"
+            <input name="title"  minlength="2" maxlength="50"  rows="10" cols="80" style="margin-top: 10px"
                    th:field="*{title}"
                    placeholder="Title (2-50 letters)" class="form-control col-4 mb-4">
 
@@ -57,7 +57,7 @@
                 </select>
             </div>
             </br>
-            <textarea name="problemspecification" minlength="30" required="required" pattern="[A-Za-z0-9,.:!?;()&öäüÖÄÜ%'/ß={}_-]{30,255}" rows="10" cols="80" style="margin-top: 10px"
+            <textarea name="problemspecification" minlength="30"  rows="10" cols="80" style="margin-top: 10px"
                       th:field="*{content}"
                       placeholder="Describe your problem (min. 30 letters)" class="form-control col-4 mb-4"></textarea>
             <input type="hidden" th:field="*{ticketId}"/>
